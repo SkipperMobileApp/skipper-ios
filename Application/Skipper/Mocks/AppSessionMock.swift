@@ -1,0 +1,14 @@
+//
+//  AppSessionMock.swift
+//  Skipper
+//
+//  Created by Denis Kovalev on 09.11.2022.
+//
+
+import Foundation
+
+func mockedAppSession(tokensContainer: TokensContainer = TokensContainerMock(),
+                      exampleRepository: ExampleRepository = ExampleRepositoryMock()) -> AppSession
+{
+    .init(tokensContainer: tokensContainer, exampleRepository: exampleRepository)
+}

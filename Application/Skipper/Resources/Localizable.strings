@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Skipper
+
+  Created by Denis Kovalev on 09.11.2022.
+  
+*/
+
+// MARK: - Splash
+
+"splash.text" = "Splash";
+
+// MARK: - Main
+
+"main.hello.text" = "Hello World!";
+
+// MARK: - Errors
+
+"error.connectivity" = "No Internet connection";
+
+// MARK: - Alert
+
+"alert.ok" = "OK";

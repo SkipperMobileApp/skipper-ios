@@ -1,0 +1,44 @@
+included:
+ - iOSTemplateProject
+
+excluded:
+ - "*.generated.swift"
+
+# rules configuration
+indentation: 4 # 4 spaces
+file_length:
+  - 1000
+  - 2500
+type_body_length:
+  - 1000 # warning
+  - 1500 # error
+function_body_length:
+  - 200 # warning
+  - 400 # error
+function_parameter_count:
+  - 6 # warning
+  - 10 # error
+cyclomatic_complexity:
+  - 20 # warning
+  - 40 # error
+large_tuple:
+  - 3 # warning
+  - 5 # error
+
+opt_in_rules:
+  - unused_optional_binding
+
+disabled_rules:
+  - line_length
+  - force_cast
+  - force_try
+  - nesting
+  - identifier_name
+  - opening_brace
+  - type_name
+  - closure_parameter_position
+  - computed_accessors_order
+  - function_parameter_count
+
+unused_optional_binding: 
+   ignore_optional_try: true
