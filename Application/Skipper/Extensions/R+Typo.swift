@@ -10,16 +10,22 @@ import UIKit
 
 extension R {
     enum typo {
-        /// System font, bold, 50 pt
-        static let promo = UIFont.systemFont(ofSize: 50, weight: .bold)
+        /// Montserrat Regular (400) 50 pt
+        static let promo = R.font.montserratRegular(size: 27)
 
-        /// System font, medium, 20 pt
-        static let header = UIFont.systemFont(ofSize: 20, weight: .medium)
+        /// Montserrat Bold (700) 16 pt
+        static let header = R.font.montserratBold(size: 16)
 
-        /// System font, regular, 16 pt
-        static let body = UIFont.systemFont(ofSize: 16, weight: .regular)
+        /// Montserrat SemiBold (600), 18 pt
+        static let header2 = R.font.montserratRegular(size: 18)
 
-        /// System font, regular, 12 pt
-        static let caption = UIFont.systemFont(ofSize: 12, weight: .regular)
+        /// Montserrat Regular (400), 16 pt
+        static let header3 = R.font.montserratRegular(size: 16)
+
+        /// Montserrat Regular (400), 15 pt
+        static let body = R.font.montserratRegular(size: 15)
+
+        /// Montserrat Regular (400), 11 pt
+        static let caption = R.font.montserratRegular(size: 11)
     }
 }
