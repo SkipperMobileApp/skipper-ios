@@ -16,11 +16,11 @@ extension R {
         /// Montserrat Bold (700) 16 pt
         static let header = R.font.montserratBold(size: 16)
 
-        /// Montserrat SemiBold (600), 18 pt
-        static let header2 = R.font.montserratRegular(size: 18)
+        /// Montserrat SemiBold (700), 22 pt
+        static let header2 = R.font.montserratSemiBold(size: 22)
 
-        /// Montserrat Regular (400), 16 pt
-        static let header3 = R.font.montserratRegular(size: 16)
+        /// Montserrat Medium (500), 16 pt
+        static let header3 = R.font.montserratMedium(size: 16)
 
         /// Montserrat Regular (400), 15 pt
         static let body = R.font.montserratRegular(size: 15)

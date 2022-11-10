@@ -10,16 +10,23 @@ import UIKit
 
 class AuthViewController: UIViewController {
     private lazy var loginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Login", for: .normal)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        let button = PrimaryButton()
+        button.setTitle(R.string.localizable.authLoginButtonText(), for: .normal)
         button.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var registerButton: TextButton = {
+        let button = TextButton()
+        button.setTitle(R.string.localizable.authRegisterButtonText(), for: .normal)
+        button.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
         return button
     }()
 
     // MARK: - Output
 
     var didFinish: (() -> Void)?
+    var didTapRegister: (() -> Void)?
 
     // MARK: - Properties
 
@@ -53,15 +60,19 @@ class AuthViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        loginButton.frame.size = CGSize(width: 100, height: 50)
+        loginButton.frame.size = CGSize(width: 200, height: 42)
         loginButton.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+        registerButton.frame.size = CGSize(width: 200, height: 42)
+        registerButton.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY + 100)
     }
 
     // MARK: - UI Methods
 
     private func setupUI() {
         view.backgroundColor = .white
+
         view.addSubview(loginButton)
+        view.addSubview(registerButton)
     }
 
     private func bindViewModelActions() {
@@ -72,7 +83,11 @@ class AuthViewController: UIViewController {
 
     // MARK: - UI Callbacks
 
-    @objc private func loginAction(_: Any) {
+    @objc private func loginAction() {
         viewModel.login()
+    }
+
+    @objc private func registerAction() {
+        didTapRegister?()
     }
 }

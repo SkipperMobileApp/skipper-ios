@@ -55,9 +55,10 @@
 		84C39369291D72A40042C231 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84C39364291D72A40042C231 /* Montserrat-Bold.ttf */; };
 		84C3936A291D72A40042C231 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84C39365291D72A40042C231 /* Montserrat-SemiBold.ttf */; };
 		84C3936B291D72A40042C231 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84C39366291D72A40042C231 /* Montserrat-Regular.ttf */; };
+		84C3936C291D7DEF0042C231 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84C3936E291D7DEF0042C231 /* Localizable.strings */; };
+		84C39370291D825D0042C231 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3936F291D825D0042C231 /* TextButton.swift */; };
 		84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE753B28F706F600B55839 /* GlobalConstants.swift */; };
 		84EE754228F70C8500B55839 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EE754128F70C8500B55839 /* Colors.xcassets */; };
-		84EE755228F70E4400B55839 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84EE755128F70E4400B55839 /* Localizable.strings */; };
 		84EE755428F70E8900B55839 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755328F70E8900B55839 /* Log.swift */; };
 		84EE755628F70F1F00B55839 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755528F70F1F00B55839 /* Errors.swift */; };
 		84EE755828F70FC000B55839 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755728F70FC000B55839 /* AppSession.swift */; };
@@ -147,9 +148,10 @@
 		84C39364291D72A40042C231 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		84C39365291D72A40042C231 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		84C39366291D72A40042C231 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		84C3936D291D7DEF0042C231 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84C3936F291D825D0042C231 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		84EE753B28F706F600B55839 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		84EE754128F70C8500B55839 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		84EE755128F70E4400B55839 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		84EE755328F70E8900B55839 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		84EE755528F70F1F00B55839 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		84EE755728F70FC000B55839 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
@@ -369,7 +371,7 @@
 				840DB1DD27A552AA00F40C89 /* LaunchScreen.storyboard */,
 				840DB1DB27A552AA00F40C89 /* Images.xcassets */,
 				84EE754128F70C8500B55839 /* Colors.xcassets */,
-				84EE755128F70E4400B55839 /* Localizable.strings */,
+				84C3936E291D7DEF0042C231 /* Localizable.strings */,
 				84573E0429071D8D00F03827 /* R.generated.swift */,
 			);
 			path = Resources;
@@ -531,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				84A2CF1C291839A900829C59 /* PrimaryButton.swift */,
+				84C3936F291D825D0042C231 /* TextButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -694,7 +697,7 @@
 				84C39368291D72A40042C231 /* Montserrat-Light.ttf in Resources */,
 				84EE754228F70C8500B55839 /* Colors.xcassets in Resources */,
 				84C39367291D72A40042C231 /* Montserrat-Medium.ttf in Resources */,
-				84EE755228F70E4400B55839 /* Localizable.strings in Resources */,
+				84C3936C291D7DEF0042C231 /* Localizable.strings in Resources */,
 				840DB1DF27A552AA00F40C89 /* LaunchScreen.storyboard in Resources */,
 				840DB1DC27A552AA00F40C89 /* Images.xcassets in Resources */,
 				84C3936A291D72A40042C231 /* Montserrat-SemiBold.ttf in Resources */,
@@ -804,6 +807,7 @@
 				84A2CF1D291839A900829C59 /* PrimaryButton.swift in Sources */,
 				84EE756028F72A1500B55839 /* UIWindow+Transition.swift in Sources */,
 				84EE757A28F72A9200B55839 /* AppRouter.swift in Sources */,
+				84C39370291D825D0042C231 /* TextButton.swift in Sources */,
 				84573E132907258300F03827 /* UIView+Constraints.swift in Sources */,
 				84EE759D28F7357F00B55839 /* NetworkReachability.swift in Sources */,
 				84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */,
@@ -882,6 +886,14 @@
 				840DB1DE27A552AA00F40C89 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		84C3936E291D7DEF0042C231 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84C3936D291D7DEF0042C231 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

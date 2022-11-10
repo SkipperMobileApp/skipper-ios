@@ -8,16 +8,23 @@
 import UIKit
 
 class PrimaryButton: SetupableButton {
+    override var isHighlighted: Bool {
+        didSet {
+            updateStyle()
+        }
+    }
+
     override func setup() {
         super.setup()
 
-        backgroundColor = R.color.brandPrimary()
-        setTitleColor(R.color.primary87(), for: .normal)
+        updateStyle()
+
+        titleLabel?.font = R.typo.header2
+        layer.cornerRadius = 6
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        layer.cornerRadius = frame.height / 2
+    private func updateStyle() {
+        backgroundColor = R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
+        setTitleColor(isHighlighted ? R.color.primary87() : R.color.primary100(), for: .normal)
     }
 }

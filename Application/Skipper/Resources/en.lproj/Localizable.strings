@@ -10,6 +10,11 @@
 
 "splash.text" = "Skipper";
 
+// MARK: - Login
+
+"auth.login.button.text" = "ВОЙТИ";
+"auth.register.button.text" = "ЗАРЕГИСТИРОВАТЬСЯ";
+
 // MARK: - Main
 
 "main.hello.text" = "Hello World!";
