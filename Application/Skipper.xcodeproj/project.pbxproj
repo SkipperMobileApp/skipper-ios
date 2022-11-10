@@ -265,7 +265,7 @@
 			path = SkipperUITests;
 			sourceTree = "<group>";
 		};
-		84573E0C2907258200F03827 /* PrettyConstraints */ = {
+		84573E0C2907258200F03827 /* Construct */ = {
 			isa = PBXGroup;
 			children = (
 				84573E0D2907258200F03827 /* Constraints.swift */,
@@ -273,7 +273,7 @@
 				84573E0F2907258200F03827 /* UIView+Constraints.swift */,
 				84573E102907258200F03827 /* Constrainable.swift */,
 			);
-			path = PrettyConstraints;
+			path = Construct;
 			sourceTree = "<group>";
 		};
 		847DD3A52906E71400C9CC5D /* CoreData */ = {
@@ -390,7 +390,7 @@
 		84EE753728F7064500B55839 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				84573E0C2907258200F03827 /* PrettyConstraints */,
+				84573E0C2907258200F03827 /* Construct */,
 				84EE753B28F706F600B55839 /* GlobalConstants.swift */,
 				84EE755328F70E8900B55839 /* Log.swift */,
 				84EE755528F70F1F00B55839 /* Errors.swift */,

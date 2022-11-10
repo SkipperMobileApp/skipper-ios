@@ -17,7 +17,7 @@ class SplashViewModel {
     }
 
     func tryLogin() {
-        delay(1.0) { [weak self] in
+        delay(2.0) { [weak self] in
             self?.didFinish?(false)
         }
     }

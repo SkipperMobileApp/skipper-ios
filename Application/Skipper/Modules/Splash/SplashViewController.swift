@@ -15,9 +15,16 @@ class SplashViewController: UIViewController {
         let label = UILabel()
         label.text = R.string.localizable.splashText()
         label.font = R.typo.promo
-        label.textColor = R.color.primary87()
+        label.textColor = R.color.primary100()
         label.textAlignment = .center
         return label
+    }()
+
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = R.image.bgSplash()
+        return imageView
     }()
 
     // MARK: - Output
@@ -55,17 +62,22 @@ class SplashViewController: UIViewController {
         viewModel.tryLogin()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        label.frame = view.bounds
-    }
-
     // MARK: - UI Methods
 
     private func setupUI() {
-        view.backgroundColor = R.color.brandPrimary()
+        view.backgroundColor = R.color.themeBackground()
+
         view.addSubview(label)
+        view.addSubview(imageView)
+
+        imageView.applyConstraints(.height(constant: 300),
+                                   .leading(to: view, attribute: .leading),
+                                   .trailing(to: view, attribute: .trailing),
+                                   .centerY(to: view, attribute: .centerY))
+
+        label.applyConstraints(.leading(to: view, attribute: .leading, constant: 10),
+                               .trailing(to: view, attribute: .trailing, constant: -10),
+                               .top(to: imageView, attribute: .bottom, constant: 30))
     }
 
     private func bindViewModelActions() {
