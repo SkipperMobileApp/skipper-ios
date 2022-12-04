@@ -7,10 +7,4 @@
 
 import Foundation
 
-class MainViewModel {
-    private let session: AppSession
-
-    init(session: AppSession) {
-        self.session = session
-    }
-}
+class MainViewModel {}

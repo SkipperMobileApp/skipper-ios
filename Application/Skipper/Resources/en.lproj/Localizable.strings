@@ -10,10 +10,25 @@
 
 "splash.text" = "Skipper";
 
-// MARK: - Login
+// MARK: - Auth
 
-"auth.login.button.text" = "ВОЙТИ";
-"auth.register.button.text" = "ЗАРЕГИСТИРОВАТЬСЯ";
+"auth.login.header.text" = "Sign in";
+"auth.login.button.text" = "Log in";
+"auth.login.email.placeholder" = "Email";
+"auth.login.password.placeholder" = "Password";
+"auth.login.error.email.empty" = "Email is empty";
+"auth.login.error.email.incorrect" = "Email has incorrect format";
+"auth.login.error.password.empty" = "Password is empty";
+"auth.login.register.button.text" = "Sign up";
+
+"auth.signUp.header.text" = "Sign up";
+"auth.signUp.button.text" = "Sign up";
+"auth.signUp.lastName.placeholder" = "Last Name";
+"auth.signUp.firstName.placeholder" = "First Name";
+"auth.signUp.patronymic.placeholder" = "Patronymic";
+"auth.signUp.email.placeholder" = "Email";
+"auth.signUp.password.placeholder" = "Password";
+"auth.signUp.confirmPassword.placeholder" = "Confirm Password";
 
 // MARK: - Main
 
@@ -21,7 +36,13 @@
 
 // MARK: - Errors
 
+"error.title" = "Error";
 "error.connectivity" = "No Internet connection";
+"error.auth.invalidEmail" = "User with this email was not found";
+"error.auth.invalidPassword" = "Wrong password";
+"error.auth.accountDisabled" = "Your account was disabled. Please, contact support for more details";
+"error.firebase.system" = "Something went wrong. Please, try again later";
+
 
 // MARK: - Alert
 

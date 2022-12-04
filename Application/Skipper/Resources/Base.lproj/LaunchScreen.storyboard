@@ -17,19 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-splash" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-Mt-cBH">
-                                <rect key="frame" x="0.0" y="298" width="414" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="11g-05-dzT"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skipper" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivI-kz-LLy">
+                                <rect key="frame" x="154" y="408.5" width="106" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="themeBackground"/>
                         <constraints>
-                            <constraint firstItem="fMh-Mt-cBH" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="VGQ-Sb-gyi"/>
-                            <constraint firstItem="fMh-Mt-cBH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="uiN-Na-lxe"/>
-                            <constraint firstItem="fMh-Mt-cBH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yG4-Sa-4Da"/>
+                            <constraint firstItem="ivI-kz-LLy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-20" id="LYJ-0f-Fyp"/>
+                            <constraint firstItem="ivI-kz-LLy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WoC-41-IV5"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,7 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg-splash" width="738" height="706"/>
         <namedColor name="themeBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

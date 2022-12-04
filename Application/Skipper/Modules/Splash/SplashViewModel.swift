@@ -10,15 +10,29 @@ import Foundation
 class SplashViewModel {
     var didFinish: ((_ isSuccess: Bool) -> Void)?
 
-    private let session: AppSession
-
-    init(session: AppSession) {
-        self.session = session
-    }
+    @Injected() private var authRepository: AuthRepository
+    @Injected() private var userService: UserService
 
     func tryLogin() {
-        delay(2.0) { [weak self] in
-            self?.didFinish?(false)
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: 1000000000)
+
+                let user = try await authRepository.currentUser()
+
+                await MainActor.run {
+                    if let user = user {
+                        userService.currentUser = user
+                    }
+
+                    didFinish?(userService.isAuthenticated)
+                }
+            } catch {
+                await MainActor.run {
+                    Log.error(error.localizedDescription)
+                    didFinish?(false)
+                }
+            }
         }
     }
 }

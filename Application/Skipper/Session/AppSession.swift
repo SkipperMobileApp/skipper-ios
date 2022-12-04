@@ -9,12 +9,15 @@ import Foundation
 
 class AppSession {
     let tokensContainer: TokensContainer
-    let exampleRepository: ExampleRepository
+    let authRepository: AuthRepository
+    let userService: UserService
 
     init(tokensContainer: TokensContainer,
-         exampleRepository: ExampleRepository)
+         authRepository: AuthRepository,
+         userService: UserService)
     {
         self.tokensContainer = tokensContainer
-        self.exampleRepository = exampleRepository
+        self.authRepository = authRepository
+        self.userService = userService
     }
 }

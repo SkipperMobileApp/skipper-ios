@@ -8,7 +8,6 @@ protocol InteractiveDismissable: UIAdaptivePresentationControllerDelegate {
 
 public protocol CoordinatorType: AnyObject, Presentable {
     associatedtype DeepLinkType
-    associatedtype SessionType
     associatedtype Router: RouterType
 
     var router: Router { get }
@@ -17,16 +16,14 @@ public protocol CoordinatorType: AnyObject, Presentable {
     func start(with deeplink: DeepLinkType?)
 }
 
-public class Coordinator<DeepLinkType, SessionType, Router: RouterType>: NSObject, CoordinatorType, InteractiveDismissable {
+public class Coordinator<DeepLinkType, Router: RouterType>: NSObject, CoordinatorType, InteractiveDismissable {
     public let router: Router
-    public let session: SessionType
-    public var childCoordinators: [Coordinator<DeepLinkType, SessionType, NavigationRouter>] = []
+    public var childCoordinators: [Coordinator<DeepLinkType, NavigationRouter>] = []
 
     var didInteractiveDismissPresentedController: (() -> Void)?
 
-    public init(with router: Router, session: SessionType) {
+    public init(with router: Router) {
         self.router = router
-        self.session = session
         super.init()
         setPresentationDelegate()
     }
@@ -37,11 +34,11 @@ public class Coordinator<DeepLinkType, SessionType, Router: RouterType>: NSObjec
 
     public func start(with _: DeepLinkType?) {}
 
-    public func addChild(_ coordinator: Coordinator<DeepLinkType, SessionType, NavigationRouter>) {
+    public func addChild(_ coordinator: Coordinator<DeepLinkType, NavigationRouter>) {
         childCoordinators.append(coordinator)
     }
 
-    public func removeChild(_ coordinator: Coordinator<DeepLinkType, SessionType, NavigationRouter>?) {
+    public func removeChild(_ coordinator: Coordinator<DeepLinkType, NavigationRouter>?) {
         guard let coordinator = coordinator, let index = childCoordinators.firstIndex(where: { $0 === coordinator }) else {
             return
         }
@@ -68,5 +65,5 @@ public class Coordinator<DeepLinkType, SessionType, Router: RouterType>: NSObjec
     }
 }
 
-typealias RootCoordinator = Coordinator<DeepLink, AppSession, AppRouter>
-typealias NavigationCoordinator = Coordinator<DeepLink, AppSession, NavigationRouter>
+typealias RootCoordinator = Coordinator<DeepLink, AppRouter>
+typealias NavigationCoordinator = Coordinator<DeepLink, NavigationRouter>

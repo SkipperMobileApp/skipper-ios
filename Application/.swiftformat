@@ -1,7 +1,6 @@
 # Initial list of options was provided by running swiftformat with `--inferoptions`
 
 --binarygrouping none
---closingparen same-line
 --commas inline
 --decimalgrouping none
 --hexgrouping none
@@ -10,7 +9,7 @@
 --patternlet hoist
 --nospaceoperators
 --stripunusedargs closure-only
---wraparguments after-first
+--wraparguments preserve
 --wrapcollections before-first
 --exclude Pods
 --swiftversion 5.0

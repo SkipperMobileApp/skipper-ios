@@ -13,18 +13,11 @@ class SplashViewController: UIViewController {
 
     private lazy var label: UILabel = {
         let label = UILabel()
-        label.text = R.string.localizable.splashText()
-        label.font = R.typo.promo
+        label.text = Strings.splashText()
+        label.font = R.typo.promo2
         label.textColor = R.color.primary100()
         label.textAlignment = .center
         return label
-    }()
-
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = R.image.bgSplash()
-        return imageView
     }()
 
     // MARK: - Output
@@ -68,16 +61,9 @@ class SplashViewController: UIViewController {
         view.backgroundColor = R.color.themeBackground()
 
         view.addSubview(label)
-        view.addSubview(imageView)
 
-        imageView.applyConstraints(.height(constant: 300),
-                                   .leading(to: view, attribute: .leading),
-                                   .trailing(to: view, attribute: .trailing),
-                                   .centerY(to: view, attribute: .centerY))
-
-        label.applyConstraints(.leading(to: view, attribute: .leading, constant: 10),
-                               .trailing(to: view, attribute: .trailing, constant: -10),
-                               .top(to: imageView, attribute: .bottom, constant: 30))
+        label.applyConstraints(.centerX(to: view, attribute: .centerX),
+                               .centerY(to: view, attribute: .centerY, constant: -20))
     }
 
     private func bindViewModelActions() {

@@ -18,7 +18,7 @@ class AlertPresenter {
     class func presentSimpleAlert(_ title: String? = nil,
                                   message: String? = nil,
                                   controller: UIViewController,
-                                  buttonText: String = R.string.localizable.alertOk(),
+                                  buttonText: String = Strings.alertOk(),
                                   action: (() -> Void)? = nil)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
