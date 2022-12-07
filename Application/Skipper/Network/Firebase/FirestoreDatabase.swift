@@ -44,7 +44,9 @@ extension FirestoreDatabaseImpl {
 // MARK: - Utils
 
 extension FirestoreDatabaseImpl {
-    private func get<T: FirebaseModel>(_ documentReference: DocumentReference, type: T.Type) async throws -> T? {
+    private func get<T: FirebaseResponseModel>(_ documentReference: DocumentReference,
+                                               type: T.Type) async throws -> T?
+    {
         try await withCheckedThrowingContinuation { continuation in
             documentReference.getDocument { snapshot, error in
                 if let error = error {
@@ -58,12 +60,12 @@ extension FirestoreDatabaseImpl {
                     return
                 }
 
-                continuation.resume(throwing: AppError(message: R.string.localizable.errorUnknown()))
+                continuation.resume(throwing: AppError(message: Strings.errorUnknown()))
             }
         }
     }
 
-    private func get<T: FirebaseModel>(_ query: Query, type: T.Type) async throws -> [T] {
+    private func get<T: FirebaseResponseModel>(_ query: Query, type: T.Type) async throws -> [T] {
         try await withCheckedThrowingContinuation { continuation in
             query.getDocuments { snapshot, error in
                 if let error = error {
@@ -77,7 +79,7 @@ extension FirestoreDatabaseImpl {
                     return
                 }
 
-                continuation.resume(throwing: AppError(message: R.string.localizable.errorUnknown()))
+                continuation.resume(throwing: AppError(message: Strings.errorUnknown()))
             }
         }
     }

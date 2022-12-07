@@ -1,6 +1,6 @@
 //
 //  FIrebaseModel.swift
-//  HRAutomation
+//  Skipper
 //
 //  Created by Denis Kovalev on 19.11.2022.
 //
@@ -12,6 +12,8 @@ protocol FirebaseResponseModel {
 }
 
 protocol FirebaseRequestModel {
+    var id: String { get }
+
     func toDictionary() -> [String: Any]
 }
 

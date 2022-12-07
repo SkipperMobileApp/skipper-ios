@@ -7,4 +7,22 @@
 
 import Foundation
 
-class MainViewModel {}
+class MainViewModel {
+    @Injected() private var authRepository: AuthRepository
+    @Injected() private var logoutHandler: LogoutHandler
+
+    @MainActor var didFail: ((Error) -> Void)?
+
+    func signOut() {
+        Task {
+            do {
+                try await logoutHandler.logout()
+
+            } catch {
+                await MainActor.run {
+                    didFail?(error)
+                }
+            }
+        }
+    }
+}

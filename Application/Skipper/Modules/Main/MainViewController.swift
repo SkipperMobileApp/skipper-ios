@@ -15,6 +15,13 @@ class MainViewController: UIViewController {
         return label
     }()
 
+    private lazy var logoutButton: UIButton = {
+        let button = PrimaryButton()
+        button.setTitle("Sign Out", for: .normal)
+        button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - Output
 
     var didFinish: (() -> Void)?
@@ -46,12 +53,15 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        bindViewModelActions()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         label.frame = view.bounds
+
+        logoutButton.frame = .init(x: 100, y: 100, width: 100, height: 50)
     }
 
     // MARK: - UI Methods
@@ -59,5 +69,18 @@ class MainViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(label)
+        view.addSubview(logoutButton)
+    }
+
+    private func bindViewModelActions() {
+        viewModel.didFail = { [weak self] error in
+            guard let self = self else { return }
+
+            AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+        }
+    }
+
+    @objc private func signOut() {
+        viewModel.signOut()
     }
 }

@@ -10,16 +10,19 @@ import Foundation
 
 protocol AuthAPI {
     func signIn(email: String, password: String) async throws -> AuthUserFirebaseModel
-    func signUp(email: String, password: String) async throws -> AuthUserFirebaseModel
+    func signUp(user: UserRegisterAPIModel) async throws -> AuthUserFirebaseModel
+    func signOut() async throws
+
     func currentUser() async throws -> AuthUserFirebaseModel?
 }
 
 class FirebaseAuthAPI: AuthAPI {
     private let auth: Auth
-    private
+    private let database: FirestoreDatabase
 
     init(auth: Auth, database: FirestoreDatabase) {
         self.auth = auth
+        self.database = database
     }
 
     func signIn(email: String, password: String) async throws -> AuthUserFirebaseModel {
@@ -31,16 +34,32 @@ class FirebaseAuthAPI: AuthAPI {
         }
     }
 
-    func signUp(email: String, password: String) async throws -> AuthUserFirebaseModel {
+    func signUp(user: UserRegisterAPIModel) async throws -> AuthUserFirebaseModel {
         do {
-            let result = try await auth.createUser(withEmail: email, password: password)
+            let result = try await auth.createUser(withEmail: user.email,
+                                                   password: user.password)
 
-            data
+            let authUser = AuthUserMapper.firebaseToAPI(result.user)
 
-            return AuthUserMapper.firebaseToAPI(result.user)
+            let user = UserFirebaseModel(id: authUser.id,
+                                         email: authUser.email,
+                                         firstName: user.firstName,
+                                         lastName: user.lastName,
+                                         patronymic: "",
+                                         bio: "",
+                                         post: "",
+                                         branch: "")
+
+            try await database.updateUsers(users: [user])
+
+            return authUser
         } catch {
             throw mapFirebaseError(error)
         }
+    }
+
+    func signOut() async throws {
+        try auth.signOut()
     }
 
     func currentUser() async throws -> AuthUserFirebaseModel? {

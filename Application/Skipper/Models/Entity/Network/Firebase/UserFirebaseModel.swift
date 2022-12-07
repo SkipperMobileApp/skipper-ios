@@ -1,6 +1,6 @@
 //
 //  UserFirebaseModel.swift
-//  HRAutomation
+//  Skipper
 //
 //  Created by Denis Kovalev on 19.11.2022.
 //

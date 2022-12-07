@@ -16,9 +16,6 @@
 "auth.login.button.text" = "Log in";
 "auth.login.email.placeholder" = "Email";
 "auth.login.password.placeholder" = "Password";
-"auth.login.error.email.empty" = "Email is empty";
-"auth.login.error.email.incorrect" = "Email has incorrect format";
-"auth.login.error.password.empty" = "Password is empty";
 "auth.login.register.button.text" = "Sign up";
 
 "auth.signUp.header.text" = "Sign up";
@@ -29,6 +26,19 @@
 "auth.signUp.email.placeholder" = "Email";
 "auth.signUp.password.placeholder" = "Password";
 "auth.signUp.confirmPassword.placeholder" = "Confirm Password";
+"auth.signUp.login.button.text" = "Already signed up?";
+
+"auth.error.email.incorrect" = "Email has incorrect format";
+"auth.error.password.empty" = "Password is empty";
+"auth.error.password.length" = "Password must be minimum %d symbols length";
+"auth.error.password.uppercase" = "Password must contain at least %d uppercase letters";
+"auth.error.password.lowercase" = "Password must contain at least %d lowercase letters";
+"auth.error.password.digit" = "Password must contain at least %d digits";
+"auth.error.password.symbol" = "Password must contain at least %d special symbols";
+"auth.error.password.notEqual" = "Passwords are not equal";
+"auth.error.firstName.empty" = "First name is empty";
+"auth.error.lastName.empty" = "Last name is empty";
+"auth.error.patronymic.empty" = "Patronymic is empty";
 
 // MARK: - Main
 
@@ -42,6 +52,7 @@
 "error.auth.invalidPassword" = "Wrong password";
 "error.auth.accountDisabled" = "Your account was disabled. Please, contact support for more details";
 "error.firebase.system" = "Something went wrong. Please, try again later";
+"error.unknown" = "Ooops, something went wrong";
 
 
 // MARK: - Alert

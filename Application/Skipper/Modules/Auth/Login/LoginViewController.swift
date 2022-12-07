@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
 
     private lazy var signUpButton: UIButton = {
         let button = UnderlinedButton()
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(Strings.authLoginRegisterButtonText(), for: .normal)
         button.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
         return button
     }()
@@ -92,28 +92,35 @@ class LoginViewController: UIViewController {
 
         let containerView = UIView()
 
+        containerView.addSubview(headerLabel)
         containerView.addSubview(stackView)
         containerView.addSubview(signUpButton)
         scrollView.addSubview(containerView)
         view.addSubview(scrollView)
 
-        scrollView.applyConstraints(.fit(in: view))
+        scrollView.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
 
         containerView.applyConstraints(
-            .width(to: scrollView.frameLayoutGuide, attribute: .width),
-            .height(to: scrollView.frameLayoutGuide, attribute: .height, equality: .greaterThanOrEqual),
+            .width(to: scrollView, attribute: .width),
+            .height(to: scrollView, attribute: .height, equality: .greaterThanOrEqual),
             .fit(in: scrollView.contentLayoutGuide)
+        )
+
+        headerLabel.applyConstraints(
+            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual),
+            .centerX(to: containerView, attribute: .centerX),
+            .bottom(to: stackView, attribute: .top, constant: -100)
         )
 
         stackView.applyConstraints(
             .centerY(to: containerView, attribute: .centerY, equality: .lessThanOrEqual),
             .leading(to: containerView, attribute: .leading, constant: 32),
             .trailing(to: containerView, attribute: .trailing, constant: -32),
-            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual),
-            .bottom(to: containerView, attribute: .bottom, constant: -70, equality: .lessThanOrEqual)
+            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual)
         )
 
         signUpButton.applyConstraints(
+            .top(to: stackView, attribute: .bottom, constant: 10, equality: .greaterThanOrEqual),
             .bottom(to: containerView, attribute: .bottom, constant: -25),
             .centerX(to: containerView, attribute: .centerX),
             .height(constant: 45)
@@ -128,9 +135,6 @@ class LoginViewController: UIViewController {
     }
 
     private func assembleForm() {
-        stackView.addArrangedSubview(headerLabel)
-        stackView.setCustomSpacing(100, after: headerLabel)
-
         let fieldViews = Field.allCases.map { field in
             let fieldView = makeFieldView(field)
 

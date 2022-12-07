@@ -28,7 +28,7 @@ class SignUpViewController: UIViewController {
 
     private lazy var signUpButton: PrimaryButton = {
         let button = PrimaryButton()
-        button.setTitle(Strings.authLoginButtonText(), for: .normal)
+        button.setTitle(Strings.authSignUpButtonText(), for: .normal)
         button.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
         return button
     }()
@@ -37,12 +37,24 @@ class SignUpViewController: UIViewController {
         let label = UILabel()
         label.font = R.typo.promo
         label.textColor = R.color.primary87()
-        label.text = Strings.authLoginHeaderText()
+        label.text = Strings.authSignUpHeaderText()
         label.textAlignment = .center
         return label
     }()
 
+    private lazy var loginButton: UIButton = {
+        let button = UnderlinedButton()
+        button.setTitle(Strings.authSignUpLoginButtonText(), for: .normal)
+        button.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        return button
+    }()
+
     private var fields: [Field: FormFieldView] = [:]
+
+    // MARK: - Output
+
+    var didSignUp: (() -> Void)?
+    var didTapLogin: (() -> Void)?
 
     // MARK: - Properties
 
@@ -80,56 +92,55 @@ class SignUpViewController: UIViewController {
 
         let containerView = UIView()
 
+        containerView.addSubview(headerLabel)
         containerView.addSubview(stackView)
-        containerView.addSubview(signUpButton)
+        containerView.addSubview(loginButton)
         scrollView.addSubview(containerView)
         view.addSubview(scrollView)
 
-        scrollView.applyConstraints(.fit(in: view))
+        scrollView.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
 
         containerView.applyConstraints(
-            .width(to: scrollView.frameLayoutGuide, attribute: .width),
-            .height(to: scrollView.frameLayoutGuide, attribute: .height, equality: .greaterThanOrEqual),
+            .width(to: scrollView, attribute: .width),
+            .height(to: scrollView, attribute: .height, equality: .greaterThanOrEqual),
             .fit(in: scrollView.contentLayoutGuide)
+        )
+
+        headerLabel.applyConstraints(
+            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual),
+            .centerX(to: containerView, attribute: .centerX),
+            .bottom(to: stackView, attribute: .top, constant: -100)
         )
 
         stackView.applyConstraints(
             .centerY(to: containerView, attribute: .centerY, equality: .lessThanOrEqual),
             .leading(to: containerView, attribute: .leading, constant: 32),
             .trailing(to: containerView, attribute: .trailing, constant: -32),
-            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual),
-            .bottom(to: containerView, attribute: .bottom, constant: -70, equality: .lessThanOrEqual)
+            .top(to: containerView, attribute: .top, constant: 10, equality: .greaterThanOrEqual)
         )
 
-        signUpButton.applyConstraints(
+        loginButton.applyConstraints(
+            .top(to: stackView, attribute: .bottom, constant: 10, equality: .greaterThanOrEqual),
             .bottom(to: containerView, attribute: .bottom, constant: -25),
             .centerX(to: containerView, attribute: .centerX),
             .height(constant: 45)
         )
 
         assembleForm()
-
-        #if DEBUG
-        fields[.email]?.text = "test@test.test"
-        fields[.password]?.text = "testtest"
-        #endif
     }
 
     private func assembleForm() {
-        stackView.addArrangedSubview(headerLabel)
-        stackView.setCustomSpacing(100, after: headerLabel)
-
         let fieldViews = Field.allCases.map { field in
             let fieldView = makeFieldView(field)
 
             stackView.addArrangedSubview(fieldView)
-            stackView.setCustomSpacing(25, after: fieldView)
+            stackView.setCustomSpacing(15, after: fieldView)
 
             fields[field] = fieldView
             return fieldView
         }
 
-        stackView.setCustomSpacing(70, after: fieldViews.last!)
+        stackView.setCustomSpacing(67, after: fieldViews.last!)
 
         signUpButton.applyConstraints(.height(constant: 45))
         stackView.addArrangedSubview(signUpButton)
@@ -137,14 +148,14 @@ class SignUpViewController: UIViewController {
 
     private func bindViewModelActions() {
         viewModel.didSignUp = { [weak self] in
-            self?.setLoginButtonLoading(false)
-            self?.didFinish?()
+            self?.setSignUpButtonLoading(false)
+            self?.didSignUp?()
         }
 
         viewModel.didFail = { [weak self] error in
             guard let self = self else { return }
 
-            self.setLoginButtonLoading(false)
+            self.setSignUpButtonLoading(false)
             AlertPresenter.presentSimpleAlert(Strings.errorTitle(),
                                               message: error.localizedDescription,
                                               controller: self)
@@ -161,9 +172,9 @@ class SignUpViewController: UIViewController {
             return
         }
 
-        setLoginButtonLoading(true)
+        setSignUpButtonLoading(true)
 
-        viewModel.signUp(email: email, password: password)
+        viewModel.signUp(values: values)
     }
 
     private func applyErrors(_ errors: [Field: [String]]) {
@@ -200,14 +211,24 @@ class SignUpViewController: UIViewController {
     @objc private func signUpAction() {
         signUp()
     }
+
+    @objc private func loginAction() {
+        didTapLogin?()
+    }
 }
 
 extension SignUpViewController: FormFieldViewDelegate {
     func formFieldViewShouldReturn(_ view: FormFieldView) {
-        <#code#>
+        if fields[.password] === view {
+            signUp()
+            self.view.endEditing(true)
+            return
+        }
+
+        scrollView.focusNextTextField()
     }
 
     func formFieldViewDidChangeText(_ view: FormFieldView, newText: String?) {
-        <#code#>
+        view.setErrorState(.none)
     }
 }

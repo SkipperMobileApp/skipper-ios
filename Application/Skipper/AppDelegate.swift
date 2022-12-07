@@ -8,6 +8,7 @@
 import Alamofire
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
 import UIKit
 
 @main
@@ -36,31 +37,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase
 
         let auth = Auth.auth()
+        let firestore = Firestore.firestore()
+
+        // Cache
+
+        let authCache = AuthCacheImpl()
 
         // Database
 
-        let database = Database()
-
-        // TODO: Example, remove when another database DAO is ready
-        let exampleDao = ExampleDaoImpl(context: database.context)
+        let firestoreDatabase = FirestoreDatabaseImpl(firestore: firestore)
 
         // API
 
         let tokensContainer: TokensContainer = KeychainContainer()
-        let authAPI = FirebaseAuthAPI(auth: auth)
+        let authAPI = FirebaseAuthAPI(auth: auth, database: firestoreDatabase)
 
         // Repositories
 
-        let authRepository: AuthRepository = AuthRepositoryImpl(api: authAPI)
+        let authRepositoryImpl = AuthRepositoryImpl(api: authAPI, cache: authCache)
+        let authRepository: AuthRepository = authRepositoryImpl
+        let logoutRepository: LogoutRepository = authRepositoryImpl
 
         // Services
 
-        let userService: UserService = UserServiceImpl()
+        let logoutHandler = makeLogoutHandler(logoutRepository: logoutRepository,
+                                              postLogoutNavigationHandler: reAuthHandler)
 
-        // Registration
+        // Assembling
 
+        SharedDependencyContainer.register(logoutHandler)
         SharedDependencyContainer.register(tokensContainer)
         SharedDependencyContainer.register(authRepository)
-        SharedDependencyContainer.register(userService)
+    }
+
+    private func makeLogoutHandler(logoutRepository: LogoutRepository,
+                                   postLogoutNavigationHandler: @escaping () -> Void) -> LogoutHandler
+    {
+        SyncCompositeLogoutHandler {
+            APILogoutHandler(logoutRepository: logoutRepository)
+            NavigationLogoutHandler(logoutNavigationHandler: postLogoutNavigationHandler)
+        }
     }
 }

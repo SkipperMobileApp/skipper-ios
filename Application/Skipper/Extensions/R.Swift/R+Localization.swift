@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias Strings = R.string.localizable
+let Strings = R.string.localizable.self

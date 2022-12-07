@@ -43,7 +43,20 @@
 		847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A72906E71400C9CC5D /* ExampleDao.swift */; };
 		847DD3AD2906E71500C9CC5D /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A82906E71400C9CC5D /* Database.swift */; };
 		847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A92906E71400C9CC5D /* DBError.swift */; };
+		848AB2B32940F5EF007DB9F4 /* Sequence+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2B22940F5EF007DB9F4 /* Sequence+Concurrency.swift */; };
+		848AB2B52940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2B42940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift */; };
+		848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2BD29410097007DB9F4 /* NavigationLogoutHandler.swift */; };
+		848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2C229410362007DB9F4 /* LogoutHandlerComposed.swift */; };
+		848AB2C529410933007DB9F4 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2C429410933007DB9F4 /* AuthRepository.swift */; };
+		848AB2C729410940007DB9F4 /* LogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2C629410940007DB9F4 /* LogoutRepository.swift */; };
+		848AB2CA2941099F007DB9F4 /* AuthCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2C92941099F007DB9F4 /* AuthCache.swift */; };
+		848AB2CD29410D5C007DB9F4 /* AuthUserCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2CC29410D5C007DB9F4 /* AuthUserCacheModel.swift */; };
+		848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AB2CE29410F54007DB9F4 /* AuthCacheImpl.swift */; };
 		8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491023C291995D500979112 /* UIApplication+Extensions.swift */; };
+		849A9257293E7E2A0056711F /* LogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A9256293E7E2A0056711F /* LogoutHandler.swift */; };
+		849A925B293E80420056711F /* APILogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A925A293E80420056711F /* APILogoutHandler.swift */; };
+		849A925D293E80910056711F /* CompositeLogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A925C293E80910056711F /* CompositeLogoutHandler.swift */; };
+		849A925F293E80A00056711F /* SyncCompositeLogoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A925E293E80A00056711F /* SyncCompositeLogoutHandler.swift */; };
 		84A2CF1D291839A900829C59 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2CF1C291839A900829C59 /* PrimaryButton.swift */; };
 		84AC0226292E880900DE7AF2 /* UserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0224292E880900DE7AF2 /* UserMapper.swift */; };
 		84AC0227292E880900DE7AF2 /* AuthUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0225292E880900DE7AF2 /* AuthUserMapper.swift */; };
@@ -59,9 +72,8 @@
 		84AC023D292E906400DE7AF2 /* ExampleRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2CF2A29184F6800829C59 /* ExampleRepositoryMock.swift */; };
 		84AC023E292E906400DE7AF2 /* AppSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2CF2E29184FE900829C59 /* AppSessionMock.swift */; };
 		84AC023F292E906400DE7AF2 /* TokensContainerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2CF2C29184FA700829C59 /* TokensContainerMock.swift */; };
-		84AC0241292E909900DE7AF2 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0240292E909900DE7AF2 /* AuthRepository.swift */; };
+		84AC0241292E909900DE7AF2 /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0240292E909900DE7AF2 /* AuthRepositoryImpl.swift */; };
 		84AC0243292E90BB00DE7AF2 /* AuthRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0242292E90BB00DE7AF2 /* AuthRepositoryMock.swift */; };
-		84AC0246292E933700DE7AF2 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0245292E933700DE7AF2 /* UserService.swift */; };
 		84AC0248292E94D300DE7AF2 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC0247292E94D300DE7AF2 /* FormFieldView.swift */; };
 		84C29A9F2908397D0073E7A4 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 84C29A9E2908397D0073E7A4 /* PKHUD */; };
 		84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C29AAA29086E030073E7A4 /* SplashViewController.swift */; };
@@ -84,11 +96,16 @@
 		84E6C2E2293CB13F003ACCF7 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2E1293CB13F003ACCF7 /* Injected.swift */; };
 		84E6C2E4293CCFF4003ACCF7 /* R+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2E3293CCFF4003ACCF7 /* R+Localization.swift */; };
 		84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2E7293CDAA6003ACCF7 /* FirestoreDatabase.swift */; };
+		84E6C2EA293D015F003ACCF7 /* UserRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2E9293D015F003ACCF7 /* UserRegisterModel.swift */; };
+		84E6C2EE293D0C39003ACCF7 /* UserRegisterAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2ED293D0C39003ACCF7 /* UserRegisterAPIModel.swift */; };
+		84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */; };
+		84E6C2F2293D13E1003ACCF7 /* ContainingCharactersValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2F1293D13E1003ACCF7 /* ContainingCharactersValidator.swift */; };
+		84E6C2F4293D16EE003ACCF7 /* CharacterSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2F3293D16EE003ACCF7 /* CharacterSet+Extensions.swift */; };
+		84E6C2F6293D1892003ACCF7 /* EqualValueValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C2F5293D1892003ACCF7 /* EqualValueValidator.swift */; };
 		84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE753B28F706F600B55839 /* GlobalConstants.swift */; };
 		84EE754228F70C8500B55839 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EE754128F70C8500B55839 /* Colors.xcassets */; };
 		84EE755428F70E8900B55839 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755328F70E8900B55839 /* Log.swift */; };
 		84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755528F70F1F00B55839 /* AppErrors.swift */; };
-		84EE755828F70FC000B55839 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755728F70FC000B55839 /* AppSession.swift */; };
 		84EE755A28F7114D00B55839 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755928F7114D00B55839 /* Utils.swift */; };
 		84EE756028F72A1500B55839 /* UIWindow+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755C28F72A1400B55839 /* UIWindow+Transition.swift */; };
 		84EE756128F72A1500B55839 /* R+Typo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755D28F72A1400B55839 /* R+Typo.swift */; };
@@ -161,7 +178,20 @@
 		847DD3A72906E71400C9CC5D /* ExampleDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDao.swift; sourceTree = "<group>"; };
 		847DD3A82906E71400C9CC5D /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		847DD3A92906E71400C9CC5D /* DBError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
+		848AB2B22940F5EF007DB9F4 /* Sequence+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Concurrency.swift"; sourceTree = "<group>"; };
+		848AB2B42940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCompositeLogoutHandler.swift; sourceTree = "<group>"; };
+		848AB2BD29410097007DB9F4 /* NavigationLogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoutHandler.swift; sourceTree = "<group>"; };
+		848AB2C229410362007DB9F4 /* LogoutHandlerComposed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutHandlerComposed.swift; sourceTree = "<group>"; };
+		848AB2C429410933007DB9F4 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		848AB2C629410940007DB9F4 /* LogoutRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRepository.swift; sourceTree = "<group>"; };
+		848AB2C92941099F007DB9F4 /* AuthCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCache.swift; sourceTree = "<group>"; };
+		848AB2CC29410D5C007DB9F4 /* AuthUserCacheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserCacheModel.swift; sourceTree = "<group>"; };
+		848AB2CE29410F54007DB9F4 /* AuthCacheImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCacheImpl.swift; sourceTree = "<group>"; };
 		8491023C291995D500979112 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		849A9256293E7E2A0056711F /* LogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutHandler.swift; sourceTree = "<group>"; };
+		849A925A293E80420056711F /* APILogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogoutHandler.swift; sourceTree = "<group>"; };
+		849A925C293E80910056711F /* CompositeLogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeLogoutHandler.swift; sourceTree = "<group>"; };
+		849A925E293E80A00056711F /* SyncCompositeLogoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCompositeLogoutHandler.swift; sourceTree = "<group>"; };
 		84A2CF1C291839A900829C59 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		84A2CF2A29184F6800829C59 /* ExampleRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepositoryMock.swift; sourceTree = "<group>"; };
 		84A2CF2C29184FA700829C59 /* TokensContainerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensContainerMock.swift; sourceTree = "<group>"; };
@@ -177,9 +207,8 @@
 		84AC0236292E8F0100DE7AF2 /* LengthValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthValidator.swift; sourceTree = "<group>"; };
 		84AC0237292E8F0100DE7AF2 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		84AC0238292E8F0100DE7AF2 /* EmptyValueValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyValueValidator.swift; sourceTree = "<group>"; };
-		84AC0240292E909900DE7AF2 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		84AC0240292E909900DE7AF2 /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
 		84AC0242292E90BB00DE7AF2 /* AuthRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryMock.swift; sourceTree = "<group>"; };
-		84AC0245292E933700DE7AF2 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		84AC0247292E94D300DE7AF2 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		84C29AAA29086E030073E7A4 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		84C29AAC29086E090073E7A4 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
@@ -199,11 +228,16 @@
 		84E6C2E1293CB13F003ACCF7 /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		84E6C2E3293CCFF4003ACCF7 /* R+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Localization.swift"; sourceTree = "<group>"; };
 		84E6C2E7293CDAA6003ACCF7 /* FirestoreDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDatabase.swift; sourceTree = "<group>"; };
+		84E6C2E9293D015F003ACCF7 /* UserRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterModel.swift; sourceTree = "<group>"; };
+		84E6C2ED293D0C39003ACCF7 /* UserRegisterAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterAPIModel.swift; sourceTree = "<group>"; };
+		84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterMapper.swift; sourceTree = "<group>"; };
+		84E6C2F1293D13E1003ACCF7 /* ContainingCharactersValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainingCharactersValidator.swift; sourceTree = "<group>"; };
+		84E6C2F3293D16EE003ACCF7 /* CharacterSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extensions.swift"; sourceTree = "<group>"; };
+		84E6C2F5293D1892003ACCF7 /* EqualValueValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualValueValidator.swift; sourceTree = "<group>"; };
 		84EE753B28F706F600B55839 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		84EE754128F70C8500B55839 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		84EE755328F70E8900B55839 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		84EE755528F70F1F00B55839 /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
-		84EE755728F70FC000B55839 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		84EE755928F7114D00B55839 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		84EE755B28F72A1400B55839 /* String+ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		84EE755C28F72A1400B55839 /* UIWindow+Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Transition.swift"; sourceTree = "<group>"; };
@@ -292,9 +326,9 @@
 			children = (
 				8447C3CC2932957D0092B10D /* DI */,
 				847DD3A52906E71400C9CC5D /* CoreData */,
+				848AB2C829410988007DB9F4 /* Cache */,
 				8406AB0429313DBB00D12767 /* Network */,
 				84EE753E28F70BF400B55839 /* Repositories */,
-				84AC0244292E932F00DE7AF2 /* Services */,
 				84EE753828F7064E00B55839 /* Models */,
 				84EE753628F7063B00B55839 /* Coordination */,
 				84EE754028F70C2800B55839 /* Session */,
@@ -365,6 +399,53 @@
 			path = Dao;
 			sourceTree = "<group>";
 		};
+		848AB2B92940FF52007DB9F4 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				849A9256293E7E2A0056711F /* LogoutHandler.swift */,
+				849A925A293E80420056711F /* APILogoutHandler.swift */,
+				848AB2BD29410097007DB9F4 /* NavigationLogoutHandler.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
+		848AB2BA2940FF57007DB9F4 /* CompositeHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				849A925C293E80910056711F /* CompositeLogoutHandler.swift */,
+				848AB2C229410362007DB9F4 /* LogoutHandlerComposed.swift */,
+				849A925E293E80A00056711F /* SyncCompositeLogoutHandler.swift */,
+				848AB2B42940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift */,
+			);
+			path = CompositeHandlers;
+			sourceTree = "<group>";
+		};
+		848AB2C829410988007DB9F4 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				848AB2C92941099F007DB9F4 /* AuthCache.swift */,
+				848AB2CE29410F54007DB9F4 /* AuthCacheImpl.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		848AB2CB29410B09007DB9F4 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				848AB2CC29410D5C007DB9F4 /* AuthUserCacheModel.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		849A9255293E7E1C0056711F /* LogoutHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				848AB2B92940FF52007DB9F4 /* Handlers */,
+				848AB2BA2940FF57007DB9F4 /* CompositeHandlers */,
+			);
+			path = LogoutHandlers;
+			sourceTree = "<group>";
+		};
 		84A2CF2929184F5100829C59 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,7 +460,9 @@
 		84AC0221292E863F00DE7AF2 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				84AC0240292E909900DE7AF2 /* AuthRepository.swift */,
+				848AB2C429410933007DB9F4 /* AuthRepository.swift */,
+				848AB2C629410940007DB9F4 /* LogoutRepository.swift */,
+				84AC0240292E909900DE7AF2 /* AuthRepositoryImpl.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -409,16 +492,10 @@
 				84AC0235292E8F0100DE7AF2 /* EmailValidator.swift */,
 				84AC0238292E8F0100DE7AF2 /* EmptyValueValidator.swift */,
 				84AC0236292E8F0100DE7AF2 /* LengthValidator.swift */,
+				84E6C2F1293D13E1003ACCF7 /* ContainingCharactersValidator.swift */,
+				84E6C2F5293D1892003ACCF7 /* EqualValueValidator.swift */,
 			);
 			path = Validators;
-			sourceTree = "<group>";
-		};
-		84AC0244292E932F00DE7AF2 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				84AC0245292E933700DE7AF2 /* UserService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		84C29AA829086DF30073E7A4 /* Auth */ = {
@@ -554,6 +631,8 @@
 				84EE755B28F72A1400B55839 /* String+ExtensionsTests.swift */,
 				84EE755C28F72A1400B55839 /* UIWindow+Transition.swift */,
 				8491023C291995D500979112 /* UIApplication+Extensions.swift */,
+				84E6C2F3293D16EE003ACCF7 /* CharacterSet+Extensions.swift */,
+				848AB2B22940F5EF007DB9F4 /* Sequence+Concurrency.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -569,9 +648,9 @@
 		84EE754028F70C2800B55839 /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				849A9255293E7E1C0056711F /* LogoutHandlers */,
 				84573E06290720D600F03827 /* Environment.swift */,
 				84573E07290720D600F03827 /* TokensContainer.swift */,
-				84EE755728F70FC000B55839 /* AppSession.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -599,6 +678,7 @@
 				84AC0225292E880900DE7AF2 /* AuthUserMapper.swift */,
 				84AC0224292E880900DE7AF2 /* UserMapper.swift */,
 				84573DE52906F42200F03827 /* ExampleMapper.swift */,
+				84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -606,7 +686,7 @@
 		84EE754828F70DBD00B55839 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				84AC0228292E881E00DE7AF2 /* Firebase */,
+				848AB2CB29410B09007DB9F4 /* Cache */,
 				84EE754B28F70DD400B55839 /* CoreData */,
 				84EE754A28F70DCE00B55839 /* Network */,
 			);
@@ -620,6 +700,7 @@
 				84AC022D292E886D00DE7AF2 /* UserModel.swift */,
 				84573DE72906F45900F03827 /* ExampleModel.swift */,
 				84573E0A2907218100F03827 /* TokensModel.swift */,
+				84E6C2E9293D015F003ACCF7 /* UserRegisterModel.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -627,8 +708,10 @@
 		84EE754A28F70DCE00B55839 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				84AC0228292E881E00DE7AF2 /* Firebase */,
 				84573DEB2906F4B600F03827 /* APIModel.swift */,
 				84573DE92906F4A800F03827 /* ExampleAPIModel.swift */,
+				84E6C2ED293D0C39003ACCF7 /* UserRegisterAPIModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -926,28 +1009,38 @@
 			files = (
 				84AC0226292E880900DE7AF2 /* UserMapper.swift in Sources */,
 				847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */,
-				84EE755828F70FC000B55839 /* AppSession.swift in Sources */,
+				84E6C2F4293D16EE003ACCF7 /* CharacterSet+Extensions.swift in Sources */,
 				84573DE82906F45900F03827 /* ExampleModel.swift in Sources */,
 				84573DE22906F38C00F03827 /* ExampleDBModel.swift in Sources */,
+				848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */,
 				84AC022C292E882A00DE7AF2 /* UserFirebaseModel.swift in Sources */,
+				849A925F293E80A00056711F /* SyncCompositeLogoutHandler.swift in Sources */,
 				84AC0233292E889100DE7AF2 /* PaginatedModel.swift in Sources */,
 				84AC0227292E880900DE7AF2 /* AuthUserMapper.swift in Sources */,
 				84573E112907258200F03827 /* Constraints.swift in Sources */,
 				84EE758528F72A9200B55839 /* Coordinator.swift in Sources */,
 				84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */,
-				84AC0241292E909900DE7AF2 /* AuthRepository.swift in Sources */,
+				84AC0241292E909900DE7AF2 /* AuthRepositoryImpl.swift in Sources */,
+				848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */,
 				84AC022B292E882A00DE7AF2 /* FIrebaseModel.swift in Sources */,
+				84E6C2EA293D015F003ACCF7 /* UserRegisterModel.swift in Sources */,
 				84EE757828F72A9200B55839 /* AppCoordinator.swift in Sources */,
 				84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */,
+				849A925D293E80910056711F /* CompositeLogoutHandler.swift in Sources */,
 				84EE756228F72A1500B55839 /* String+Extensions.swift in Sources */,
 				840DB1D727A552AA00F40C89 /* MainViewController.swift in Sources */,
 				84AC0248292E94D300DE7AF2 /* FormFieldView.swift in Sources */,
 				84573DEA2906F4A800F03827 /* ExampleAPIModel.swift in Sources */,
+				848AB2CA2941099F007DB9F4 /* AuthCache.swift in Sources */,
+				84E6C2EE293D0C39003ACCF7 /* UserRegisterAPIModel.swift in Sources */,
 				84AC023A292E8F0100DE7AF2 /* LengthValidator.swift in Sources */,
 				8406AB03293138D300D12767 /* PaddingLabel.swift in Sources */,
 				8447C3CE2932958F0092B10D /* Container.swift in Sources */,
 				84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */,
+				848AB2CD29410D5C007DB9F4 /* AuthUserCacheModel.swift in Sources */,
 				84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */,
+				848AB2B52940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift in Sources */,
+				848AB2B32940F5EF007DB9F4 /* Sequence+Concurrency.swift in Sources */,
 				84EE758828F72E1600B55839 /* MainCoordinator.swift in Sources */,
 				84AC022F292E886D00DE7AF2 /* UserModel.swift in Sources */,
 				8406AB0829313F4200D12767 /* AuthAPI.swift in Sources */,
@@ -956,10 +1049,13 @@
 				84EE757A28F72A9200B55839 /* AppRouter.swift in Sources */,
 				84C39370291D825D0042C231 /* TextButton.swift in Sources */,
 				84573E132907258300F03827 /* UIView+Constraints.swift in Sources */,
+				849A9257293E7E2A0056711F /* LogoutHandler.swift in Sources */,
 				84AC0230292E886D00DE7AF2 /* AuthUserModel.swift in Sources */,
 				84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */,
+				84E6C2F2293D13E1003ACCF7 /* ContainingCharactersValidator.swift in Sources */,
 				84EE757928F72A9200B55839 /* NavigationRouter.swift in Sources */,
 				84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */,
+				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
 				84EE756128F72A1500B55839 /* R+Typo.swift in Sources */,
@@ -967,6 +1063,7 @@
 				84AC023C292E8F0100DE7AF2 /* EmptyValueValidator.swift in Sources */,
 				84E51DDC292BFB84008D2308 /* PrimaryTextField.swift in Sources */,
 				84573E0B2907218100F03827 /* TokensModel.swift in Sources */,
+				84E6C2F6293D1892003ACCF7 /* EqualValueValidator.swift in Sources */,
 				84EE755A28F7114D00B55839 /* Utils.swift in Sources */,
 				84EE758E28F72E9200B55839 /* AlertPresenter.swift in Sources */,
 				84EE755428F70E8900B55839 /* Log.swift in Sources */,
@@ -974,17 +1071,19 @@
 				84E51DDE292BFB8F008D2308 /* InsetTextField.swift in Sources */,
 				84573E0529071D8D00F03827 /* R.generated.swift in Sources */,
 				84E6C2E2293CB13F003ACCF7 /* Injected.swift in Sources */,
-				84AC0246292E933700DE7AF2 /* UserService.swift in Sources */,
 				84EE758428F72A9200B55839 /* Presentable.swift in Sources */,
 				84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */,
+				84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */,
 				847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */,
 				84EE757F28F72A9200B55839 /* DeepLink.swift in Sources */,
 				8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */,
 				8406AB0629313DCB00D12767 /* FirebaseError.swift in Sources */,
 				84EE759028F72EE700B55839 /* SetupableView.swift in Sources */,
+				848AB2C729410940007DB9F4 /* LogoutRepository.swift in Sources */,
 				84E51DDA292BFB33008D2308 /* UnderlinedButton.swift in Sources */,
 				84EE757B28F72A9200B55839 /* RouterType.swift in Sources */,
 				84573E142907258300F03827 /* Constrainable.swift in Sources */,
+				849A925B293E80420056711F /* APILogoutHandler.swift in Sources */,
 				84AC0239292E8F0100DE7AF2 /* EmailValidator.swift in Sources */,
 				84C29AB129086E180073E7A4 /* LoginViewModel.swift in Sources */,
 				84573E08290720D600F03827 /* Environment.swift in Sources */,
@@ -996,6 +1095,7 @@
 				84573E09290720D600F03827 /* TokensContainer.swift in Sources */,
 				84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */,
 				84573DEC2906F4B600F03827 /* APIModel.swift in Sources */,
+				848AB2C529410933007DB9F4 /* AuthRepository.swift in Sources */,
 				84573E122907258300F03827 /* Attributes.swift in Sources */,
 				84EE758A28F72E1E00B55839 /* MainViewModel.swift in Sources */,
 			);

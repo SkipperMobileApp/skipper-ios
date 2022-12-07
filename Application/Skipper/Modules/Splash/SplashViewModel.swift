@@ -11,25 +11,20 @@ class SplashViewModel {
     var didFinish: ((_ isSuccess: Bool) -> Void)?
 
     @Injected() private var authRepository: AuthRepository
-    @Injected() private var userService: UserService
 
     func tryLogin() {
         Task {
             do {
                 try await Task.sleep(nanoseconds: 1000000000)
 
-                let user = try await authRepository.currentUser()
+                let user = try await authRepository.currentUser(forceUpdate: true)
 
                 await MainActor.run {
-                    if let user = user {
-                        userService.currentUser = user
-                    }
-
-                    didFinish?(userService.isAuthenticated)
+                    didFinish?(user != nil)
                 }
             } catch {
+                Log.error(error.localizedDescription)
                 await MainActor.run {
-                    Log.error(error.localizedDescription)
                     didFinish?(false)
                 }
             }

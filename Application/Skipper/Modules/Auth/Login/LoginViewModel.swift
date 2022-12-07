@@ -11,13 +11,12 @@ import FirebaseAuth
 class LoginViewModel {
     // MARK: - Outputs
 
-    var didLogin: (() -> Void)?
-    var didFail: ((Error) -> Void)?
+    @MainActor var didLogin: (() -> Void)?
+    @MainActor var didFail: ((Error) -> Void)?
 
     // MARK: - Properties
 
     @Injected() private var authRepository: AuthRepository
-    @Injected() private var userService: UserService
 
     // MARK: - API Calls
 
@@ -25,7 +24,6 @@ class LoginViewModel {
         Task {
             do {
                 let user = try await authRepository.signIn(email: email, password: password)
-                userService.currentUser = user
                 await MainActor.run {
                     didLogin?()
                 }
@@ -69,12 +67,11 @@ extension LoginViewModel {
             switch self {
             case .email:
                 return [
-                    EmptyValueValidator(errorText: Strings.authLoginErrorEmailEmpty()),
-                    EmailValidator(errorText: Strings.authLoginErrorEmailIncorrect())
+                    EmailValidator(errorText: Strings.authErrorEmailIncorrect())
                 ]
             case .password:
                 return [
-                    EmptyValueValidator(errorText: Strings.authLoginErrorPasswordEmpty())
+                    EmptyValueValidator(errorText: Strings.authErrorPasswordEmpty())
                 ]
             }
         }
