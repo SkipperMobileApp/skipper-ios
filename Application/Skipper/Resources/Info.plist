@@ -4,5 +4,13 @@
 <dict>
 	<key>Environment</key>
 	<string>$(ENVIRONMENT)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

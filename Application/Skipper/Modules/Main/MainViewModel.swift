@@ -8,9 +8,21 @@
 import Foundation
 
 class MainViewModel {
-    private let session: AppSession
+    @Injected() private var authRepository: AuthRepository
+    @Injected() private var logoutHandler: LogoutHandler
 
-    init(session: AppSession) {
-        self.session = session
+    @MainActor var didFail: ((Error) -> Void)?
+
+    func signOut() {
+        Task {
+            do {
+                try await logoutHandler.logout()
+
+            } catch {
+                await MainActor.run {
+                    didFail?(error)
+                }
+            }
+        }
     }
 }

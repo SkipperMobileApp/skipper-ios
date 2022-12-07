@@ -13,9 +13,9 @@ class SplashViewController: UIViewController {
 
     private lazy var label: UILabel = {
         let label = UILabel()
-        label.text = R.string.localizable.splashText()
-        label.font = R.typo.promo
-        label.textColor = R.color.primary87()
+        label.text = Strings.splashText()
+        label.font = R.typo.promo2
+        label.textColor = R.color.primary100()
         label.textAlignment = .center
         return label
     }()
@@ -55,17 +55,15 @@ class SplashViewController: UIViewController {
         viewModel.tryLogin()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        label.frame = view.bounds
-    }
-
     // MARK: - UI Methods
 
     private func setupUI() {
-        view.backgroundColor = R.color.brandPrimary()
+        view.backgroundColor = R.color.themeBackground()
+
         view.addSubview(label)
+
+        label.applyConstraints(.centerX(to: view, attribute: .centerX),
+                               .centerY(to: view, attribute: .centerY, constant: -20))
     }
 
     private func bindViewModelActions() {

@@ -6,6 +6,9 @@
 //
 
 import Alamofire
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 import UIKit
 
 @main
@@ -14,13 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let session = makeAppSession(reAuthHandler: { [weak self] in
+        FirebaseApp.configure()
+
+        initializeDependencyGraph(reAuthHandler: { [weak self] in
             self?.appCoordinator.runAuth()
         })
 
         window = UIWindow()
 
-        let coordinator = AppCoordinator(with: AppRouter(with: window!), session: session)
+        let coordinator = AppCoordinator(with: AppRouter(with: window!))
         coordinator.start()
 
         appCoordinator = coordinator
@@ -28,42 +33,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func makeAppSession(reAuthHandler: @escaping () -> Void) -> AppSession {
+    private func initializeDependencyGraph(reAuthHandler: @escaping () -> Void) {
+        // Firebase
+
+        let auth = Auth.auth()
+        let firestore = Firestore.firestore()
+
+        // Cache
+
+        let authCache = AuthCacheImpl()
+
         // Database
 
-        let database = Database()
-
-        // TODO: Example, remove when another database DAO is ready
-        let exampleDao = ExampleDaoImpl(context: database.context)
+        let firestoreDatabase = FirestoreDatabaseImpl(firestore: firestore)
 
         // API
 
-        let tokensContainer = KeychainContainer()
-
-        var monitors: [EventMonitor] = []
-        monitors.append(APILogger()) // Uncomment if you want to see network logs in your debug session
-        let session = Session(eventMonitors: monitors)
-
-        let reachability = RemoteNetworkReachability()
-
-        let api = API(interceptor: APIRequestIntercepter(tokensContainer: tokensContainer,
-                                                         refreshTokenFailureHandler: { [weak tokensContainer] in
-                                                             tokensContainer?.removeTokens()
-                                                             reAuthHandler()
-                                                         }),
-                      session: session,
-                      reachability: reachability)
+        let tokensContainer: TokensContainer = KeychainContainer()
+        let authAPI = FirebaseAuthAPI(auth: auth, database: firestoreDatabase)
 
         // Repositories
 
-        // TODO: Example, remove when another database repository is ready
-        let exampleRepository = ExampleRepositoryImpl(api: api,
-                                                      database: database,
-                                                      exampleDao: exampleDao)
+        let authRepositoryImpl = AuthRepositoryImpl(api: authAPI, cache: authCache)
+        let authRepository: AuthRepository = authRepositoryImpl
+        let logoutRepository: LogoutRepository = authRepositoryImpl
+
+        // Services
+
+        let logoutHandler = makeLogoutHandler(logoutRepository: logoutRepository,
+                                              postLogoutNavigationHandler: reAuthHandler)
 
         // Assembling
 
-        return AppSession(tokensContainer: tokensContainer,
-                          exampleRepository: exampleRepository)
+        SharedDependencyContainer.register(logoutHandler)
+        SharedDependencyContainer.register(tokensContainer)
+        SharedDependencyContainer.register(authRepository)
+    }
+
+    private func makeLogoutHandler(logoutRepository: LogoutRepository,
+                                   postLogoutNavigationHandler: @escaping () -> Void) -> LogoutHandler
+    {
+        SyncCompositeLogoutHandler {
+            APILogoutHandler(logoutRepository: logoutRepository)
+            NavigationLogoutHandler(logoutNavigationHandler: postLogoutNavigationHandler)
+        }
     }
 }

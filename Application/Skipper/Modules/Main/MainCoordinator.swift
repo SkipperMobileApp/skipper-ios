@@ -10,10 +10,10 @@ import Foundation
 class MainCoordinator: NavigationCoordinator {
     var didFinish: (() -> Void)?
 
-    override init(with router: NavigationRouter, session: AppSession) {
-        super.init(with: router, session: session)
+    override init(with router: NavigationRouter) {
+        super.init(with: router)
 
-        let viewModel = MainViewModel(session: session)
+        let viewModel = MainViewModel()
         let controller = MainViewController(viewModel: viewModel)
 
         controller.didFinish = { [weak self] in
