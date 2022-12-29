@@ -40,6 +40,7 @@ class PrimaryButton: SetupableButton {
 
         titleLabel?.font = R.typo.header2
         layer.cornerRadius = 14
+        contentEdgeInsets = .init(top: 5, left: 16, bottom: 5, right: 16)
     }
 
     override func layoutSubviews() {

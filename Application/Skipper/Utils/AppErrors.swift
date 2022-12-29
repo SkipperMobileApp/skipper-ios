@@ -21,3 +21,5 @@ struct AppError: LocalizedError {
         .init(message: "")
     }
 }
+
+struct EmptyError: Error {}

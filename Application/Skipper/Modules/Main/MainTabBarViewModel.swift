@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  MainTabBarViewModel.swift
 //  Skipper
 //
 //  Created by Denis Kovalev on 09.11.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel {
+class MainTabBarViewModel {
     @Injected() private var authRepository: AuthRepository
     @Injected() private var logoutHandler: LogoutHandler
 

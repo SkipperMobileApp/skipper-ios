@@ -10,4 +10,5 @@ import Foundation
 struct AuthUserCacheModel {
     let id: String
     let email: String
+    let isVerified: Bool
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PKHUD
 import TPKeyboardAvoiding
 import UIKit
 
@@ -88,7 +89,7 @@ class SignUpViewController: UIViewController {
     // MARK: - UI Methods
 
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = R.color.themeBackground()
 
         let containerView = UIView()
 
@@ -149,7 +150,11 @@ class SignUpViewController: UIViewController {
     private func bindViewModelActions() {
         viewModel.didSignUp = { [weak self] in
             self?.setSignUpButtonLoading(false)
-            self?.didSignUp?()
+
+            HUD.show(.labeledSuccess(title: nil, subtitle: "Registered successfully"))
+            HUD.hide(afterDelay: 1) { _ in
+                self?.didSignUp?()
+            }
         }
 
         viewModel.didFail = { [weak self] error in

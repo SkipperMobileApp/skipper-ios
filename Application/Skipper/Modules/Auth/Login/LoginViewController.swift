@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
 
     // MARK: - Output
 
-    var didFinish: (() -> Void)?
+    var didFinish: ((_ isVerified: Bool) -> Void)?
     var didTapSignUp: (() -> Void)?
 
     // MARK: - Properties
@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
     // MARK: - UI Methods
 
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = R.color.themeBackground()
 
         let containerView = UIView()
 
@@ -152,9 +152,9 @@ class LoginViewController: UIViewController {
     }
 
     private func bindViewModelActions() {
-        viewModel.didLogin = { [weak self] in
+        viewModel.didLogin = { [weak self] isVerified in
             self?.setLoginButtonLoading(false)
-            self?.didFinish?()
+            self?.didFinish?(isVerified)
         }
 
         viewModel.didFail = { [weak self] error in

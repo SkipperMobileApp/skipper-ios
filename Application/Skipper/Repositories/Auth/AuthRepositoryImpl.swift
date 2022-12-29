@@ -46,4 +46,8 @@ class AuthRepositoryImpl: AuthRepository, LogoutRepository {
 
         return try await api.currentUser().flatMap(AuthUserMapper.apiToDomain)
     }
+
+    func resendVerificationEmail() async throws {
+        try await api.resendVerificationEmail()
+    }
 }

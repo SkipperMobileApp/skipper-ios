@@ -10,18 +10,18 @@ import Foundation
 
 enum AuthUserMapper {
     static func firebaseToAPI(_ model: User) -> AuthUserFirebaseModel {
-        .init(id: model.uid, email: model.email ?? "")
+        .init(id: model.uid, email: model.email ?? "", isVerified: model.isEmailVerified)
     }
 
     static func apiToDomain(_ model: AuthUserFirebaseModel) -> AuthUserModel {
-        .init(id: model.id, email: model.email)
+        .init(id: model.id, email: model.email, isVerified: model.isVerified)
     }
 
     static func cacheToDomain(_ model: AuthUserCacheModel) -> AuthUserModel {
-        .init(id: model.id, email: model.email)
+        .init(id: model.id, email: model.email, isVerified: model.isVerified)
     }
 
     static func domainToCache(_ model: AuthUserModel) -> AuthUserCacheModel {
-        .init(id: model.id, email: model.email)
+        .init(id: model.id, email: model.email, isVerified: model.isVerified)
     }
 }

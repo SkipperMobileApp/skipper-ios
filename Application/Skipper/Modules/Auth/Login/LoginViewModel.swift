@@ -11,7 +11,7 @@ import FirebaseAuth
 class LoginViewModel {
     // MARK: - Outputs
 
-    @MainActor var didLogin: (() -> Void)?
+    @MainActor var didLogin: ((_ isVerified: Bool) -> Void)?
     @MainActor var didFail: ((Error) -> Void)?
 
     // MARK: - Properties
@@ -25,7 +25,7 @@ class LoginViewModel {
             do {
                 let user = try await authRepository.signIn(email: email, password: password)
                 await MainActor.run {
-                    didLogin?()
+                    didLogin?(user.isVerified)
                 }
             } catch {
                 await MainActor.run {
