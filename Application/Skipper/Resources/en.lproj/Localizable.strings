@@ -40,6 +40,11 @@
 "auth.error.lastName.empty" = "Last name is empty";
 "auth.error.patronymic.empty" = "Patronymic is empty";
 
+"auth.verification.header.text" = "Whooops!\nYour account is not activated!";
+"auth.verification.body.text" = "Please, open the verification link from the post-registration email.\nClick the button below to resend the verification email to your email address.";
+"auth.verification.resendButton.text" = "Resend email";
+"auth.verification.signInButton.text" = "Go back to sign in";
+
 // MARK: - Main
 
 "main.hello.text" = "Hello World!";

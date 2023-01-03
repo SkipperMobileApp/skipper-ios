@@ -10,4 +10,5 @@ import Foundation
 struct AuthUserModel {
     let id: String
     let email: String
+    let isVerified: Bool
 }

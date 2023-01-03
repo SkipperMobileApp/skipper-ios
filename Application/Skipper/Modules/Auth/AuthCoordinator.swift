@@ -20,8 +20,12 @@ class AuthCoordinator: NavigationCoordinator {
         let viewModel = LoginViewModel()
         let controller = LoginViewController(viewModel: viewModel)
 
-        controller.didFinish = { [weak self] in
-            self?.didFinish?()
+        controller.didFinish = { [weak self] isVerified in
+            if isVerified {
+                self?.didFinish?()
+            } else {
+                self?.showVerification()
+            }
         }
 
         controller.didTapSignUp = { [weak self] in
@@ -37,10 +41,22 @@ class AuthCoordinator: NavigationCoordinator {
         let controller = SignUpViewController(viewModel: viewModel)
 
         controller.didSignUp = { [weak self] in
-            self?.didFinish?()
+            self?.showSignIn()
         }
 
         controller.didTapLogin = { [weak self] in
+            self?.showSignIn()
+        }
+
+        router.navigationController.setNavigationBarHidden(true, animated: false)
+        router.setRootModule(controller, animated: true)
+    }
+
+    private func showVerification() {
+        let viewModel = AuthVerificationViewModel()
+        let controller = AuthVerificationViewController(viewModel: viewModel)
+
+        controller.didFinish = { [weak self] in
             self?.showSignIn()
         }
 

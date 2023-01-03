@@ -13,6 +13,8 @@ protocol AuthAPI {
     func signUp(user: UserRegisterAPIModel) async throws -> AuthUserFirebaseModel
     func signOut() async throws
 
+    func resendVerificationEmail() async throws
+
     func currentUser() async throws -> AuthUserFirebaseModel?
 }
 
@@ -64,6 +66,10 @@ class FirebaseAuthAPI: AuthAPI {
 
     func currentUser() async throws -> AuthUserFirebaseModel? {
         auth.currentUser.flatMap(AuthUserMapper.firebaseToAPI)
+    }
+
+    func resendVerificationEmail() async throws {
+        try await auth.currentUser?.sendEmailVerification()
     }
 
     // MARK: - Private

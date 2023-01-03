@@ -12,5 +12,11 @@ extension R {
         static let eye = UIImage(systemName: "eye.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let eyeSlashed = UIImage(systemName: "eye.slash.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let home = UIImage(systemName: "house")!.withRenderingMode(.alwaysTemplate)
+
+        static let search = UIImage(systemName: "magnifyingglass")!.withRenderingMode(.alwaysTemplate)
+
+        static let profile = UIImage(systemName: "person.crop.circle.fill")!.withRenderingMode(.alwaysTemplate)
     }
 }

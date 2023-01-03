@@ -20,7 +20,7 @@ class SplashViewModel {
                 let user = try await authRepository.currentUser(forceUpdate: true)
 
                 await MainActor.run {
-                    didFinish?(user != nil)
+                    didFinish?(user?.isVerified ?? false)
                 }
             } catch {
                 Log.error(error.localizedDescription)
