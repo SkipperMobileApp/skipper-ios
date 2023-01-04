@@ -14,7 +14,9 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = DashboardViewModel()
         let controller = DashboardViewController(viewModel: viewModel)
 
-        router.navigationController.setNavigationBarHidden(true, animated: false)
+        router.navigationController.navigationItem.largeTitleDisplayMode = .always
+        router.navigationController.navigationBar.prefersLargeTitles = true
+
         router.setRootModule(controller)
     }
 }

@@ -45,9 +45,11 @@
 "auth.verification.resendButton.text" = "Resend email";
 "auth.verification.signInButton.text" = "Go back to sign in";
 
-// MARK: - Main
+// MARK: - Dashboard
 
-"main.hello.text" = "Hello World!";
+"dashboard.nav.title" = "Home";
+"dashboard.categories.title" = "Categories";
+"dashboard.popularMentors.title" = "Popular Mentors";
 
 // MARK: - Errors
 

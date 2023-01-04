@@ -25,8 +25,8 @@ extension R {
         /// Montserrat Medium (500), 16 pt
         static let header3 = R.font.montserratMedium(size: 16)
 
-        /// Montserrat Regular (400), 15 pt
-        static let body = R.font.montserratRegular(size: 15)
+        /// SF Pro Regular (400), 15 pt
+        static let body = UIFont.systemFont(ofSize: 15, weight: .regular)
 
         /// SF Pro Regular (400) 17 pt
         static let body1 = UIFont.systemFont(ofSize: 17, weight: .regular)
