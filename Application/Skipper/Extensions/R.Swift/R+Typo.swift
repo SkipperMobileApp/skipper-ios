@@ -16,8 +16,8 @@ extension R {
         /// SF Pro Regular (400) 32 pt
         static let promo2 = UIFont.systemFont(ofSize: 32, weight: .regular)
 
-        /// Montserrat Bold (700) 16 pt
-        static let header = R.font.montserratBold(size: 16)
+        /// SF Pro Medium (500) 17 pt
+        static let header = UIFont.systemFont(ofSize: 17, weight: .medium)
 
         /// Montserrat SemiBold (700), 22 pt
         static let header2 = R.font.montserratSemiBold(size: 22)

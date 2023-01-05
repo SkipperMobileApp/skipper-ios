@@ -51,6 +51,9 @@
 "dashboard.categories.title" = "Categories";
 "dashboard.popularMentors.title" = "Popular Mentors";
 
+"searchMentor.nav.title" = "Search Mentor";
+"searchMentor.search.placeholder" = "Search mentor by name";
+
 // MARK: - Errors
 
 "error.title" = "Error";

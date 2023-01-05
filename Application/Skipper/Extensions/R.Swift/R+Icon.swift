@@ -20,5 +20,7 @@ extension R {
         static let profile = UIImage(systemName: "person.crop.circle.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let like = UIImage(systemName: "hand.thumbsup.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let star = UIImage(systemName: "star.fill")!.withRenderingMode(.alwaysTemplate)
     }
 }

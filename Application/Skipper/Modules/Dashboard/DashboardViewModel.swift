@@ -10,17 +10,9 @@ import UIKit
 
 class DashboardViewModel {
     var sections: [Section] = [
-        .categories([
-            .init(title: "Разработка", image: nil),
-            .init(title: "Аналитика", image: nil),
-            .init(title: "Дизайн", image: nil),
-            .init(title: "Тестирование", image: nil),
-            .init(title: "Инфраструктура", image: nil),
-            .init(title: "Менеджмент", image: nil),
-            .init(title: "Продуктовая аналитика", image: nil),
-            .init(title: "Системный анализ", image: nil),
-            .init(title: "Бизнес анализ", image: nil)
-        ]),
+        .categories(
+            categories.map { .init(title: $0, image: nil) }
+        ),
         .popularMentors([
             .init(
                 name: "Thomas Shelby",
