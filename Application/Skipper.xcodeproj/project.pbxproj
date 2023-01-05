@@ -46,7 +46,13 @@
 		8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462CB412965B9C300347EA1 /* LabeledImageView.swift */; };
 		8462CB452965DAED00347EA1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8462CB442965DAED00347EA1 /* Kingfisher */; };
 		8462CB482965ECFB00347EA1 /* FadedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462CB472965ECFB00347EA1 /* FadedImageView.swift */; };
+		8462CB4B2965FBAC00347EA1 /* SearchMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462CB4A2965FBAC00347EA1 /* SearchMentorViewController.swift */; };
+		8462CB4D2965FBB200347EA1 /* SearchMentorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462CB4C2965FBB200347EA1 /* SearchMentorViewModel.swift */; };
 		846A4B92291C2B3300258A78 /* String+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE755B28F72A1400B55839 /* String+ExtensionsTests.swift */; };
+		846B83512966DADE008F9BB5 /* SearchMentorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B83502966DADE008F9BB5 /* SearchMentorCell.swift */; };
+		846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B83532966E4A5008F9BB5 /* CloudView.swift */; };
+		846B83562966E4B1008F9BB5 /* TextCloudItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B83552966E4B1008F9BB5 /* TextCloudItem.swift */; };
+		846B83582966FABE008F9BB5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B83572966FABE008F9BB5 /* UIView+Extensions.swift */; };
 		847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A72906E71400C9CC5D /* ExampleDao.swift */; };
 		847DD3AD2906E71500C9CC5D /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A82906E71400C9CC5D /* Database.swift */; };
 		847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD3A92906E71400C9CC5D /* DBError.swift */; };
@@ -200,6 +206,12 @@
 		8462CB3F2965A8C700347EA1 /* DashboardMentorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMentorCollectionCell.swift; sourceTree = "<group>"; };
 		8462CB412965B9C300347EA1 /* LabeledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledImageView.swift; sourceTree = "<group>"; };
 		8462CB472965ECFB00347EA1 /* FadedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadedImageView.swift; sourceTree = "<group>"; };
+		8462CB4A2965FBAC00347EA1 /* SearchMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMentorViewController.swift; sourceTree = "<group>"; };
+		8462CB4C2965FBB200347EA1 /* SearchMentorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMentorViewModel.swift; sourceTree = "<group>"; };
+		846B83502966DADE008F9BB5 /* SearchMentorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMentorCell.swift; sourceTree = "<group>"; };
+		846B83532966E4A5008F9BB5 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
+		846B83552966E4B1008F9BB5 /* TextCloudItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCloudItem.swift; sourceTree = "<group>"; };
+		846B83572966FABE008F9BB5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		847DD3A72906E71400C9CC5D /* ExampleDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDao.swift; sourceTree = "<group>"; };
 		847DD3A82906E71400C9CC5D /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		847DD3A92906E71400C9CC5D /* DBError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
@@ -453,6 +465,26 @@
 			path = ImageViews;
 			sourceTree = "<group>";
 		};
+		8462CB492965FB1800347EA1 /* SearchMentor */ = {
+			isa = PBXGroup;
+			children = (
+				84F68C85296606A000CAA3E9 /* Filters */,
+				8462CB4A2965FBAC00347EA1 /* SearchMentorViewController.swift */,
+				8462CB4C2965FBB200347EA1 /* SearchMentorViewModel.swift */,
+				846B83502966DADE008F9BB5 /* SearchMentorCell.swift */,
+			);
+			path = SearchMentor;
+			sourceTree = "<group>";
+		};
+		846B83522966E49C008F9BB5 /* CloudView */ = {
+			isa = PBXGroup;
+			children = (
+				846B83532966E4A5008F9BB5 /* CloudView.swift */,
+				846B83552966E4B1008F9BB5 /* TextCloudItem.swift */,
+			);
+			path = CloudView;
+			sourceTree = "<group>";
+		};
 		847DD3A52906E71400C9CC5D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +511,7 @@
 				8485C4D3295E2BBF007A7811 /* DashboardViewController.swift */,
 				8485C4D7295E2BD2007A7811 /* DashboardViewModel.swift */,
 				8462CB3829649BC700347EA1 /* Views */,
+				8462CB492965FB1800347EA1 /* SearchMentor */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -752,6 +785,7 @@
 				8491023C291995D500979112 /* UIApplication+Extensions.swift */,
 				84E6C2F3293D16EE003ACCF7 /* CharacterSet+Extensions.swift */,
 				848AB2B22940F5EF007DB9F4 /* Sequence+Concurrency.swift */,
+				846B83572966FABE008F9BB5 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -846,6 +880,7 @@
 		84EE754D28F70E0100B55839 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				846B83522966E49C008F9BB5 /* CloudView */,
 				84AC0247292E94D300DE7AF2 /* FormFieldView.swift */,
 				8462CB412965B9C300347EA1 /* LabeledImageView.swift */,
 			);
@@ -887,6 +922,13 @@
 				84EE756828F72A9100B55839 /* NavigationRouter.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		84F68C85296606A000CAA3E9 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 		84FD389B2933E3F8004023E4 /* Login */ = {
@@ -1149,6 +1191,7 @@
 				848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */,
 				84AC022B292E882A00DE7AF2 /* FIrebaseModel.swift in Sources */,
 				8462CB3B29649BE500347EA1 /* DashboardSectionHeaderView.swift in Sources */,
+				8462CB4B2965FBAC00347EA1 /* SearchMentorViewController.swift in Sources */,
 				84E6C2EA293D015F003ACCF7 /* UserRegisterModel.swift in Sources */,
 				84B11190295CCA9F0040AEA1 /* AuthVerificationViewModel.swift in Sources */,
 				84EE757828F72A9200B55839 /* AppCoordinator.swift in Sources */,
@@ -1164,6 +1207,7 @@
 				8406AB03293138D300D12767 /* PaddingLabel.swift in Sources */,
 				8485C4D4295E2BBF007A7811 /* DashboardViewController.swift in Sources */,
 				8447C3CE2932958F0092B10D /* Container.swift in Sources */,
+				846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */,
 				84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */,
 				848AB2CD29410D5C007DB9F4 /* AuthUserCacheModel.swift in Sources */,
 				8462CB3D29649E0000347EA1 /* DashboardCategoryFooterView.swift in Sources */,
@@ -1186,6 +1230,7 @@
 				84AC0230292E886D00DE7AF2 /* AuthUserModel.swift in Sources */,
 				84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */,
 				8485C4D0295E2B50007A7811 /* ProfileCoordinator.swift in Sources */,
+				846B83512966DADE008F9BB5 /* SearchMentorCell.swift in Sources */,
 				84E6C2F2293D13E1003ACCF7 /* ContainingCharactersValidator.swift in Sources */,
 				84EE757928F72A9200B55839 /* NavigationRouter.swift in Sources */,
 				84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */,
@@ -1208,6 +1253,7 @@
 				84E6C2E2293CB13F003ACCF7 /* Injected.swift in Sources */,
 				84EE758428F72A9200B55839 /* Presentable.swift in Sources */,
 				84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */,
+				846B83582966FABE008F9BB5 /* UIView+Extensions.swift in Sources */,
 				84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */,
 				847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */,
 				84EE757F28F72A9200B55839 /* DeepLink.swift in Sources */,
@@ -1219,6 +1265,7 @@
 				8485C4D2295E2B56007A7811 /* ProfileViewModel.swift in Sources */,
 				84EE757B28F72A9200B55839 /* RouterType.swift in Sources */,
 				84573E142907258300F03827 /* Constrainable.swift in Sources */,
+				846B83562966E4B1008F9BB5 /* TextCloudItem.swift in Sources */,
 				849A925B293E80420056711F /* APILogoutHandler.swift in Sources */,
 				84AC0239292E8F0100DE7AF2 /* EmailValidator.swift in Sources */,
 				84C29AB129086E180073E7A4 /* LoginViewModel.swift in Sources */,
@@ -1228,6 +1275,7 @@
 				8485C4DA295E2C76007A7811 /* SearchViewController.swift in Sources */,
 				84AC023B292E8F0100DE7AF2 /* Validator.swift in Sources */,
 				847DD3AD2906E71500C9CC5D /* Database.swift in Sources */,
+				8462CB4D2965FBB200347EA1 /* SearchMentorViewModel.swift in Sources */,
 				84FD389A2933E3F5004023E4 /* SignUpViewController.swift in Sources */,
 				84573E09290720D600F03827 /* TokensContainer.swift in Sources */,
 				84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */,

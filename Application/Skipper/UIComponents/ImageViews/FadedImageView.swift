@@ -25,7 +25,7 @@ class FadedImageView: SetupableImageView {
     }()
 
     // MARK: - UI Lifecycle
-    
+
     override func setup() {
         super.setup()
 

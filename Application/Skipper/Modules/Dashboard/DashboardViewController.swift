@@ -37,6 +37,7 @@ class DashboardViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
+    var didTapCategory: ((String) -> Void)?
 
     // MARK: - Properties
 
@@ -74,6 +75,8 @@ class DashboardViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = R.color.themeBackground()
         title = Strings.dashboardNavTitle()
+        navigationItem.backButtonTitle = ""
+        navigationItem.largeTitleDisplayMode = .always
 
         view.addSubview(collectionView)
         collectionView.applyConstraints(.fitWithInsets(in: view, insets: .init(top: 0, left: 8, bottom: 0, right: 8)))
@@ -242,6 +245,17 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                 imageURL: item.imageURL
             )
             return cell
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = viewModel.sections[indexPath.section]
+
+        switch section {
+        case let .categories(items):
+            didTapCategory?(items[indexPath.item].title)
+        default:
+            break
         }
     }
 }
