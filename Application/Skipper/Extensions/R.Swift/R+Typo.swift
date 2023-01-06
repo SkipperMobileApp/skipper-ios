@@ -19,11 +19,14 @@ extension R {
         /// SF Pro Medium (500) 17 pt
         static let header = UIFont.systemFont(ofSize: 17, weight: .medium)
 
-        /// Montserrat SemiBold (700), 22 pt
-        static let header2 = R.font.montserratSemiBold(size: 22)
+        /// SF Pro Bold (700), 22 pt
+        static let header2 = UIFont.systemFont(ofSize: 22, weight: .bold)
 
         /// Montserrat Medium (500), 16 pt
         static let header3 = R.font.montserratMedium(size: 16)
+
+        /// SF Pro Regular (400), 18 pt
+        static let subheader = UIFont.systemFont(ofSize: 18, weight: .regular)
 
         /// SF Pro Regular (400), 15 pt
         static let body = UIFont.systemFont(ofSize: 15, weight: .regular)

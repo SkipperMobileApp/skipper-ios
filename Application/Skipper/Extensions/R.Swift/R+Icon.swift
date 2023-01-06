@@ -22,5 +22,13 @@ extension R {
         static let like = UIImage(systemName: "hand.thumbsup.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let star = UIImage(systemName: "star.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let disclosure = UIImage(systemName: "chevron.right")!.withRenderingMode(.alwaysTemplate)
+
+        static let educationCircle = UIImage(systemName: "graduationcap.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let briefCaseCircle = UIImage(systemName: "briefcase.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let starCircle = UIImage(systemName: "star.circle.fill")!.withRenderingMode(.alwaysTemplate)
     }
 }

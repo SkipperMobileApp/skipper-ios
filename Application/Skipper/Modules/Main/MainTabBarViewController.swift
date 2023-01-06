@@ -65,7 +65,7 @@ class MainTabBarViewController: UITabBarController {
 
 extension MainTabBarViewController {
     enum Tab: Int, CaseIterable {
-        case dashboard, search, profile
+        case dashboard, profile
     }
 
     private func setupTabBarAppearance() {

@@ -40,7 +40,7 @@ class DashboardMentorCollectionCell: SetupableCollectionViewCell, Reusable {
 
     private lazy var likesView: LabeledImageView = {
         let view = LabeledImageView()
-        view.font = R.typo.header2!
+        view.font = R.typo.header2
         view.image = R.icon.like
         view.textColor = R.color.secondary100()!
         view.imageTintColor = R.color.secondary100()!
