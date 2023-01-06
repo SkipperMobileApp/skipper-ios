@@ -34,7 +34,7 @@ class SearchMentorViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let controller = UISearchController()
 
-        controller.searchBar.placeholder = Strings.searchMentorSearhPlaceholder()
+        controller.searchBar.placeholder = Strings.searchMentorSearchPlaceholder()
         controller.searchBar.tintColor = R.color.primary87()
         controller.searchBar.searchTextField.backgroundColor = R.color.themePrimary()
 
@@ -48,6 +48,7 @@ class SearchMentorViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
+    var didSelectMentor: ((_ mentorId: String) -> Void)?
 
     // MARK: - Properties
 
@@ -87,8 +88,11 @@ class SearchMentorViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = R.color.themeBackground()
 
-        navigationItem.largeTitleDisplayMode = .never
         title = Strings.searchMentorNavTitle()
+
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.backButtonTitle = ""
+
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
 
@@ -136,6 +140,8 @@ extension SearchMentorViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: false)
         let cell = tableView.cellForRow(at: indexPath) as? SearchMentorCell
         cell?.performBlink()
+
+        didSelectMentor?(viewModel.items[indexPath.row].id)
     }
 }
 

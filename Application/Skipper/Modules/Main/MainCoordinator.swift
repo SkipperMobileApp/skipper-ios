@@ -48,12 +48,10 @@ class MainCoordinator: NavigationCoordinator {
 
     private func initTabs() -> [TabBox] {
         let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
-        let searchCoordinator = SearchCoordinator(with: NavigationRouter())
         let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
 
         return [
             (.dashboard, dashboardCoordinator),
-            (.search, searchCoordinator),
             (.profile, profileCoordinator)
         ]
     }
@@ -81,7 +79,6 @@ private extension MainCoordinator.Tab {
     var title: String {
         switch self {
         case .dashboard: return "Home"
-        case .search: return "Search"
         case .profile: return "Profile"
         }
     }
@@ -89,7 +86,6 @@ private extension MainCoordinator.Tab {
     var icon: UIImage? {
         switch self {
         case .dashboard: return R.icon.home
-        case .search: return R.icon.search
         case .profile: return R.icon.profile
         }
     }

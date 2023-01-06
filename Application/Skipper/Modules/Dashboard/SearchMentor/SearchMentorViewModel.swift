@@ -14,6 +14,7 @@ class SearchMentorViewModel {
 
     private var sourceItems: [Item] = [
         .init(
+            id: "1",
             name: "Van Darkholm",
             major: "Backend Developer",
             imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
@@ -22,6 +23,7 @@ class SearchMentorViewModel {
             subcategories: ["Backend", "SRE", "Python", "Frontend", "Swift", "Kotlin"]
         ),
         .init(
+            id: "2",
             name: "Thomas Shelby",
             major: "Мегахарош",
             imageURL: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
@@ -30,6 +32,7 @@ class SearchMentorViewModel {
             subcategories: ["Backend", "SRE", "Python"]
         ),
         .init(
+            id: "3",
             name: "Thomas Angelo",
             major: "Backend Developer",
             imageURL: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
@@ -38,6 +41,7 @@ class SearchMentorViewModel {
             subcategories: ["Backend", "SRE", "Python"]
         ),
         .init(
+            id: "4",
             name: "Homelander",
             major: "Backend Developer",
             imageURL: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
@@ -68,6 +72,7 @@ class SearchMentorViewModel {
 
 extension SearchMentorViewModel {
     struct Item {
+        let id: String
         let name: String
         let major: String
         let imageURL: String?

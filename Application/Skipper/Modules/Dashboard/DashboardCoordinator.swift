@@ -28,6 +28,31 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = SearchMentorViewModel(category: category)
         let controller = SearchMentorViewController(viewModel: viewModel)
 
+        controller.didSelectMentor = { [weak self] mentorId in
+            self?.showMentorProfile(mentorId: mentorId)
+        }
+
+        router.push(controller)
+    }
+
+    func showMentorProfile(mentorId: String) {
+        let viewModel = MentorProfileViewModel(mentorId: mentorId)
+        let controller = MentorProfileViewController(viewModel: viewModel)
+
+        controller.didSelectClass = { [weak self] _ in
+        }
+
+        controller.didTapClassesList = { [weak self] in
+            self?.showClassesList(mentorId: mentorId)
+        }
+
+        router.push(controller)
+    }
+
+    func showClassesList(mentorId: String) {
+        let viewModel = ClassesListViewModel(mentorId: mentorId)
+        let controller = ClassesListViewController(viewModel: viewModel)
+
         router.push(controller)
     }
 }
