@@ -69,7 +69,7 @@ class ClassesListViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonTitle = ""
 
-        title = "Classes List"
+        title = "Список занятий"
 
         view.addSubview(tableView)
         tableView.applyConstraints(.fit(in: view))

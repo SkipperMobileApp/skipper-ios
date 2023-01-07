@@ -187,18 +187,18 @@ class MentorProfileViewController: UIViewController {
         stackView.addArrangedSubview(statusView)
         stackView.setCustomSpacing(24, after: statusView)
 
-        let skillsHeader = makeHeader(with: "Skills")
+        let skillsHeader = makeHeader(with: "Компетенции")
         stackView.addArrangedSubview(skillsHeader)
         stackView.setCustomSpacing(8, after: skillsHeader)
 
         stackView.addArrangedSubview(skillsCloudView)
         stackView.setCustomSpacing(24, after: skillsCloudView)
 
-        let classesHeader = makeHeader(with: "Classes")
+        let classesHeader = makeHeader(with: "Занятия")
         stackView.addArrangedSubview(classesHeader)
         stackView.setCustomSpacing(8, after: classesHeader)
 
-        classesHeader.buttonTitle = viewModel.classItems.count > 3 ? "See all" : ""
+        classesHeader.buttonTitle = viewModel.classItems.count > 3 ? "Все" : ""
         classesHeader.isButtonHidden = viewModel.classItems.count < 4
         classesHeader.didTapButton = { [weak self] in
             self?.didTapClassesList?()
@@ -207,7 +207,7 @@ class MentorProfileViewController: UIViewController {
         stackView.addArrangedSubview(classesView)
         stackView.setCustomSpacing(24, after: classesView)
 
-        let resumeHeader = makeHeader(with: "Resume")
+        let resumeHeader = makeHeader(with: "Резюме")
         stackView.addArrangedSubview(resumeHeader)
         stackView.setCustomSpacing(8, after: resumeHeader)
 
@@ -244,7 +244,7 @@ class MentorProfileViewController: UIViewController {
         let skillItems = viewModel.skills.map {
             let label = TextCloudItem()
             label.text = $0
-            label.backgroundColor = R.color.brandSecondary()!
+            label.backgroundColor = R.color.brandPrimary()!
             label.font = R.typo.body
             label.textColor = R.color.secondary100()!
             return label

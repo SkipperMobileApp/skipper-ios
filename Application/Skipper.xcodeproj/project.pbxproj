@@ -16,6 +16,14 @@
 		840DB1EA27A552AA00F40C89 /* SkipperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1E927A552AA00F40C89 /* SkipperTests.swift */; };
 		840DB1F427A552AA00F40C89 /* SkipperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1F327A552AA00F40C89 /* SkipperUITests.swift */; };
 		840DB1F627A552AA00F40C89 /* SkipperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1F527A552AA00F40C89 /* SkipperUITestsLaunchTests.swift */; };
+		8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC8E296973A000FB00F8 /* BookingViewController.swift */; };
+		8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC90296973A600FB00F8 /* BookingViewModel.swift */; };
+		8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC962969785300FB00F8 /* BookingTypeViewController.swift */; };
+		8431CC992969786000FB00F8 /* BookingTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC982969786000FB00F8 /* BookingTypeViewModel.swift */; };
+		8431CC9B29697B3800FB00F8 /* BookingTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC9A29697B3800FB00F8 /* BookingTypeCell.swift */; };
+		8431CC9D29698C2F00FB00F8 /* BookingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC9C29698C2F00FB00F8 /* BookingHeaderView.swift */; };
+		8431CCA52969B5FC00FB00F8 /* BookingAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */; };
+		8431CCA72969B60500FB00F8 /* BookingAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */; };
 		8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */; };
 		8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */; };
 		8447C3CE2932958F0092B10D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CD2932958F0092B10D /* Container.swift */; };
@@ -193,6 +201,14 @@
 		840DB1EF27A552AA00F40C89 /* SkipperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkipperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		840DB1F327A552AA00F40C89 /* SkipperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipperUITests.swift; sourceTree = "<group>"; };
 		840DB1F527A552AA00F40C89 /* SkipperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8431CC8E296973A000FB00F8 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
+		8431CC90296973A600FB00F8 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
+		8431CC962969785300FB00F8 /* BookingTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTypeViewController.swift; sourceTree = "<group>"; };
+		8431CC982969786000FB00F8 /* BookingTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTypeViewModel.swift; sourceTree = "<group>"; };
+		8431CC9A29697B3800FB00F8 /* BookingTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTypeCell.swift; sourceTree = "<group>"; };
+		8431CC9C29698C2F00FB00F8 /* BookingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHeaderView.swift; sourceTree = "<group>"; };
+		8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewController.swift; sourceTree = "<group>"; };
+		8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewModel.swift; sourceTree = "<group>"; };
 		8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Skipper/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserFirebaseModel.swift; sourceTree = "<group>"; };
 		8447C3CD2932958F0092B10D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -432,6 +448,53 @@
 			path = SkipperUITests;
 			sourceTree = "<group>";
 		};
+		8431CC8D2969739300FB00F8 /* Booking */ = {
+			isa = PBXGroup;
+			children = (
+				8431CC952969784000FB00F8 /* Contact */,
+				8431CC94296976D900FB00F8 /* Time */,
+				8431CC932969758800FB00F8 /* Type */,
+				8431CC922969756600FB00F8 /* Amount */,
+				8431CC8E296973A000FB00F8 /* BookingViewController.swift */,
+				8431CC90296973A600FB00F8 /* BookingViewModel.swift */,
+				8431CC9C29698C2F00FB00F8 /* BookingHeaderView.swift */,
+			);
+			path = Booking;
+			sourceTree = "<group>";
+		};
+		8431CC922969756600FB00F8 /* Amount */ = {
+			isa = PBXGroup;
+			children = (
+				8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */,
+				8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */,
+			);
+			path = Amount;
+			sourceTree = "<group>";
+		};
+		8431CC932969758800FB00F8 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				8431CC962969785300FB00F8 /* BookingTypeViewController.swift */,
+				8431CC982969786000FB00F8 /* BookingTypeViewModel.swift */,
+				8431CC9A29697B3800FB00F8 /* BookingTypeCell.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		8431CC94296976D900FB00F8 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		8431CC952969784000FB00F8 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
 		8447C3CC2932957D0092B10D /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +612,7 @@
 				8462CB492965FB1800347EA1 /* SearchMentor */,
 				846B835929674775008F9BB5 /* MentorProfile */,
 				84A27BE12968B283002465DD /* ClassesList */,
+				8431CC8D2969739300FB00F8 /* Booking */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1262,8 +1326,10 @@
 				8462CB3B29649BE500347EA1 /* DashboardSectionHeaderView.swift in Sources */,
 				8462CB4B2965FBAC00347EA1 /* SearchMentorViewController.swift in Sources */,
 				84E6C2EA293D015F003ACCF7 /* UserRegisterModel.swift in Sources */,
+				8431CCA72969B60500FB00F8 /* BookingAmountViewModel.swift in Sources */,
 				84B11190295CCA9F0040AEA1 /* AuthVerificationViewModel.swift in Sources */,
 				84A27BDA29685AD6002465DD /* MentorProfileResumeItem.swift in Sources */,
+				8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */,
 				846B835D296747A2008F9BB5 /* MentorProfileViewModel.swift in Sources */,
 				84EE757828F72A9200B55839 /* AppCoordinator.swift in Sources */,
 				84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */,
@@ -1284,7 +1350,9 @@
 				84A27BE32968B296002465DD /* ClassesListViewController.swift in Sources */,
 				8462CB3D29649E0000347EA1 /* DashboardCategoryFooterView.swift in Sources */,
 				84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */,
+				8431CC9B29697B3800FB00F8 /* BookingTypeCell.swift in Sources */,
 				848AB2B52940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift in Sources */,
+				8431CC9D29698C2F00FB00F8 /* BookingHeaderView.swift in Sources */,
 				848AB2B32940F5EF007DB9F4 /* Sequence+Concurrency.swift in Sources */,
 				84EE758828F72E1600B55839 /* MainCoordinator.swift in Sources */,
 				84AC022F292E886D00DE7AF2 /* UserModel.swift in Sources */,
@@ -1300,12 +1368,14 @@
 				8485C4D8295E2BD2007A7811 /* DashboardViewModel.swift in Sources */,
 				8462CB3729646BCC00347EA1 /* DashboardCategoryCollectionCell.swift in Sources */,
 				84AC0230292E886D00DE7AF2 /* AuthUserModel.swift in Sources */,
+				8431CCA52969B5FC00FB00F8 /* BookingAmountViewController.swift in Sources */,
 				84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */,
 				8485C4D0295E2B50007A7811 /* ProfileCoordinator.swift in Sources */,
 				846B83512966DADE008F9BB5 /* SearchMentorCell.swift in Sources */,
 				84E6C2F2293D13E1003ACCF7 /* ContainingCharactersValidator.swift in Sources */,
 				84EE757928F72A9200B55839 /* NavigationRouter.swift in Sources */,
 				84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */,
+				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
@@ -1316,6 +1386,7 @@
 				84E6C2E4293CCFF4003ACCF7 /* R+Localization.swift in Sources */,
 				84AC023C292E8F0100DE7AF2 /* EmptyValueValidator.swift in Sources */,
 				84E51DDC292BFB84008D2308 /* PrimaryTextField.swift in Sources */,
+				8431CC992969786000FB00F8 /* BookingTypeViewModel.swift in Sources */,
 				84573E0B2907218100F03827 /* TokensModel.swift in Sources */,
 				84E6C2F6293D1892003ACCF7 /* EqualValueValidator.swift in Sources */,
 				84EE755A28F7114D00B55839 /* Utils.swift in Sources */,
@@ -1330,6 +1401,7 @@
 				84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */,
 				846B83582966FABE008F9BB5 /* UIView+Extensions.swift in Sources */,
 				84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */,
+				8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */,
 				847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */,
 				84EE757F28F72A9200B55839 /* DeepLink.swift in Sources */,
 				8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */,

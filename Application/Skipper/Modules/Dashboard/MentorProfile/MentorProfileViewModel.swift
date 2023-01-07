@@ -121,9 +121,9 @@ extension MentorProfileViewModel {
 
         var title: String {
             switch self {
-            case .education: return "Education"
-            case .work: return "Work Experience"
-            case .achievements: return "Achievements"
+            case .education: return "Образование"
+            case .work: return "Опыт работы"
+            case .achievements: return "Достижения"
             }
         }
 

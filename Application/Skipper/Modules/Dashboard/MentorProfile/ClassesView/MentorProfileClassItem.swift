@@ -74,7 +74,7 @@ class MentorProfileClassItem: SetupableControl {
     func performBlink() {
         layer.removeAllAnimations()
         UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseIn, .autoreverse]) { [weak self] in
-            self?.backgroundColor = R.color.themeSecondary()
+            self?.backgroundColor = R.color.brandPrimary()?.withAlphaComponent(0.3)
         } completion: { [weak self] finished in
             if finished {
                 self?.backgroundColor = .clear

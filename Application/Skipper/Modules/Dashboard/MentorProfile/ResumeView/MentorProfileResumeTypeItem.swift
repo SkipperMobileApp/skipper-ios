@@ -20,7 +20,7 @@ class MentorProfileResumeTypeItem: SetupableView {
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = R.color.brandSecondary()
+        imageView.tintColor = R.color.brandPrimary()
         return imageView
     }()
 
