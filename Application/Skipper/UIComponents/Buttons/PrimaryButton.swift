@@ -39,7 +39,7 @@ class PrimaryButton: SetupableButton {
         updateLoadingState()
 
         titleLabel?.font = R.typo.header
-        layer.cornerRadius = 14
+        layer.cornerRadius = 12
         contentEdgeInsets = .init(top: 5, left: 16, bottom: 5, right: 16)
     }
 

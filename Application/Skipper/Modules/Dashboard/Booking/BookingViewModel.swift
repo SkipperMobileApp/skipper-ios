@@ -105,7 +105,7 @@ extension BookingViewModel {
 
         var title: String {
             switch self {
-            case .trial: return "15 минут (пробное занятие)"
+            case .trial: return "15 минут (пробное)"
             case .short: return "30 минут"
             case .mid: return "60 минут"
             case .long: return "90 минут"

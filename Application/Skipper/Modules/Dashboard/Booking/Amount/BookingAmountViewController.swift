@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 class BookingAmountViewController: UIViewController {
+    // MARK: - Definitions
+
+    private enum PickerMode {
+        case amount, duration
+    }
+
     // MARK: - UI Controls
 
     private lazy var nextButton: PrimaryButton = {
@@ -44,6 +50,26 @@ class BookingAmountViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var durationButton: DropdownButton = {
+        let button = DropdownButton()
+        button.placeholder = "Выберите длительность"
+        button.addTarget(self, action: #selector(durationAction), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var amountButton: DropdownButton = {
+        let button = DropdownButton()
+        button.placeholder = "Выберите количество"
+        button.addTarget(self, action: #selector(amountAction), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var pickerPresenter: PickerPresenter = {
+        let presenter = PickerPresenter()
+        presenter.delegate = self
+        return presenter
+    }()
+
     // MARK: - Output
 
     var didFinish: (() -> Void)?
@@ -51,7 +77,9 @@ class BookingAmountViewController: UIViewController {
 
     // MARK: - Properties
 
-    private let viewModel: BookingTypeViewModel
+    private let viewModel: BookingAmountViewModel
+
+    private var pickerMode: PickerMode?
 
     // MARK: - Initialization
 
@@ -60,7 +88,7 @@ class BookingAmountViewController: UIViewController {
         didFinish?()
     }
 
-    init(viewModel: BookingTypeViewModel) {
+    init(viewModel: BookingAmountViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,6 +106,8 @@ class BookingAmountViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        updateData()
     }
 
     // MARK: - UI Methods
@@ -124,11 +154,91 @@ class BookingAmountViewController: UIViewController {
         )
     }
 
+    private func updateData() {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        let durationHeader = makeButtonHeader(text: "Длительность занятий")
+        stackView.addArrangedSubview(durationHeader)
+        stackView.setCustomSpacing(8, after: durationHeader)
+
+        durationButton.applyConstraints(.height(constant: 50))
+        stackView.addArrangedSubview(durationButton)
+        stackView.setCustomSpacing(16, after: durationButton)
+
+        let amountHeader = makeButtonHeader(text: "Количество занятий")
+        stackView.addArrangedSubview(amountHeader)
+        stackView.setCustomSpacing(8, after: amountHeader)
+
+        amountButton.applyConstraints(.height(constant: 50))
+        stackView.addArrangedSubview(amountButton)
+        stackView.setCustomSpacing(16, after: amountButton)
+    }
+
     private func bindViewModelActions() {}
+
+    // MARK: - UI Builders
+
+    private func makeButtonHeader(text: String) -> UIView {
+        let container = UIView()
+        container.backgroundColor = .clear
+
+        let label = UILabel()
+        label.font = R.typo.body
+        label.text = text
+        label.textColor = R.color.primary54()
+        label.numberOfLines = 1
+
+        container.addSubview(label)
+        label.applyConstraints(
+            .leading(to: container, attribute: .leading, constant: 8),
+            .top(to: container, attribute: .top),
+            .bottom(to: container, attribute: .bottom),
+            .trailing(to: container, attribute: .trailing, constant: -8)
+        )
+
+        return container
+    }
 
     // MARK: - UI Callbacks
 
     @objc private func nextAction() {
         didTapNext?()
+    }
+
+    @objc private func durationAction() {
+        pickerPresenter.presentPicker(
+            pickerData: .init(
+                title: "Длительность занятия",
+                items: viewModel.durationItems.map { $0.title },
+                selectedIndex: viewModel.selectedDurationIndex
+            )
+        )
+        pickerMode = .duration
+    }
+
+    @objc private func amountAction() {
+        pickerPresenter.presentPicker(
+            pickerData: .init(
+                title: "Количество занятий",
+                items: viewModel.amountItems.map { $0.title },
+                selectedIndex: viewModel.selectedAmountIndex
+            )
+        )
+        pickerMode = .amount
+    }
+}
+
+// MARK: - PickerPresenterDelegate
+
+extension BookingAmountViewController: PickerPresenterDelegate {
+    func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
+        if pickerMode == .duration {
+            viewModel.setSelectedDuration(at: index)
+            durationButton.text = viewModel.durationItems[index].title
+        } else {
+            viewModel.setSelectedAmount(at: index)
+            amountButton.text = viewModel.amountItems[index].title
+        }
+        pickerPresenter.dismiss()
     }
 }

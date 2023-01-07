@@ -30,5 +30,7 @@ extension R {
         static let briefCaseCircle = UIImage(systemName: "briefcase.circle.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let starCircle = UIImage(systemName: "star.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let arrowRight = UIImage(systemName: "arrowtriangle.forward.fill")!.withRenderingMode(.alwaysTemplate)
     }
 }

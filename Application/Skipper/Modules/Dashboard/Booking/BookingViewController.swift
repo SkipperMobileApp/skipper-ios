@@ -97,9 +97,15 @@ class BookingViewController: UIPageViewController {
             Step.type.nextStep.flatMap { self?.navigateTo(step: $0) }
         }
 
+        let amountController = BookingAmountViewController(viewModel: viewModel)
+
+        amountController.didTapNext = { [weak self] in
+            Step.amount.nextStep.flatMap { self?.navigateTo(step: $0) }
+        }
+
         stepControllers = [
             .type: typeController,
-            .amount: BookingTypeViewController(viewModel: viewModel)
+            .amount: amountController
         ]
     }
 
