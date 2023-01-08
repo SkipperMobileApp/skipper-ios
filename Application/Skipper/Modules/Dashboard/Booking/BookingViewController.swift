@@ -8,22 +8,7 @@
 import Foundation
 import UIKit
 
-class BookingViewController: UIPageViewController {
-    // MARK: - Definitions
-
-    typealias Step = BookingViewModel.Step
-
-    // MARK: - UI Controls
-
-    private lazy var pageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.currentPageIndicatorTintColor = R.color.brandPrimary()
-        pageControl.pageIndicatorTintColor = R.color.primary24()
-        pageControl.hidesForSinglePage = true
-        pageControl.isUserInteractionEnabled = false
-        return pageControl
-    }()
-
+class BookingViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
@@ -32,8 +17,6 @@ class BookingViewController: UIPageViewController {
     // MARK: - Properties
 
     private let viewModel: BookingViewModel
-
-    private var stepControllers: [Step: UIViewController] = [:]
 
     // MARK: - Initialization
 
@@ -44,7 +27,7 @@ class BookingViewController: UIPageViewController {
 
     init(viewModel: BookingViewModel) {
         self.viewModel = viewModel
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -58,10 +41,6 @@ class BookingViewController: UIPageViewController {
         super.viewDidLoad()
 
         setupUI()
-
-        bindViewModelActions()
-
-        navigateTo(step: .type)
     }
 
     // MARK: - UI Methods
@@ -72,78 +51,18 @@ class BookingViewController: UIPageViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.backButtonTitle = ""
 
-        delegate = self
-        dataSource = self
+        let controller = BookingPageViewController(viewModel: viewModel)
 
-        initializeControllers()
+        controller.didFinishBooking = { [weak self] in
+            self?.didFinishBooking?()
+        }
 
-        pageControl.numberOfPages = stepControllers.keys.count
+        view.addSubview(controller.view)
+        controller.view.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
 
-        view.addSubview(pageControl)
-        view.bringSubviewToFront(pageControl)
-
-        pageControl.applyConstraints(
-            .centerX(to: view.safeAreaLayoutGuide, attribute: .centerX),
-            .bottom(to: view.safeAreaLayoutGuide, attribute: .bottom, constant: -16)
-        )
+        addChild(controller)
+        controller.didMove(toParent: self)
     }
 
     private func bindViewModelActions() {}
-
-    private func initializeControllers() {
-        let typeController = BookingTypeViewController(viewModel: viewModel)
-
-        typeController.didTapNext = { [weak self] in
-            Step.type.nextStep.flatMap { self?.navigateTo(step: $0) }
-        }
-
-        let amountController = BookingAmountViewController(viewModel: viewModel)
-
-        amountController.didTapNext = { [weak self] in
-            Step.amount.nextStep.flatMap { self?.navigateTo(step: $0) }
-        }
-
-        stepControllers = [
-            .type: typeController,
-            .amount: amountController
-        ]
-    }
-
-    private func navigateTo(step: Step) {
-        guard let controller = stepControllers[step] else { return }
-
-        setViewControllers([controller], direction: .forward, animated: true)
-
-        pageControl.currentPage = Step.allCases.firstIndex(of: step) ?? 0
-    }
-}
-
-// MARK: - UIPageViewControllerDelegate
-
-extension BookingViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        guard let step = stepControllers.first(where: { $0.value == pendingViewControllers[0] })?.key,
-              let stepIndex = Step.allCases.firstIndex(of: step)
-        else { return }
-
-        pageControl.currentPage = stepIndex
-    }
-}
-
-// MARK: - UIPageViewControllerDataSource
-
-extension BookingViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController?
-    {
-        guard let step = stepControllers.first(where: { $0.value == viewController })?.key else { return nil }
-        return step.nextStep.flatMap { stepControllers[$0] }
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController?
-    {
-        guard let step = stepControllers.first(where: { $0.value == viewController })?.key else { return nil }
-        return step.previousStep.flatMap { stepControllers[$0] }
-    }
 }

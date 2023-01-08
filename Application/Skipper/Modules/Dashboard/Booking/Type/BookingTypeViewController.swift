@@ -29,7 +29,6 @@ class BookingTypeViewController: UIViewController {
 
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
-        tableView.contentInsetAdjustmentBehavior = .never
 
         headerView.frame = .init(x: 0, y: 0, width: tableView.frame.width, height: 60)
         tableView.tableHeaderView = headerView
@@ -90,16 +89,16 @@ class BookingTypeViewController: UIViewController {
         view.addSubview(nextButton)
 
         tableView.applyConstraints(
-            .top(to: view.safeAreaLayoutGuide, attribute: .top, constant: 16),
-            .leading(to: view.safeAreaLayoutGuide, attribute: .leading),
-            .trailing(to: view.safeAreaLayoutGuide, attribute: .trailing),
+            .top(to: view, attribute: .top, constant: 16),
+            .leading(to: view, attribute: .leading),
+            .trailing(to: view, attribute: .trailing),
             .bottom(to: nextButton, attribute: .top, constant: -16)
         )
 
         nextButton.applyConstraints(
-            .leading(to: view.safeAreaLayoutGuide, attribute: .leading, constant: 16),
-            .trailing(to: view.safeAreaLayoutGuide, attribute: .trailing, constant: -16),
-            .bottom(to: view.safeAreaLayoutGuide, attribute: .bottom, constant: -64),
+            .leading(to: view, attribute: .leading, constant: 16),
+            .trailing(to: view, attribute: .trailing, constant: -16),
+            .bottom(to: view, attribute: .bottom, constant: -64),
             .height(constant: 45)
         )
     }

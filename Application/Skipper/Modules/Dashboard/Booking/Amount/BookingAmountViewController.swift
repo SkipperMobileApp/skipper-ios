@@ -114,7 +114,7 @@ class BookingAmountViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = R.color.themeBackground()
-        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .never
         navigationItem.backButtonTitle = ""
 
         view.addSubview(scrollView)
@@ -124,9 +124,9 @@ class BookingAmountViewController: UIViewController {
         view.addSubview(nextButton)
 
         scrollView.applyConstraints(
-            .top(to: view.safeAreaLayoutGuide, attribute: .top),
-            .leading(to: view.safeAreaLayoutGuide, attribute: .leading),
-            .trailing(to: view.safeAreaLayoutGuide, attribute: .trailing),
+            .top(to: view, attribute: .top),
+            .leading(to: view, attribute: .leading),
+            .trailing(to: view, attribute: .trailing),
             .bottom(to: nextButton, attribute: .top, constant: -16)
         )
 
@@ -134,9 +134,10 @@ class BookingAmountViewController: UIViewController {
                                        .width(to: scrollView, attribute: .width))
 
         headerView.applyConstraints(
-            .top(to: containerView, attribute: .top),
+            .top(to: containerView, attribute: .top, constant: 16),
             .leading(to: containerView, attribute: .leading),
-            .trailing(to: containerView, attribute: .trailing)
+            .trailing(to: containerView, attribute: .trailing),
+            .height(constant: 60)
         )
 
         stackView.applyConstraints(
@@ -147,9 +148,9 @@ class BookingAmountViewController: UIViewController {
         )
 
         nextButton.applyConstraints(
-            .leading(to: view.safeAreaLayoutGuide, attribute: .leading, constant: 16),
-            .trailing(to: view.safeAreaLayoutGuide, attribute: .trailing, constant: -16),
-            .bottom(to: view.safeAreaLayoutGuide, attribute: .bottom, constant: -64),
+            .leading(to: view, attribute: .leading, constant: 16),
+            .trailing(to: view, attribute: .trailing, constant: -16),
+            .bottom(to: view, attribute: .bottom, constant: -64),
             .height(constant: 45)
         )
     }
