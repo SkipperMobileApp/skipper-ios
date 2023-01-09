@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class ClassesListViewController: UIViewController {
@@ -35,6 +37,8 @@ class ClassesListViewController: UIViewController {
 
     private let viewModel: ClassesListViewModel
 
+    private var subscriptions = Set<AnyCancellable>()
+
     // MARK: - Initialization
 
     deinit {
@@ -60,6 +64,8 @@ class ClassesListViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -75,7 +81,26 @@ class ClassesListViewController: UIViewController {
         tableView.applyConstraints(.fit(in: view))
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$loadDataEvent
+            .sink { [weak self] in
+                self?.tableView.reloadData()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate

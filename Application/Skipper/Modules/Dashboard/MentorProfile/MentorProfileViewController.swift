@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 05.01.2023.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class MentorProfileViewController: UIViewController {
@@ -104,6 +106,8 @@ class MentorProfileViewController: UIViewController {
 
     private let viewModel: MentorProfileViewModel
 
+    private var subscriptions = Set<AnyCancellable>()
+
     // MARK: - Initialization
 
     deinit {
@@ -129,7 +133,8 @@ class MentorProfileViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
-        updateData()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -138,8 +143,6 @@ class MentorProfileViewController: UIViewController {
         view.backgroundColor = R.color.themeBackground()
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.backButtonTitle = ""
-
-        title = viewModel.title
 
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -219,6 +222,8 @@ class MentorProfileViewController: UIViewController {
     }
 
     private func updateData() {
+        title = viewModel.title
+
         // General info
 
         nameLabel.text = viewModel.profileInfo.name
@@ -275,7 +280,7 @@ class MentorProfileViewController: UIViewController {
             case let .work(workItems):
                 items = workItems.map {
                     .init(
-                        title: "\($0.startYear)-\($0.endYear), \($0.name)",
+                        title: "\($0.startYear)-\($0.endYear.flatMap(String.init) ?? "н.в."), \($0.name)",
                         subtitle: $0.post
                     )
                 }
@@ -292,7 +297,26 @@ class MentorProfileViewController: UIViewController {
         })
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$loadDataEvent
+            .sink { [weak self] in
+                self?.updateData()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+    }
 
     // MARK: - UI Builders
 

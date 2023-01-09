@@ -14,8 +14,12 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = DashboardViewModel()
         let controller = DashboardViewController(viewModel: viewModel)
 
-        controller.didTapCategory = { [weak self] category in
-            self?.showSearchMentor(category: category)
+        controller.didTapCategory = { [weak self] categoryId in
+            self?.showSearchMentor(categoryId: categoryId)
+        }
+
+        controller.didTapMentor = { [weak self] mentorId in
+            self?.showMentorProfile(mentorId: mentorId)
         }
 
         router.navigationController.navigationItem.largeTitleDisplayMode = .always
@@ -24,8 +28,8 @@ class DashboardCoordinator: NavigationCoordinator {
         router.setRootModule(controller)
     }
 
-    func showSearchMentor(category: String?) {
-        let viewModel = SearchMentorViewModel(category: category)
+    func showSearchMentor(categoryId: String?) {
+        let viewModel = SearchMentorViewModel(categoryId: categoryId)
         let controller = SearchMentorViewController(viewModel: viewModel)
 
         controller.didSelectMentor = { [weak self] mentorId in

@@ -27,7 +27,7 @@ class BookingPageViewController: UIPageViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didFinishBooking: (() -> Void)?
+    var didPrepareForBooking: (() -> Void)?
 
     // MARK: - Properties
 
@@ -91,21 +91,35 @@ class BookingPageViewController: UIPageViewController {
     private func bindViewModelActions() {}
 
     private func initializeControllers() {
-        let typeController = BookingTypeViewController(viewModel: viewModel)
+        let typeController = BookingTypeViewController(viewModel: viewModel.typeViewModel)
 
         typeController.didTapNext = { [weak self] in
             Step.type.nextStep.flatMap { self?.navigateTo(step: $0) }
         }
 
-        let amountController = BookingAmountViewController(viewModel: viewModel)
+        let amountController = BookingAmountViewController(viewModel: viewModel.amountViewModel)
 
         amountController.didTapNext = { [weak self] in
             Step.amount.nextStep.flatMap { self?.navigateTo(step: $0) }
         }
 
+        let timeController = BookingTimeViewController(viewModel: viewModel.timeViewModel)
+
+        timeController.didTapNext = { [weak self] in
+            Step.time.nextStep.flatMap { self?.navigateTo(step: $0) }
+        }
+
+        let contactController = BookingContactViewController(viewModel: viewModel.contactViewModel)
+
+        contactController.didTapBook = { [weak self] in
+            self?.didPrepareForBooking?()
+        }
+
         stepControllers = [
             .type: typeController,
-            .amount: amountController
+            .amount: amountController,
+            .time: timeController,
+            .contact: contactController
         ]
     }
 

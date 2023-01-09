@@ -57,6 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let authRepositoryImpl = AuthRepositoryImpl(api: authAPI, cache: authCache)
         let authRepository: AuthRepository = authRepositoryImpl
         let logoutRepository: LogoutRepository = authRepositoryImpl
+        let lessonRepository: LessonRepository = LessonRepositoryImpl()
+        let utilRepository: UtilRepository = UtilRepositoryImpl()
+        let userRepository: UserRepository = UserRepositoryImpl(
+            lessonRepository: lessonRepository,
+            utilRepository: utilRepository
+        )
 
         // Services
 
@@ -68,6 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(logoutHandler)
         SharedDependencyContainer.register(tokensContainer)
         SharedDependencyContainer.register(authRepository)
+        SharedDependencyContainer.register(utilRepository)
+        SharedDependencyContainer.register(lessonRepository)
+        SharedDependencyContainer.register(userRepository)
     }
 
     private func makeLogoutHandler(logoutRepository: LogoutRepository,

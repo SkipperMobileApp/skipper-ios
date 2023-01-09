@@ -5,55 +5,110 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import Combine
 import Foundation
 
-class BookingViewModel: BookingTypeViewModel, BookingAmountViewModel {
+class BookingViewModel {
+    @Event private(set) var bookClassEvent: Void?
+    @Event private(set) var errorEvent: Error?
+    @Published private(set) var isLoading: Bool = false
+
+    let typeViewModel = BookingTypeViewModel()
+    let amountViewModel = BookingAmountViewModel()
+    let timeViewModel = BookingTimeViewModel()
+    let contactViewModel = BookingContactViewModel()
+
+    private var subscriptions = Set<AnyCancellable>()
+
     private let classId: String
 
     init(classId: String) {
         self.classId = classId
+
+        subscribeOnActions()
     }
 
-    // MARK: - BookingTypeViewModel
-
-    private(set) var selectedItemIndex: Int?
-
-    private(set) var typeItems: [BookingTypeItem] = [
-        .init(
-            id: "1",
-            title: "Теоретическая консультация",
-            description: "Решение профильных вопросов в устной форме"
-        ),
-        .init(
-            id: "2",
-            title: "Практическое решение текущих проблем",
-            description: "Разбор практического решения задачи"
-        ),
-        .init(
-            id: "3",
-            title: #"Решение "под ключ""#,
-            description: "Описание задачи с последующим онлайн-решением"
-        )
-    ]
-
-    func setSelectedItem(at index: Int) {
-        selectedItemIndex = index
+    private func subscribeOnActions() {
+        amountViewModel.$selectedAmountIndex
+            .dropFirst()
+            .sink { [weak self] _ in
+                self?.timeViewModel.clearSelectedItems()
+            }
+            .store(in: &subscriptions)
     }
 
-    // MARK: - BookingAmountViewModel
+    // MARK: - Validation
 
-    private(set) var selectedAmountIndex: Int?
-    private(set) var selectedDurationIndex: Int?
-
-    private(set) var amountItems: [BookingAmount] = [.one, .three, .five]
-    private(set) var durationItems: [BookingDuration] = [.trial, .short, .mid, .long]
-
-    func setSelectedAmount(at index: Int) {
-        selectedAmountIndex = index
+    func validateValues() -> [String] {
+        [validateType(), validateAmount(), validateTime(), validateContacts()].flatMap { $0 }
     }
 
-    func setSelectedDuration(at index: Int) {
-        selectedDurationIndex = index
+    private func validateType() -> [String] {
+        if typeViewModel.selectedItemIndex == nil {
+            return ["Тип занятия не выбран"]
+        }
+        return []
+    }
+
+    private func validateAmount() -> [String] {
+        var result: [String] = []
+        if amountViewModel.selectedAmountIndex == nil {
+            result.append("Количество занятий не выбрано")
+        }
+        if amountViewModel.selectedDurationIndex == nil {
+            result.append("Длительность занятий не выбрана")
+        }
+        return result
+    }
+
+    private func validateTime() -> [String] {
+        let amountIndex = amountViewModel.selectedAmountIndex ?? 0
+
+        if timeViewModel.selectedTimeItems.count < amountViewModel.amountItems[amountIndex].rawValue {
+            return ["Выбрано недостаточное количество дат для занятий"]
+        }
+
+        return []
+    }
+
+    private func validateContacts() -> [String] {
+        let values = contactViewModel.contactValues
+
+        return BookingContactViewModel.BookingContactType.allCases.compactMap {
+            if let value = values[$0], !value.isEmpty {
+                return nil
+            }
+
+            return "Способ связи в \($0.title) не заполнен"
+        }
+    }
+
+    // MARK: - Data methods
+
+    func loadData() {
+        isLoading = true
+        Task {
+            do {
+                await MainActor.run {
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorEvent = error
+                    isLoading = false
+                }
+            }
+        }
+    }
+
+    func bookClass() {
+        Task {
+            try await Task.sleep(for: .seconds(1))
+
+            await MainActor.run {
+                bookClassEvent = ()
+            }
+        }
     }
 }
 
@@ -78,37 +133,6 @@ extension BookingViewModel {
             case .amount: return .time
             case .time: return .contact
             case .contact: return nil
-            }
-        }
-    }
-
-    struct BookingTypeItem {
-        let id: String
-        let title: String
-        let description: String
-    }
-
-    enum BookingAmount {
-        case one, three, five
-
-        var title: String {
-            switch self {
-            case .one: return "1 занятие"
-            case .three: return "3 занятия"
-            case .five: return "5 занятий"
-            }
-        }
-    }
-
-    enum BookingDuration {
-        case trial, short, mid, long
-
-        var title: String {
-            switch self {
-            case .trial: return "15 минут (пробное)"
-            case .short: return "30 минут"
-            case .mid: return "60 минут"
-            case .long: return "90 минут"
             }
         }
     }

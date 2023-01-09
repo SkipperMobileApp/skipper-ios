@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class SearchMentorViewController: UIViewController {
@@ -54,7 +55,7 @@ class SearchMentorViewController: UIViewController {
 
     private let viewModel: SearchMentorViewModel
 
-    private var subscription: AnyCancellable?
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -81,6 +82,8 @@ class SearchMentorViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -101,11 +104,24 @@ class SearchMentorViewController: UIViewController {
     }
 
     private func bindViewModelActions() {
-        subscription?.cancel()
-        subscription = viewModel.$itemsUpdatedEvent
+        viewModel.$itemsUpdatedEvent
             .sink { [weak self] in
                 self?.tableView.reloadData()
             }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
     }
 }
 

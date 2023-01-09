@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class BookingViewController: UIViewController {
@@ -17,6 +19,8 @@ class BookingViewController: UIViewController {
     // MARK: - Properties
 
     private let viewModel: BookingViewModel
+
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -53,8 +57,8 @@ class BookingViewController: UIViewController {
 
         let controller = BookingPageViewController(viewModel: viewModel)
 
-        controller.didFinishBooking = { [weak self] in
-            self?.didFinishBooking?()
+        controller.didPrepareForBooking = { [weak self] in
+            self?.save()
         }
 
         view.addSubview(controller.view)
@@ -64,5 +68,36 @@ class BookingViewController: UIViewController {
         controller.didMove(toParent: self)
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$bookClassEvent
+            .sink { [weak self] in
+                self?.didFinishBooking?()
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func save() {
+        let validationResults = viewModel.validateValues()
+
+        guard validationResults.isEmpty else {
+            AlertPresenter.presentSimpleAlert(validationResults.joined(separator: "\n"),
+                                              controller: self)
+            return
+        }
+
+        viewModel.bookClass()
+    }
 }

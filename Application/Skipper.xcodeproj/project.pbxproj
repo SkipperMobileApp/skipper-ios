@@ -29,6 +29,12 @@
 		8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */; };
 		8447C3CE2932958F0092B10D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CD2932958F0092B10D /* Container.swift */; };
 		844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844E345D2942648E003AC372 /* MainTabBarViewController.swift */; };
+		8455B985296C7452005DE8DD /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B984296C7452005DE8DD /* UserRepository.swift */; };
+		8455B987296C7819005DE8DD /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B986296C7819005DE8DD /* LessonModel.swift */; };
+		8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B988296C799B005DE8DD /* LessonDuration.swift */; };
+		8455B98B296C79D8005DE8DD /* LessonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B98A296C79D8005DE8DD /* LessonRepository.swift */; };
+		8455B98D296C903A005DE8DD /* UtilRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B98C296C903A005DE8DD /* UtilRepository.swift */; };
+		8455B98F296C912C005DE8DD /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B98E296C912C005DE8DD /* CategoryModel.swift */; };
 		84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84573DDD2906F21900F03827 /* Database.xcdatamodeld */; };
 		84573DE22906F38C00F03827 /* ExampleDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573DE02906F38C00F03827 /* ExampleDBModel.swift */; };
 		84573DE62906F42200F03827 /* ExampleMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573DE52906F42200F03827 /* ExampleMapper.swift */; };
@@ -121,6 +127,15 @@
 		84B1118E295CCA930040AEA1 /* AuthVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B1118D295CCA930040AEA1 /* AuthVerificationViewController.swift */; };
 		84B11190295CCA9F0040AEA1 /* AuthVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B1118F295CCA9F0040AEA1 /* AuthVerificationViewModel.swift */; };
 		84BC43C7296AB4C7000B2C67 /* BookingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43C6296AB4C7000B2C67 /* BookingPageViewController.swift */; };
+		84BC43C9296AB8E3000B2C67 /* BookingTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43C8296AB8E3000B2C67 /* BookingTimeViewController.swift */; };
+		84BC43CB296ABDE4000B2C67 /* BookingTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43CA296ABDE4000B2C67 /* BookingTimeViewModel.swift */; };
+		84BC43CD296AD26C000B2C67 /* BookingTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43CC296AD26C000B2C67 /* BookingTimeCell.swift */; };
+		84BC43CF296AF427000B2C67 /* BookingTimeSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43CE296AF427000B2C67 /* BookingTimeSectionHeader.swift */; };
+		84BC43D1296AF8C0000B2C67 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43D0296AF8C0000B2C67 /* DateHelper.swift */; };
+		84BC43D3296B3C86000B2C67 /* BookingContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43D2296B3C86000B2C67 /* BookingContactViewController.swift */; };
+		84BC43D5296B3D2D000B2C67 /* BookingContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43D4296B3D2D000B2C67 /* BookingContactViewModel.swift */; };
+		84BC43D7296B3F24000B2C67 /* BookingContactItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43D6296B3F24000B2C67 /* BookingContactItemView.swift */; };
+		84BC43D9296B568C000B2C67 /* SecondaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC43D8296B568C000B2C67 /* SecondaryTextField.swift */; };
 		84C29A9F2908397D0073E7A4 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 84C29A9E2908397D0073E7A4 /* PKHUD */; };
 		84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C29AAA29086E030073E7A4 /* SplashViewController.swift */; };
 		84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C29AAC29086E090073E7A4 /* SplashViewModel.swift */; };
@@ -218,6 +233,12 @@
 		8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserFirebaseModel.swift; sourceTree = "<group>"; };
 		8447C3CD2932958F0092B10D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		844E345D2942648E003AC372 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		8455B984296C7452005DE8DD /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		8455B986296C7819005DE8DD /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
+		8455B988296C799B005DE8DD /* LessonDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDuration.swift; sourceTree = "<group>"; };
+		8455B98A296C79D8005DE8DD /* LessonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRepository.swift; sourceTree = "<group>"; };
+		8455B98C296C903A005DE8DD /* UtilRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilRepository.swift; sourceTree = "<group>"; };
+		8455B98E296C912C005DE8DD /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		84573DDE2906F21900F03827 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		84573DE02906F38C00F03827 /* ExampleDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleDBModel.swift; sourceTree = "<group>"; };
 		84573DE52906F42200F03827 /* ExampleMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleMapper.swift; sourceTree = "<group>"; };
@@ -303,6 +324,15 @@
 		84B1118D295CCA930040AEA1 /* AuthVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVerificationViewController.swift; sourceTree = "<group>"; };
 		84B1118F295CCA9F0040AEA1 /* AuthVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVerificationViewModel.swift; sourceTree = "<group>"; };
 		84BC43C6296AB4C7000B2C67 /* BookingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingPageViewController.swift; sourceTree = "<group>"; };
+		84BC43C8296AB8E3000B2C67 /* BookingTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTimeViewController.swift; sourceTree = "<group>"; };
+		84BC43CA296ABDE4000B2C67 /* BookingTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTimeViewModel.swift; sourceTree = "<group>"; };
+		84BC43CC296AD26C000B2C67 /* BookingTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTimeCell.swift; sourceTree = "<group>"; };
+		84BC43CE296AF427000B2C67 /* BookingTimeSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTimeSectionHeader.swift; sourceTree = "<group>"; };
+		84BC43D0296AF8C0000B2C67 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		84BC43D2296B3C86000B2C67 /* BookingContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingContactViewController.swift; sourceTree = "<group>"; };
+		84BC43D4296B3D2D000B2C67 /* BookingContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingContactViewModel.swift; sourceTree = "<group>"; };
+		84BC43D6296B3F24000B2C67 /* BookingContactItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingContactItemView.swift; sourceTree = "<group>"; };
+		84BC43D8296B568C000B2C67 /* SecondaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextField.swift; sourceTree = "<group>"; };
 		84C29AAA29086E030073E7A4 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		84C29AAC29086E090073E7A4 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		84C29AAE29086E120073E7A4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -459,10 +489,10 @@
 		8431CC8D2969739300FB00F8 /* Booking */ = {
 			isa = PBXGroup;
 			children = (
-				8431CC952969784000FB00F8 /* Contact */,
-				8431CC94296976D900FB00F8 /* Time */,
 				8431CC932969758800FB00F8 /* Type */,
 				8431CC922969756600FB00F8 /* Amount */,
+				8431CC94296976D900FB00F8 /* Time */,
+				8431CC952969784000FB00F8 /* Contact */,
 				8431CC8E296973A000FB00F8 /* BookingViewController.swift */,
 				8431CC90296973A600FB00F8 /* BookingViewModel.swift */,
 				8431CC9C29698C2F00FB00F8 /* BookingHeaderView.swift */,
@@ -493,6 +523,10 @@
 		8431CC94296976D900FB00F8 /* Time */ = {
 			isa = PBXGroup;
 			children = (
+				84BC43C8296AB8E3000B2C67 /* BookingTimeViewController.swift */,
+				84BC43CA296ABDE4000B2C67 /* BookingTimeViewModel.swift */,
+				84BC43CC296AD26C000B2C67 /* BookingTimeCell.swift */,
+				84BC43CE296AF427000B2C67 /* BookingTimeSectionHeader.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -500,6 +534,9 @@
 		8431CC952969784000FB00F8 /* Contact */ = {
 			isa = PBXGroup;
 			children = (
+				84BC43D2296B3C86000B2C67 /* BookingContactViewController.swift */,
+				84BC43D4296B3D2D000B2C67 /* BookingContactViewModel.swift */,
+				84BC43D6296B3F24000B2C67 /* BookingContactItemView.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -893,6 +930,7 @@
 				84EE755528F70F1F00B55839 /* AppErrors.swift */,
 				84EE755928F7114D00B55839 /* Utils.swift */,
 				84EE758D28F72E9200B55839 /* AlertPresenter.swift */,
+				84BC43D0296AF8C0000B2C67 /* DateHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -940,6 +978,9 @@
 			isa = PBXGroup;
 			children = (
 				84AC0221292E863F00DE7AF2 /* Auth */,
+				8455B984296C7452005DE8DD /* UserRepository.swift */,
+				8455B98A296C79D8005DE8DD /* LessonRepository.swift */,
+				8455B98C296C903A005DE8DD /* UtilRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1001,6 +1042,9 @@
 				84573DE72906F45900F03827 /* ExampleModel.swift */,
 				84573E0A2907218100F03827 /* TokensModel.swift */,
 				84E6C2E9293D015F003ACCF7 /* UserRegisterModel.swift */,
+				8455B986296C7819005DE8DD /* LessonModel.swift */,
+				8455B988296C799B005DE8DD /* LessonDuration.swift */,
+				8455B98E296C912C005DE8DD /* CategoryModel.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1051,6 +1095,7 @@
 			children = (
 				84E51DDB292BFB84008D2308 /* PrimaryTextField.swift */,
 				84E51DDD292BFB8F008D2308 /* InsetTextField.swift */,
+				84BC43D8296B568C000B2C67 /* SecondaryTextField.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -1321,16 +1366,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A27BD429682775002465DD /* MentorProfileClassesView.swift in Sources */,
+				84BC43CB296ABDE4000B2C67 /* BookingTimeViewModel.swift in Sources */,
 				84AC0226292E880900DE7AF2 /* UserMapper.swift in Sources */,
+				84BC43C9296AB8E3000B2C67 /* BookingTimeViewController.swift in Sources */,
 				847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */,
 				84E6C2F4293D16EE003ACCF7 /* CharacterSet+Extensions.swift in Sources */,
 				84573DE82906F45900F03827 /* ExampleModel.swift in Sources */,
 				84573DE22906F38C00F03827 /* ExampleDBModel.swift in Sources */,
+				84BC43D9296B568C000B2C67 /* SecondaryTextField.swift in Sources */,
 				848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */,
 				84A27BE52968B29D002465DD /* ClassesListViewModel.swift in Sources */,
 				84AC022C292E882A00DE7AF2 /* UserFirebaseModel.swift in Sources */,
 				84B1118E295CCA930040AEA1 /* AuthVerificationViewController.swift in Sources */,
+				8455B98D296C903A005DE8DD /* UtilRepository.swift in Sources */,
 				8485C4CE295E2B49007A7811 /* ProfileViewController.swift in Sources */,
+				8455B985296C7452005DE8DD /* UserRepository.swift in Sources */,
+				84BC43CF296AF427000B2C67 /* BookingTimeSectionHeader.swift in Sources */,
 				849A925F293E80A00056711F /* SyncCompositeLogoutHandler.swift in Sources */,
 				84A27BE72968B407002465DD /* ClassesListCell.swift in Sources */,
 				84AC0233292E889100DE7AF2 /* PaginatedModel.swift in Sources */,
@@ -1371,14 +1422,17 @@
 				84A27BE32968B296002465DD /* ClassesListViewController.swift in Sources */,
 				8462CB3D29649E0000347EA1 /* DashboardCategoryFooterView.swift in Sources */,
 				84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */,
+				8455B987296C7819005DE8DD /* LessonModel.swift in Sources */,
 				8431CC9B29697B3800FB00F8 /* BookingTypeCell.swift in Sources */,
 				848AB2B52940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift in Sources */,
 				8431CC9D29698C2F00FB00F8 /* BookingHeaderView.swift in Sources */,
 				848AB2B32940F5EF007DB9F4 /* Sequence+Concurrency.swift in Sources */,
 				84EE758828F72E1600B55839 /* MainCoordinator.swift in Sources */,
+				84BC43D5296B3D2D000B2C67 /* BookingContactViewModel.swift in Sources */,
 				84AC022F292E886D00DE7AF2 /* UserModel.swift in Sources */,
 				8406AB0829313F4200D12767 /* AuthAPI.swift in Sources */,
 				8485C4D6295E2BCB007A7811 /* DashboardCoordinator.swift in Sources */,
+				8455B98B296C79D8005DE8DD /* LessonRepository.swift in Sources */,
 				84A2CF1D291839A900829C59 /* PrimaryButton.swift in Sources */,
 				84EE756028F72A1500B55839 /* UIWindow+Transition.swift in Sources */,
 				84EE757A28F72A9200B55839 /* AppRouter.swift in Sources */,
@@ -1386,6 +1440,7 @@
 				84573E132907258300F03827 /* UIView+Constraints.swift in Sources */,
 				84A27BD629682797002465DD /* MentorProfileClassItem.swift in Sources */,
 				849A9257293E7E2A0056711F /* LogoutHandler.swift in Sources */,
+				84BC43D3296B3C86000B2C67 /* BookingContactViewController.swift in Sources */,
 				8485C4D8295E2BD2007A7811 /* DashboardViewModel.swift in Sources */,
 				8462CB3729646BCC00347EA1 /* DashboardCategoryCollectionCell.swift in Sources */,
 				84AC0230292E886D00DE7AF2 /* AuthUserModel.swift in Sources */,
@@ -1395,14 +1450,17 @@
 				846B83512966DADE008F9BB5 /* SearchMentorCell.swift in Sources */,
 				84E6C2F2293D13E1003ACCF7 /* ContainingCharactersValidator.swift in Sources */,
 				84EE757928F72A9200B55839 /* NavigationRouter.swift in Sources */,
+				84BC43D7296B3F24000B2C67 /* BookingContactItemView.swift in Sources */,
 				84BC43C7296AB4C7000B2C67 /* BookingPageViewController.swift in Sources */,
 				84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */,
 				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
+				8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */,
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
+				84BC43D1296AF8C0000B2C67 /* DateHelper.swift in Sources */,
 				84A27BE02968ADBA002465DD /* MentorProfileHeaderView.swift in Sources */,
 				84EE756128F72A1500B55839 /* R+Typo.swift in Sources */,
 				84E6C2E4293CCFF4003ACCF7 /* R+Localization.swift in Sources */,
@@ -1420,6 +1478,7 @@
 				84573E0529071D8D00F03827 /* R.generated.swift in Sources */,
 				84E6C2E2293CB13F003ACCF7 /* Injected.swift in Sources */,
 				84EE758428F72A9200B55839 /* Presentable.swift in Sources */,
+				8455B98F296C912C005DE8DD /* CategoryModel.swift in Sources */,
 				84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */,
 				846B83582966FABE008F9BB5 /* UIView+Extensions.swift in Sources */,
 				84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */,
@@ -1452,6 +1511,7 @@
 				84573E09290720D600F03827 /* TokensContainer.swift in Sources */,
 				84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */,
 				8431CCA92969CF3D00FB00F8 /* DropdownButton.swift in Sources */,
+				84BC43CD296AD26C000B2C67 /* BookingTimeCell.swift in Sources */,
 				84573DEC2906F4B600F03827 /* APIModel.swift in Sources */,
 				848AB2C529410933007DB9F4 /* AuthRepository.swift in Sources */,
 				8462CB482965ECFB00347EA1 /* FadedImageView.swift in Sources */,
@@ -1569,7 +1629,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1626,7 +1686,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1654,7 +1714,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1685,7 +1745,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1858,7 +1918,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1885,7 +1945,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2001,7 +2061,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2028,7 +2088,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

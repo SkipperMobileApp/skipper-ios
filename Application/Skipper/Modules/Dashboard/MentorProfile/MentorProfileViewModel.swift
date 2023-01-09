@@ -9,89 +9,104 @@ import Foundation
 import UIKit
 
 class MentorProfileViewModel {
-    var title: String {
-        "Van Darkholm"
-    }
+    private(set) var title: String = ""
+    private(set) var statusItems: [StatusItem] = []
+    private(set) var classItems: [ClassItem] = []
+    private(set) var profileInfo: ProfileInfo = .init(name: "", major: "", description: "", imageURL: nil)
+    private(set) var skills: [String] = []
+    private(set) var resumeItems: [ResumeType] = []
 
-    let statusItems: [StatusItem] = [
-        .init(title: "50", subtitle: "ЗАНЯТИЙ"),
-        .init(title: "5.0", subtitle: "ОЦЕНКА"),
-        .init(title: "10000 дней", subtitle: "НА SKIPPER")
-    ]
+    @Event private(set) var loadDataEvent: Void?
+    @Event private(set) var errorEvent: Error?
+    @Published private(set) var isLoading: Bool = false
 
-    let classItems: [ClassItem] = [
-        .init(id: "1", title: "Курс по React", description: randomDebugString(wordsCount: 10)),
-        .init(id: "2", title: "Курс по React", description: randomDebugString(wordsCount: 10)),
-        .init(id: "3", title: "Курс по React", description: randomDebugString(wordsCount: 10))
-    ]
-
-    let profileInfo: ProfileInfo = .init(name: "Van Darkholm",
-                                         major: "Backend Developer",
-                                         description: randomDebugString(wordsCount: 20),
-                                         imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg")
-
-    let skills: [String] = [
-        "Quality Assurance",
-        "Data Science",
-        "Analytics",
-        "Management",
-        "SRE",
-        "Frontend",
-        "Backend"
-    ]
-
-    let resumeItems: [ResumeType] = [
-        .education(items: [
-            .init(
-                name: "Сибирский Федеральный Университет",
-                startYear: 2016,
-                endYear: 2020,
-                degree: "Бакалавр"
-            ),
-            .init(
-                name: "Сибирский Федеральный Университет",
-                startYear: 2020,
-                endYear: 2022,
-                degree: "Магистр"
-            )
-        ]),
-        .work(items: [
-            .init(
-                name: #"ООО "Очень Интересно""#,
-                startYear: 2018,
-                endYear: 2018,
-                post: "Стажер Android Разработчик"
-            ),
-            .init(
-                name: #"ООО "Очень Интересно""#,
-                startYear: 2019,
-                endYear: 2023,
-                post: "iOS Разработчик"
-            )
-        ]),
-        .achievements(items: [
-            .init(
-                name: "ВКОШП ACM Team Tournament",
-                year: 2015,
-                info: "9 место"
-            ),
-            .init(
-                name: "Yandex Cup",
-                year: 2020,
-                info: "9 место"
-            ),
-            .init(
-                name: "Yandex Cup",
-                year: 2021,
-                info: "12 место"
-            )
-        ])
-    ]
+    @Injected() private(set) var userRepository: UserRepository
 
     private let mentorId: String
 
     init(mentorId: String) {
         self.mentorId = mentorId
+    }
+
+    func loadData() {
+        isLoading = true
+        Task {
+            do {
+                let mentor = try await userRepository.mentor(mentorId: mentorId)
+
+                await MainActor.run {
+                    title = [mentor.firstName, mentor.lastName, mentor.patronymic].joined(separator: " ")
+
+                    statusItems = [
+                        .init(
+                            title: String(mentor.stats.lessonsCount),
+                            subtitle: "ЗАНЯТИЙ"
+                        ),
+                        .init(
+                            title: String(format: "%.1lf", mentor.stats.rating),
+                            subtitle: "ОЦЕНКА"
+                        ),
+                        .init(
+                            title: mentor.stats.registrationDate,
+                            subtitle: "НА SKIPPER"
+                        )
+                    ]
+
+                    classItems = mentor.lessons.map {
+                        .init(id: $0.id, title: $0.title, description: $0.brief)
+                    }
+
+                    profileInfo = .init(
+                        name: [mentor.firstName, mentor.lastName, mentor.patronymic].joined(separator: " "),
+                        major: mentor.post,
+                        description: mentor.bio,
+                        imageURL: mentor.imageURL
+                    )
+
+                    skills = mentor.tags
+
+                    resumeItems = [
+                        .education(
+                            items: mentor.resumeInfo.educationUnits.map {
+                                .init(
+                                    name: $0.name,
+                                    startYear: $0.startYear,
+                                    endYear: $0.endYear,
+                                    degree: $0.degree
+                                )
+                            }
+                        ),
+                        .work(
+                            items: mentor.resumeInfo.workUnits.map {
+                                .init(
+                                    name: $0.name,
+                                    startYear: $0.startYear,
+                                    endYear: $0.endYear,
+                                    post: $0.post
+                                )
+                            }
+                        ),
+                        .achievements(
+                            items: mentor.resumeInfo.achievementUnits.map {
+                                .init(
+                                    name: $0.name,
+                                    year: $0.year,
+                                    info: $0.info
+                                )
+                            }
+                        )
+                    ]
+
+                    isLoading = false
+                    loadDataEvent = ()
+                }
+            } catch {
+                await MainActor.run {
+                    errorEvent = error
+                    isLoading = false
+                }
+            }
+        }
     }
 }
 
@@ -146,7 +161,7 @@ extension MentorProfileViewModel {
     struct ResumeWorkItem {
         let name: String
         let startYear: Int
-        let endYear: Int
+        let endYear: Int?
         let post: String
     }
 

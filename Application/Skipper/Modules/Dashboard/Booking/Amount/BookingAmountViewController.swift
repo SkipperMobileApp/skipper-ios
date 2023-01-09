@@ -64,6 +64,14 @@ class BookingAmountViewController: UIViewController {
         return button
     }()
 
+    private lazy var totalLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = R.color.primary87()
+        label.font = R.typo.header
+        label.numberOfLines = 1
+        return label
+    }()
+
     private lazy var pickerPresenter: PickerPresenter = {
         let presenter = PickerPresenter()
         presenter.delegate = self
@@ -107,6 +115,7 @@ class BookingAmountViewController: UIViewController {
 
         bindViewModelActions()
 
+        updateUI()
         updateData()
     }
 
@@ -155,7 +164,7 @@ class BookingAmountViewController: UIViewController {
         )
     }
 
-    private func updateData() {
+    private func updateUI() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         let durationHeader = makeButtonHeader(text: "Длительность занятий")
@@ -173,6 +182,15 @@ class BookingAmountViewController: UIViewController {
         amountButton.applyConstraints(.height(constant: 50))
         stackView.addArrangedSubview(amountButton)
         stackView.setCustomSpacing(16, after: amountButton)
+
+        stackView.addArrangedSubview(totalLabel)
+        stackView.setCustomSpacing(16, after: totalLabel)
+    }
+
+    private func updateData() {
+        totalLabel.text = "Итоговая стоимость: \(viewModel.totalCost) рублей"
+        amountButton.text = viewModel.selectedAmountIndex.flatMap { viewModel.amountItems[$0].title }
+        durationButton.text = viewModel.selectedDurationIndex.flatMap { viewModel.durationItems[$0].title }
     }
 
     private func bindViewModelActions() {}
@@ -235,11 +253,12 @@ extension BookingAmountViewController: PickerPresenterDelegate {
     func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
         if pickerMode == .duration {
             viewModel.setSelectedDuration(at: index)
-            durationButton.text = viewModel.durationItems[index].title
         } else {
             viewModel.setSelectedAmount(at: index)
-            amountButton.text = viewModel.amountItems[index].title
         }
+
+        updateData()
+
         pickerPresenter.dismiss()
     }
 }
