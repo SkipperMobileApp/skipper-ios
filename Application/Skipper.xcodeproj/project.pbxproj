@@ -1135,7 +1135,7 @@
 				84573DEF2906FD3500F03827 /* XCRemoteSwiftPackageReference "TPKeyboardAvoiding" */,
 				84573DF22906FD5000F03827 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				84573DFB2906FD9100F03827 /* XCRemoteSwiftPackageReference "Reusable" */,
-				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
+				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */,
 				84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				845A2A362916B5E5003EB7DF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -1157,6 +1157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */,
 				84C3936B291D72A40042C231 /* Montserrat-Regular.ttf in Resources */,
 				84C39368291D72A40042C231 /* Montserrat-Light.ttf in Resources */,
 				84EE754228F70C8500B55839 /* Colors.xcassets in Resources */,
@@ -1164,7 +1165,6 @@
 				84C3936C291D7DEF0042C231 /* Localizable.strings in Resources */,
 				840DB1DF27A552AA00F40C89 /* LaunchScreen.storyboard in Resources */,
 				840DB1DC27A552AA00F40C89 /* Images.xcassets in Resources */,
-				8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */,
 				84C3936A291D72A40042C231 /* Montserrat-SemiBold.ttf in Resources */,
 				84C39369291D72A40042C231 /* Montserrat-Bold.ttf in Resources */,
 			);
@@ -1202,7 +1202,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1260,8 +1260,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp \"$SRCROOT/Skipper/Google-Services/GoogleService-Info-$ENVIRONMENT.plist\" \"$SRCROOT/Skipper/GoogleService-Info.plist\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "./scripts/copy-google-services-info\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2124,7 +2123,7 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
+		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -2184,7 +2183,7 @@
 		};
 		84573DFF2906FDCC00F03827 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
+			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = Rswift;
 		};
 		845A2A372916B5E5003EB7DF /* Alamofire */ = {
