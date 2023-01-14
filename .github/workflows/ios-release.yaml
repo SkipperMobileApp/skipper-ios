@@ -16,11 +16,8 @@ jobs:
           fetch-depth: 0
       
       - name: Set up ruby
-        if: ${{ runner.name == 'Hosted Agent' }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
+        run: |
+          brew install ruby
       
       - name: Setup fastlane
         run: |
