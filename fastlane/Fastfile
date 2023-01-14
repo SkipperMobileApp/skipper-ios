@@ -16,7 +16,7 @@ platform :ios do
     )
 
     import_certificate(
-      certificate_path: File.absolute_path("certificate.p12"),
+      certificate_path: File.absolute_path(ENV['FL_CERTIFICATE_PATH']),
       certificate_password: ENV['CERTIFICATE_PASSWORD']
     )
   end
@@ -26,7 +26,7 @@ platform :ios do
     unlock_keychain(
       path: "ci"
     )
-    
+
     install_provisioning_profile
     update_code_signing_settings
   end
