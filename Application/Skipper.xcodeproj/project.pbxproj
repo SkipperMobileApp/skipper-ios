@@ -1035,7 +1035,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 840DB1F927A552AA00F40C89 /* Build configuration list for PBXNativeTarget "Skipper" */;
 			buildPhases = (
-				84D7D1952972AAC400504E35 /* Google-Services */,
 				84573E012906FE0900F03827 /* R.Swift */,
 				84573E022906FEDC00F03827 /* Format */,
 				84573E032906FEDF00F03827 /* Lint */,
@@ -1135,7 +1134,7 @@
 				84573DEF2906FD3500F03827 /* XCRemoteSwiftPackageReference "TPKeyboardAvoiding" */,
 				84573DF22906FD5000F03827 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				84573DFB2906FD9100F03827 /* XCRemoteSwiftPackageReference "Reusable" */,
-				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
+				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */,
 				84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				845A2A362916B5E5003EB7DF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -1157,6 +1156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */,
 				84C3936B291D72A40042C231 /* Montserrat-Regular.ttf in Resources */,
 				84C39368291D72A40042C231 /* Montserrat-Light.ttf in Resources */,
 				84EE754228F70C8500B55839 /* Colors.xcassets in Resources */,
@@ -1164,7 +1164,6 @@
 				84C3936C291D7DEF0042C231 /* Localizable.strings in Resources */,
 				840DB1DF27A552AA00F40C89 /* LaunchScreen.storyboard in Resources */,
 				840DB1DC27A552AA00F40C89 /* Images.xcassets in Resources */,
-				8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */,
 				84C3936A291D72A40042C231 /* Montserrat-SemiBold.ttf in Resources */,
 				84C39369291D72A40042C231 /* Montserrat-Bold.ttf in Resources */,
 			);
@@ -1202,7 +1201,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1243,25 +1242,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cp \"$SRCROOT/.swiftlint.yml\" ./\n\ncd BuildTools\nSDKROOT=$(xcrun --sdk macosx --show-sdk-path)\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\necho \"$SRCROOT/.swiftlint.yml\"\n\nif which swiftlint >/dev/null; then\n    swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		84D7D1952972AAC400504E35 /* Google-Services */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Google-Services";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp \"$SRCROOT/Skipper/Google-Services/GoogleService-Info-$ENVIRONMENT.plist\" \"$SRCROOT/Skipper/GoogleService-Info.plist\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2124,7 +2104,7 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
+		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -2184,7 +2164,7 @@
 		};
 		84573DFF2906FDCC00F03827 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
+			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = Rswift;
 		};
 		845A2A372916B5E5003EB7DF /* Alamofire */ = {

@@ -9,8 +9,6 @@ platform :ios do
   desc "Update ci keychain"
   lane :update_keychain do
     create_keychain(
-      name: "ci",
-      password: "test",
       default_keychain: false,
       unlock: true,
       timeout: 3600,
@@ -18,25 +16,29 @@ platform :ios do
     )
 
     import_certificate(
-      keychain_name: "ci",
-      keychain_password: "test",
-      certificate_path: File.absolute_path("certificate.p12"),
-      certificate_password: ENV['FL_UNLOCK_KEYCHAIN_PASSWORD']
+      certificate_path: File.absolute_path(ENV['FL_CERTIFICATE_PATH']),
+      certificate_password: ENV['CERTIFICATE_PASSWORD']
     )
+  end
+
+  desc "Bump build number from Firebase"
+  lane :bump_build_number do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV['FIREBASEAPPDISTRO_APP']
+    )
+    increment_build_number(build_number: latest_release[:buildVersion].to_i + 1)
   end
 
   desc "Sync signing"
   lane :signing do
     unlock_keychain(
-      path: "ci", 
-      password: ENV['FL_UNLOCK_KEYCHAIN_PASSWORD']
+      path: "ci"
     )
+
     install_provisioning_profile
     update_code_signing_settings
-    # get_certificates           # invokes cert
-    # get_provisioning_profile   # invokes sigh
   end
-  
+
   desc "Build binary"
   lane :build do
     xcode_select ENV['FL_XCODE_PATH']
@@ -51,7 +53,7 @@ platform :ios do
   desc "Release binary"
   lane :release do
 
-    increment_build_number
+    bump_build_number
     build
     firebase_app_distribution
 
@@ -59,5 +61,5 @@ platform :ios do
 
   error do |lane, exception|
     
-end
+  end
 end
