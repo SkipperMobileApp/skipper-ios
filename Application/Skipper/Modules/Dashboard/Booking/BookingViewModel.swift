@@ -20,10 +20,13 @@ class BookingViewModel {
 
     private var subscriptions = Set<AnyCancellable>()
 
-    private let classId: String
+    @Injected() private var lessonRepository: LessonRepository
+    @Injected() private var userRepository: UserRepository
 
-    init(classId: String) {
-        self.classId = classId
+    private let lessonId: String
+
+    init(lessonId: String) {
+        self.lessonId = lessonId
 
         subscribeOnActions()
     }
@@ -72,15 +75,11 @@ class BookingViewModel {
     }
 
     private func validateContacts() -> [String] {
-        let values = contactViewModel.contactValues
-
-        return BookingContactViewModel.BookingContactType.allCases.compactMap {
-            if let value = values[$0], !value.isEmpty {
-                return nil
-            }
-
-            return "Способ связи в \($0.title) не заполнен"
+        if contactViewModel.selectedContactIndex == nil {
+            return ["Способ связи не выбран"]
         }
+
+        return []
     }
 
     // MARK: - Data methods
@@ -89,7 +88,15 @@ class BookingViewModel {
         isLoading = true
         Task {
             do {
+                let lesson = try await lessonRepository.lesson(lessonId: lessonId)
+                let mentor = try await userRepository.mentor(mentorId: lesson.mentorId)
+
                 await MainActor.run {
+                    typeViewModel.setTypes(types: lesson.types)
+                    amountViewModel.setCosts(durations: lesson.durations, costs: lesson.costTable)
+                    timeViewModel.setLessonAvailableIntervals(lesson.slots)
+                    contactViewModel.setContacts(types: mentor.contacts)
+
                     isLoading = false
                 }
             } catch {

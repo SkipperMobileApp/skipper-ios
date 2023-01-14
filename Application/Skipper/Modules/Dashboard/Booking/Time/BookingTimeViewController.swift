@@ -26,7 +26,7 @@ class BookingTimeViewController: UIViewController {
         view.calendar = Calendar.current
         view.timeZone = TimeZone.current
 
-        view.availableDateRange = viewModel.availableDateInterval
+        view.availableDateRange = viewModel.bookableDateInterval
 
         view.delegate = self
         view.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
@@ -82,7 +82,7 @@ class BookingTimeViewController: UIViewController {
 
     private let viewModel: BookingTimeViewModel
 
-    private var selectedDate: Date?
+    private var selectedDateComponents: DateComponents?
 
     // MARK: - Initialization
 
@@ -152,7 +152,7 @@ class BookingTimeViewController: UIViewController {
 
     private func bindViewModelActions() {}
 
-    private func reloadData() {
+    private func reloadTableData() {
         tableView.reloadData()
     }
 
@@ -171,11 +171,11 @@ extension BookingTimeViewController: UICalendarViewDelegate {
     {
         guard let date = dateComponents.date else { return nil }
 
-        if !viewModel.availableDateInterval.contains(date) {
-            return nil
-        }
+        let status = viewModel.statusFor(date: date)
 
-        return UICalendarView.Decoration.default(color: R.color.brandPrimary(), size: .small)
+        return status.indicatorColor.flatMap {
+            UICalendarView.Decoration.default(color: $0, size: .small)
+        }
     }
 }
 
@@ -187,7 +187,8 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
     {
         guard let date = dateComponents?.date else { return false }
 
-        return Calendar.current.startOfDay(for: Date()) <= date
+        return Calendar.current.startOfDay(for: Date()) <= date &&
+            viewModel.statusFor(date: date) != .notAvailable
     }
 
     func dateSelection(_ selection: UICalendarSelectionSingleDate,
@@ -197,14 +198,14 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
 
         viewModel.loadIntervalsFor(date: date)
 
-        if viewModel.availableIntervals.isEmpty {
+        if viewModel.availableBookingIntervals.isEmpty {
             return
         }
 
-        selectedDate = date
+        selectedDateComponents = dateComponents
 
         pickerPresenter.presentPicker(pickerData: .init(title: "Выберите время",
-                                                        items: viewModel.availableIntervals.map { $0.time },
+                                                        items: viewModel.availableBookingIntervals.map { $0.time },
                                                         selectedIndex: nil))
     }
 }
@@ -233,17 +234,23 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
 
         let item = viewModel.selectedTimeItems[indexPath.row]
 
-        cell.configureWith(date: item.date, time: item.timeInterval)
+        cell.configureWith(date: DateHelper.Formatters.fullDateFormatter.string(from: item.date),
+                           time: item.timeInterval)
 
         cell.didTapDelete = { [weak self] in
             guard let self = self,
                   let actualIndexPath = tableView.indexPath(for: cell) else { return }
 
+            let date = self.viewModel.selectedTimeItems[actualIndexPath.row].date
+
             self.viewModel.deleteSelectedItem(at: actualIndexPath.row)
             self.tableView.deleteRows(at: [actualIndexPath], with: .fade)
 
+            let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            self.calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: true)
+
             if self.viewModel.selectedTimeItems.isEmpty {
-                self.reloadData()
+                self.reloadTableData()
             }
         }
 
@@ -255,12 +262,16 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension BookingTimeViewController: PickerPresenterDelegate {
     func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
-        guard let selectedDate = selectedDate else { return }
+        guard let selectedDateComponents = selectedDateComponents,
+              let selectedDate = selectedDateComponents.date else { return }
 
         viewModel.selectInterval(at: index, for: selectedDate)
 
+        calendarView.reloadDecorations(forDateComponents: [selectedDateComponents],
+                                       animated: true)
+
         presenter.dismiss()
 
-        reloadData()
+        reloadTableData()
     }
 }

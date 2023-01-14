@@ -14,6 +14,8 @@ struct LessonModel {
     let brief: String
     let description: String
     let appointmentDate: Date
+    let durations: [LessonDuration]
     let costTable: [LessonDuration: Int]
     let slots: [Int: [String]]
+    let types: [LessonType]
 }

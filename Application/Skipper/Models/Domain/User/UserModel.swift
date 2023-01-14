@@ -21,6 +21,7 @@ struct UserModel {
 
     let isMentor: Bool
 
+    let contacts: [UserContactModel]
     let stats: UserStats
     let tags: [String]
     var lessons: [LessonModel]

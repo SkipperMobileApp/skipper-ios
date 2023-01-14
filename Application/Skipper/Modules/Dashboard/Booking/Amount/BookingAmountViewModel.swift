@@ -8,15 +8,6 @@
 import Foundation
 
 class BookingAmountViewModel {
-    @Published private(set) var selectedAmountIndex: Int?
-    private(set) var selectedDurationIndex: Int?
-
-    private let trialAmountItems: [BookingAmount] = [.one]
-    private let defaultAmountItems: [BookingAmount] = [.one, .three, .five]
-
-    private(set) lazy var amountItems: [BookingAmount] = defaultAmountItems
-    private(set) var durationItems: [BookingDuration] = [.trial, .short, .mid, .long]
-
     var totalCost: Int {
         guard let amountIndex = selectedAmountIndex,
               let durationIndex = selectedDurationIndex else { return 0 }
@@ -24,12 +15,30 @@ class BookingAmountViewModel {
         return (costs[durationItems[durationIndex]] ?? 0) * amountItems[amountIndex].rawValue
     }
 
-    private let costs: [BookingDuration: Int] = [
-        .trial: 1500,
-        .short: 1500,
-        .mid: 2000,
-        .long: 2500
-    ]
+    private let trialAmountItems: [BookingAmount] = [.one]
+    private let defaultAmountItems: [BookingAmount] = [.one, .three, .five]
+
+    private(set) lazy var amountItems: [BookingAmount] = defaultAmountItems
+    private(set) var durationItems: [BookingDuration] = []
+
+    @Published private(set) var selectedAmountIndex: Int?
+    private(set) var selectedDurationIndex: Int?
+
+    private var costs: [BookingDuration: Int] = [:]
+
+    // MARK: - Initializations
+
+    func setCosts(durations: [LessonDuration], costs: [LessonDuration: Int]) {
+        durationItems = durations.map(BookingDuration.init).sorted(by: { $0.rawValue < $1.rawValue })
+
+        self.costs = durations.reduce([BookingDuration: Int]()) { acc, item in
+            var acc = acc
+            acc[BookingDuration(from: item)] = costs[item]
+            return acc
+        }
+    }
+
+    // MARK: - Data items
 
     func setSelectedAmount(at index: Int) {
         if index != selectedAmountIndex {
@@ -62,7 +71,7 @@ extension BookingAmountViewModel {
         }
     }
 
-    enum BookingDuration {
+    enum BookingDuration: Int {
         case trial, short, mid, long
 
         var title: String {
@@ -71,6 +80,15 @@ extension BookingAmountViewModel {
             case .short: return "30 минут"
             case .mid: return "60 минут"
             case .long: return "90 минут"
+            }
+        }
+
+        init(from duration: LessonDuration) {
+            switch duration {
+            case .trial: self = .trial
+            case .short: self = .short
+            case .mid: self = .mid
+            case .long: self = .long
             }
         }
     }

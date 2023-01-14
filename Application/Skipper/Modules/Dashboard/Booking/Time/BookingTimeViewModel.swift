@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class BookingTimeViewModel {
     // MARK: - Properties
 
-    let availableDateInterval: DateInterval = {
+    let bookableDateInterval: DateInterval = {
         let startDate = Calendar.current.startOfDay(for: .now)
         let endDate = Calendar.current.date(byAdding: .month, value: 1, to: startDate) ?? .now
 
@@ -19,28 +20,39 @@ class BookingTimeViewModel {
 
     private(set) var selectedTimeItems: [BookingTimeItem] = []
 
-    private(set) var availableIntervals: [BookingTimeInterval] = []
+    private(set) var availableBookingIntervals: [BookingTimeInterval] = []
+
+    private var lessonAvailableIntervals: [Int: [String]] = [:]
 
     // MARK: - Data methods
 
     func selectInterval(at index: Int, for date: Date) {
-        let interval = availableIntervals[index].time
-        let dateString = DateHelper.Formatters.fullDateFormatter.string(from: date)
+        let interval = availableBookingIntervals[index].time
 
-        selectedTimeItems.append(.init(date: dateString, timeInterval: interval))
+        selectedTimeItems.append(.init(date: date, timeInterval: interval))
     }
 
     func loadIntervalsFor(date: Date) {
-        availableIntervals = [
-            .init(time: "00:00 - 03:00"),
-            .init(time: "03:00 - 06:00"),
-            .init(time: "06:00 - 09:00"),
-            .init(time: "09:00 - 12:00"),
-            .init(time: "12:00 - 15:00"),
-            .init(time: "15:00 - 18:00"),
-            .init(time: "18:00 - 21:00"),
-            .init(time: "21:00 - 00:00")
-        ]
+        guard let weekDay = Calendar.current.dateComponents([.weekday], from: date).weekday else {
+            availableBookingIntervals = []
+            return
+        }
+
+        let allIntervals = lessonAvailableIntervals[weekDay - 1]?.map(BookingTimeInterval.init) ?? []
+
+        availableBookingIntervals = allIntervals.filter { interval in
+            selectedTimeItems.filter { $0.date == date }.contains { $0.timeInterval == interval.time }
+        }
+    }
+
+    func statusFor(date: Date) -> BookStatus {
+        if selectedTimeItems.contains(where: { $0.date == date }) {
+            return .booked
+        }
+
+        loadIntervalsFor(date: date)
+
+        return availableBookingIntervals.isEmpty ? .notAvailable : .available
     }
 
     func deleteSelectedItem(at index: Int) {
@@ -49,6 +61,10 @@ class BookingTimeViewModel {
 
     func clearSelectedItems() {
         selectedTimeItems = []
+    }
+
+    func setLessonAvailableIntervals(_ intervals: [Int: [String]]) {
+        lessonAvailableIntervals = intervals
     }
 }
 
@@ -60,7 +76,21 @@ extension BookingTimeViewModel {
     }
 
     struct BookingTimeItem {
-        let date: String
+        let date: Date
         let timeInterval: String
+    }
+
+    enum BookStatus {
+        case booked
+        case available
+        case notAvailable
+
+        var indicatorColor: UIColor? {
+            switch self {
+            case .booked: return R.color.brandPrimary()
+            case .available: return R.color.brandEventAvailable()
+            case .notAvailable: return nil
+            }
+        }
     }
 }

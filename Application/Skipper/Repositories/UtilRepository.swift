@@ -151,7 +151,11 @@ class UtilRepositoryImpl: UtilRepository {
             ]
         )
     ]
+}
 
+// MARK: - Categories
+
+extension UtilRepositoryImpl {
     func categories() async throws -> [CategoryModel] {
         try await Task.sleep(for: .seconds(1))
 

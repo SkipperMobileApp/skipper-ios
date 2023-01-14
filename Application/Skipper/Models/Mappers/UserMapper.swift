@@ -19,6 +19,7 @@ enum UserMapper {
             post: model.post,
             imageURL: model.imageURL,
             isMentor: false,
+            contacts: [],
             stats: .init(lessonsCount: 0, rating: 0, registrationDate: "", reviewsCount: 0),
             tags: [],
             lessons: [],

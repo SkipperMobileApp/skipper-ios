@@ -9,6 +9,7 @@ import Foundation
 
 protocol LessonRepository {
     func lessonsForMentor(mentorId: String) async throws -> [LessonModel]
+    func lesson(lessonId: String) async throws -> LessonModel
 }
 
 class LessonRepositoryImpl: LessonRepository {
@@ -20,8 +21,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Консультация для овладения базовыми знаниями по React",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .short, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical]
         ),
         LessonModel(
             id: "2",
@@ -30,8 +33,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Разработка приложения на Android под присмотром специалиста со стажем",
             description: "",
             appointmentDate: Date.now,
+            durations: [.short, .mid, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .practical]
         ),
         LessonModel(
             id: "3",
@@ -40,8 +45,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Получение базовых навыков по бэкэнду на примере Flask Framework",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .short, .mid, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .practical, .solution]
         ),
         LessonModel(
             id: "4",
@@ -50,8 +57,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Консультация для овладения базовыми знаниями по React",
             description: "",
             appointmentDate: Date.now,
+            durations: [.mid],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.practical, .solution]
         ),
         LessonModel(
             id: "5",
@@ -60,8 +69,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Разработка приложения на Android под присмотром специалиста со стажем",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .mid, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .solution]
         ),
         LessonModel(
             id: "6",
@@ -70,8 +81,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Получение базовых навыков по бэкэнду на примере Flask Framework",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .mid],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.practical]
         ),
         LessonModel(
             id: "7",
@@ -80,8 +93,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Консультация для овладения базовыми знаниями по React",
             description: "",
             appointmentDate: Date.now,
+            durations: [.long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.solution]
         ),
         LessonModel(
             id: "8",
@@ -90,8 +105,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Разработка приложения на Android под присмотром специалиста со стажем",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .short, .mid],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .practical, .solution]
         ),
         LessonModel(
             id: "9",
@@ -100,8 +117,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Получение базовых навыков по бэкэнду на примере Flask Framework",
             description: "",
             appointmentDate: Date.now,
+            durations: [.mid, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .solution]
         ),
         LessonModel(
             id: "10",
@@ -110,8 +129,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Консультация для овладения базовыми знаниями по React",
             description: "",
             appointmentDate: Date.now,
+            durations: [.mid, .long],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.practical, .solution]
         ),
         LessonModel(
             id: "11",
@@ -120,8 +141,10 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Разработка приложения на Android под присмотром специалиста со стажем",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial, .short],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical, .practical]
         ),
         LessonModel(
             id: "12",
@@ -130,10 +153,14 @@ class LessonRepositoryImpl: LessonRepository {
             brief: "Получение базовых навыков по бэкэнду на примере Flask Framework",
             description: "",
             appointmentDate: Date.now,
+            durations: [.trial],
             costTable: mockCostTable(),
-            slots: mockFreeSlots()
+            slots: mockFreeSlots(),
+            types: [.theoretical]
         )
     ]
+
+    // MARK: - Lessons
 
     // Int - day of week from monday - [0-6]
     private func mockFreeSlots() -> [Int: [String]] {
@@ -147,10 +174,10 @@ class LessonRepositoryImpl: LessonRepository {
 
     private func mockCostTable() -> [LessonDuration: Int] {
         return [
-            LessonDuration.trial: 100,
-            LessonDuration.short: 500,
-            LessonDuration.mid: 1000,
-            LessonDuration.long: 1500
+            .trial: 100,
+            .short: 500,
+            .mid: 1000,
+            .long: 1500
         ]
     }
 
@@ -158,5 +185,15 @@ class LessonRepositoryImpl: LessonRepository {
         try await Task.sleep(for: .seconds(1))
 
         return lessons.filter { $0.mentorId == mentorId }
+    }
+
+    func lesson(lessonId: String) async throws -> LessonModel {
+        try await Task.sleep(for: .seconds(1))
+
+        guard let lesson = lessons.first(where: { $0.id == lessonId }) else {
+            throw AppError(message: "Занятие не найдено :(")
+        }
+
+        return lesson
     }
 }

@@ -25,6 +25,10 @@ class UserRepositoryImpl: UserRepository {
             post: "Backend Developer",
             imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
             isMentor: true,
+            contacts: [
+                .init(type: .discord, accountName: "VanDarkholme"),
+                .init(type: .telegram, accountName: "VanDark")
+            ],
             stats: .init(
                 lessonsCount: 77,
                 rating: 4.3,
@@ -45,6 +49,10 @@ class UserRepositoryImpl: UserRepository {
             post: "Аналитик со стажем",
             imageURL: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
             isMentor: true,
+            contacts: [
+                .init(type: .vk, accountName: "thomas_shelby"),
+                .init(type: .skype, accountName: "thomas1337")
+            ],
             stats: .init(
                 lessonsCount: 282,
                 rating: 4.6,
@@ -65,6 +73,10 @@ class UserRepositoryImpl: UserRepository {
             post: "Мобильный архитектор-муравей",
             imageURL: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
             isMentor: true,
+            contacts: [
+                .init(type: .telegram, accountName: "tommyAngel"),
+                .init(type: .skype, accountName: "tommyangelo")
+            ],
             stats: .init(
                 lessonsCount: 23,
                 rating: 3.0,
@@ -85,6 +97,10 @@ class UserRepositoryImpl: UserRepository {
             post: "Data learning engineer",
             imageURL: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
             isMentor: true,
+            contacts: [
+                .init(type: .telegram, accountName: "IAmHomelander"),
+                .init(type: .discord, accountName: "Homelander")
+            ],
             stats: .init(
                 lessonsCount: 50,
                 rating: 5.0,

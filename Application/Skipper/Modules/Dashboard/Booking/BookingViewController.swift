@@ -45,6 +45,10 @@ class BookingViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+
+        bindViewModelActions()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -78,7 +82,8 @@ class BookingViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(error.localizedDescription,
+                                                  controller: self)
             }
             .store(in: &subscriptions)
 

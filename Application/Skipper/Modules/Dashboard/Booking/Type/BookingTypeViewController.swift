@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import Combine
 import Foundation
 import UIKit
 
@@ -50,6 +51,7 @@ class BookingTypeViewController: UIViewController {
     // MARK: - Properties
 
     private let viewModel: BookingTypeViewModel
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -103,7 +105,14 @@ class BookingTypeViewController: UIViewController {
         )
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$typeItems
+            .delay(for: .milliseconds(1), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &subscriptions)
+    }
 
     // MARK: - UI Callbacks
 

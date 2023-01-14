@@ -28,27 +28,23 @@ class BookingContactViewController: UIViewController {
         return view
     }()
 
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
-        return scrollView
-    }()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
 
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
 
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.spacing = 16
-        return stackView
-    }()
+        headerView.frame = .init(x: 0, y: 0, width: tableView.frame.width, height: 60)
+        tableView.tableHeaderView = headerView
+        tableView.tableFooterView = UIView()
 
-    private var fieldViews: [BookingContactType: BookingContactItemView] = [:]
+        tableView.register(cellType: BookingContactCell.self)
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        return tableView
+    }()
 
     // MARK: - Output
 
@@ -82,45 +78,23 @@ class BookingContactViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
-
-        updateData()
     }
 
     // MARK: - UI Methods
 
     private func setupUI() {
         view.backgroundColor = R.color.themeBackground()
-        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonTitle = ""
 
-        view.addSubview(scrollView)
-        scrollView.addSubview(containerView)
-        containerView.addSubview(headerView)
-        containerView.addSubview(stackView)
+        view.addSubview(tableView)
         view.addSubview(bookButton)
 
-        scrollView.applyConstraints(
-            .top(to: view, attribute: .top),
+        tableView.applyConstraints(
+            .top(to: view, attribute: .top, constant: 16),
             .leading(to: view, attribute: .leading),
             .trailing(to: view, attribute: .trailing),
             .bottom(to: bookButton, attribute: .top, constant: -16)
-        )
-
-        containerView.applyConstraints(.fit(in: scrollView.contentLayoutGuide),
-                                       .width(to: scrollView, attribute: .width))
-
-        headerView.applyConstraints(
-            .top(to: containerView, attribute: .top, constant: 16),
-            .leading(to: containerView, attribute: .leading),
-            .trailing(to: containerView, attribute: .trailing),
-            .height(constant: 60)
-        )
-
-        stackView.applyConstraints(
-            .top(to: headerView, attribute: .bottom, constant: 16),
-            .leading(to: containerView, attribute: .leading),
-            .trailing(to: containerView, attribute: .trailing),
-            .bottom(to: containerView, attribute: .bottom, constant: -16)
         )
 
         bookButton.applyConstraints(
@@ -131,33 +105,48 @@ class BookingContactViewController: UIViewController {
         )
     }
 
-    private func updateData() {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        viewModel.contactTypes.map(makeField).forEach {
-            stackView.addArrangedSubview($0)
-        }
-    }
-
     private func save() {
-        let values = fieldViews.mapValues { $0.value }
-        viewModel.saveContactValues(values)
         didTapBook?()
-    }
-
-    // MARK: - UI Builders
-
-    private func makeField(for type: BookingContactType) -> UIView {
-        let view = BookingContactItemView()
-
-        view.configureWith(title: type.title, imageURL: type.imageURL, fieldPlaceholder: type.placeholder)
-
-        return view
     }
 
     // MARK: - UI Callbacks
 
     @objc private func bookAction() {
         save()
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension BookingContactViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.contactTypes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: BookingContactCell = tableView.dequeueReusableCell(for: indexPath)
+        let item = viewModel.contactTypes[indexPath.row]
+
+        cell.configureWith(title: item.title, image: item.image)
+
+        cell.isSelected = viewModel.selectedContactIndex == indexPath.row
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.setSelectedIndex(indexPath.row)
+
+        for i in 0 ..< viewModel.contactTypes.count {
+            if let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) {
+                cell.isSelected = false
+            }
+        }
+
+        tableView.cellForRow(at: indexPath)?.isSelected = true
     }
 }

@@ -6,36 +6,53 @@
 //
 
 import Foundation
+import UIKit
 
 class BookingContactViewModel {
-    let contactTypes: [BookingContactType] = BookingContactType.allCases
+    private(set) var contactTypes: [BookingContactType] = []
 
-    private(set) var contactValues: [BookingContactType: String] = [:]
+    private(set) var selectedContactIndex: Int?
 
-    func saveContactValues(_ values: [BookingContactType: String]) {
-        contactValues = values
+    func setContacts(types: [UserContactModel]) {
+        contactTypes = types.map { .init(from: $0.type) }
+    }
+
+    func setSelectedIndex(_ index: Int) {
+        selectedContactIndex = index
     }
 }
 
 extension BookingContactViewModel {
-    enum BookingContactType: CaseIterable {
+    enum BookingContactType: Int, CaseIterable {
         case discord
+        case skype
+        case telegram
+        case vk
+
+        init(from type: UserContactType) {
+            switch type {
+            case .discord: self = .discord
+            case .skype: self = .skype
+            case .telegram: self = .telegram
+            case .vk: self = .vk
+            }
+        }
 
         var title: String {
             switch self {
             case .discord: return "Discord"
+            case .skype: return "Skype"
+            case .telegram: return "Telegram"
+            case .vk: return "VK"
             }
         }
 
-        var placeholder: String {
+        var image: UIImage? {
             switch self {
-            case .discord: return "Логин от Discord"
-            }
-        }
-
-        var imageURL: String? {
-            switch self {
-            case .discord: return "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/discord-512.png"
+            case .discord: return R.image.logoContactDiscord()
+            case .skype: return R.image.logoContactSkype()
+            case .telegram: return R.image.logoContactTelegram()
+            case .vk: return R.image.logoContactVk()
             }
         }
     }

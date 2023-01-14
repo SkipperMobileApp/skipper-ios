@@ -85,7 +85,7 @@ class MentorProfileViewController: UIViewController {
         view.didSelectItemAtIndex = { [weak self] index in
             guard let self = self else { return }
             let item = self.viewModel.classItems[index]
-            self.didSelectClass?(item.id)
+            self.didSelectLesson?(item.id)
         }
 
         return view
@@ -99,7 +99,7 @@ class MentorProfileViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didSelectClass: ((_ id: String) -> Void)?
+    var didSelectLesson: ((_ id: String) -> Void)?
     var didTapClassesList: (() -> Void)?
 
     // MARK: - Properties

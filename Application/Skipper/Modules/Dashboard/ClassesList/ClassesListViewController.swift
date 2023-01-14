@@ -31,7 +31,7 @@ class ClassesListViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didSelectClass: ((_ id: String) -> Void)?
+    var didSelectLesson: ((_ id: String) -> Void)?
 
     // MARK: - Properties
 
@@ -127,6 +127,6 @@ extension ClassesListViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.deselectRow(at: indexPath, animated: true)
 
         let id = viewModel.items[indexPath.row].id
-        didSelectClass?(id)
+        didSelectLesson?(id)
     }
 }

@@ -43,8 +43,8 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = MentorProfileViewModel(mentorId: mentorId)
         let controller = MentorProfileViewController(viewModel: viewModel)
 
-        controller.didSelectClass = { [weak self] classId in
-            self?.showBookingForClass(classId: classId)
+        controller.didSelectLesson = { [weak self] lessonId in
+            self?.showBookingForLesson(lessonId: lessonId)
         }
 
         controller.didTapClassesList = { [weak self] in
@@ -58,15 +58,15 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = ClassesListViewModel(mentorId: mentorId)
         let controller = ClassesListViewController(viewModel: viewModel)
 
-        controller.didSelectClass = { [weak self] classId in
-            self?.showBookingForClass(classId: classId)
+        controller.didSelectLesson = { [weak self] lessonId in
+            self?.showBookingForLesson(lessonId: lessonId)
         }
 
         router.push(controller)
     }
 
-    func showBookingForClass(classId: String) {
-        let viewModel = BookingViewModel(classId: classId)
+    func showBookingForLesson(lessonId: String) {
+        let viewModel = BookingViewModel(lessonId: lessonId)
         let controller = BookingViewController(viewModel: viewModel)
 
         controller.didFinishBooking = { [weak self] in
