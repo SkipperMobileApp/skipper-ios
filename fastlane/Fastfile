@@ -9,8 +9,6 @@ platform :ios do
   desc "Update ci keychain"
   lane :update_keychain do
     create_keychain(
-      name: "ci",
-      password: "test",
       default_keychain: false,
       unlock: true,
       timeout: 3600,
@@ -18,19 +16,17 @@ platform :ios do
     )
 
     import_certificate(
-      keychain_name: "ci",
-      keychain_password: "test",
       certificate_path: File.absolute_path("certificate.p12"),
-      certificate_password: ENV['FL_UNLOCK_KEYCHAIN_PASSWORD']
+      certificate_password: ENV['CERTIFICATE_PASSWORD']
     )
   end
 
   desc "Sync signing"
   lane :signing do
     unlock_keychain(
-      path: "ci", 
-      password: ENV['FL_UNLOCK_KEYCHAIN_PASSWORD']
+      path: "ci"
     )
+    
     install_provisioning_profile
     update_code_signing_settings
   end
