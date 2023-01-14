@@ -1,0 +1,24 @@
+name: "[DEV] Release"
+
+on:
+  push:
+    branches:
+      - 'releases/**'
+      - 'feature/ci-*'
+      - 'develop'
+
+jobs:
+  release-ipa:
+    runs-on: [self-hosted, macos, x64]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: saritasa-nest/saritasa-github-actions/.github/actions/fastlane-ios@v2.1
+        env:
+          FL_UNLOCK_KEYCHAIN_PASSWORD: ${{ secrets.XCODEKEYCHAIN_PASSWORD }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          SLACK_URL: ${{ secrets.SLACK_URL }}
+        with:
+          environment: dev
+          target: release
+          # iOS optional
+          certificate: ${{ secrets.P12 }}

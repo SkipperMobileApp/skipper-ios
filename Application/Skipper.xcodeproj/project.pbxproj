@@ -265,6 +265,9 @@
 		84A2CF2A29184F6800829C59 /* ExampleRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepositoryMock.swift; sourceTree = "<group>"; };
 		84A2CF2C29184FA700829C59 /* TokensContainerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensContainerMock.swift; sourceTree = "<group>"; };
 		84A2CF2E29184FE900829C59 /* AppSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionMock.swift; sourceTree = "<group>"; };
+		84A699C12972AFB9005172A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84A699C42972AFCC005172A1 /* GoogleService-Info-development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-development.plist"; sourceTree = "<group>"; };
+		84A699C52972AFCC005172A1 /* GoogleService-Info-production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-production.plist"; sourceTree = "<group>"; };
 		84AC0224292E880900DE7AF2 /* UserMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMapper.swift; sourceTree = "<group>"; };
 		84AC0225292E880900DE7AF2 /* AuthUserMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUserMapper.swift; sourceTree = "<group>"; };
 		84AC0229292E882A00DE7AF2 /* FIrebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIrebaseModel.swift; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 		840DB1D127A552AA00F40C89 /* Skipper */ = {
 			isa = PBXGroup;
 			children = (
+				84A699C32972AFCC005172A1 /* Google-Services */,
 				8447C3CC2932957D0092B10D /* DI */,
 				847DD3A52906E71400C9CC5D /* CoreData */,
 				848AB2C829410988007DB9F4 /* Cache */,
@@ -410,6 +414,7 @@
 				84EE753728F7064500B55839 /* Utils */,
 				84EE753528F7063600B55839 /* Resources */,
 				840DB1D227A552AA00F40C89 /* AppDelegate.swift */,
+				84A699C12972AFB9005172A1 /* GoogleService-Info.plist */,
 			);
 			path = Skipper;
 			sourceTree = "<group>";
@@ -657,6 +662,15 @@
 				84AC0242292E90BB00DE7AF2 /* AuthRepositoryMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		84A699C32972AFCC005172A1 /* Google-Services */ = {
+			isa = PBXGroup;
+			children = (
+				84A699C42972AFCC005172A1 /* GoogleService-Info-development.plist */,
+				84A699C52972AFCC005172A1 /* GoogleService-Info-production.plist */,
+			);
+			path = "Google-Services";
 			sourceTree = "<group>";
 		};
 		84AC0221292E863F00DE7AF2 /* Auth */ = {
@@ -1021,6 +1035,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 840DB1F927A552AA00F40C89 /* Build configuration list for PBXNativeTarget "Skipper" */;
 			buildPhases = (
+				84D7D1952972AAC400504E35 /* Google-Services */,
 				84573E012906FE0900F03827 /* R.Swift */,
 				84573E022906FEDC00F03827 /* Format */,
 				84573E032906FEDF00F03827 /* Lint */,
@@ -1120,7 +1135,7 @@
 				84573DEF2906FD3500F03827 /* XCRemoteSwiftPackageReference "TPKeyboardAvoiding" */,
 				84573DF22906FD5000F03827 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				84573DFB2906FD9100F03827 /* XCRemoteSwiftPackageReference "Reusable" */,
-				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */,
+				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				845A2A362916B5E5003EB7DF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -1187,7 +1202,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1228,6 +1243,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cp \"$SRCROOT/.swiftlint.yml\" ./\n\ncd BuildTools\nSDKROOT=$(xcrun --sdk macosx --show-sdk-path)\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\necho \"$SRCROOT/.swiftlint.yml\"\n\nif which swiftlint >/dev/null; then\n    swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		84D7D1952972AAC400504E35 /* Google-Services */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Google-Services";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"$SRCROOT/Skipper/Google-Services/GoogleService-Info-$ENVIRONMENT.plist\" \"$SRCROOT/Skipper/GoogleService-Info.plist\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1548,7 +1582,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				ENVIRONMENT = development;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1564,9 +1598,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1578,9 +1613,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 97CJYDC5AL;
 				ENVIRONMENT = development;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
@@ -1595,9 +1632,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1611,7 +1650,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z935R654UA;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = Z935R654UA;
@@ -1623,9 +1662,10 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1639,7 +1679,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1649,9 +1689,10 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.study.skipper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1664,7 +1705,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1673,11 +1714,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1690,7 +1731,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1699,11 +1740,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1778,9 +1819,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 97CJYDC5AL;
 				ENVIRONMENT = production;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
@@ -1795,9 +1838,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1812,7 +1857,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = Z935R654UA;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1822,11 +1867,12 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.study.skipper;
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1839,7 +1885,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1848,11 +1894,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1921,9 +1967,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 97CJYDC5AL;
 				ENVIRONMENT = production;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
@@ -1938,9 +1986,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1953,7 +2003,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1963,9 +2013,10 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.study.skipper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1978,7 +2029,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1987,11 +2038,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2073,7 +2124,7 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -2133,7 +2184,7 @@
 		};
 		84573DFF2906FDCC00F03827 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */;
+			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
 			productName = Rswift;
 		};
 		845A2A372916B5E5003EB7DF /* Alamofire */ = {
