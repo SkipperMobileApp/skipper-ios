@@ -1035,7 +1035,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 840DB1F927A552AA00F40C89 /* Build configuration list for PBXNativeTarget "Skipper" */;
 			buildPhases = (
-				84D7D1952972AAC400504E35 /* Google-Services */,
 				84573E012906FE0900F03827 /* R.Swift */,
 				84573E022906FEDC00F03827 /* Format */,
 				84573E032906FEDF00F03827 /* Lint */,
@@ -1243,24 +1242,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cp \"$SRCROOT/.swiftlint.yml\" ./\n\ncd BuildTools\nSDKROOT=$(xcrun --sdk macosx --show-sdk-path)\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\necho \"$SRCROOT/.swiftlint.yml\"\n\nif which swiftlint >/dev/null; then\n    swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		84D7D1952972AAC400504E35 /* Google-Services */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Google-Services";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./scripts/copy-google-services-info\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
