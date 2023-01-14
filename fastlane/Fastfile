@@ -21,6 +21,14 @@ platform :ios do
     )
   end
 
+  desc "Bump build number from Firebase"
+  lane :bump_build_number do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV['FIREBASEAPPDISTRO_APP']
+    )
+    increment_build_number(build_number: latest_release[:buildVersion].to_i + 1)
+  end
+
   desc "Sync signing"
   lane :signing do
     unlock_keychain(
@@ -30,7 +38,7 @@ platform :ios do
     install_provisioning_profile
     update_code_signing_settings
   end
-  
+
   desc "Build binary"
   lane :build do
     xcode_select ENV['FL_XCODE_PATH']
@@ -45,7 +53,7 @@ platform :ios do
   desc "Release binary"
   lane :release do
 
-    increment_build_number
+    bump_build_number
     build
     firebase_app_distribution
 
