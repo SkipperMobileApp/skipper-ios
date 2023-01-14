@@ -8,7 +8,7 @@ on:
 
 jobs:
   release-ipa:
-    runs-on: [self-hosted, macos, x64]
+    runs-on: [self-hosted, macOS, ARM64]
     steps:
       - name: Checkout Source
         uses: actions/checkout@v2
