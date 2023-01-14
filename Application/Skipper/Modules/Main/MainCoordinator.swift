@@ -6,20 +6,87 @@
 //
 
 import Foundation
+import UIKit
 
 class MainCoordinator: NavigationCoordinator {
+    // MARK: - Definitions
+
+    typealias TabBox = (tab: Tab, coordinator: NavigationCoordinator)
+    typealias Tab = MainTabBarViewController.Tab
+
+    // MARK: - Output
+
     var didFinish: (() -> Void)?
 
-    override init(with router: NavigationRouter, session: AppSession) {
-        super.init(with: router, session: session)
+    // MARK: - Properties
 
-        let viewModel = MainViewModel(session: session)
-        let controller = MainViewController(viewModel: viewModel)
+    private var tabs: [Tab: NavigationCoordinator] = [:]
+
+    private let tabController: MainTabBarViewController
+
+    // MARK: - Initialization
+
+    override init(with router: NavigationRouter) {
+        let viewModel = MainTabBarViewModel()
+        let controller = MainTabBarViewController(viewModel: viewModel)
+
+        tabController = controller
+
+        super.init(with: router)
 
         controller.didFinish = { [weak self] in
             self?.didFinish?()
         }
 
+        router.navigationController.setNavigationBarHidden(true, animated: false)
+
+        addTabs(initTabs(), to: controller)
         router.setRootModule(controller)
+    }
+
+    // MARK: - Tabs
+
+    private func initTabs() -> [TabBox] {
+        let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
+        let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
+
+        return [
+            (.dashboard, dashboardCoordinator),
+            (.profile, profileCoordinator)
+        ]
+    }
+
+    private func addTabs(_ tabs: [TabBox], to tabController: UITabBarController, selectedTab: Tab = .dashboard) {
+        let sorted = tabs.sorted { box1, box2 -> Bool in
+            box2.tab.rawValue > box1.tab.rawValue
+        }
+
+        let controllers = sorted.map { box -> UIViewController in
+            self.tabs[box.tab] = box.coordinator
+            let controller = box.coordinator.toPresentable()
+            controller.tabBarItem = UITabBarItem(title: box.tab.title, image: box.tab.icon, tag: box.tab.rawValue)
+            return controller
+        }
+
+        tabController.viewControllers = controllers
+        tabController.selectedIndex = selectedTab.rawValue
+    }
+}
+
+// MARK: - Tab Items
+
+private extension MainCoordinator.Tab {
+    var title: String {
+        switch self {
+        case .dashboard: return "Home"
+        case .profile: return "Profile"
+        }
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .dashboard: return R.icon.home
+        case .profile: return R.icon.profile
+        }
     }
 }

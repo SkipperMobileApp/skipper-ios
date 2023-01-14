@@ -29,28 +29,30 @@ class AppCoordinator: RootCoordinator {
     private func runSplash() {
         clear()
 
-        let viewModel = SplashViewModel(session: session)
+        let viewModel = SplashViewModel()
         let controller = SplashViewController(viewModel: viewModel)
 
         controller.didFinish = { [weak self] isSuccess in
             isSuccess ? self?.runMain() : self?.runAuth()
         }
 
-        router.setRootModule(controller, transitionOptions: defaultTransitionOptions)
+        router.setRootModule(controller)
         currentRootModule = .splash
     }
 
     func runAuth() {
         clear()
 
-        let viewModel = AuthViewModel(session: session)
-        let controller = AuthViewController(viewModel: viewModel)
+        let coordinator = AuthCoordinator(with: NavigationRouter())
 
-        controller.didFinish = { [weak self] in
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
             self?.runMain()
         }
 
-        router.setRootModule(controller, transitionOptions: defaultTransitionOptions)
+        addChild(coordinator)
+
+        router.setRootModule(coordinator.toPresentable(), transitionOptions: defaultTransitionOptions)
         currentRootModule = .auth
     }
 
@@ -59,7 +61,7 @@ class AppCoordinator: RootCoordinator {
 
         clear()
 
-        let coordinator = MainCoordinator(with: NavigationRouter(), session: session)
+        let coordinator = MainCoordinator(with: NavigationRouter())
 
         coordinator.didFinish = { [weak self, weak coordinator] in
             self?.removeChild(coordinator)
@@ -73,4 +75,5 @@ class AppCoordinator: RootCoordinator {
     }
 }
 
-private let defaultTransitionOptions = UIWindow.TransitionOptions(direction: .fade, style: .easeIn)
+private let defaultTransitionOptions = UIWindow.TransitionOptions(direction: .fade,
+                                                                  style: .easeIn)
