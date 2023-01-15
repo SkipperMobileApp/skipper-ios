@@ -9,53 +9,18 @@ import Foundation
 
 class SearchMentorViewModel {
     @Event private(set) var itemsUpdatedEvent: Void?
+    @Event private(set) var errorEvent: Error?
+    @Published private(set) var isLoading: Bool = false
+
+    @Injected() private var userRepository: UserRepository
 
     var items: [Item] = []
+    private var sourceItems: [Item] = []
 
-    private var sourceItems: [Item] = [
-        .init(
-            id: "1",
-            name: "Van Darkholm",
-            major: "Backend Developer",
-            imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
-            rating: 5.0,
-            description: randomDebugString(wordsCount: 20),
-            subcategories: ["Backend", "SRE", "Python", "Frontend", "Swift", "Kotlin"]
-        ),
-        .init(
-            id: "2",
-            name: "Thomas Shelby",
-            major: "Мегахарош",
-            imageURL: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
-            rating: 5.0,
-            description: randomDebugString(wordsCount: 10),
-            subcategories: ["Backend", "SRE", "Python"]
-        ),
-        .init(
-            id: "3",
-            name: "Thomas Angelo",
-            major: "Backend Developer",
-            imageURL: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
-            rating: 5.0,
-            description: randomDebugString(wordsCount: 15),
-            subcategories: ["Backend", "SRE", "Python"]
-        ),
-        .init(
-            id: "4",
-            name: "Homelander",
-            major: "Backend Developer",
-            imageURL: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
-            rating: 5.0,
-            description: randomDebugString(wordsCount: 25),
-            subcategories: ["Backend", "SRE", "Python"]
-        )
-    ]
+    private let selectedCategoryId: String?
 
-    private let selectedCategory: String?
-
-    init(category: String?) {
-        selectedCategory = category
-        applySearchText("")
+    init(categoryId: String?) {
+        selectedCategoryId = categoryId
     }
 
     func applySearchText(_ text: String) {
@@ -67,6 +32,41 @@ class SearchMentorViewModel {
 
         items = sourceItems.filter { $0.name.lowercased().contains(text.lowercased()) }
         itemsUpdatedEvent = ()
+    }
+
+    func loadData() {
+        isLoading = true
+        Task {
+            do {
+                let mentors: [UserModel]
+                if let categoryId = selectedCategoryId {
+                    mentors = try await userRepository.mentorsOfCategory(categoryId: categoryId)
+                } else {
+                    mentors = try await userRepository.mentors()
+                }
+
+                await MainActor.run {
+                    sourceItems = mentors.map {
+                        .init(
+                            id: $0.id,
+                            name: [$0.firstName, $0.lastName, $0.patronymic].joined(separator: " "),
+                            major: $0.post,
+                            imageURL: $0.imageURL,
+                            rating: $0.stats.rating,
+                            description: $0.bio,
+                            subcategories: $0.tags
+                        )
+                    }
+                    applySearchText("")
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorEvent = error
+                    isLoading = false
+                }
+            }
+        }
     }
 }
 

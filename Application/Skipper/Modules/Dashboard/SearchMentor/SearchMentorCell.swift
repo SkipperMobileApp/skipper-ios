@@ -69,7 +69,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         let view = LabeledImageView()
         view.font = R.typo.body1
         view.textColor = R.color.primary87()!
-        view.imageTintColor = R.color.brandSecondary()
+        view.imageTintColor = R.color.brandPrimary()
         view.image = R.icon.star
         return view
     }()
@@ -150,7 +150,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         let items = subcategories.map {
             let item = TextCloudItem()
             item.text = $0
-            item.backgroundColor = R.color.brandSecondary()!
+            item.backgroundColor = R.color.brandPrimary()!
             item.textColor = R.color.secondary100()!
             item.font = R.typo.body
             return item
@@ -168,7 +168,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
     func performBlink() {
         containerView.layer.removeAllAnimations()
         UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseIn, .autoreverse]) { [weak self] in
-            self?.containerView.backgroundColor = R.color.themeSecondary()
+            self?.containerView.backgroundColor = R.color.brandPrimary()?.withAlphaComponent(0.3)
         } completion: { [weak self] finished in
             if finished {
                 self?.containerView.backgroundColor = R.color.themePrimary()

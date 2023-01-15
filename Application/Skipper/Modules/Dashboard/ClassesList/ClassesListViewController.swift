@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class ClassesListViewController: UIViewController {
@@ -29,11 +31,13 @@ class ClassesListViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didSelectClass: ((_ id: String) -> Void)?
+    var didSelectLesson: ((_ id: String) -> Void)?
 
     // MARK: - Properties
 
     private let viewModel: ClassesListViewModel
+
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -60,6 +64,8 @@ class ClassesListViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -69,13 +75,32 @@ class ClassesListViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonTitle = ""
 
-        title = "Classes List"
+        title = "Список занятий"
 
         view.addSubview(tableView)
         tableView.applyConstraints(.fit(in: view))
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$loadDataEvent
+            .sink { [weak self] in
+                self?.tableView.reloadData()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -102,6 +127,6 @@ extension ClassesListViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.deselectRow(at: indexPath, animated: true)
 
         let id = viewModel.items[indexPath.row].id
-        didSelectClass?(id)
+        didSelectLesson?(id)
     }
 }

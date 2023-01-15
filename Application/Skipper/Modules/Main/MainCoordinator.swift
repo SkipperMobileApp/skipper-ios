@@ -78,8 +78,8 @@ class MainCoordinator: NavigationCoordinator {
 private extension MainCoordinator.Tab {
     var title: String {
         switch self {
-        case .dashboard: return "Home"
-        case .profile: return "Profile"
+        case .dashboard: return "Главная"
+        case .profile: return "Профиль"
         }
     }
 

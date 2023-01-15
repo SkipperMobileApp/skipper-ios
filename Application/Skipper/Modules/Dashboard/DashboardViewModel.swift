@@ -9,41 +9,51 @@ import Foundation
 import UIKit
 
 class DashboardViewModel {
-    var sections: [Section] = [
-        .categories(
-            categories.map { .init(title: $0, image: nil) }
-        ),
-        .popularMentors([
-            .init(
-                name: "Thomas Shelby",
-                major: "Мегахарош",
-                likesCount: 10,
-                imageURL: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png"
-            ),
-            .init(
-                name: "Thomas Angelo",
-                major: "Ведущий бизнес-аналитик",
-                likesCount: 100,
-                imageURL: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg"
-            ),
-            .init(
-                name: "Van Darkholm",
-                major: "Эксперт по бэкенду",
-                likesCount: 1000,
-                imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg"
-            ),
-            .init(
-                name: "Homelander",
-                major: "Senior HR",
-                likesCount: 10000,
-                imageURL: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg"
-            )
-        ])
-    ]
+    @Injected() private var userRepository: UserRepository
+    @Injected() private var utilRepository: UtilRepository
+
+    @Event private(set) var loadDataEvent: Void?
+    @Event private(set) var errorEvent: Error?
+    @Published private(set) var isLoading: Bool = false
 
     @Published private(set) var categoriesPage: Int = 0
+    var sections: [Section] = []
 
     // MARK: - Data methods
+
+    func loadData() {
+        isLoading = true
+        Task {
+            do {
+                let mentors = try await userRepository.mentors()
+                let categories = try await utilRepository.categories()
+
+                await MainActor.run {
+                    sections = [
+                        .categories(categories.map {
+                            .init(id: $0.id, title: $0.name, imageURL: $0.imageURL)
+                        }),
+                        .popularMentors(mentors.map {
+                            .init(
+                                id: $0.id,
+                                name: [$0.firstName, $0.lastName, $0.patronymic].joined(separator: " "),
+                                major: $0.post,
+                                likesCount: $0.stats.reviewsCount,
+                                imageURL: $0.imageURL
+                            )
+                        })
+                    ]
+                    loadDataEvent = ()
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorEvent = error
+                    isLoading = false
+                }
+            }
+        }
+    }
 
     func setCategoriesCurrentPage(_ page: Int) {
         categoriesPage = page
@@ -63,11 +73,13 @@ extension DashboardViewModel {
     }
 
     struct CategoryItem {
+        let id: String
         let title: String
-        let image: UIImage?
+        let imageURL: String?
     }
 
     struct MentorItem {
+        let id: String
         let name: String
         let major: String
         let likesCount: Int
