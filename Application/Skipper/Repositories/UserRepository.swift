@@ -139,13 +139,13 @@ class UserRepositoryImpl: UserRepository {
     }
 
     func mentors() async throws -> [UserModel] {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         return users.filter { $0.isMentor }
     }
 
     func mentorsOfCategory(categoryId: String) async throws -> [UserModel] {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         let mentors = users.filter { $0.isMentor }
 
@@ -161,7 +161,7 @@ class UserRepositoryImpl: UserRepository {
     }
 
     func mentor(mentorId: String) async throws -> UserModel {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         guard let mentor = users.filter({ $0.isMentor }).first(where: { $0.id == mentorId }) else {
             throw AppError(message: "Ментор не найден")

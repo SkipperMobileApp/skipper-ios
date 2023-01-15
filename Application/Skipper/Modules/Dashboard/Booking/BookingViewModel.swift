@@ -22,8 +22,11 @@ class BookingViewModel {
 
     @Injected() private var lessonRepository: LessonRepository
     @Injected() private var userRepository: UserRepository
+    @Injected() private var bookedLessonRepository: BookedLessonRepository
 
     private let lessonId: String
+    private var lesson: LessonModel?
+    private var mentor: UserModel?
 
     init(lessonId: String) {
         self.lessonId = lessonId
@@ -34,8 +37,12 @@ class BookingViewModel {
     private func subscribeOnActions() {
         amountViewModel.$selectedAmountIndex
             .dropFirst()
-            .sink { [weak self] _ in
-                self?.timeViewModel.clearSelectedItems()
+            .removeDuplicates()
+            .sink { [weak self] index in
+                guard let self = self else { return }
+
+                let amount = index.flatMap { self.amountViewModel.amountItems[$0].rawValue } ?? 0
+                self.timeViewModel.setAmountOfLessonsToSelect(amount)
             }
             .store(in: &subscriptions)
     }
@@ -93,9 +100,12 @@ class BookingViewModel {
 
                 await MainActor.run {
                     typeViewModel.setTypes(types: lesson.types)
-                    amountViewModel.setCosts(durations: lesson.durations, costs: lesson.costTable)
+                    amountViewModel.setData(durations: lesson.durations, costs: lesson.costTable)
                     timeViewModel.setLessonAvailableIntervals(lesson.slots)
                     contactViewModel.setContacts(types: mentor.contacts)
+
+                    self.lesson = lesson
+                    self.mentor = mentor
 
                     isLoading = false
                 }
@@ -109,11 +119,52 @@ class BookingViewModel {
     }
 
     func bookClass() {
-        Task {
-            try await Task.sleep(for: .seconds(1))
+        guard
+            let lesson = lesson,
+            let mentor = mentor,
+            let durationIndex = amountViewModel.selectedDurationIndex,
+            durationIndex >= 0, durationIndex < lesson.durations.count,
+            let cost = lesson.costTable[lesson.durations[durationIndex]],
+            let typeIndex = typeViewModel.selectedItemIndex,
+            typeIndex >= 0, typeIndex < lesson.types.count,
+            timeViewModel.selectedTimeItems.count > 0,
+            let contactIndex = contactViewModel.selectedContactIndex,
+            contactIndex >= 0, contactIndex < mentor.contacts.count
+        else {
+            errorEvent = AppError(message: "Ошибка бронирования :(\nПроверьте выбранные данные!")
+            return
+        }
 
-            await MainActor.run {
-                bookClassEvent = ()
+        let bookedLessons = timeViewModel.selectedTimeItems.map {
+            BookedLesson(
+                mentorId: mentor.id,
+                lessonId: lesson.id,
+                name: lesson.title,
+                description: lesson.description,
+                type: lesson.types[typeIndex],
+                cost: cost,
+                date: $0.date,
+                time: $0.timeInterval,
+                duration: lesson.durations[durationIndex],
+                contact: mentor.contacts[contactIndex].type
+            )
+        }
+
+        isLoading = true
+        Task {
+            do {
+                try await bookedLessonRepository.bookLessons(lessons: bookedLessons)
+
+                await MainActor.run {
+                    isLoading = false
+                    bookClassEvent = ()
+                }
+
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    errorEvent = error
+                }
             }
         }
     }

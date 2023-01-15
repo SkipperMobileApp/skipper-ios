@@ -82,14 +82,23 @@ class BookingViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert(error.localizedDescription,
+                AlertPresenter.presentSimpleAlert("Ошибка записи!",
+                                                  message: error.localizedDescription,
                                                   controller: self)
             }
             .store(in: &subscriptions)
 
         viewModel.$bookClassEvent
             .sink { [weak self] in
-                self?.didFinishBooking?()
+                guard let self = self else { return }
+
+                AlertPresenter.presentSimpleAlert(
+                    "Запись прошла успешно!",
+                    message: "Вы можете посмотреть все свои занятия на вкладке \"Мои занятия\"",
+                    controller: self
+                ) { [weak self] in
+                    self?.didFinishBooking?()
+                }
             }
             .store(in: &subscriptions)
     }

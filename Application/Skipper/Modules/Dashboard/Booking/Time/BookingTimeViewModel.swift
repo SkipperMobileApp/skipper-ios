@@ -19,14 +19,24 @@ class BookingTimeViewModel {
     }()
 
     private(set) var selectedTimeItems: [BookingTimeItem] = []
-
     private(set) var availableBookingIntervals: [BookingTimeInterval] = []
 
     private var lessonAvailableIntervals: [Int: [String]] = [:]
+    private var maxSelectionAmount: Int = 0
+
+    var isMaximumItemsSelected: Bool {
+        selectedTimeItems.count >= maxSelectionAmount
+    }
+
+    var remainingItemsAmountForSelection: Int {
+        max(0, maxSelectionAmount - selectedTimeItems.count)
+    }
 
     // MARK: - Data methods
 
     func selectInterval(at index: Int, for date: Date) {
+        guard index >= 0, index < availableBookingIntervals.count else { return }
+
         let interval = availableBookingIntervals[index].time
 
         selectedTimeItems.append(.init(date: date, timeInterval: interval))
@@ -41,7 +51,7 @@ class BookingTimeViewModel {
         let allIntervals = lessonAvailableIntervals[weekDay - 1]?.map(BookingTimeInterval.init) ?? []
 
         availableBookingIntervals = allIntervals.filter { interval in
-            selectedTimeItems.filter { $0.date == date }.contains { $0.timeInterval == interval.time }
+            !selectedTimeItems.filter { $0.date == date }.contains { $0.timeInterval == interval.time }
         }
     }
 
@@ -63,8 +73,39 @@ class BookingTimeViewModel {
         selectedTimeItems = []
     }
 
+    func bookableDateComponents() -> [DateComponents] {
+        let interval = bookableDateInterval
+
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+
+        var components: [DateComponents] = []
+        var currentDate = interval.start
+
+        while let date = calendar.date(byAdding: .day, value: 1, to: currentDate),
+              date <= interval.end
+        {
+            let component = calendar.dateComponents(
+                [.year, .month, .day, .hour, .minute, .second, .timeZone],
+                from: date
+            )
+
+            components.append(component)
+            currentDate = date
+        }
+
+        return components
+    }
+
+    // MARK: - Global data
+
     func setLessonAvailableIntervals(_ intervals: [Int: [String]]) {
         lessonAvailableIntervals = intervals
+    }
+
+    func setAmountOfLessonsToSelect(_ amount: Int) {
+        maxSelectionAmount = amount
+        clearSelectedItems()
     }
 }
 

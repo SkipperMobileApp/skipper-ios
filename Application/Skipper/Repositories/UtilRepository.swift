@@ -157,13 +157,13 @@ class UtilRepositoryImpl: UtilRepository {
 
 extension UtilRepositoryImpl {
     func categories() async throws -> [CategoryModel] {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         return categories
     }
 
     func category(categoryId: String) async throws -> CategoryModel {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         guard let category = categories.first(where: { $0.id == categoryId }) else {
             throw AppError(message: "Категория не найдена")

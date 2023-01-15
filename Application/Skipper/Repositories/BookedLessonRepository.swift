@@ -7,8 +7,14 @@
 
 import Foundation
 
-protocol BookedLessonRepository {}
+protocol BookedLessonRepository {
+    func bookLessons(lessons: [BookedLesson]) async throws
+}
 
 class BookedLessonRepositoryImpl: BookedLessonRepository {
-    let bookedLessons: [BookedLesson] = []
+    private var bookedLessons: [BookedLesson] = []
+
+    func bookLessons(lessons: [BookedLesson]) async throws {
+        bookedLessons.append(contentsOf: lessons)
+    }
 }

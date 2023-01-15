@@ -44,6 +44,7 @@ class BookingTimeViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .plain)
 
         tableView.showsVerticalScrollIndicator = false
+        tableView.allowsSelection = false
 
         headerContainerView.frame = .init(x: 0, y: 0, width: tableView.frame.width, height: 470)
         tableView.tableHeaderView = headerContainerView
@@ -72,6 +73,8 @@ class BookingTimeViewController: UIViewController {
         presenter.delegate = self
         return presenter
     }()
+
+    private var tableHeaderView: BookingTimeSectionHeader?
 
     // MARK: - Output
 
@@ -107,6 +110,13 @@ class BookingTimeViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reloadCalendarData()
+        reloadTableData()
     }
 
     // MARK: - UI Methods
@@ -156,6 +166,17 @@ class BookingTimeViewController: UIViewController {
         tableView.reloadData()
     }
 
+    private func reloadCalendarData() {
+        let components = viewModel.bookableDateComponents()
+        calendarView.reloadDecorations(forDateComponents: components, animated: false)
+    }
+
+    private func updateTableHeader() {
+        tableHeaderView?.configureWith(
+            title: "Выбранные даты (осталось \(viewModel.remainingItemsAmountForSelection))"
+        )
+    }
+
     // MARK: - UI Callbacks
 
     @objc private func nextAction() {
@@ -170,6 +191,8 @@ extension BookingTimeViewController: UICalendarViewDelegate {
                       decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration?
     {
         guard let date = dateComponents.date else { return nil }
+
+        if !calendarView.availableDateRange.contains(date) { return nil }
 
         let status = viewModel.statusFor(date: date)
 
@@ -187,8 +210,12 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
     {
         guard let date = dateComponents?.date else { return false }
 
+        if viewModel.isMaximumItemsSelected { return false }
+
+        let status = viewModel.statusFor(date: date)
+
         return Calendar.current.startOfDay(for: Date()) <= date &&
-            viewModel.statusFor(date: date) != .notAvailable
+            status != .notAvailable
     }
 
     func dateSelection(_ selection: UICalendarSelectionSingleDate,
@@ -223,9 +250,8 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view: BookingTimeSectionHeader? = tableView.dequeueReusableHeaderFooterView()
-
-        view?.configureWith(title: viewModel.selectedTimeItems.isEmpty ? "" : "Выбранные даты")
-
+        tableHeaderView = view
+        updateTableHeader()
         return view
     }
 
@@ -246,12 +272,8 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
             self.viewModel.deleteSelectedItem(at: actualIndexPath.row)
             self.tableView.deleteRows(at: [actualIndexPath], with: .fade)
 
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            self.calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: true)
-
-            if self.viewModel.selectedTimeItems.isEmpty {
-                self.reloadTableData()
-            }
+            self.reloadCalendarData()
+            self.updateTableHeader()
         }
 
         return cell
@@ -267,11 +289,9 @@ extension BookingTimeViewController: PickerPresenterDelegate {
 
         viewModel.selectInterval(at: index, for: selectedDate)
 
-        calendarView.reloadDecorations(forDateComponents: [selectedDateComponents],
-                                       animated: true)
-
         presenter.dismiss()
 
         reloadTableData()
+        reloadCalendarData()
     }
 }

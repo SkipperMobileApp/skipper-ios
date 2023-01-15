@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             lessonRepository: lessonRepository,
             utilRepository: utilRepository
         )
+        let bookedLessonRepository: BookedLessonRepository = BookedLessonRepositoryImpl()
 
         // Services
 
@@ -77,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(utilRepository)
         SharedDependencyContainer.register(lessonRepository)
         SharedDependencyContainer.register(userRepository)
+        SharedDependencyContainer.register(bookedLessonRepository)
     }
 
     private func makeLogoutHandler(logoutRepository: LogoutRepository,

@@ -189,6 +189,7 @@
 		84EE922429707AF300893B09 /* LessonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE922329707AF300893B09 /* LessonType.swift */; };
 		84EE92272970A68400893B09 /* UserContactType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92262970A68400893B09 /* UserContactType.swift */; };
 		84EE92292970A73A00893B09 /* UserContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92282970A73A00893B09 /* UserContactModel.swift */; };
+		84F6A2FA2974518700B7E188 /* LessonAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2F92974518700B7E188 /* LessonAmount.swift */; };
 		84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD38972933E1B7004023E4 /* AuthCoordinator.swift */; };
 		84FD389A2933E3F5004023E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD38992933E3F5004023E4 /* SignUpViewController.swift */; };
 		84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD389D2933E412004023E4 /* SignUpViewModel.swift */; };
@@ -392,6 +393,7 @@
 		84EE922329707AF300893B09 /* LessonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonType.swift; sourceTree = "<group>"; };
 		84EE92262970A68400893B09 /* UserContactType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactType.swift; sourceTree = "<group>"; };
 		84EE92282970A73A00893B09 /* UserContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactModel.swift; sourceTree = "<group>"; };
+		84F6A2F92974518700B7E188 /* LessonAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonAmount.swift; sourceTree = "<group>"; };
 		84FD38972933E1B7004023E4 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		84FD38992933E3F5004023E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		84FD389D2933E412004023E4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 				8455B986296C7819005DE8DD /* LessonModel.swift */,
 				8455B988296C799B005DE8DD /* LessonDuration.swift */,
 				84EE922329707AF300893B09 /* LessonType.swift */,
+				84F6A2F92974518700B7E188 /* LessonAmount.swift */,
 				84DC34052971EB580023A3A0 /* BookedLesson.swift */,
 			);
 			path = Lesson;
@@ -1465,6 +1468,7 @@
 				846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */,
 				84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */,
 				848AB2CD29410D5C007DB9F4 /* AuthUserCacheModel.swift in Sources */,
+				84F6A2FA2974518700B7E188 /* LessonAmount.swift in Sources */,
 				84A27BE32968B296002465DD /* ClassesListViewController.swift in Sources */,
 				8462CB3D29649E0000347EA1 /* DashboardCategoryFooterView.swift in Sources */,
 				84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */,

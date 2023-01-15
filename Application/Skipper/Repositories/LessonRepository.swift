@@ -162,13 +162,13 @@ class LessonRepositoryImpl: LessonRepository {
 
     // MARK: - Lessons
 
-    // Int - day of week from monday - [0-6]
+    // Int - day of week from sunday [0-6]
     private func mockFreeSlots() -> [Int: [String]] {
         [
-            0: ["18:00 - 21:00"],
-            2: ["12:00 - 15:00", "15:00 - 18:00", "18:00 - 21:00"],
-            3: ["15:00 - 18:00", "18:00 - 21:00"],
-            6: ["12:00 - 15:00", "15:00 - 18:00", "18:00 - 21:00"]
+            1: ["18:00 - 21:00"], // Monday
+            3: ["12:00 - 15:00", "15:00 - 18:00", "18:00 - 21:00"], // Wednesday
+            4: ["15:00 - 18:00", "18:00 - 21:00"], // Thursday
+            0: ["12:00 - 15:00", "15:00 - 18:00", "18:00 - 21:00"] // Sunday
         ]
     }
 
@@ -182,13 +182,13 @@ class LessonRepositoryImpl: LessonRepository {
     }
 
     func lessonsForMentor(mentorId: String) async throws -> [LessonModel] {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         return lessons.filter { $0.mentorId == mentorId }
     }
 
     func lesson(lessonId: String) async throws -> LessonModel {
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(0.5))
 
         guard let lesson = lessons.first(where: { $0.id == lessonId }) else {
             throw AppError(message: "Занятие не найдено :(")
