@@ -1,0 +1,65 @@
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    Dotenv.load ".env"
+    Dotenv.load ".env.ios"
+  end
+
+  desc "Update ci keychain"
+  lane :update_keychain do
+    create_keychain(
+      default_keychain: false,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
+    import_certificate(
+      certificate_path: File.absolute_path(ENV['FL_CERTIFICATE_PATH']),
+      certificate_password: ENV['CERTIFICATE_PASSWORD']
+    )
+  end
+
+  desc "Bump build number from Firebase"
+  lane :bump_build_number do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV['FIREBASEAPPDISTRO_APP']
+    )
+    increment_build_number(build_number: latest_release[:buildVersion].to_i + 1)
+  end
+
+  desc "Sync signing"
+  lane :signing do
+    unlock_keychain(
+      path: "ci"
+    )
+
+    install_provisioning_profile
+    update_code_signing_settings
+  end
+
+  desc "Build binary"
+  lane :build do
+    xcode_select ENV['FL_XCODE_PATH']
+    
+    signing
+    
+    build_ios_app(
+      include_bitcode: false
+    )
+  end
+
+  desc "Release binary"
+  lane :release do
+
+    bump_build_number
+    build
+    firebase_app_distribution
+
+  end
+
+  error do |lane, exception|
+    
+  end
+end

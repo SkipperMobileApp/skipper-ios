@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cp "$SRCROOT/Skipper/Google-Services/GoogleService-Info-$ENVIRONMENT.plist" "$SRCROOT/Skipper/GoogleService-Info.plist"

@@ -1,0 +1,41 @@
+name: "Firebase Release"
+
+on:
+  push:
+    branches:
+      - 'feature/setup-ci'
+      - 'main'
+
+jobs:
+  release-ipa:
+    runs-on: [self-hosted, macOS, ARM64]
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Set up ruby
+        run: |
+          brew install ruby
+      
+      - name: Setup fastlane
+        run: |
+          gem install bundler:2.4.2
+          bundle install --jobs 4 --retry 3 
+        
+      - name: Update Keychain
+        env:
+          KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          FL_IMPORT_CERT_KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          CERTIFICATE_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          bundle exec fastlane ios update_keychain
+
+      - name: Fastlane ios release
+        env:
+          FL_UNLOCK_KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS_PATH }}
+        run: |
+          bundle exec fastlane ios release
