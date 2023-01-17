@@ -34,5 +34,13 @@ extension R {
         static let arrowRight = UIImage(systemName: "arrowtriangle.forward.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let trash = UIImage(systemName: "trash.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let chatCircle = R.image.icChatCircle()!
+
+        static let clockCircle = UIImage(systemName: "clock.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let dollarCircle = UIImage(systemName: "dollarsign.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let checklist = UIImage(systemName: "checklist")!.withRenderingMode(.alwaysTemplate)
     }
 }

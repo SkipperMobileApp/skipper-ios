@@ -8,6 +8,8 @@
 import Foundation
 
 struct BookedLesson {
+    let id: String
+    let userId: String
     let mentorId: String
     let lessonId: String
 

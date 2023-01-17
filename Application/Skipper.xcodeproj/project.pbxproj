@@ -190,6 +190,10 @@
 		84EE92272970A68400893B09 /* UserContactType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92262970A68400893B09 /* UserContactType.swift */; };
 		84EE92292970A73A00893B09 /* UserContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92282970A73A00893B09 /* UserContactModel.swift */; };
 		84F6A2FA2974518700B7E188 /* LessonAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2F92974518700B7E188 /* LessonAmount.swift */; };
+		84F6A2FD2974800D00B7E188 /* MyLessonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2FC2974800D00B7E188 /* MyLessonsCoordinator.swift */; };
+		84F6A2FF2974801500B7E188 /* MyLessonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2FE2974801500B7E188 /* MyLessonsViewController.swift */; };
+		84F6A3012974801C00B7E188 /* MyLessonsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A3002974801C00B7E188 /* MyLessonsViewModel.swift */; };
+		84F6A303297480C300B7E188 /* MyLessonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A302297480C300B7E188 /* MyLessonsCell.swift */; };
 		84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD38972933E1B7004023E4 /* AuthCoordinator.swift */; };
 		84FD389A2933E3F5004023E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD38992933E3F5004023E4 /* SignUpViewController.swift */; };
 		84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD389D2933E412004023E4 /* SignUpViewModel.swift */; };
@@ -394,6 +398,10 @@
 		84EE92262970A68400893B09 /* UserContactType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactType.swift; sourceTree = "<group>"; };
 		84EE92282970A73A00893B09 /* UserContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactModel.swift; sourceTree = "<group>"; };
 		84F6A2F92974518700B7E188 /* LessonAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonAmount.swift; sourceTree = "<group>"; };
+		84F6A2FC2974800D00B7E188 /* MyLessonsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsCoordinator.swift; sourceTree = "<group>"; };
+		84F6A2FE2974801500B7E188 /* MyLessonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsViewController.swift; sourceTree = "<group>"; };
+		84F6A3002974801C00B7E188 /* MyLessonsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsViewModel.swift; sourceTree = "<group>"; };
+		84F6A302297480C300B7E188 /* MyLessonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsCell.swift; sourceTree = "<group>"; };
 		84FD38972933E1B7004023E4 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		84FD38992933E3F5004023E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		84FD389D2933E412004023E4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -915,6 +923,7 @@
 				84EE754328F70C9800B55839 /* Main */,
 				8485C4CA295E2B2A007A7811 /* Dashboard */,
 				8485C4CC295E2B3C007A7811 /* Profile */,
+				84F6A2FB29747FFF00B7E188 /* MyLessons */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1173,6 +1182,17 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
+		84F6A2FB29747FFF00B7E188 /* MyLessons */ = {
+			isa = PBXGroup;
+			children = (
+				84F6A2FC2974800D00B7E188 /* MyLessonsCoordinator.swift */,
+				84F6A2FE2974801500B7E188 /* MyLessonsViewController.swift */,
+				84F6A3002974801C00B7E188 /* MyLessonsViewModel.swift */,
+				84F6A302297480C300B7E188 /* MyLessonsCell.swift */,
+			);
+			path = MyLessons;
+			sourceTree = "<group>";
+		};
 		84FD389B2933E3F8004023E4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1297,7 +1317,7 @@
 				84573DEF2906FD3500F03827 /* XCRemoteSwiftPackageReference "TPKeyboardAvoiding" */,
 				84573DF22906FD5000F03827 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				84573DFB2906FD9100F03827 /* XCRemoteSwiftPackageReference "Reusable" */,
-				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */,
+				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				845A2A362916B5E5003EB7DF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -1364,7 +1384,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1451,6 +1471,7 @@
 				8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */,
 				846B835D296747A2008F9BB5 /* MentorProfileViewModel.swift in Sources */,
 				84EE757828F72A9200B55839 /* AppCoordinator.swift in Sources */,
+				84F6A2FD2974800D00B7E188 /* MyLessonsCoordinator.swift in Sources */,
 				84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */,
 				849A925D293E80910056711F /* CompositeLogoutHandler.swift in Sources */,
 				84EE756228F72A1500B55839 /* String+Extensions.swift in Sources */,
@@ -1484,6 +1505,7 @@
 				8485C4D6295E2BCB007A7811 /* DashboardCoordinator.swift in Sources */,
 				8455B98B296C79D8005DE8DD /* LessonRepository.swift in Sources */,
 				84A2CF1D291839A900829C59 /* PrimaryButton.swift in Sources */,
+				84F6A2FF2974801500B7E188 /* MyLessonsViewController.swift in Sources */,
 				84EE756028F72A1500B55839 /* UIWindow+Transition.swift in Sources */,
 				84EE757A28F72A9200B55839 /* AppRouter.swift in Sources */,
 				84C39370291D825D0042C231 /* TextButton.swift in Sources */,
@@ -1507,10 +1529,12 @@
 				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
 				8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */,
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
+				84F6A3012974801C00B7E188 /* MyLessonsViewModel.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
+				84F6A303297480C300B7E188 /* MyLessonsCell.swift in Sources */,
 				84BC43D1296AF8C0000B2C67 /* DateHelper.swift in Sources */,
 				84A27BE02968ADBA002465DD /* MentorProfileHeaderView.swift in Sources */,
 				84EE756128F72A1500B55839 /* R+Typo.swift in Sources */,
@@ -2300,7 +2324,7 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -2360,7 +2384,7 @@
 		};
 		84573DFF2906FDCC00F03827 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */;
+			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
 			productName = Rswift;
 		};
 		845A2A372916B5E5003EB7DF /* Alamofire */ = {

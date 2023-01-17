@@ -15,5 +15,11 @@ enum DateHelper {
             formatter.timeStyle = .none
             return formatter
         }()
+
+        static let dayAndMonthFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "d MMMM"
+            return formatter
+        }()
     }
 }
