@@ -49,9 +49,11 @@ class MainCoordinator: NavigationCoordinator {
     private func initTabs() -> [TabBox] {
         let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
         let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
+        let myLessonsCoordinator = MyLessonsCoordinator(with: NavigationRouter())
 
         return [
             (.dashboard, dashboardCoordinator),
+            (.myLessons, myLessonsCoordinator),
             (.profile, profileCoordinator)
         ]
     }
@@ -79,6 +81,7 @@ private extension MainCoordinator.Tab {
     var title: String {
         switch self {
         case .dashboard: return "Главная"
+        case .myLessons: return "Мои занятия"
         case .profile: return "Профиль"
         }
     }
@@ -86,6 +89,7 @@ private extension MainCoordinator.Tab {
     var icon: UIImage? {
         switch self {
         case .dashboard: return R.icon.home
+        case .myLessons: return R.icon.checklist
         case .profile: return R.icon.profile
         }
     }

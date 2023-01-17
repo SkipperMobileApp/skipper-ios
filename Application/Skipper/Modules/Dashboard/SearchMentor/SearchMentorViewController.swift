@@ -119,7 +119,7 @@ class SearchMentorViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
             }
             .store(in: &subscriptions)
     }

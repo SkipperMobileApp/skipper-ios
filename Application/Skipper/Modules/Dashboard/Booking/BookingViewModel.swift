@@ -23,6 +23,7 @@ class BookingViewModel {
     @Injected() private var lessonRepository: LessonRepository
     @Injected() private var userRepository: UserRepository
     @Injected() private var bookedLessonRepository: BookedLessonRepository
+    @Injected() private var authRepository: AuthRepository
 
     private let lessonId: String
     private var lesson: LessonModel?
@@ -135,24 +136,30 @@ class BookingViewModel {
             return
         }
 
-        let bookedLessons = timeViewModel.selectedTimeItems.map {
-            BookedLesson(
-                mentorId: mentor.id,
-                lessonId: lesson.id,
-                name: lesson.title,
-                description: lesson.description,
-                type: lesson.types[typeIndex],
-                cost: cost,
-                date: $0.date,
-                time: $0.timeInterval,
-                duration: lesson.durations[durationIndex],
-                contact: mentor.contacts[contactIndex].type
-            )
-        }
-
         isLoading = true
         Task {
             do {
+                guard let user = try await authRepository.currentUser(forceUpdate: false) else {
+                    throw AppError(message: "Пользователь не найден")
+                }
+
+                let bookedLessons = timeViewModel.selectedTimeItems.map {
+                    BookedLesson(
+                        id: "",
+                        userId: user.id,
+                        mentorId: mentor.id,
+                        lessonId: lesson.id,
+                        name: lesson.title,
+                        description: lesson.brief,
+                        type: lesson.types[typeIndex],
+                        cost: cost,
+                        date: $0.date,
+                        time: $0.timeInterval,
+                        duration: lesson.durations[durationIndex],
+                        contact: mentor.contacts[contactIndex].type
+                    )
+                }
+
                 try await bookedLessonRepository.bookLessons(lessons: bookedLessons)
 
                 await MainActor.run {

@@ -56,7 +56,7 @@ class MainTabBarViewController: UITabBarController {
         viewModel.didFail = { [weak self] error in
             guard let self = self else { return }
 
-            AlertPresenter.presentSimpleAlert(error.localizedDescription, controller: self)
+            AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
         }
     }
 }
@@ -65,7 +65,7 @@ class MainTabBarViewController: UITabBarController {
 
 extension MainTabBarViewController {
     enum Tab: Int, CaseIterable {
-        case dashboard, profile
+        case dashboard, myLessons, profile
     }
 
     private func setupTabBarAppearance() {
