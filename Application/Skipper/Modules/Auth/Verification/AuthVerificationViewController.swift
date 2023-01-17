@@ -130,7 +130,7 @@ class AuthVerificationViewController: UIViewController {
 
         viewModel.didFail = { [weak self] error in
             guard let self = self else { return }
-            AlertPresenter.presentSimpleAlert(error.localizedDescription,
+            AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription,
                                               controller: self)
         }
     }

@@ -15,7 +15,7 @@ class ProfileViewModel {
     // MARK: - Properties
 
     @Event private(set) var isLoading: Bool?
-    @Event private(set) var failEvent: Error?
+    @Event private(set) var errorEvent: Error?
 
     // MARK: - API Calls
 
@@ -30,7 +30,7 @@ class ProfileViewModel {
                 }
             } catch {
                 await MainActor.run {
-                    failEvent = error
+                    errorEvent = error
                     isLoading = false
                 }
             }

@@ -41,6 +41,7 @@ class ClassesListCell: SetupableTableViewCell, Reusable {
 
         backgroundColor = .clear
         accessoryType = .none
+        selectedBackgroundView?.backgroundColor = R.color.brandPrimary()?.withAlphaComponent(0.3)
 
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)

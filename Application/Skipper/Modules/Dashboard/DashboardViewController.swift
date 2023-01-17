@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 30.12.2022.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class DashboardViewController: UIViewController {
@@ -37,11 +39,13 @@ class DashboardViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didTapCategory: ((String) -> Void)?
+    var didTapCategory: ((_ categoryId: String) -> Void)?
+    var didTapMentor: ((_ mentorId: String) -> Void)?
 
     // MARK: - Properties
 
     private let viewModel: DashboardViewModel
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -68,6 +72,8 @@ class DashboardViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -83,7 +89,30 @@ class DashboardViewController: UIViewController {
         collectionView.clipsToBounds = false
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$loadDataEvent
+            .sink { [weak self] in
+                self?.reloadData()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func reloadData() {
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - Collection View
@@ -232,7 +261,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         case let .categories(items):
             let cell: DashboardCategoryCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
             let item = items[indexPath.item]
-            cell.configureWith(image: item.image, title: item.title)
+            cell.configureWith(imageURL: item.imageURL, title: item.title)
             return cell
 
         case let .popularMentors(items):
@@ -253,9 +282,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
         switch section {
         case let .categories(items):
-            didTapCategory?(items[indexPath.item].title)
-        default:
-            break
+            didTapCategory?(items[indexPath.item].id)
+        case let .popularMentors(items):
+            didTapMentor?(items[indexPath.row].id)
         }
     }
 }

@@ -14,8 +14,12 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = DashboardViewModel()
         let controller = DashboardViewController(viewModel: viewModel)
 
-        controller.didTapCategory = { [weak self] category in
-            self?.showSearchMentor(category: category)
+        controller.didTapCategory = { [weak self] categoryId in
+            self?.showSearchMentor(categoryId: categoryId)
+        }
+
+        controller.didTapMentor = { [weak self] mentorId in
+            self?.showMentorProfile(mentorId: mentorId)
         }
 
         router.navigationController.navigationItem.largeTitleDisplayMode = .always
@@ -24,8 +28,8 @@ class DashboardCoordinator: NavigationCoordinator {
         router.setRootModule(controller)
     }
 
-    func showSearchMentor(category: String?) {
-        let viewModel = SearchMentorViewModel(category: category)
+    func showSearchMentor(categoryId: String?) {
+        let viewModel = SearchMentorViewModel(categoryId: categoryId)
         let controller = SearchMentorViewController(viewModel: viewModel)
 
         controller.didSelectMentor = { [weak self] mentorId in
@@ -39,7 +43,8 @@ class DashboardCoordinator: NavigationCoordinator {
         let viewModel = MentorProfileViewModel(mentorId: mentorId)
         let controller = MentorProfileViewController(viewModel: viewModel)
 
-        controller.didSelectClass = { [weak self] _ in
+        controller.didSelectLesson = { [weak self] lessonId in
+            self?.showBookingForLesson(lessonId: lessonId)
         }
 
         controller.didTapClassesList = { [weak self] in
@@ -52,6 +57,21 @@ class DashboardCoordinator: NavigationCoordinator {
     func showClassesList(mentorId: String) {
         let viewModel = ClassesListViewModel(mentorId: mentorId)
         let controller = ClassesListViewController(viewModel: viewModel)
+
+        controller.didSelectLesson = { [weak self] lessonId in
+            self?.showBookingForLesson(lessonId: lessonId)
+        }
+
+        router.push(controller)
+    }
+
+    func showBookingForLesson(lessonId: String) {
+        let viewModel = BookingViewModel(lessonId: lessonId)
+        let controller = BookingViewController(viewModel: viewModel)
+
+        controller.didFinishBooking = { [weak self] in
+            self?.router.popModule()
+        }
 
         router.push(controller)
     }

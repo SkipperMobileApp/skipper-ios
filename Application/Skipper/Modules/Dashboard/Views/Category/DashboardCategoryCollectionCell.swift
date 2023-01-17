@@ -61,8 +61,8 @@ class DashboardCategoryCollectionCell: SetupableCollectionViewCell, Reusable {
 
     // MARK: - UI Methods
 
-    func configureWith(image: UIImage?, title: String) {
-        imageView.image = image
+    func configureWith(imageURL: String?, title: String) {
+        imageView.kf.setImage(with: URL(string: imageURL ?? ""), placeholder: nil)
         titleLabel.text = title
     }
 }

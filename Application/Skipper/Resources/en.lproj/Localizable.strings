@@ -12,57 +12,57 @@
 
 // MARK: - Auth
 
-"auth.login.header.text" = "Sign in";
-"auth.login.button.text" = "Log in";
-"auth.login.email.placeholder" = "Email";
-"auth.login.password.placeholder" = "Password";
-"auth.login.register.button.text" = "Sign up";
+"auth.login.header.text" = "Войти";
+"auth.login.button.text" = "Войти";
+"auth.login.email.placeholder" = "Почта";
+"auth.login.password.placeholder" = "Пароль";
+"auth.login.register.button.text" = "Зарегистрироваться";
 
-"auth.signUp.header.text" = "Sign up";
-"auth.signUp.button.text" = "Sign up";
-"auth.signUp.lastName.placeholder" = "Last Name";
-"auth.signUp.firstName.placeholder" = "First Name";
-"auth.signUp.patronymic.placeholder" = "Patronymic";
-"auth.signUp.email.placeholder" = "Email";
-"auth.signUp.password.placeholder" = "Password";
-"auth.signUp.confirmPassword.placeholder" = "Confirm Password";
-"auth.signUp.login.button.text" = "Already signed up?";
+"auth.signUp.header.text" = "Регистрация";
+"auth.signUp.button.text" = "Зарегистрироваться";
+"auth.signUp.lastName.placeholder" = "Фамилия";
+"auth.signUp.firstName.placeholder" = "Имя";
+"auth.signUp.patronymic.placeholder" = "Отчество";
+"auth.signUp.email.placeholder" = "Почта";
+"auth.signUp.password.placeholder" = "Пароль";
+"auth.signUp.confirmPassword.placeholder" = "Повтор пароля";
+"auth.signUp.login.button.text" = "Уже зарегистрированы?";
 
-"auth.error.email.incorrect" = "Email has incorrect format";
-"auth.error.password.empty" = "Password is empty";
-"auth.error.password.length" = "Password must be minimum %d symbols length";
-"auth.error.password.uppercase" = "Password must contain at least %d uppercase letters";
-"auth.error.password.lowercase" = "Password must contain at least %d lowercase letters";
-"auth.error.password.digit" = "Password must contain at least %d digits";
-"auth.error.password.symbol" = "Password must contain at least %d special symbols";
-"auth.error.password.notEqual" = "Passwords are not equal";
-"auth.error.firstName.empty" = "First name is empty";
-"auth.error.lastName.empty" = "Last name is empty";
-"auth.error.patronymic.empty" = "Patronymic is empty";
+"auth.error.email.incorrect" = "Неверный формат адреса почты";
+"auth.error.password.empty" = "Поле пароль пустое";
+"auth.error.password.length" = "Длина пароля должна быть не меньше %d символов";
+"auth.error.password.uppercase" = "Пароль должен содержать минимум %d заглавных букв";
+"auth.error.password.lowercase" = "Пароль должен содержать минимум %d строчных букв";
+"auth.error.password.digit" = "Пароль должен содержать минимум %d цифр";
+"auth.error.password.symbol" = "Пароль должен содержать минимум %d спецсимволов";
+"auth.error.password.notEqual" = "Пароли не совпадают";
+"auth.error.firstName.empty" = "Имя не может быть пустым";
+"auth.error.lastName.empty" = "Фамилия не может быть пустой";
+"auth.error.patronymic.empty" = "Отчество не может быть пустым";
 
-"auth.verification.header.text" = "Whooops!\nYour account is not activated!";
-"auth.verification.body.text" = "Please, open the verification link from the post-registration email.\nClick the button below to resend the verification email to your email address.";
-"auth.verification.resendButton.text" = "Resend email";
-"auth.verification.signInButton.text" = "Go back to sign in";
+"auth.verification.header.text" = "Ой!\nВаш аккаунт еще не активирован!";
+"auth.verification.body.text" = "Пожалуйста, перейдите по ссылке из письма, отправленного после регистрации.\nЧтобы получить письмо еще раз, нажмите кнопку ниже";
+"auth.verification.resendButton.text" = "Отправить еще раз";
+"auth.verification.signInButton.text" = "Перейти обратно к авторизации";
 
 // MARK: - Dashboard
 
-"dashboard.nav.title" = "Home";
-"dashboard.categories.title" = "Categories";
-"dashboard.popularMentors.title" = "Popular Mentors";
+"dashboard.nav.title" = "Главная";
+"dashboard.categories.title" = "Категории";
+"dashboard.popularMentors.title" = "Популярные менторы";
 
-"searchMentor.nav.title" = "Search Mentor";
-"searchMentor.search.placeholder" = "Search mentor by name";
+"searchMentor.nav.title" = "Поиск ментора";
+"searchMentor.search.placeholder" = "Искать ментора по имени";
 
 // MARK: - Errors
 
-"error.title" = "Error";
-"error.connectivity" = "No Internet connection";
-"error.auth.invalidEmail" = "User with this email was not found";
-"error.auth.invalidPassword" = "Wrong password";
-"error.auth.accountDisabled" = "Your account was disabled. Please, contact support for more details";
-"error.firebase.system" = "Something went wrong. Please, try again later";
-"error.unknown" = "Ooops, something went wrong";
+"error.title" = "Ошибка";
+"error.connectivity" = "Проверьте интернет-соединение";
+"error.auth.invalidEmail" = "Пользователь с таким адресом не найден";
+"error.auth.invalidPassword" = "Неверный пароль";
+"error.auth.accountDisabled" = "Ваш аккаунт был заблокирован. Пожалуйста, свяжитесь с поддержкой для дополнительной информации";
+"error.firebase.system" = "Что-то пошло не так. Пожалуйста, повторите позднее";
+"error.unknown" = "Ой! Что-то пошло не так :(";
 
 
 // MARK: - Alert

@@ -8,19 +8,40 @@
 import Foundation
 
 class ClassesListViewModel {
-    var items: [Item] = [
-        .init(id: "1", title: "Консультация по React", description: randomDebugString(wordsCount: 10)),
-        .init(id: "2", title: "Консультация по React", description: randomDebugString(wordsCount: 10)),
-        .init(id: "3", title: "Консультация по React", description: randomDebugString(wordsCount: 15)),
-        .init(id: "4", title: "Консультация по React", description: randomDebugString(wordsCount: 20)),
-        .init(id: "5", title: "Консультация по React", description: randomDebugString(wordsCount: 5)),
-        .init(id: "6", title: "Консультация по React", description: randomDebugString(wordsCount: 12))
-    ]
+    @Event private(set) var loadDataEvent: Void?
+    @Event private(set) var errorEvent: Error?
+    @Published private(set) var isLoading: Bool = false
+
+    @Injected() private(set) var lessonRepository: LessonRepository
+
+    private(set) var items: [Item] = []
 
     private let mentorId: String
 
     init(mentorId: String) {
         self.mentorId = mentorId
+    }
+
+    func loadData() {
+        isLoading = true
+        Task {
+            do {
+                let lessons = try await lessonRepository.lessonsForMentor(mentorId: mentorId)
+
+                await MainActor.run {
+                    items = lessons.map {
+                        .init(id: $0.id, title: $0.title, description: $0.brief)
+                    }
+                    loadDataEvent = ()
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorEvent = error
+                    isLoading = false
+                }
+            }
+        }
     }
 }
 

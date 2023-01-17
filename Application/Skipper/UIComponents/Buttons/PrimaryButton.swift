@@ -38,8 +38,8 @@ class PrimaryButton: SetupableButton {
         updateStyle()
         updateLoadingState()
 
-        titleLabel?.font = R.typo.header2
-        layer.cornerRadius = 14
+        titleLabel?.font = R.typo.header
+        layer.cornerRadius = 12
         contentEdgeInsets = .init(top: 5, left: 16, bottom: 5, right: 16)
     }
 
@@ -54,7 +54,7 @@ class PrimaryButton: SetupableButton {
 
     private func updateStyle() {
         backgroundColor = R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
-        setTitleColor(isHighlighted ? R.color.primary87() : R.color.primary100(), for: .normal)
+        setTitleColor(isHighlighted ? R.color.secondary70() : R.color.secondary100(), for: .normal)
     }
 
     private func updateLoadingState() {

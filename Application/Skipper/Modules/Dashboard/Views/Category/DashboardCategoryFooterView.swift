@@ -16,7 +16,7 @@ class DashboardCategoryFooterView: SetupableCollectionReusableView, Reusable {
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = R.color.primary24()
-        pageControl.currentPageIndicatorTintColor = R.color.brandSecondary()
+        pageControl.currentPageIndicatorTintColor = R.color.brandPrimary()
         pageControl.hidesForSinglePage = true
         return pageControl
     }()

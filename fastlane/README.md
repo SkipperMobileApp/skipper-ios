@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Update ci keychain
 
+### ios bump_build_number
+
+```sh
+[bundle exec] fastlane ios bump_build_number
+```
+
+Bump build number from Firebase
+
 ### ios signing
 
 ```sh

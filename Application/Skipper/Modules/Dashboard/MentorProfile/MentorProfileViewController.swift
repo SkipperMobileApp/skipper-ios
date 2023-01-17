@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 05.01.2023.
 //
 
+import Combine
 import Foundation
+import PKHUD
 import UIKit
 
 class MentorProfileViewController: UIViewController {
@@ -83,7 +85,7 @@ class MentorProfileViewController: UIViewController {
         view.didSelectItemAtIndex = { [weak self] index in
             guard let self = self else { return }
             let item = self.viewModel.classItems[index]
-            self.didSelectClass?(item.id)
+            self.didSelectLesson?(item.id)
         }
 
         return view
@@ -97,12 +99,14 @@ class MentorProfileViewController: UIViewController {
     // MARK: - Output
 
     var didFinish: (() -> Void)?
-    var didSelectClass: ((_ id: String) -> Void)?
+    var didSelectLesson: ((_ id: String) -> Void)?
     var didTapClassesList: (() -> Void)?
 
     // MARK: - Properties
 
     private let viewModel: MentorProfileViewModel
+
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
@@ -129,7 +133,8 @@ class MentorProfileViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
-        updateData()
+
+        viewModel.loadData()
     }
 
     // MARK: - UI Methods
@@ -138,8 +143,6 @@ class MentorProfileViewController: UIViewController {
         view.backgroundColor = R.color.themeBackground()
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.backButtonTitle = ""
-
-        title = viewModel.title
 
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -187,18 +190,18 @@ class MentorProfileViewController: UIViewController {
         stackView.addArrangedSubview(statusView)
         stackView.setCustomSpacing(24, after: statusView)
 
-        let skillsHeader = makeHeader(with: "Skills")
+        let skillsHeader = makeHeader(with: "Компетенции")
         stackView.addArrangedSubview(skillsHeader)
         stackView.setCustomSpacing(8, after: skillsHeader)
 
         stackView.addArrangedSubview(skillsCloudView)
         stackView.setCustomSpacing(24, after: skillsCloudView)
 
-        let classesHeader = makeHeader(with: "Classes")
+        let classesHeader = makeHeader(with: "Занятия")
         stackView.addArrangedSubview(classesHeader)
         stackView.setCustomSpacing(8, after: classesHeader)
 
-        classesHeader.buttonTitle = viewModel.classItems.count > 3 ? "See all" : ""
+        classesHeader.buttonTitle = viewModel.classItems.count > 3 ? "Все" : ""
         classesHeader.isButtonHidden = viewModel.classItems.count < 4
         classesHeader.didTapButton = { [weak self] in
             self?.didTapClassesList?()
@@ -207,7 +210,7 @@ class MentorProfileViewController: UIViewController {
         stackView.addArrangedSubview(classesView)
         stackView.setCustomSpacing(24, after: classesView)
 
-        let resumeHeader = makeHeader(with: "Resume")
+        let resumeHeader = makeHeader(with: "Резюме")
         stackView.addArrangedSubview(resumeHeader)
         stackView.setCustomSpacing(8, after: resumeHeader)
 
@@ -219,6 +222,8 @@ class MentorProfileViewController: UIViewController {
     }
 
     private func updateData() {
+        title = viewModel.title
+
         // General info
 
         nameLabel.text = viewModel.profileInfo.name
@@ -244,7 +249,7 @@ class MentorProfileViewController: UIViewController {
         let skillItems = viewModel.skills.map {
             let label = TextCloudItem()
             label.text = $0
-            label.backgroundColor = R.color.brandSecondary()!
+            label.backgroundColor = R.color.brandPrimary()!
             label.font = R.typo.body
             label.textColor = R.color.secondary100()!
             return label
@@ -275,7 +280,7 @@ class MentorProfileViewController: UIViewController {
             case let .work(workItems):
                 items = workItems.map {
                     .init(
-                        title: "\($0.startYear)-\($0.endYear), \($0.name)",
+                        title: "\($0.startYear)-\($0.endYear.flatMap(String.init) ?? "н.в."), \($0.name)",
                         subtitle: $0.post
                     )
                 }
@@ -292,7 +297,26 @@ class MentorProfileViewController: UIViewController {
         })
     }
 
-    private func bindViewModelActions() {}
+    private func bindViewModelActions() {
+        viewModel.$loadDataEvent
+            .sink { [weak self] in
+                self?.updateData()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$isLoading
+            .sink { isLoading in
+                isLoading ? HUD.show(.progress) : HUD.hide()
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$errorEvent
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+            }
+            .store(in: &subscriptions)
+    }
 
     // MARK: - UI Builders
 

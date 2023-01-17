@@ -22,8 +22,8 @@ class MentorProfileHeaderView: SetupableView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = R.typo.subheader
-        button.setTitleColor(R.color.brandSecondary(), for: .normal)
-        button.setTitleColor(R.color.brandSecondary()?.withAlphaComponent(0.6), for: .highlighted)
+        button.setTitleColor(R.color.brandPrimary(), for: .normal)
+        button.setTitleColor(R.color.brandPrimary()?.withAlphaComponent(0.6), for: .highlighted)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
