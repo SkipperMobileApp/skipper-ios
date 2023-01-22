@@ -144,7 +144,7 @@ class ProfileViewController: UIViewController {
         )
 
         logoutButton.applyConstraints(
-            .top(to: stackView, attribute: .bottom, constant: 16),
+            .top(to: stackView, attribute: .bottom, constant: 32),
             .leading(to: contentView, attribute: .leading, constant: 16),
             .trailing(to: contentView, attribute: .trailing, constant: -16),
             .height(constant: 45)

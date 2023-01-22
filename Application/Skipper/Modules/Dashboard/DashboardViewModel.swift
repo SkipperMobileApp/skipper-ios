@@ -31,7 +31,7 @@ class DashboardViewModel {
                 await MainActor.run {
                     sections = [
                         .categories(categories.map {
-                            .init(id: $0.id, title: $0.name, imageUrl: $0.imageUrl)
+                            .init(id: $0.id, title: $0.name, image: $0.image)
                         }),
                         .popularMentors(mentors.map {
                             .init(
@@ -75,7 +75,7 @@ extension DashboardViewModel {
     struct CategoryItem {
         let id: String
         let title: String
-        let imageUrl: String?
+        let image: UIImage
     }
 
     struct MentorItem {

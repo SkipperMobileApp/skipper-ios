@@ -28,6 +28,7 @@
 		8431CCA52969B5FC00FB00F8 /* BookingAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */; };
 		8431CCA72969B60500FB00F8 /* BookingAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */; };
 		8431CCA92969CF3D00FB00F8 /* DropdownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA82969CF3D00FB00F8 /* DropdownButton.swift */; };
+		84429C49297DD7D300645C6A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84429C48297DD7D300645C6A /* GradientView.swift */; };
 		8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */; };
 		8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */; };
 		8447C3CE2932958F0092B10D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CD2932958F0092B10D /* Container.swift */; };
@@ -259,6 +260,7 @@
 		8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewController.swift; sourceTree = "<group>"; };
 		8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewModel.swift; sourceTree = "<group>"; };
 		8431CCA82969CF3D00FB00F8 /* DropdownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownButton.swift; sourceTree = "<group>"; };
+		84429C48297DD7D300645C6A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Skipper/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserFirebaseModel.swift; sourceTree = "<group>"; };
 		8447C3CD2932958F0092B10D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				846B83522966E49C008F9BB5 /* CloudView */,
 				84AC0247292E94D300DE7AF2 /* FormFieldView.swift */,
 				8462CB412965B9C300347EA1 /* LabeledImageView.swift */,
+				84429C48297DD7D300645C6A /* GradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1586,6 +1589,7 @@
 				8415A8C8297C7EFF00D16CD0 /* ProfileHeaderView.swift in Sources */,
 				84F1B503297DB8D2008AC86B /* ImagePickerProvider.swift in Sources */,
 				8447C3CE2932958F0092B10D /* Container.swift in Sources */,
+				84429C49297DD7D300645C6A /* GradientView.swift in Sources */,
 				84CC1F4A2969EEF200300F32 /* PickerViewController.swift in Sources */,
 				846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */,
 				84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */,
