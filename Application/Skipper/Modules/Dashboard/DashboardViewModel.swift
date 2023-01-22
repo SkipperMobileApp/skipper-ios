@@ -31,15 +31,15 @@ class DashboardViewModel {
                 await MainActor.run {
                     sections = [
                         .categories(categories.map {
-                            .init(id: $0.id, title: $0.name, imageURL: $0.imageURL)
+                            .init(id: $0.id, title: $0.name, imageUrl: $0.imageUrl)
                         }),
                         .popularMentors(mentors.map {
                             .init(
                                 id: $0.id,
-                                name: [$0.firstName, $0.lastName, $0.patronymic].joined(separator: " "),
+                                name: [$0.firstName, $0.lastName].joined(separator: " "),
                                 major: $0.post,
                                 likesCount: $0.stats.reviewsCount,
-                                imageURL: $0.imageURL
+                                imageUrl: $0.imageUrl
                             )
                         })
                     ]
@@ -75,7 +75,7 @@ extension DashboardViewModel {
     struct CategoryItem {
         let id: String
         let title: String
-        let imageURL: String?
+        let imageUrl: String?
     }
 
     struct MentorItem {
@@ -83,6 +83,6 @@ extension DashboardViewModel {
         let name: String
         let major: String
         let likesCount: Int
-        let imageURL: String?
+        let imageUrl: String?
     }
 }

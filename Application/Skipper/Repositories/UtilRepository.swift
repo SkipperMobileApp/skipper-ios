@@ -17,7 +17,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "1",
             name: "Разработка",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Backend"),
                 .init(name: "Frontend"),
@@ -28,7 +28,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "2",
             name: "Аналитика",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Бизнес-аналитика"),
                 .init(name: "Системная аналитика")
@@ -37,7 +37,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "3",
             name: "Инфраструктура",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "DevOps"),
                 .init(name: "Сетевое обеспечение"),
@@ -47,7 +47,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "4",
             name: "Тестирование",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Ручное тестирование"),
                 .init(name: "Автотестирование")
@@ -56,7 +56,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "5",
             name: "Дизайн",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Мобильный дизайн"),
                 .init(name: "Принципы UI/UX"),
@@ -66,7 +66,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "6",
             name: "Проектирование",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Проектирование систем"),
                 .init(name: "Highload"),
@@ -76,7 +76,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "7",
             name: "Программная архитектура",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Мобильная архитектура"),
                 .init(name: "Архитектура Web-приложений"),
@@ -86,7 +86,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "8",
             name: "Менеджмент",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Продуктовый менеджмент"),
                 .init(name: "Проектный менеджмент")
@@ -95,7 +95,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "9",
             name: "Системное программирование",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Linux"),
                 .init(name: "Автоматизация систем")
@@ -104,7 +104,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "10",
             name: "Мониторинг надежности",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "SRE"),
                 .init(name: "Инфраструктурный мониторинг")
@@ -113,7 +113,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "11",
             name: "Информационная безопасность",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "OWASP"),
                 .init(name: "Сетевая безопасность"),
@@ -123,7 +123,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "12",
             name: "Базы данных",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "SQL"),
                 .init(name: "NoSQL"),
@@ -133,7 +133,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "13",
             name: "Анализ данных",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Математический анализ"),
                 .init(name: "Нейронные сети")
@@ -142,7 +142,7 @@ class UtilRepositoryImpl: UtilRepository {
         .init(
             id: "14",
             name: "Машинное обучение",
-            imageURL: nil,
+            imageUrl: nil,
             subcategories: [
                 .init(name: "Распознавание образов"),
                 .init(name: "Глубокое обучение"),

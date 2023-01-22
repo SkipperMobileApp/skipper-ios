@@ -136,7 +136,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
     func configureWith(name: String,
                        major: String,
                        rating: Double,
-                       imageURL: String?,
+                       imageUrl: String?,
                        description: String,
                        subcategories: [String],
                        layoutWidth: CGFloat)
@@ -144,7 +144,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         nameLabel.text = name
         majorLabel.text = major
         ratingView.text = String(format: "%.1lf", rating)
-        avatarImageView.kf.setImage(with: URL(string: imageURL ?? ""), placeholder: nil)
+        avatarImageView.kf.setImage(with: URL(string: imageUrl ?? ""), placeholder: nil)
         descriptionLabel.text = description
 
         let items = subcategories.map {

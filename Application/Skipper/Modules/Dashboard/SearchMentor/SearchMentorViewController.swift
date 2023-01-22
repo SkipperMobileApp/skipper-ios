@@ -144,7 +144,7 @@ extension SearchMentorViewController: UITableViewDelegate, UITableViewDataSource
         cell.configureWith(name: item.name,
                            major: item.major,
                            rating: item.rating,
-                           imageURL: item.imageURL,
+                           imageUrl: item.imageUrl,
                            description: item.description,
                            subcategories: item.subcategories,
                            layoutWidth: tableView.frame.width)

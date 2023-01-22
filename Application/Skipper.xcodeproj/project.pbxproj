@@ -16,6 +16,9 @@
 		840DB1EA27A552AA00F40C89 /* SkipperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1E927A552AA00F40C89 /* SkipperTests.swift */; };
 		840DB1F427A552AA00F40C89 /* SkipperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1F327A552AA00F40C89 /* SkipperUITests.swift */; };
 		840DB1F627A552AA00F40C89 /* SkipperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB1F527A552AA00F40C89 /* SkipperUITestsLaunchTests.swift */; };
+		8415A8C8297C7EFF00D16CD0 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8C7297C7EFF00D16CD0 /* ProfileHeaderView.swift */; };
+		8415A8CA297C877500D16CD0 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8C9297C877500D16CD0 /* SecondaryButton.swift */; };
+		8415A8CC297C8A8500D16CD0 /* DangerSecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8CB297C8A8500D16CD0 /* DangerSecondaryButton.swift */; };
 		8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC8E296973A000FB00F8 /* BookingViewController.swift */; };
 		8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC90296973A600FB00F8 /* BookingViewModel.swift */; };
 		8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC962969785300FB00F8 /* BookingTypeViewController.swift */; };
@@ -152,8 +155,6 @@
 		84CC1F4A2969EEF200300F32 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC1F492969EEF200300F32 /* PickerViewController.swift */; };
 		84DC34042971EAF90023A3A0 /* BookedLessonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC34032971EAF90023A3A0 /* BookedLessonRepository.swift */; };
 		84DC34062971EB580023A3A0 /* BookedLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC34052971EB580023A3A0 /* BookedLesson.swift */; };
-		84E51DD4292BE604008D2308 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84E51DD3292BE604008D2308 /* FirebaseAuth */; };
-		84E51DD6292BE604008D2308 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 84E51DD5292BE604008D2308 /* FirebaseFirestore */; };
 		84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DD7292BEEBA008D2308 /* R+Icon.swift */; };
 		84E51DDA292BFB33008D2308 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DD9292BFB33008D2308 /* UnderlinedButton.swift */; };
 		84E51DDC292BFB84008D2308 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DDB292BFB84008D2308 /* PrimaryTextField.swift */; };
@@ -189,6 +190,22 @@
 		84EE922429707AF300893B09 /* LessonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE922329707AF300893B09 /* LessonType.swift */; };
 		84EE92272970A68400893B09 /* UserContactType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92262970A68400893B09 /* UserContactType.swift */; };
 		84EE92292970A73A00893B09 /* UserContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE92282970A73A00893B09 /* UserContactModel.swift */; };
+		84F1B4EE297D4924008AC86B /* ProfileOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4ED297D4924008AC86B /* ProfileOptionView.swift */; };
+		84F1B4F1297D8433008AC86B /* EditPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4F0297D8433008AC86B /* EditPersonalInfoViewController.swift */; };
+		84F1B4F3297D8447008AC86B /* EditPersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4F2297D8447008AC86B /* EditPersonalInfoViewModel.swift */; };
+		84F1B4F6297D86E8008AC86B /* SecondaryTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4F5297D86E8008AC86B /* SecondaryTextView.swift */; };
+		84F1B4FA297D929A008AC86B /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4F9297D929A008AC86B /* ChangePasswordViewController.swift */; };
+		84F1B4FC297D92A3008AC86B /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4FB297D92A3008AC86B /* ChangePasswordViewModel.swift */; };
+		84F1B4FF297D97B0008AC86B /* PasswordSecondaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B4FE297D97B0008AC86B /* PasswordSecondaryTextField.swift */; };
+		84F1B503297DB8D2008AC86B /* ImagePickerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B501297DB8D2008AC86B /* ImagePickerProvider.swift */; };
+		84F1B504297DB8D2008AC86B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B502297DB8D2008AC86B /* ImagePicker.swift */; };
+		84F1B506297DBB5B008AC86B /* StorageDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B505297DBB5B008AC86B /* StorageDatabase.swift */; };
+		84F1B509297DBBEF008AC86B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84F1B508297DBBEF008AC86B /* FirebaseAuth */; };
+		84F1B50B297DBBEF008AC86B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 84F1B50A297DBBEF008AC86B /* FirebaseFirestore */; };
+		84F1B50D297DBBEF008AC86B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 84F1B50C297DBBEF008AC86B /* FirebaseStorage */; };
+		84F1B50F297DBC0C008AC86B /* UserImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */; };
+		84F1B511297DBC24008AC86B /* UserImageStorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */; };
+		84F1B513297DBC3F008AC86B /* UserImageUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B512297DBC3F008AC86B /* UserImageUploadModel.swift */; };
 		84F6A2FA2974518700B7E188 /* LessonAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2F92974518700B7E188 /* LessonAmount.swift */; };
 		84F6A2FD2974800D00B7E188 /* MyLessonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2FC2974800D00B7E188 /* MyLessonsCoordinator.swift */; };
 		84F6A2FF2974801500B7E188 /* MyLessonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6A2FE2974801500B7E188 /* MyLessonsViewController.swift */; };
@@ -230,6 +247,9 @@
 		840DB1EF27A552AA00F40C89 /* SkipperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkipperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		840DB1F327A552AA00F40C89 /* SkipperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipperUITests.swift; sourceTree = "<group>"; };
 		840DB1F527A552AA00F40C89 /* SkipperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8415A8C7297C7EFF00D16CD0 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8415A8C9297C877500D16CD0 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		8415A8CB297C8A8500D16CD0 /* DangerSecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerSecondaryButton.swift; sourceTree = "<group>"; };
 		8431CC8E296973A000FB00F8 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8431CC90296973A600FB00F8 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		8431CC962969785300FB00F8 /* BookingTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTypeViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +417,19 @@
 		84EE922329707AF300893B09 /* LessonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonType.swift; sourceTree = "<group>"; };
 		84EE92262970A68400893B09 /* UserContactType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactType.swift; sourceTree = "<group>"; };
 		84EE92282970A73A00893B09 /* UserContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactModel.swift; sourceTree = "<group>"; };
+		84F1B4ED297D4924008AC86B /* ProfileOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionView.swift; sourceTree = "<group>"; };
+		84F1B4F0297D8433008AC86B /* EditPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		84F1B4F2297D8447008AC86B /* EditPersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalInfoViewModel.swift; sourceTree = "<group>"; };
+		84F1B4F5297D86E8008AC86B /* SecondaryTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextView.swift; sourceTree = "<group>"; };
+		84F1B4F9297D929A008AC86B /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		84F1B4FB297D92A3008AC86B /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		84F1B4FE297D97B0008AC86B /* PasswordSecondaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordSecondaryTextField.swift; sourceTree = "<group>"; };
+		84F1B501297DB8D2008AC86B /* ImagePickerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerProvider.swift; sourceTree = "<group>"; };
+		84F1B502297DB8D2008AC86B /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		84F1B505297DBB5B008AC86B /* StorageDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDatabase.swift; sourceTree = "<group>"; };
+		84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageMapper.swift; sourceTree = "<group>"; };
+		84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageStorageModel.swift; sourceTree = "<group>"; };
+		84F1B512297DBC3F008AC86B /* UserImageUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageUploadModel.swift; sourceTree = "<group>"; };
 		84F6A2F92974518700B7E188 /* LessonAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonAmount.swift; sourceTree = "<group>"; };
 		84F6A2FC2974800D00B7E188 /* MyLessonsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsCoordinator.swift; sourceTree = "<group>"; };
 		84F6A2FE2974801500B7E188 /* MyLessonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLessonsViewController.swift; sourceTree = "<group>"; };
@@ -415,12 +448,13 @@
 				84573E002906FDCC00F03827 /* Rswift in Frameworks */,
 				84573DF42906FD5000F03827 /* KeychainAccess in Frameworks */,
 				84C29A9F2908397D0073E7A4 /* PKHUD in Frameworks */,
+				84F1B50D297DBBEF008AC86B /* FirebaseStorage in Frameworks */,
 				8462CB452965DAED00347EA1 /* Kingfisher in Frameworks */,
 				845A2A382916B5E5003EB7DF /* Alamofire in Frameworks */,
+				84F1B50B297DBBEF008AC86B /* FirebaseFirestore in Frameworks */,
 				84573DF12906FD3500F03827 /* TPKeyboardAvoiding in Frameworks */,
-				84E51DD6292BE604008D2308 /* FirebaseFirestore in Frameworks */,
-				84E51DD4292BE604008D2308 /* FirebaseAuth in Frameworks */,
 				84573DFD2906FD9100F03827 /* Reusable in Frameworks */,
+				84F1B509297DBBEF008AC86B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,9 +725,14 @@
 		8485C4CC295E2B3C007A7811 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				84F1B4F7297D9277008AC86B /* ProfileNotifications */,
+				84F1B4EF297D841A008AC86B /* EditPersonalInfo */,
+				84F1B4F8297D928E008AC86B /* ChangePassword */,
 				8485C4CF295E2B50007A7811 /* ProfileCoordinator.swift */,
 				8485C4CD295E2B49007A7811 /* ProfileViewController.swift */,
 				8485C4D1295E2B56007A7811 /* ProfileViewModel.swift */,
+				8415A8C7297C7EFF00D16CD0 /* ProfileHeaderView.swift */,
+				84F1B4ED297D4924008AC86B /* ProfileOptionView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -819,6 +858,7 @@
 				84AC0229292E882A00DE7AF2 /* FIrebaseModel.swift */,
 				84AC022A292E882A00DE7AF2 /* UserFirebaseModel.swift */,
 				8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */,
+				84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -910,6 +950,7 @@
 			children = (
 				8406AB0529313DCB00D12767 /* FirebaseError.swift */,
 				84E6C2E7293CDAA6003ACCF7 /* FirestoreDatabase.swift */,
+				84F1B505297DBB5B008AC86B /* StorageDatabase.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -918,6 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				84EE754428F70D5500B55839 /* Common */,
+				84F1B500297DB8D2008AC86B /* ImagePicker */,
 				84C29AA929086DF90073E7A4 /* Splash */,
 				84C29AA829086DF30073E7A4 /* Auth */,
 				84EE754328F70C9800B55839 /* Main */,
@@ -989,6 +1031,7 @@
 				8462CB462965ECEF00347EA1 /* ImageViews */,
 				84EE754F28F70E0900B55839 /* TextFields */,
 				84EE754E28F70E0500B55839 /* Buttons */,
+				84F1B4F4297D86DE008AC86B /* TextViews */,
 				84EE754D28F70E0100B55839 /* Views */,
 			);
 			path = UIComponents;
@@ -1056,6 +1099,7 @@
 				84AC0224292E880900DE7AF2 /* UserMapper.swift */,
 				84573DE52906F42200F03827 /* ExampleMapper.swift */,
 				84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */,
+				84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1121,6 +1165,8 @@
 				84C3936F291D825D0042C231 /* TextButton.swift */,
 				84E51DD9292BFB33008D2308 /* UnderlinedButton.swift */,
 				8431CCA82969CF3D00FB00F8 /* DropdownButton.swift */,
+				8415A8C9297C877500D16CD0 /* SecondaryButton.swift */,
+				8415A8CB297C8A8500D16CD0 /* DangerSecondaryButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1131,6 +1177,7 @@
 				84E51DDB292BFB84008D2308 /* PrimaryTextField.swift */,
 				84E51DDD292BFB8F008D2308 /* InsetTextField.swift */,
 				84BC43D8296B568C000B2C67 /* SecondaryTextField.swift */,
+				84F1B4FE297D97B0008AC86B /* PasswordSecondaryTextField.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -1171,8 +1218,51 @@
 				84AC022D292E886D00DE7AF2 /* UserModel.swift */,
 				84EE92262970A68400893B09 /* UserContactType.swift */,
 				84EE92282970A73A00893B09 /* UserContactModel.swift */,
+				84F1B512297DBC3F008AC86B /* UserImageUploadModel.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		84F1B4EF297D841A008AC86B /* EditPersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				84F1B4F0297D8433008AC86B /* EditPersonalInfoViewController.swift */,
+				84F1B4F2297D8447008AC86B /* EditPersonalInfoViewModel.swift */,
+			);
+			path = EditPersonalInfo;
+			sourceTree = "<group>";
+		};
+		84F1B4F4297D86DE008AC86B /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				84F1B4F5297D86E8008AC86B /* SecondaryTextView.swift */,
+			);
+			path = TextViews;
+			sourceTree = "<group>";
+		};
+		84F1B4F7297D9277008AC86B /* ProfileNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProfileNotifications;
+			sourceTree = "<group>";
+		};
+		84F1B4F8297D928E008AC86B /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				84F1B4F9297D929A008AC86B /* ChangePasswordViewController.swift */,
+				84F1B4FB297D92A3008AC86B /* ChangePasswordViewModel.swift */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		84F1B500297DB8D2008AC86B /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				84F1B501297DB8D2008AC86B /* ImagePickerProvider.swift */,
+				84F1B502297DB8D2008AC86B /* ImagePicker.swift */,
+			);
+			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 		84F68C85296606A000CAA3E9 /* Filters */ = {
@@ -1237,9 +1327,10 @@
 				84573DFF2906FDCC00F03827 /* Rswift */,
 				84C29A9E2908397D0073E7A4 /* PKHUD */,
 				845A2A372916B5E5003EB7DF /* Alamofire */,
-				84E51DD3292BE604008D2308 /* FirebaseAuth */,
-				84E51DD5292BE604008D2308 /* FirebaseFirestore */,
 				8462CB442965DAED00347EA1 /* Kingfisher */,
+				84F1B508297DBBEF008AC86B /* FirebaseAuth */,
+				84F1B50A297DBBEF008AC86B /* FirebaseFirestore */,
+				84F1B50C297DBBEF008AC86B /* FirebaseStorage */,
 			);
 			productName = iOSTemplateProject;
 			productReference = 840DB1CF27A552AA00F40C89 /* Skipper.app */;
@@ -1317,11 +1408,11 @@
 				84573DEF2906FD3500F03827 /* XCRemoteSwiftPackageReference "TPKeyboardAvoiding" */,
 				84573DF22906FD5000F03827 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				84573DFB2906FD9100F03827 /* XCRemoteSwiftPackageReference "Reusable" */,
-				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
+				84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */,
 				84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				845A2A362916B5E5003EB7DF /* XCRemoteSwiftPackageReference "Alamofire" */,
-				84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				8462CB432965DAED00347EA1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				84F1B507297DBBEF008AC86B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 840DB1D027A552AA00F40C89 /* Products */;
 			projectDirPath = "";
@@ -1384,7 +1475,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1433,13 +1524,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F1B4FA297D929A008AC86B /* ChangePasswordViewController.swift in Sources */,
+				8415A8CA297C877500D16CD0 /* SecondaryButton.swift in Sources */,
 				84A27BD429682775002465DD /* MentorProfileClassesView.swift in Sources */,
 				84BC43CB296ABDE4000B2C67 /* BookingTimeViewModel.swift in Sources */,
+				84F1B4EE297D4924008AC86B /* ProfileOptionView.swift in Sources */,
 				84AC0226292E880900DE7AF2 /* UserMapper.swift in Sources */,
 				84BC43C9296AB8E3000B2C67 /* BookingTimeViewController.swift in Sources */,
 				847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */,
 				84E6C2F4293D16EE003ACCF7 /* CharacterSet+Extensions.swift in Sources */,
 				84573DE82906F45900F03827 /* ExampleModel.swift in Sources */,
+				84F1B511297DBC24008AC86B /* UserImageStorageModel.swift in Sources */,
 				84573DE22906F38C00F03827 /* ExampleDBModel.swift in Sources */,
 				84BC43D9296B568C000B2C67 /* SecondaryTextField.swift in Sources */,
 				848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */,
@@ -1454,14 +1549,17 @@
 				84A27BE72968B407002465DD /* ClassesListCell.swift in Sources */,
 				84AC0233292E889100DE7AF2 /* PaginatedModel.swift in Sources */,
 				844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */,
+				84F1B50F297DBC0C008AC86B /* UserImageMapper.swift in Sources */,
 				84AC0227292E880900DE7AF2 /* AuthUserMapper.swift in Sources */,
 				84573E112907258200F03827 /* Constraints.swift in Sources */,
+				84F1B506297DBB5B008AC86B /* StorageDatabase.swift in Sources */,
 				84EE758528F72A9200B55839 /* Coordinator.swift in Sources */,
 				84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */,
 				84AC0241292E909900DE7AF2 /* AuthRepositoryImpl.swift in Sources */,
 				84A27BD829685ACC002465DD /* MentorProfileResumeView.swift in Sources */,
 				848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */,
 				84AC022B292E882A00DE7AF2 /* FIrebaseModel.swift in Sources */,
+				84F1B4F3297D8447008AC86B /* EditPersonalInfoViewModel.swift in Sources */,
 				8462CB3B29649BE500347EA1 /* DashboardSectionHeaderView.swift in Sources */,
 				8462CB4B2965FBAC00347EA1 /* SearchMentorViewController.swift in Sources */,
 				84E6C2EA293D015F003ACCF7 /* UserRegisterModel.swift in Sources */,
@@ -1481,9 +1579,12 @@
 				84E6C2EE293D0C39003ACCF7 /* UserRegisterAPIModel.swift in Sources */,
 				8462CB402965A8C700347EA1 /* DashboardMentorCollectionCell.swift in Sources */,
 				84AC023A292E8F0100DE7AF2 /* LengthValidator.swift in Sources */,
+				84F1B504297DB8D2008AC86B /* ImagePicker.swift in Sources */,
 				8406AB03293138D300D12767 /* PaddingLabel.swift in Sources */,
 				8485C4D4295E2BBF007A7811 /* DashboardViewController.swift in Sources */,
 				84EE922429707AF300893B09 /* LessonType.swift in Sources */,
+				8415A8C8297C7EFF00D16CD0 /* ProfileHeaderView.swift in Sources */,
+				84F1B503297DB8D2008AC86B /* ImagePickerProvider.swift in Sources */,
 				8447C3CE2932958F0092B10D /* Container.swift in Sources */,
 				84CC1F4A2969EEF200300F32 /* PickerViewController.swift in Sources */,
 				846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */,
@@ -1531,6 +1632,7 @@
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
 				84F6A3012974801C00B7E188 /* MyLessonsViewModel.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
+				84F1B4F6297D86E8008AC86B /* SecondaryTextView.swift in Sources */,
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
@@ -1539,6 +1641,7 @@
 				84A27BE02968ADBA002465DD /* MentorProfileHeaderView.swift in Sources */,
 				84EE756128F72A1500B55839 /* R+Typo.swift in Sources */,
 				84E6C2E4293CCFF4003ACCF7 /* R+Localization.swift in Sources */,
+				84F1B4FC297D92A3008AC86B /* ChangePasswordViewModel.swift in Sources */,
 				84AC023C292E8F0100DE7AF2 /* EmptyValueValidator.swift in Sources */,
 				84E51DDC292BFB84008D2308 /* PrimaryTextField.swift in Sources */,
 				8431CC992969786000FB00F8 /* BookingTypeViewModel.swift in Sources */,
@@ -1561,6 +1664,7 @@
 				8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */,
 				847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */,
 				84EE757F28F72A9200B55839 /* DeepLink.swift in Sources */,
+				84F1B513297DBC3F008AC86B /* UserImageUploadModel.swift in Sources */,
 				8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */,
 				8406AB0629313DCB00D12767 /* FirebaseError.swift in Sources */,
 				846B835B2967478D008F9BB5 /* MentorProfileViewController.swift in Sources */,
@@ -1572,8 +1676,10 @@
 				846B835F296749DF008F9BB5 /* CircleImageView.swift in Sources */,
 				84DC34042971EAF90023A3A0 /* BookedLessonRepository.swift in Sources */,
 				84A27BCE2968055A002465DD /* StatusView.swift in Sources */,
+				8415A8CC297C8A8500D16CD0 /* DangerSecondaryButton.swift in Sources */,
 				84EE757B28F72A9200B55839 /* RouterType.swift in Sources */,
 				84573E142907258300F03827 /* Constrainable.swift in Sources */,
+				84F1B4FF297D97B0008AC86B /* PasswordSecondaryTextField.swift in Sources */,
 				846B83562966E4B1008F9BB5 /* TextCloudItem.swift in Sources */,
 				849A925B293E80420056711F /* APILogoutHandler.swift in Sources */,
 				84AC0239292E8F0100DE7AF2 /* EmailValidator.swift in Sources */,
@@ -1585,6 +1691,7 @@
 				84AC023B292E8F0100DE7AF2 /* Validator.swift in Sources */,
 				847DD3AD2906E71500C9CC5D /* Database.swift in Sources */,
 				8462CB4D2965FBB200347EA1 /* SearchMentorViewModel.swift in Sources */,
+				84F1B4F1297D8433008AC86B /* EditPersonalInfoViewController.swift in Sources */,
 				84FD389A2933E3F5004023E4 /* SignUpViewController.swift in Sources */,
 				84573E09290720D600F03827 /* TokensContainer.swift in Sources */,
 				84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */,
@@ -1788,6 +1895,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Skipper;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for making photos for profile avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library is used for picking images for profile's avatar";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1798,7 +1907,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ExampleMobileApp;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.skipper.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
 				PROVISIONING_PROFILE_SPECIFIER = "f08a51b7-a760-4cc5-b449-5dbc044fd427";
@@ -1822,6 +1931,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Skipper;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for making photos for profile avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library is used for picking images for profile's avatar";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2028,6 +2139,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Skipper;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for making photos for profile avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library is used for picking images for profile's avatar";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2176,6 +2289,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skipper/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Skipper;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for making photos for profile avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library is used for picking images for profile's avatar";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2324,7 +2439,7 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
+		84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -2356,7 +2471,7 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		84F1B507297DBBEF008AC86B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -2384,7 +2499,7 @@
 		};
 		84573DFF2906FDCC00F03827 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
+			package = 84573DFE2906FDCC00F03827 /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = Rswift;
 		};
 		845A2A372916B5E5003EB7DF /* Alamofire */ = {
@@ -2402,15 +2517,20 @@
 			package = 84C29A9D2908397D0073E7A4 /* XCRemoteSwiftPackageReference "PKHUD" */;
 			productName = PKHUD;
 		};
-		84E51DD3292BE604008D2308 /* FirebaseAuth */ = {
+		84F1B508297DBBEF008AC86B /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 84F1B507297DBBEF008AC86B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		84E51DD5292BE604008D2308 /* FirebaseFirestore */ = {
+		84F1B50A297DBBEF008AC86B /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84E51DD2292BE604008D2308 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 84F1B507297DBBEF008AC86B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		84F1B50C297DBBEF008AC86B /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84F1B507297DBBEF008AC86B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

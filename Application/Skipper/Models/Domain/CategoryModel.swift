@@ -10,7 +10,7 @@ import Foundation
 struct CategoryModel {
     let id: String
     let name: String
-    let imageURL: String?
+    let imageUrl: String?
     let subcategories: [Subcategory]
 }
 

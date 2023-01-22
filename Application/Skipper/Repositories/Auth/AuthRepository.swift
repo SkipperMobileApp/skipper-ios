@@ -14,6 +14,8 @@ protocol AuthRepository {
     func resendVerificationEmail() async throws
 
     func currentUser(forceUpdate: Bool) async throws -> AuthUserModel?
+    func changePassword(oldPassword: String, newPassword: String) async throws
+    func changeEmail(email: String) async throws
 }
 
 extension AuthRepository {

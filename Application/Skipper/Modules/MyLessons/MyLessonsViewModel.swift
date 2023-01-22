@@ -44,7 +44,7 @@ class MyLessonsViewModel {
                             name: lesson.name,
                             type: titleFromLessonType(lesson.type),
                             mentorName: [mentor.firstName, mentor.lastName].filter { !$0.isEmpty }.joined(separator: " "),
-                            mentorAvatarURL: mentor.imageURL,
+                            mentorAvatarURL: mentor.imageUrl,
                             description: lesson.description,
                             time: timeStringFor(date: lesson.date, time: lesson.time, duration: lesson.duration),
                             cost: "\(lesson.cost) руб.",

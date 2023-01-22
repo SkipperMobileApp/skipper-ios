@@ -11,19 +11,22 @@ protocol UserRepository {
     func mentors() async throws -> [UserModel]
     func mentorsOfCategory(categoryId: String) async throws -> [UserModel]
     func mentor(mentorId: String) async throws -> UserModel
+
+    func user(userId: String) async throws -> UserModel
+    func updateUser(user: UserModel) async throws
+    func uploadUserImage(userImage: UserImageUploadModel) async throws -> URL
 }
 
-class UserRepositoryImpl: UserRepository {
+class UserRepositoryImpl {
     private lazy var users: [UserModel] = [
         .init(
             id: "1",
             email: "van.darkholme@test.com",
             firstName: "Van",
             lastName: "Darkholme",
-            patronymic: "",
             bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
             post: "Backend Developer",
-            imageURL: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
+            imageUrl: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
             isMentor: true,
             contacts: [
                 .init(type: .discord, accountName: "VanDarkholme"),
@@ -44,10 +47,9 @@ class UserRepositoryImpl: UserRepository {
             email: "thomas.shelby@test.com",
             firstName: "Thomas",
             lastName: "Shelby",
-            patronymic: "",
             bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
             post: "Аналитик со стажем",
-            imageURL: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
+            imageUrl: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
             isMentor: true,
             contacts: [
                 .init(type: .vk, accountName: "thomas_shelby"),
@@ -68,10 +70,9 @@ class UserRepositoryImpl: UserRepository {
             email: "thomas.shelby@test.com",
             firstName: "Thomas",
             lastName: "Angelo",
-            patronymic: "",
             bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
             post: "Мобильный архитектор-муравей",
-            imageURL: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
+            imageUrl: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
             isMentor: true,
             contacts: [
                 .init(type: .telegram, accountName: "tommyAngel"),
@@ -92,10 +93,9 @@ class UserRepositoryImpl: UserRepository {
             email: "homelander@test.com",
             firstName: "Homelander",
             lastName: "",
-            patronymic: "",
             bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
             post: "Data learning engineer",
-            imageURL: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
+            imageUrl: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
             isMentor: true,
             contacts: [
                 .init(type: .telegram, accountName: "IAmHomelander"),
@@ -110,8 +110,51 @@ class UserRepositoryImpl: UserRepository {
             tags: ["Распознавание образов", "Глубокое обучение", "Обучение с подкреплением"],
             lessons: [],
             resumeInfo: generateCv()
+        ),
+        .init(
+            id: "1bbR71nRN2dEFSHeIOUZZrxUlLl2",
+            email: "den.kovalev999@gmail.com",
+            firstName: "Денис",
+            lastName: "Ковалёв",
+            bio: "Просто здравствуй, просто как дела",
+            post: "iOS разработчик",
+            imageUrl: "",
+            isMentor: false,
+            contacts: [],
+            stats: .init(
+                lessonsCount: 0,
+                rating: 0,
+                registrationDate: "",
+                reviewsCount: 0
+            ),
+            tags: [],
+            lessons: [],
+            resumeInfo: .init(
+                educationUnits: [],
+                workUnits: [],
+                achievementUnits: []
+            )
         )
     ]
+
+    private let lessonRepository: LessonRepository
+    private let utilRepository: UtilRepository
+    private let database: FirestoreDatabase
+    private let storage: StorageDatabase
+
+    init(
+        lessonRepository: LessonRepository,
+        utilRepository: UtilRepository,
+        database: FirestoreDatabase,
+        storage: StorageDatabase
+    ) {
+        self.lessonRepository = lessonRepository
+        self.utilRepository = utilRepository
+        self.database = database
+        self.storage = storage
+    }
+
+    // MARK: - Private
 
     private func generateCv() -> UserModel.UserResumeInfo {
         .init(
@@ -129,15 +172,9 @@ class UserRepositoryImpl: UserRepository {
             ]
         )
     }
+}
 
-    private let lessonRepository: LessonRepository
-    private let utilRepository: UtilRepository
-
-    init(lessonRepository: LessonRepository, utilRepository: UtilRepository) {
-        self.lessonRepository = lessonRepository
-        self.utilRepository = utilRepository
-    }
-
+extension UserRepositoryImpl: UserRepository {
     func mentors() async throws -> [UserModel] {
         try await Task.sleep(for: .seconds(0.5))
 
@@ -172,5 +209,21 @@ class UserRepositoryImpl: UserRepository {
         var mentorWithLessons = mentor
         mentorWithLessons.lessons = lessons
         return mentorWithLessons
+    }
+
+    func user(userId: String) async throws -> UserModel {
+        guard let user = try await database.user(userId: userId) else {
+            throw AppError(message: "Пользователь не найден")
+        }
+
+        return UserMapper.apiToDomain(user)
+    }
+
+    func updateUser(user: UserModel) async throws {
+        try await database.updateUsers(users: [UserMapper.domainToAPI(user)])
+    }
+
+    func uploadUserImage(userImage: UserImageUploadModel) async throws -> URL {
+        try await storage.uploadImage(model: UserImageMapper.uploadDomainToAPI(userImage))
     }
 }

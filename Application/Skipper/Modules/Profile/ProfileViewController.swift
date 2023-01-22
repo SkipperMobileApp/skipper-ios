@@ -11,18 +11,65 @@ import PKHUD
 import UIKit
 
 class ProfileViewController: UIViewController {
+    // MARK: - Definitions
+
+    typealias Option = ProfileViewModel.Option
+
     // MARK: - UI Controls
+
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 0
+        return stackView
+    }()
+
+    private lazy var headerView: ProfileHeaderView = {
+        let view = ProfileHeaderView()
+
+        view.didTapEditAvatar = { [weak self] in
+            self?.showAvatarOptionsSheet()
+        }
+
+        return view
+    }()
 
     private lazy var logoutButton: UIButton = {
         let button = PrimaryButton()
-        button.setTitle("Logout", for: .normal)
+        button.setTitle("Выйти из аккаунта", for: .normal)
         button.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var deleteAccountButton: UIButton = {
+        let button = DangerSecondaryButton()
+        button.setTitle("Удалить аккаунт", for: .normal)
+        button.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
+        button.isEnabled = false
+        button.alpha = 0.5
         return button
     }()
 
     // MARK: - Output
 
     var didFinish: (() -> Void)?
+    var didTapEditProfileInfo: (() -> Void)?
+    var didTapEditPassword: (() -> Void)?
+    var didTapEditNotifications: (() -> Void)?
+    var didTapImageAction: ((ImagePickerProvider) -> Void)?
 
     // MARK: - Properties
 
@@ -57,20 +104,79 @@ class ProfileViewController: UIViewController {
         bindViewModelActions()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.loadData()
+    }
+
     // MARK: - UI Methods
 
     private func setupUI() {
+        title = "Мой профиль"
+        navigationItem.backButtonTitle = ""
+        navigationItem.largeTitleDisplayMode = .always
         view.backgroundColor = R.color.themeBackground()
 
-        view.addSubview(logoutButton)
-        logoutButton.frame = .init(x: 100, y: 100, width: 100, height: 50)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(headerView)
+        contentView.addSubview(stackView)
+        contentView.addSubview(logoutButton)
+        contentView.addSubview(deleteAccountButton)
+
+        scrollView.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
+        contentView.applyConstraints(
+            .fit(in: scrollView.contentLayoutGuide),
+            .width(to: scrollView, attribute: .width)
+        )
+
+        headerView.applyConstraints(
+            .top(to: contentView, attribute: .top),
+            .leading(to: contentView, attribute: .leading),
+            .trailing(to: contentView, attribute: .trailing)
+        )
+
+        stackView.applyConstraints(
+            .top(to: headerView, attribute: .bottom, constant: 16),
+            .leading(to: contentView, attribute: .leading),
+            .trailing(to: contentView, attribute: .trailing)
+        )
+
+        logoutButton.applyConstraints(
+            .top(to: stackView, attribute: .bottom, constant: 16),
+            .leading(to: contentView, attribute: .leading, constant: 16),
+            .trailing(to: contentView, attribute: .trailing, constant: -16),
+            .height(constant: 45)
+        )
+
+        deleteAccountButton.applyConstraints(
+            .top(to: logoutButton, attribute: .bottom, constant: 8),
+            .leading(to: contentView, attribute: .leading, constant: 16),
+            .trailing(to: contentView, attribute: .trailing, constant: -16),
+            .bottom(to: contentView, attribute: .bottom, constant: -8),
+            .height(constant: 45)
+        )
+
+        setupStackView()
+    }
+
+    private func setupStackView() {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        Option.allCases
+            .map(makeOptionView)
+            .forEach {
+                stackView.addArrangedSubview($0)
+                stackView.addArrangedSubview(makeSeparator())
+            }
     }
 
     private func bindViewModelActions() {
         viewModel.$isLoading
-            .sink { [weak self] isLoading in
+            .sink { isLoading in
                 if isLoading {
-                    HUD.show(.progress, onView: self?.view)
+                    HUD.show(.progress)
                 } else {
                     HUD.hide()
                 }
@@ -83,11 +189,88 @@ class ProfileViewController: UIViewController {
                 AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
             }
             .store(in: &subscriptions)
+
+        viewModel.$profileInfo
+            .sink { [weak self] info in
+                self?.headerView.configure(with: .init(
+                    avatarUrl: info.avatarUrl,
+                    name: info.name,
+                    email: info.email
+                )
+                )
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func showAvatarOptionsSheet() {
+        let sheet = UIAlertController(title: "Update Avatar",
+                                      message: "Image size limit - 20MB",
+                                      preferredStyle: .actionSheet)
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            sheet.addAction(.init(title: "Take a photo", style: .default) { [weak self] _ in
+                guard let self = self else { return }
+                self.didTapImageAction?(self.viewModel.imageActionProvider(for: .camera))
+            })
+        }
+
+        sheet.addAction(.init(title: "Choose from Photos", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.didTapImageAction?(self.viewModel.imageActionProvider(for: .photos))
+        })
+
+        sheet.addAction(.init(title: "Cancel", style: .cancel))
+
+        present(sheet, animated: true)
+    }
+
+    // MARK: - UI Builders
+
+    private func makeOptionView(for option: Option) -> ProfileOptionView {
+        let view = ProfileOptionView()
+
+        view.configureWith(title: option.title, image: option.icon)
+
+        view.addAction(
+            .init { [weak self, weak view] _ in
+                view?.performBlink()
+
+                switch option {
+                case .info: self?.didTapEditProfileInfo?()
+                case .password: self?.didTapEditPassword?()
+                case .notifications: self?.didTapEditNotifications?()
+                }
+            },
+            for: .touchUpInside
+        )
+
+        return view
+    }
+
+    private func makeSeparator() -> UIView {
+        let container = UIView()
+        container.backgroundColor = .clear
+
+        let view = UIView()
+        view.backgroundColor = R.color.primary06()
+
+        container.addSubview(view)
+
+        view.applyConstraints(
+            .fitWithInsets(in: container, insets: .init(top: 0, left: 16, bottom: 0, right: 0)),
+            .height(constant: 1)
+        )
+
+        return container
     }
 
     // MARK: - UI Callbacks
 
     @objc private func logoutAction() {
         viewModel.logout()
+    }
+
+    @objc private func deleteAction() {
+        viewModel.deleteAccount()
     }
 }

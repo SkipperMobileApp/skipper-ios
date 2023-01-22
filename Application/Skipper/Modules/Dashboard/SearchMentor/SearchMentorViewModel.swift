@@ -49,9 +49,9 @@ class SearchMentorViewModel {
                     sourceItems = mentors.map {
                         .init(
                             id: $0.id,
-                            name: [$0.firstName, $0.lastName, $0.patronymic].joined(separator: " "),
+                            name: [$0.firstName, $0.lastName].joined(separator: " "),
                             major: $0.post,
-                            imageURL: $0.imageURL,
+                            imageUrl: $0.imageUrl,
                             rating: $0.stats.rating,
                             description: $0.bio,
                             subcategories: $0.tags
@@ -75,7 +75,7 @@ extension SearchMentorViewModel {
         let id: String
         let name: String
         let major: String
-        let imageURL: String?
+        let imageUrl: String?
         let rating: Double
         let description: String
         let subcategories: [String]

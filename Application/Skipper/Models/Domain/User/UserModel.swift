@@ -9,15 +9,14 @@ import Foundation
 
 struct UserModel {
     var id: String
-    let email: String
+    var email: String
 
-    let firstName: String
-    let lastName: String
-    let patronymic: String
-    let bio: String
-    let post: String
+    var firstName: String
+    var lastName: String
+    var bio: String
+    var post: String
 
-    let imageURL: String?
+    var imageUrl: String?
 
     let isMentor: Bool
 
