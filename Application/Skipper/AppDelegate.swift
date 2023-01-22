@@ -9,6 +9,7 @@ import Alamofire
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseStorage
 import UIKit
 
 @main
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let auth = Auth.auth()
         let firestore = Firestore.firestore()
+        let storage = Storage.storage()
 
         // Cache
 
@@ -46,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Database
 
         let firestoreDatabase = FirestoreDatabaseImpl(firestore: firestore)
+        let storageDatabase = StorageDatabaseImpl(storage: storage)
 
         // API
 
@@ -61,7 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let utilRepository: UtilRepository = UtilRepositoryImpl()
         let userRepository: UserRepository = UserRepositoryImpl(
             lessonRepository: lessonRepository,
-            utilRepository: utilRepository
+            utilRepository: utilRepository,
+            database: firestoreDatabase,
+            storage: storageDatabase
         )
         let bookedLessonRepository: BookedLessonRepository = BookedLessonRepositoryImpl()
 

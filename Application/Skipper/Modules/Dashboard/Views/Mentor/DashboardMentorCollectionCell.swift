@@ -77,10 +77,10 @@ class DashboardMentorCollectionCell: SetupableCollectionViewCell, Reusable {
         )
     }
 
-    func configureWith(name: String, major: String, likesCount: Int, imageURL: String?) {
+    func configureWith(name: String, major: String, likesCount: Int, imageUrl: String?) {
         nameLabel.text = name
         majorLabel.text = major
         likesView.text = String(likesCount)
-        imageView.kf.setImage(with: URL(string: imageURL ?? ""), placeholder: nil)
+        imageView.kf.setImage(with: URL(string: imageUrl ?? ""), placeholder: nil)
     }
 }

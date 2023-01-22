@@ -14,10 +14,9 @@ enum UserMapper {
             email: model.email,
             firstName: model.firstName,
             lastName: model.lastName,
-            patronymic: model.patronymic,
             bio: model.bio,
             post: model.post,
-            imageURL: model.imageURL,
+            imageUrl: model.imageUrl,
             isMentor: false,
             contacts: [],
             stats: .init(lessonsCount: 0, rating: 0, registrationDate: "", reviewsCount: 0),
@@ -28,13 +27,14 @@ enum UserMapper {
     }
 
     static func domainToAPI(_ model: UserModel) -> UserFirebaseModel {
-        .init(id: model.id,
-              email: model.email,
-              firstName: model.firstName,
-              lastName: model.lastName,
-              patronymic: model.patronymic,
-              bio: model.bio,
-              post: model.post,
-              branch: model.post)
+        .init(
+            id: model.id,
+            email: model.email,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            bio: model.bio,
+            post: model.post,
+            imageUrl: model.imageUrl
+        )
     }
 }

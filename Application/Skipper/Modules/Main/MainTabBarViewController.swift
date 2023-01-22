@@ -71,7 +71,7 @@ extension MainTabBarViewController {
     private func setupTabBarAppearance() {
         let barBackgroundColor = R.color.themePrimary()
         let itemNormalColor = R.color.primary54()!
-        let itemSelectedColor = R.color.primary87()!
+        let itemSelectedColor = R.color.brandPrimary()!
 
         let itemTextNormalAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: itemNormalColor,

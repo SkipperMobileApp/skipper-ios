@@ -261,7 +261,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         case let .categories(items):
             let cell: DashboardCategoryCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
             let item = items[indexPath.item]
-            cell.configureWith(imageURL: item.imageURL, title: item.title)
+            cell.configureWith(image: item.image, title: item.title)
             return cell
 
         case let .popularMentors(items):
@@ -271,7 +271,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                 name: item.name,
                 major: item.major,
                 likesCount: item.likesCount,
-                imageURL: item.imageURL
+                imageUrl: item.imageUrl
             )
             return cell
         }
