@@ -42,5 +42,13 @@ extension R {
         static let dollarCircle = UIImage(systemName: "dollarsign.circle.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let checklist = UIImage(systemName: "checklist")!.withRenderingMode(.alwaysTemplate)
+
+        static let cameraCircle = UIImage(systemName: "camera.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let profileCircle = UIImage(systemName: "person.crop.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let lockCircle = UIImage(systemName: "lock.circle.fill")!.withRenderingMode(.alwaysTemplate)
+
+        static let bellCircle = UIImage(systemName: "bell.circle.fill")!.withRenderingMode(.alwaysTemplate)
     }
 }

@@ -15,6 +15,6 @@ class APILogoutHandler: LogoutHandler {
     }
 
     func logout() async throws {
-        try await logoutRepository.signOut()
+        try? await logoutRepository.signOut()
     }
 }

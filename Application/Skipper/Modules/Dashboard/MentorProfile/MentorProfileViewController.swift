@@ -229,7 +229,7 @@ class MentorProfileViewController: UIViewController {
         nameLabel.text = viewModel.profileInfo.name
         majorLabel.text = viewModel.profileInfo.major
         descriptionLabel.text = viewModel.profileInfo.description
-        avatarImageView.kf.setImage(with: URL(string: viewModel.profileInfo.imageURL ?? ""),
+        avatarImageView.kf.setImage(with: URL(string: viewModel.profileInfo.imageUrl ?? ""),
                                     placeholder: nil)
 
         // Status info

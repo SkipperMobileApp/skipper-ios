@@ -12,7 +12,7 @@ class MentorProfileViewModel {
     private(set) var title: String = ""
     private(set) var statusItems: [StatusItem] = []
     private(set) var classItems: [ClassItem] = []
-    private(set) var profileInfo: ProfileInfo = .init(name: "", major: "", description: "", imageURL: nil)
+    private(set) var profileInfo: ProfileInfo = .init(name: "", major: "", description: "", imageUrl: nil)
     private(set) var skills: [String] = []
     private(set) var resumeItems: [ResumeType] = []
 
@@ -35,7 +35,7 @@ class MentorProfileViewModel {
                 let mentor = try await userRepository.mentor(mentorId: mentorId)
 
                 await MainActor.run {
-                    title = [mentor.firstName, mentor.lastName, mentor.patronymic].joined(separator: " ")
+                    title = [mentor.firstName, mentor.lastName].joined(separator: " ")
 
                     statusItems = [
                         .init(
@@ -57,10 +57,10 @@ class MentorProfileViewModel {
                     }
 
                     profileInfo = .init(
-                        name: [mentor.firstName, mentor.lastName, mentor.patronymic].joined(separator: " "),
+                        name: [mentor.firstName, mentor.lastName].joined(separator: " "),
                         major: mentor.post,
                         description: mentor.bio,
-                        imageURL: mentor.imageURL
+                        imageUrl: mentor.imageUrl
                     )
 
                     skills = mentor.tags
@@ -126,7 +126,7 @@ extension MentorProfileViewModel {
         let name: String
         let major: String
         let description: String
-        let imageURL: String?
+        let imageUrl: String?
     }
 
     enum ResumeType {

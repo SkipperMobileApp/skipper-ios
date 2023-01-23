@@ -50,4 +50,12 @@ class AuthRepositoryImpl: AuthRepository, LogoutRepository {
     func resendVerificationEmail() async throws {
         try await api.resendVerificationEmail()
     }
+
+    func changePassword(oldPassword: String, newPassword: String) async throws {
+        try await api.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+    }
+
+    func changeEmail(email: String) async throws {
+        try await api.changeEmail(email: email)
+    }
 }

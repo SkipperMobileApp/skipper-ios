@@ -16,6 +16,9 @@ protocol AuthAPI {
     func resendVerificationEmail() async throws
 
     func currentUser() async throws -> AuthUserFirebaseModel?
+
+    func changePassword(oldPassword: String, newPassword: String) async throws
+    func changeEmail(email: String) async throws
 }
 
 class FirebaseAuthAPI: AuthAPI {
@@ -47,10 +50,9 @@ class FirebaseAuthAPI: AuthAPI {
                                          email: authUser.email,
                                          firstName: user.firstName,
                                          lastName: user.lastName,
-                                         patronymic: "",
                                          bio: "",
                                          post: "",
-                                         branch: "")
+                                         imageUrl: nil)
 
             try await database.updateUsers(users: [user])
 
@@ -64,12 +66,30 @@ class FirebaseAuthAPI: AuthAPI {
         try auth.signOut()
     }
 
+    func resendVerificationEmail() async throws {
+        try await auth.currentUser?.sendEmailVerification()
+    }
+
     func currentUser() async throws -> AuthUserFirebaseModel? {
         auth.currentUser.flatMap(AuthUserMapper.firebaseToAPI)
     }
 
-    func resendVerificationEmail() async throws {
-        try await auth.currentUser?.sendEmailVerification()
+    func changePassword(oldPassword: String, newPassword: String) async throws {
+        guard let user = auth.currentUser, let email = user.email else {
+            throw AppError(message: "Пользователь не вошел в аккаунт")
+        }
+
+        try await user.reauthenticate(with: EmailAuthProvider.credential(
+            withEmail: email,
+            password: oldPassword
+        )
+        )
+
+        try await user.updatePassword(to: newPassword)
+    }
+
+    func changeEmail(email: String) async throws {
+        try await auth.currentUser?.updateEmail(to: email)
     }
 
     // MARK: - Private

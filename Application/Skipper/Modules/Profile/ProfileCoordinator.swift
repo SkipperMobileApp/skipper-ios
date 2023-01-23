@@ -8,13 +8,49 @@
 import Foundation
 
 class ProfileCoordinator: NavigationCoordinator {
+    private let imagePicker = ImagePicker()
+
     override init(with router: NavigationRouter) {
         super.init(with: router)
 
         let viewModel = ProfileViewModel()
         let controller = ProfileViewController(viewModel: viewModel)
 
-        router.navigationController.setNavigationBarHidden(true, animated: false)
+        controller.didTapEditProfileInfo = { [weak self] in
+            self?.showEditPersonalInfo()
+        }
+
+        controller.didTapEditPassword = { [weak self] in
+            self?.showEditPassword()
+        }
+
+        controller.didTapEditNotifications = { [weak self] in
+        }
+
+        controller.didTapImageAction = { [weak self, weak controller] provider in
+            guard let self = self, let controller = controller else { return }
+            self.imagePicker.presentPicker(provider: provider, on: controller)
+        }
+
+        router.navigationController.navigationItem.largeTitleDisplayMode = .always
+        router.navigationController.navigationBar.prefersLargeTitles = true
+
         router.setRootModule(controller)
     }
+
+    private func showEditPersonalInfo() {
+        let viewModel = EditPersonalInfoViewModel()
+        let controller = EditPersonalInfoViewController(viewModel: viewModel)
+
+        router.push(controller)
+    }
+
+    private func showEditPassword() {
+        let viewModel = ChangePasswordViewModel()
+        let controller = ChangePasswordViewController(viewModel: viewModel)
+
+        router.push(controller)
+    }
+
+    private func showEditNotifications() {}
 }

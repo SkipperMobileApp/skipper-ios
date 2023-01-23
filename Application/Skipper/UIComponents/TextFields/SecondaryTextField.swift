@@ -11,14 +11,14 @@ class SecondaryTextField: InsetTextField {
     override func setup() {
         super.setup()
 
-        contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
+        contentInset = .init(top: 8, left: 16, bottom: 8, right: 16)
 
-        backgroundColor = R.color.themePrimary()
+        backgroundColor = R.color.themeBackground()
         font = R.typo.body
         textColor = R.color.primary87()
 
         layer.cornerRadius = 14
-        layer.borderColor = R.color.brandPrimary()?.cgColor
+        layer.borderColor = R.color.primary24()?.cgColor
         layer.borderWidth = 1
     }
 }
