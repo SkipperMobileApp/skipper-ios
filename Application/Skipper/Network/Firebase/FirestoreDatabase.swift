@@ -44,9 +44,10 @@ extension FirestoreDatabaseImpl {
 // MARK: - Utils
 
 extension FirestoreDatabaseImpl {
-    private func get<T: FirebaseResponseModel>(_ documentReference: DocumentReference,
-                                               type: T.Type) async throws -> T?
-    {
+    private func get<T: FirebaseResponseModel>(
+        _ documentReference: DocumentReference,
+        type: T.Type
+    ) async throws -> T? {
         try await withCheckedThrowingContinuation { continuation in
             documentReference.getDocument { snapshot, error in
                 if let error = error {

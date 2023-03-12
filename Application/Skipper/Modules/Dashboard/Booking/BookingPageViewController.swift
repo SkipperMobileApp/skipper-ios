@@ -147,16 +147,18 @@ extension BookingPageViewController: UIPageViewControllerDelegate {
 // MARK: - UIPageViewControllerDataSource
 
 extension BookingPageViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController?
-    {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
         guard let step = stepControllers.first(where: { $0.value == viewController })?.key else { return nil }
         return step.nextStep.flatMap { stepControllers[$0] }
     }
 
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController?
-    {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
         guard let step = stepControllers.first(where: { $0.value == viewController })?.key else { return nil }
         return step.previousStep.flatMap { stepControllers[$0] }
     }

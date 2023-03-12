@@ -94,13 +94,14 @@ class CloudView: SetupableView {
     // MARK: - Initialization
 
     /// Fills the view with CloudItem instances based on precalculated Layout
-    func updateWith(_ items: [CloudItem],
-                    layout: Layout,
-                    isSelectionEnabled: Bool = false,
-                    maxSelectedItems: Int? = nil,
-                    selectedIndexes: IndexSet = IndexSet(),
-                    isResetItemEnabled: Bool = false)
-    {
+    func updateWith(
+        _ items: [CloudItem],
+        layout: Layout,
+        isSelectionEnabled: Bool = false,
+        maxSelectedItems: Int? = nil,
+        selectedIndexes: IndexSet = IndexSet(),
+        isResetItemEnabled: Bool = false
+    ) {
         self.layout = layout
         self.items.forEach { $0.removeFromSuperview() }
         self.items = items

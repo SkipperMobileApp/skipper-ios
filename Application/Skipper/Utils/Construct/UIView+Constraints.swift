@@ -40,20 +40,26 @@ public extension UIView {
             case let .centerY(view, attribute, constant, multiplier, equality):
                 appliedConstraint = setConstraint(.centerY, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
             case let .fit(element, constant):
-                let internalConstraints = applyConstraints(.top(to: element, attribute: .top, constant: constant),
-                                                           .leading(to: element, attribute: .leading, constant: constant),
-                                                           .trailing(to: element, attribute: .trailing, constant: -constant),
-                                                           .bottom(to: element, attribute: .bottom, constant: -constant))
+                let internalConstraints = applyConstraints(
+                    .top(to: element, attribute: .top, constant: constant),
+                    .leading(to: element, attribute: .leading, constant: constant),
+                    .trailing(to: element, attribute: .trailing, constant: -constant),
+                    .bottom(to: element, attribute: .bottom, constant: -constant)
+                )
                 appliedConstraints.append(contentsOf: internalConstraints)
             case let .fitWithInsets(element, insets):
-                let internalConstraints = applyConstraints(.top(to: element, attribute: .top, constant: insets.top),
-                                                           .leading(to: element, attribute: .leading, constant: insets.left),
-                                                           .trailing(to: element, attribute: .trailing, constant: -insets.right),
-                                                           .bottom(to: element, attribute: .bottom, constant: -insets.bottom))
+                let internalConstraints = applyConstraints(
+                    .top(to: element, attribute: .top, constant: insets.top),
+                    .leading(to: element, attribute: .leading, constant: insets.left),
+                    .trailing(to: element, attribute: .trailing, constant: -insets.right),
+                    .bottom(to: element, attribute: .bottom, constant: -insets.bottom)
+                )
                 appliedConstraints.append(contentsOf: internalConstraints)
             case let .center(element):
-                let internalConstraints = applyConstraints(.centerX(to: element, attribute: .centerX),
-                                                           .centerY(to: element, attribute: .centerY))
+                let internalConstraints = applyConstraints(
+                    .centerX(to: element, attribute: .centerX),
+                    .centerY(to: element, attribute: .centerY)
+                )
                 appliedConstraints.append(contentsOf: internalConstraints)
             }
             if let appliedConstraint = appliedConstraint {
@@ -81,20 +87,23 @@ public extension UIView {
     /// Sets constraint from current view's `fromAttribute` to `element`'s `attribute` with `equality`, by `constant` and `multiplier`
     /// Returns applied constraint object
     @discardableResult
-    private func setConstraint(_ fromAtribute: NSLayoutConstraint.Attribute,
-                               to element: Constrainable?,
-                               attribute toAttribute: ConstraintAttribute?,
-                               equality: NSLayoutConstraint.Relation,
-                               constant: CGFloat,
-                               multiplier: CGFloat) -> NSLayoutConstraint
-    {
-        let appliedConstraint = NSLayoutConstraint(item: self,
-                                                   attribute: fromAtribute,
-                                                   relatedBy: equality,
-                                                   toItem: element,
-                                                   attribute: element.flatMap { _ in toAttribute?.constraintAttribute } ?? .notAnAttribute,
-                                                   multiplier: multiplier,
-                                                   constant: constant)
+    private func setConstraint(
+        _ fromAtribute: NSLayoutConstraint.Attribute,
+        to element: Constrainable?,
+        attribute toAttribute: ConstraintAttribute?,
+        equality: NSLayoutConstraint.Relation,
+        constant: CGFloat,
+        multiplier: CGFloat
+    ) -> NSLayoutConstraint {
+        let appliedConstraint = NSLayoutConstraint(
+            item: self,
+            attribute: fromAtribute,
+            relatedBy: equality,
+            toItem: element,
+            attribute: element.flatMap { _ in toAttribute?.constraintAttribute } ?? .notAnAttribute,
+            multiplier: multiplier,
+            constant: constant
+        )
         appliedConstraint.isActive = true
         return appliedConstraint
     }

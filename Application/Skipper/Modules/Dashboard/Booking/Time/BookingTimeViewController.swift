@@ -187,9 +187,10 @@ class BookingTimeViewController: UIViewController {
 // MARK: - UICalendarViewDelegate
 
 extension BookingTimeViewController: UICalendarViewDelegate {
-    func calendarView(_ calendarView: UICalendarView,
-                      decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration?
-    {
+    func calendarView(
+        _ calendarView: UICalendarView,
+        decorationFor dateComponents: DateComponents
+    ) -> UICalendarView.Decoration? {
         guard let date = dateComponents.date else { return nil }
 
         if !calendarView.availableDateRange.contains(date) { return nil }
@@ -205,9 +206,10 @@ extension BookingTimeViewController: UICalendarViewDelegate {
 // MARK: - UICalendarSelectionSingleDateDelegate
 
 extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
-    func dateSelection(_ selection: UICalendarSelectionSingleDate,
-                       canSelectDate dateComponents: DateComponents?) -> Bool
-    {
+    func dateSelection(
+        _ selection: UICalendarSelectionSingleDate,
+        canSelectDate dateComponents: DateComponents?
+    ) -> Bool {
         guard let date = dateComponents?.date else { return false }
 
         if viewModel.isMaximumItemsSelected { return false }
@@ -218,9 +220,10 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
             status != .notAvailable
     }
 
-    func dateSelection(_ selection: UICalendarSelectionSingleDate,
-                       didSelectDate dateComponents: DateComponents?)
-    {
+    func dateSelection(
+        _ selection: UICalendarSelectionSingleDate,
+        didSelectDate dateComponents: DateComponents?
+    ) {
         guard let date = dateComponents?.date else { return }
 
         viewModel.loadIntervalsFor(date: date)
@@ -231,9 +234,11 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
 
         selectedDateComponents = dateComponents
 
-        pickerPresenter.presentPicker(pickerData: .init(title: "Выберите время",
-                                                        items: viewModel.availableBookingIntervals.map { $0.time },
-                                                        selectedIndex: nil))
+        pickerPresenter.presentPicker(pickerData: .init(
+            title: "Выберите время",
+            items: viewModel.availableBookingIntervals.map { $0.time },
+            selectedIndex: nil
+        ))
     }
 }
 
@@ -260,8 +265,10 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
 
         let item = viewModel.selectedTimeItems[indexPath.row]
 
-        cell.configureWith(date: DateHelper.Formatters.fullDateFormatter.string(from: item.date),
-                           time: item.timeInterval)
+        cell.configureWith(
+            date: DateHelper.Formatters.fullDateFormatter.string(from: item.date),
+            time: item.timeInterval
+        )
 
         cell.didTapDelete = { [weak self] in
             guard let self = self,

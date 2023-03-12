@@ -13,11 +13,13 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
     // MARK: - Definitions
 
     private enum Constants {
-        static let cloudViewLayoutAttributes = CloudView.Layout.Attributes(insets: .zero,
-                                                                           rowSpace: 8,
-                                                                           itemSpace: 8,
-                                                                           itemHeight: 30,
-                                                                           alignment: .left)
+        static let cloudViewLayoutAttributes = CloudView.Layout.Attributes(
+            insets: .zero,
+            rowSpace: 8,
+            itemSpace: 8,
+            itemHeight: 30,
+            alignment: .left
+        )
         static let contentInsets: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
         static let edgeInsets: UIEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
     }
@@ -133,14 +135,15 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         )
     }
 
-    func configureWith(name: String,
-                       major: String,
-                       rating: Double,
-                       imageUrl: String?,
-                       description: String,
-                       subcategories: [String],
-                       layoutWidth: CGFloat)
-    {
+    func configureWith(
+        name: String,
+        major: String,
+        rating: Double,
+        imageUrl: String?,
+        description: String,
+        subcategories: [String],
+        layoutWidth: CGFloat
+    ) {
         nameLabel.text = name
         majorLabel.text = major
         ratingView.text = String(format: "%.1lf", rating)
@@ -159,9 +162,11 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         let edgeInsets = Constants.edgeInsets
         let contentInsets = Constants.contentInsets
         let availableWidth = layoutWidth - edgeInsets.left - contentInsets.left - edgeInsets.right - contentInsets.right
-        let layout = CloudView.calculateLayout(for: items,
-                                               attributes: Constants.cloudViewLayoutAttributes,
-                                               width: availableWidth)
+        let layout = CloudView.calculateLayout(
+            for: items,
+            attributes: Constants.cloudViewLayoutAttributes,
+            width: availableWidth
+        )
         subcategoriesCloudView.updateWith(items, layout: layout)
     }
 

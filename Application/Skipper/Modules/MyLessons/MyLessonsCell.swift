@@ -104,21 +104,21 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         return label
     }()
 
-    private lazy var costImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.tintColor = R.color.brandPrimary()
-        imageView.contentMode = .scaleToFill
-        imageView.image = R.icon.dollarCircle
-        return imageView
-    }()
-
-    private lazy var costLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = R.color.primary87()
-        label.font = R.typo.body
-        label.numberOfLines = 1
-        return label
-    }()
+//    private lazy var costImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.tintColor = R.color.brandPrimary()
+//        imageView.contentMode = .scaleToFill
+//        imageView.image = R.icon.dollarCircle
+//        return imageView
+//    }()
+//
+//    private lazy var costLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = R.color.primary87()
+//        label.font = R.typo.body
+//        label.numberOfLines = 1
+//        return label
+//    }()
 
     private lazy var contactImageView: UIImageView = {
         let imageView = UIImageView()
@@ -156,8 +156,8 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         containerView.addSubview(lessonInfoHeaderLabel)
         containerView.addSubview(timeImageView)
         containerView.addSubview(timeLabel)
-        containerView.addSubview(costImageView)
-        containerView.addSubview(costLabel)
+//        containerView.addSubview(costImageView)
+//        containerView.addSubview(costLabel)
         containerView.addSubview(contactImageView)
         containerView.addSubview(contactLabel)
 
@@ -227,21 +227,21 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
             .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
 
-        costImageView.applyConstraints(
-            .top(to: timeImageView, attribute: .bottom, constant: 16),
-            .leading(to: containerView, attribute: .leading, constant: 16),
-            .width(constant: 32),
-            .height(constant: 32)
-        )
-
-        costLabel.applyConstraints(
-            .centerY(to: costImageView, attribute: .centerY),
-            .leading(to: costImageView, attribute: .trailing, constant: 8),
-            .trailing(to: containerView, attribute: .trailing, constant: -16)
-        )
+//        costImageView.applyConstraints(
+//            .top(to: timeImageView, attribute: .bottom, constant: 16),
+//            .leading(to: containerView, attribute: .leading, constant: 16),
+//            .width(constant: 32),
+//            .height(constant: 32)
+//        )
+//
+//        costLabel.applyConstraints(
+//            .centerY(to: costImageView, attribute: .centerY),
+//            .leading(to: costImageView, attribute: .trailing, constant: 8),
+//            .trailing(to: containerView, attribute: .trailing, constant: -16)
+//        )
 
         contactImageView.applyConstraints(
-            .top(to: costImageView, attribute: .bottom, constant: 16),
+            .top(to: timeImageView, attribute: .bottom, constant: 16),
             .leading(to: containerView, attribute: .leading, constant: 16),
             .width(constant: 32),
             .height(constant: 32)
@@ -261,7 +261,7 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         mentorNameLabel.text = item.mentorName
         descriptionLabel.text = item.description
         timeLabel.text = item.time
-        costLabel.text = item.cost
+//        costLabel.text = item.cost
         contactLabel.text = item.contact
 
         avatarImageView.kf.setImage(

@@ -36,15 +36,19 @@ class StatusView: SetupableView {
             let separator = i < separators.count ? separators[i] : nil
 
             let viewHeight = view.intrinsicContentSize.height
-            view.frame = .init(x: currentX,
-                               y: (bounds.height - viewHeight) / 2,
-                               width: viewWidth,
-                               height: viewHeight)
+            view.frame = .init(
+                x: currentX,
+                y: (bounds.height - viewHeight) / 2,
+                width: viewWidth,
+                height: viewHeight
+            )
 
-            separator?.frame = .init(x: view.frame.maxX + 1,
-                                     y: separatorY,
-                                     width: 1,
-                                     height: separatorHeight)
+            separator?.frame = .init(
+                x: view.frame.maxX + 1,
+                y: separatorY,
+                width: 1,
+                height: separatorHeight
+            )
 
             currentX += viewWidth + (separator.flatMap { _ in 1 } ?? 0)
         }

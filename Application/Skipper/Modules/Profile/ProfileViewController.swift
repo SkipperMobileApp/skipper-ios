@@ -203,9 +203,11 @@ class ProfileViewController: UIViewController {
     }
 
     private func showAvatarOptionsSheet() {
-        let sheet = UIAlertController(title: "Update Avatar",
-                                      message: "Image size limit - 20MB",
-                                      preferredStyle: .actionSheet)
+        let sheet = UIAlertController(
+            title: "Update Avatar",
+            message: "Image size limit - 20MB",
+            preferredStyle: .actionSheet
+        )
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             sheet.addAction(.init(title: "Take a photo", style: .default) { [weak self] _ in

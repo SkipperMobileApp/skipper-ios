@@ -18,17 +18,23 @@ class DashboardViewController: UIViewController {
     // MARK: - UI Controls
 
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: makeLayout())
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: makeLayout()
+        )
 
         collectionView.showsVerticalScrollIndicator = false
 
         collectionView.register(cellType: DashboardCategoryCollectionCell.self)
         collectionView.register(cellType: DashboardMentorCollectionCell.self)
-        collectionView.register(supplementaryViewType: DashboardSectionHeaderView.self,
-                                ofKind: UICollectionView.elementKindSectionHeader)
-        collectionView.register(supplementaryViewType: DashboardCategoryFooterView.self,
-                                ofKind: UICollectionView.elementKindSectionFooter)
+        collectionView.register(
+            supplementaryViewType: DashboardSectionHeaderView.self,
+            ofKind: UICollectionView.elementKindSectionHeader
+        )
+        collectionView.register(
+            supplementaryViewType: DashboardCategoryFooterView.self,
+            ofKind: UICollectionView.elementKindSectionFooter
+        )
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -137,37 +143,59 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     private func makeCategorySectionLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.33),
+            heightDimension: .fractionalHeight(1)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
 
-        let innerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .fractionalHeight(0.5))
-        let innerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: innerGroupSize,
-                                                            subitems: [item])
+        let innerGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.5)
+        )
+        let innerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: innerGroupSize,
+            subitems: [item]
+        )
 
-        let verticalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(1.0))
-        let verticalGroup = NSCollectionLayoutGroup.vertical(layoutSize: verticalGroupSize,
-                                                             subitems: [innerGroup])
+        let verticalGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let verticalGroup = NSCollectionLayoutGroup.vertical(
+            layoutSize: verticalGroupSize,
+            subitems: [innerGroup]
+        )
 
-        let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .absolute(280))
-        let outerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: outerGroupSize,
-                                                            subitems: [verticalGroup])
+        let outerGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(280)
+        )
+        let outerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: outerGroupSize,
+            subitems: [verticalGroup]
+        )
 
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(50))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
-                                                                 elementKind: UICollectionView.elementKindSectionHeader,
-                                                                 containerAnchor: .init(edges: .top))
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(50)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            containerAnchor: .init(edges: .top)
+        )
 
-        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(20))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize,
-                                                                 elementKind: UICollectionView.elementKindSectionFooter,
-                                                                 containerAnchor: .init(edges: .bottom))
+        let footerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(20)
+        )
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize,
+            elementKind: UICollectionView.elementKindSectionFooter,
+            containerAnchor: .init(edges: .bottom)
+        )
 
         let section = NSCollectionLayoutSection(group: outerGroup)
         section.boundarySupplementaryItems = [header, footer]
@@ -184,22 +212,30 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     private func makeMentorsSectionLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                               heightDimension: .fractionalWidth(0.5))
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.9),
+            heightDimension: .fractionalWidth(0.5)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
 
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(50))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
-                                                                 elementKind: UICollectionView.elementKindSectionHeader,
-                                                                 containerAnchor: .init(edges: .top))
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(50)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            containerAnchor: .init(edges: .top)
+        )
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
@@ -223,10 +259,11 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView
-    {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
         let section = viewModel.sections[indexPath.section]
 
         switch kind {
@@ -239,11 +276,15 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
         case UICollectionView.elementKindSectionFooter:
             if case let .categories(items) = section {
-                let view: DashboardCategoryFooterView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                                        for: indexPath)
+                let view: DashboardCategoryFooterView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    for: indexPath
+                )
 
-                view.configureWith(numberOfPages: Int(ceil(Double(items.count) / 6.0)),
-                                   currentPagePublisher: viewModel.$categoriesPage.eraseToAnyPublisher())
+                view.configureWith(
+                    numberOfPages: Int(ceil(Double(items.count) / 6.0)),
+                    currentPagePublisher: viewModel.$categoriesPage.eraseToAnyPublisher()
+                )
                 return view
             }
 

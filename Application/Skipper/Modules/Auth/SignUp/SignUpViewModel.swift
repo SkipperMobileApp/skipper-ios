@@ -54,10 +54,12 @@ class SignUpViewModel {
               let firstName = values[.firstName],
               let lastName = values[.lastName] else { return nil }
 
-        return .init(email: email,
-                     password: password,
-                     firstName: firstName,
-                     lastName: lastName)
+        return .init(
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+        )
     }
 }
 
@@ -95,20 +97,30 @@ extension SignUpViewModel {
             case .password:
                 return [
                     EmptyValueValidator(errorText: Strings.authErrorPasswordEmpty()),
-                    LengthValidator(errorText: Strings.authErrorPasswordLength(8),
-                                    minimumLength: 8),
-                    ContainingCharactersValidator(errorText: Strings.authErrorPasswordUppercase(1),
-                                                  allowedCharacters: .uppercaseLetters,
-                                                  minimumAmount: 1),
-                    ContainingCharactersValidator(errorText: Strings.authErrorPasswordLowercase(1),
-                                                  allowedCharacters: .lowercaseLetters,
-                                                  minimumAmount: 1),
-                    ContainingCharactersValidator(errorText: Strings.authErrorPasswordDigit(1),
-                                                  allowedCharacters: .decimalDigits,
-                                                  minimumAmount: 1),
-                    ContainingCharactersValidator(errorText: Strings.authErrorPasswordSymbol(1),
-                                                  allowedCharacters: .specialSymbols,
-                                                  minimumAmount: 1)
+                    LengthValidator(
+                        errorText: Strings.authErrorPasswordLength(8),
+                        minimumLength: 8
+                    ),
+                    ContainingCharactersValidator(
+                        errorText: Strings.authErrorPasswordUppercase(1),
+                        allowedCharacters: .uppercaseLetters,
+                        minimumAmount: 1
+                    ),
+                    ContainingCharactersValidator(
+                        errorText: Strings.authErrorPasswordLowercase(1),
+                        allowedCharacters: .lowercaseLetters,
+                        minimumAmount: 1
+                    ),
+                    ContainingCharactersValidator(
+                        errorText: Strings.authErrorPasswordDigit(1),
+                        allowedCharacters: .decimalDigits,
+                        minimumAmount: 1
+                    ),
+                    ContainingCharactersValidator(
+                        errorText: Strings.authErrorPasswordSymbol(1),
+                        allowedCharacters: .specialSymbols,
+                        minimumAmount: 1
+                    )
                 ]
             case .firstName:
                 return [EmptyValueValidator(errorText: Strings.authErrorFirstNameEmpty())]

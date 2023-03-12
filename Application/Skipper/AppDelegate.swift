@@ -72,8 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Services
 
-        let logoutHandler = makeLogoutHandler(logoutRepository: logoutRepository,
-                                              postLogoutNavigationHandler: reAuthHandler)
+        let logoutHandler = makeLogoutHandler(
+            logoutRepository: logoutRepository,
+            postLogoutNavigationHandler: reAuthHandler
+        )
 
         // Assembling
 
@@ -86,9 +88,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(bookedLessonRepository)
     }
 
-    private func makeLogoutHandler(logoutRepository: LogoutRepository,
-                                   postLogoutNavigationHandler: @escaping () -> Void) -> LogoutHandler
-    {
+    private func makeLogoutHandler(
+        logoutRepository: LogoutRepository,
+        postLogoutNavigationHandler: @escaping () -> Void
+    ) -> LogoutHandler {
         SyncCompositeLogoutHandler {
             APILogoutHandler(logoutRepository: logoutRepository)
             NavigationLogoutHandler(logoutNavigationHandler: postLogoutNavigationHandler)

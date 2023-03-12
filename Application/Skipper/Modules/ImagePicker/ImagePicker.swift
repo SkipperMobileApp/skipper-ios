@@ -39,14 +39,18 @@ class ImagePicker: NSObject {
     }
 
     func showPermissionDeniedAlert(on controller: UIViewController) {
-        let alert = UIAlertController(title: "Photo library permission denied",
-                                      message: "Please, go to settings and enable it to choose photos from gallery",
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Photo library permission denied",
+            message: "Please, go to settings and enable it to choose photos from gallery",
+            preferredStyle: .alert
+        )
         alert.addAction(.init(title: "Cancel", style: .cancel))
         alert.addAction(.init(title: "Go to setting", style: .default) { _ in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                      options: [:],
-                                      completionHandler: nil)
+            UIApplication.shared.open(
+                URL(string: UIApplication.openSettingsURLString)!,
+                options: [:],
+                completionHandler: nil
+            )
         })
 
         controller.present(alert, animated: true)
@@ -66,9 +70,10 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
         controller.present(picker, animated: true)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any])
-    {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         guard let image = info[.originalImage] as? UIImage else { return }
 
         provider?.didSelectImage(image)

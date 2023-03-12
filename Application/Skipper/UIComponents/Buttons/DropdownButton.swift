@@ -73,10 +73,14 @@ class DropdownButton: SetupableControl {
     }
 
     override var intrinsicContentSize: CGSize {
-        let titleSize = titleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                      height: .greatestFiniteMagnitude))
-        let placeholderSize = placeholderLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                                  height: .greatestFiniteMagnitude))
+        let titleSize = titleLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
+        let placeholderSize = placeholderLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
 
         let imageSize = Constants.imageSize
         let innerInset = Constants.innerInset
@@ -111,20 +115,26 @@ class DropdownButton: SetupableControl {
         let imageSize = Constants.imageSize
         let textWidth = width - contentInset.left - contentInset.right - imageSize.width - innerInset
 
-        arrowImageView.frame = .init(x: width - contentInset.right - imageSize.width,
-                                     y: (height - imageSize.height) / 2,
-                                     width: imageSize.width,
-                                     height: imageSize.height)
+        arrowImageView.frame = .init(
+            x: width - contentInset.right - imageSize.width,
+            y: (height - imageSize.height) / 2,
+            width: imageSize.width,
+            height: imageSize.height
+        )
 
-        titleLabel.frame = .init(x: contentInset.left,
-                                 y: 0,
-                                 width: textWidth,
-                                 height: height)
+        titleLabel.frame = .init(
+            x: contentInset.left,
+            y: 0,
+            width: textWidth,
+            height: height
+        )
 
-        placeholderLabel.frame = .init(x: contentInset.left,
-                                       y: 0,
-                                       width: textWidth,
-                                       height: height)
+        placeholderLabel.frame = .init(
+            x: contentInset.left,
+            y: 0,
+            width: textWidth,
+            height: height
+        )
     }
 
     // MARK: - UI Methods

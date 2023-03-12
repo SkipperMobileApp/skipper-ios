@@ -8,10 +8,13 @@
 import Foundation
 @testable import Skipper
 
-func mockedAppSession(tokensContainer: TokensContainer = TokensContainerMock(),
-                      authRepository: AuthRepository = AuthRepositoryMock()) -> AppSession
-{
-    .init(tokensContainer: tokensContainer,
-          exampleRepository: exampleRepository,
-          authRepository: authRepository)
+func mockedAppSession(
+    tokensContainer: TokensContainer = TokensContainerMock(),
+    authRepository: AuthRepository = AuthRepositoryMock()
+) -> AppSession {
+    .init(
+        tokensContainer: tokensContainer,
+        exampleRepository: exampleRepository,
+        authRepository: authRepository
+    )
 }

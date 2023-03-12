@@ -15,12 +15,13 @@ class AlertPresenter {
     }
 
     /// Presents alert with one button
-    class func presentSimpleAlert(_ title: String? = nil,
-                                  message: String? = nil,
-                                  controller: UIViewController,
-                                  buttonText: String = Strings.alertOk(),
-                                  action: (() -> Void)? = nil)
-    {
+    class func presentSimpleAlert(
+        _ title: String? = nil,
+        message: String? = nil,
+        controller: UIViewController,
+        buttonText: String = Strings.alertOk(),
+        action: (() -> Void)? = nil
+    ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: buttonText, style: .default, handler: { _ in
@@ -32,14 +33,15 @@ class AlertPresenter {
     }
 
     /// Presents alert with two buttons
-    class func present2ButtonAlert(_ title: String? = nil,
-                                   message: String? = nil,
-                                   controller: UIViewController,
-                                   button1Text: String,
-                                   button2Text: String,
-                                   action1: (() -> Void)? = nil,
-                                   action2: (() -> Void)? = nil)
-    {
+    class func present2ButtonAlert(
+        _ title: String? = nil,
+        message: String? = nil,
+        controller: UIViewController,
+        button1Text: String,
+        button2Text: String,
+        action1: (() -> Void)? = nil,
+        action2: (() -> Void)? = nil
+    ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action1 = UIAlertAction(title: button1Text, style: .default, handler: { _ in
             action1?()

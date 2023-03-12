@@ -17,12 +17,13 @@ struct Log {
     }
 
     /// Logs to console only.
-    static func console<T>(_ object: T,
-                           prefix: String = "",
-                           filename: String = #file,
-                           line: Int = #line,
-                           funcname: String = #function)
-    {
+    static func console<T>(
+        _ object: T,
+        prefix: String = "",
+        filename: String = #file,
+        line: Int = #line,
+        funcname: String = #function
+    ) {
         let prefix = prefix.isEmpty ? "" : "\(prefix) -> "
         print("\(prefix)\(NSDate()): \((filename as NSString).lastPathComponent)(\(line)) \(funcname):\(object)\n")
     }

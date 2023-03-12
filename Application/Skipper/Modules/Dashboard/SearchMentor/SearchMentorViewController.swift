@@ -141,13 +141,15 @@ extension SearchMentorViewController: UITableViewDelegate, UITableViewDataSource
 
         let item = viewModel.items[indexPath.row]
 
-        cell.configureWith(name: item.name,
-                           major: item.major,
-                           rating: item.rating,
-                           imageUrl: item.imageUrl,
-                           description: item.description,
-                           subcategories: item.subcategories,
-                           layoutWidth: tableView.frame.width)
+        cell.configureWith(
+            name: item.name,
+            major: item.major,
+            rating: item.rating,
+            imageUrl: item.imageUrl,
+            description: item.description,
+            subcategories: item.subcategories,
+            layoutWidth: tableView.frame.width
+        )
 
         return cell
     }

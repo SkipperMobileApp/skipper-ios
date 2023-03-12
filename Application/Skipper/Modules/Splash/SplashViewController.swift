@@ -62,8 +62,10 @@ class SplashViewController: UIViewController {
 
         view.addSubview(label)
 
-        label.applyConstraints(.centerX(to: view, attribute: .centerX),
-                               .centerY(to: view, attribute: .centerY, constant: -20))
+        label.applyConstraints(
+            .centerX(to: view, attribute: .centerX),
+            .centerY(to: view, attribute: .centerY, constant: -20)
+        )
     }
 
     private func bindViewModelActions() {

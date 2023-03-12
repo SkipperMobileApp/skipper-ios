@@ -102,10 +102,11 @@ public class NavigationRouter: NSObject, NavigationRouterType {
 // MARK: - UINavigationControllerDelegate
 
 extension NavigationRouter: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController,
-                                     didShow _: UIViewController,
-                                     animated _: Bool)
-    {
+    public func navigationController(
+        _ navigationController: UINavigationController,
+        didShow _: UIViewController,
+        animated _: Bool
+    ) {
         guard let poppedController = navigationController.transitionCoordinator?.viewController(forKey: .from),
               !navigationController.viewControllers.contains(poppedController)
         else {
