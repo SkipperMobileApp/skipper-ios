@@ -35,9 +35,18 @@ class LessonDetailsViewController: UIViewController {
         return view
     }()
 
+    private lazy var cancelButton: UIButton = {
+        let button = SecondaryButton()
+        button.tintColor = R.color.brandError()
+        button.setTitle(Strings.myLessonsDetailsCancelButtonTitle(), for: .normal)
+        button.addTarget(self, action: #selector(cancelLessonAction), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - Output
 
     var didFinish: (() -> Void)?
+    var didCancelLesson: (() -> Void)?
 
     // MARK: - Properties
 
@@ -90,11 +99,18 @@ class LessonDetailsViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(headerView)
         contentView.addSubview(infoView)
+        contentView.addSubview(cancelButton)
 
         scrollView.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
+
         contentView.applyConstraints(
             .fit(in: scrollView.contentLayoutGuide),
-            .width(to: scrollView, attribute: .width)
+            .width(to: scrollView, attribute: .width),
+            .height(
+                to: scrollView.frameLayoutGuide,
+                attribute: .height,
+                equality: .greaterThanOrEqual
+            )
         )
 
         headerView.applyConstraints(
@@ -106,8 +122,15 @@ class LessonDetailsViewController: UIViewController {
         infoView.applyConstraints(
             .leading(to: contentView, attribute: .leading),
             .trailing(to: contentView, attribute: .trailing),
-            .top(to: headerView, attribute: .bottom),
-            .bottom(to: contentView, attribute: .bottom)
+            .top(to: headerView, attribute: .bottom)
+        )
+
+        cancelButton.applyConstraints(
+            .leading(to: contentView, attribute: .leading, constant: 16),
+            .trailing(to: contentView, attribute: .trailing, constant: -16),
+            .top(to: infoView, attribute: .bottom, constant: 16, equality: .greaterThanOrEqual),
+            .bottom(to: contentView, attribute: .bottom, constant: -16),
+            .height(constant: 45)
         )
     }
 
@@ -141,6 +164,13 @@ class LessonDetailsViewController: UIViewController {
                 self?.configureViews(with: info)
             }
             .store(in: &subscriptions)
+
+        viewModel.$cancelLessonEvent
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.didCancelLesson?()
+            }
+            .store(in: &subscriptions)
     }
 
     func configureViews(with info: LessonDetailsViewModel.LessonInfo) {
@@ -160,5 +190,11 @@ class LessonDetailsViewController: UIViewController {
                 time: info.time
             )
         )
+    }
+
+    // MARK: - UI Callbacks
+
+    @objc private func cancelLessonAction() {
+        viewModel.cancelLesson()
     }
 }

@@ -59,6 +59,7 @@
 "myLessons.nav.title" = "Мои занятия";
 "myLessons.lessonInfo.label" = "Информация о занятии";
 "myLessons.lessonInfo.mentor" = "Ментор";
+"myLessons.details.cancelButton.title" = "Отменить занятие";
 
 // MARK: - Errors
 

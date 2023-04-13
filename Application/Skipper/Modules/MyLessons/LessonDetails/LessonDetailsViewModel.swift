@@ -12,6 +12,7 @@ class LessonDetailsViewModel {
 
     @Event private(set) var isLoading: Bool?
     @Event private(set) var errorEvent: Error?
+    @Event private(set) var cancelLessonEvent: Void?
 
     @Injected() private var bookedLessonRepository: BookedLessonRepository
     @Injected() private var userRepository: UserRepository
@@ -64,6 +65,20 @@ class LessonDetailsViewModel {
                     isLoading = false
                 }
             }
+        }
+    }
+
+    func cancelLesson() {
+        isLoading = true
+
+        Task {
+            do {
+                try await bookedLessonRepository.cancelLesson(lessonId: lessonId)
+                cancelLessonEvent = ()
+            } catch {
+                errorEvent = error
+            }
+            isLoading = false
         }
     }
 }
