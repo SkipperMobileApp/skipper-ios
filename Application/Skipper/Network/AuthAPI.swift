@@ -80,13 +80,14 @@ class FirebaseAuthAPI: AuthAPI {
 
     func changePassword(oldPassword: String, newPassword: String) async throws {
         guard let user = auth.currentUser, let email = user.email else {
-            throw AppError(message: "Пользователь не вошел в аккаунт")
+            throw AppError(message: Strings.errorUserNotAuthorized())
         }
 
-        try await user.reauthenticate(with: EmailAuthProvider.credential(
-            withEmail: email,
-            password: oldPassword
-        )
+        try await user.reauthenticate(
+            with: EmailAuthProvider.credential(
+                withEmail: email,
+                password: oldPassword
+            )
         )
 
         try await user.updatePassword(to: newPassword)

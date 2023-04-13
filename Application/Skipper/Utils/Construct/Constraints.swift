@@ -100,13 +100,16 @@ public enum Constraints {
         equality: NSLayoutConstraint.Relation = .equal
     )
 
-    /// Fits current view into other Constrainable element (layout guide or view) with constant `inset` from all sides
+    /// Fits current view into other Constrainable element (layout guide or view) with constant
+    /// `inset` from all sides
     case fit(in: Constrainable, inset: CGFloat = 0)
 
-    /// Fits current view into other Constrainable element (layout guide or view) with custom `insets`
+    /// Fits current view into other Constrainable element (layout guide or view) with custom
+    /// `insets`
     case fitWithInsets(in: Constrainable, insets: UIEdgeInsets = .zero)
 
-    /// Align current view's center anchors (X and Y) to other Constrainable element's center anchors
+    /// Align current view's center anchors (X and Y) to other Constrainable element's center
+    /// anchors
     case center(in: Constrainable)
 }
 

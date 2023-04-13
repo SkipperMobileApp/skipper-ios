@@ -191,7 +191,7 @@ class LessonRepositoryImpl: LessonRepository {
         try await Task.sleep(for: .seconds(0.5))
 
         guard let lesson = lessons.first(where: { $0.id == lessonId }) else {
-            throw AppError(message: "Занятие не найдено :(")
+            throw AppError(message: Strings.errorLessonNotFound())
         }
 
         return lesson

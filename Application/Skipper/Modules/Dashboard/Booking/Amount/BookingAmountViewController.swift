@@ -191,8 +191,10 @@ class BookingAmountViewController: UIViewController {
 
     private func updateData() {
         // totalLabel.text = "Итоговая стоимость: \(viewModel.totalCost) рублей"
-        amountButton.text = viewModel.selectedAmountIndex.flatMap { viewModel.amountItems[$0].title }
-        durationButton.text = viewModel.selectedDurationIndex.flatMap { viewModel.durationItems[$0].title }
+        amountButton.text = viewModel.selectedAmountIndex
+            .flatMap { viewModel.amountItems[$0].title }
+        durationButton.text = viewModel.selectedDurationIndex
+            .flatMap { viewModel.durationItems[$0].title }
     }
 
     private func bindViewModelActions() {}

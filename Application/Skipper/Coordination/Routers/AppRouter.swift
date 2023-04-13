@@ -15,7 +15,10 @@ public class AppRouter: PresentationRouterType {
         setRootModule(module, transitionOptions: nil)
     }
 
-    func setRootModule(_ module: Presentable, transitionOptions: UIWindow.TransitionOptions? = nil) {
+    func setRootModule(
+        _ module: Presentable,
+        transitionOptions: UIWindow.TransitionOptions? = nil
+    ) {
         let controller = module.toPresentable()
 
         if let transitionOptions = transitionOptions {
@@ -31,7 +34,10 @@ public class AppRouter: PresentationRouterType {
     }
 
     public func toPresentable() -> UIViewController {
-        assert(window.rootViewController != nil, "setRootModule must be already called at this moment")
+        assert(
+            window.rootViewController != nil,
+            "setRootModule must be already called at this moment"
+        )
         return window.rootViewController!
     }
 }

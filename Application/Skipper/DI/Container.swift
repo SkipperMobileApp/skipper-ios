@@ -47,13 +47,18 @@ final class SharedDependencyContainer: DependencyContainer {
             dependency != nil,
             """
                 No dependency found for \(String(describing: T.self))!
-                Dependency must be registered with \(String(describing: self)).register(:for:) before resolve.")
+                Dependency must be registered with \(
+                    String(describing: self)
+                ).register(:for:) before resolve.")
             """
         )
         return dependency!
     }
 
-    private func dependencyIdentifier<T>(withCustomIdentifier identifier: String, type: T.Type) -> String {
+    private func dependencyIdentifier<T>(
+        withCustomIdentifier identifier: String,
+        type: T.Type
+    ) -> String {
         return "\(identifier)_\(String(describing: T.self))"
     }
 }

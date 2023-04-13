@@ -27,7 +27,7 @@ class MyLessonsViewModel {
         Task {
             do {
                 guard let user = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Пользователь не найден")
+                    throw AppError(message: Strings.errorUserNotAuthorized())
                 }
 
                 let lessons = try await bookedLessonRepository.lessonsForUser(userId: user.id)
@@ -43,12 +43,20 @@ class MyLessonsViewModel {
                             lessonId: lesson.lessonId,
                             name: lesson.name,
                             type: titleFromLessonType(lesson.type),
-                            mentorName: [mentor.firstName, mentor.lastName].filter { !$0.isEmpty }.joined(separator: " "),
-                            mentorAvatarURL: mentor.imageUrl,
-                            description: lesson.description,
-                            time: timeStringFor(date: lesson.date, time: lesson.time, duration: lesson.duration),
-                            cost: "\(lesson.cost) руб.",
-                            contact: contactStringFor(lessonContactType: lesson.contact, mentor: mentor, date: lesson.date)
+                            mentorName: [
+                                mentor.firstName,
+                                mentor.lastName
+                            ].filter { !$0.isEmpty }.joined(separator: " "),
+                            time: timeStringFor(
+                                date: lesson.date,
+                                time: lesson.time,
+                                duration: lesson.duration
+                            ),
+                            contact: contactStringFor(
+                                lessonContactType: lesson.contact,
+                                mentor: mentor,
+                                date: lesson.date
+                            )
                         )
                     }
 
@@ -95,10 +103,15 @@ class MyLessonsViewModel {
         let timeString = String(time.split(separator: " - ").first ?? "") // Temporary
         let durationString = durationFromLessonDuration(duration)
 
-        return [dateString, timeString, durationString].filter { !$0.isEmpty }.joined(separator: ", ")
+        return [dateString, timeString, durationString].filter { !$0.isEmpty }
+            .joined(separator: ", ")
     }
 
-    private func contactStringFor(lessonContactType: UserContactType, mentor: UserModel, date: Date) -> String {
+    private func contactStringFor(
+        lessonContactType: UserContactType,
+        mentor: UserModel,
+        date: Date
+    ) -> String {
         if abs(date.timeIntervalSince(.now)) > 60 * 60 * 24 {
             return "\(contactTypeNameFrom(type: lessonContactType)): Станет видимым за сутки до занятия"
         }

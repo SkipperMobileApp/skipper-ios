@@ -107,8 +107,9 @@ extension NavigationRouter: UINavigationControllerDelegate {
         didShow _: UIViewController,
         animated _: Bool
     ) {
-        guard let poppedController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.viewControllers.contains(poppedController)
+        guard let poppedController = navigationController.transitionCoordinator?
+            .viewController(forKey: .from),
+            !navigationController.viewControllers.contains(poppedController)
         else {
             return
         }

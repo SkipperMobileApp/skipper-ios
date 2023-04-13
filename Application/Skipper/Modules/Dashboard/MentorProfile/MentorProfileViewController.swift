@@ -156,7 +156,10 @@ class MentorProfileViewController: UIViewController {
         )
 
         stackView.applyConstraints(
-            .fitWithInsets(in: containerView, insets: .init(top: 24, left: 16, bottom: 24, right: 16))
+            .fitWithInsets(
+                in: containerView,
+                insets: .init(top: 24, left: 16, bottom: 24, right: 16)
+            )
         )
 
         setupStack()
@@ -319,7 +322,11 @@ class MentorProfileViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
     }

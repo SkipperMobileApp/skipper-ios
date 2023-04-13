@@ -10,6 +10,7 @@ import Foundation
 protocol BookedLessonRepository {
     func bookLessons(lessons: [BookedLesson]) async throws
     func lessonsForUser(userId: String) async throws -> [BookedLesson]
+    func lesson(lessonId: String) async throws -> BookedLesson
 }
 
 class BookedLessonRepositoryImpl: BookedLessonRepository {
@@ -25,5 +26,13 @@ class BookedLessonRepositoryImpl: BookedLessonRepository {
         try await Task.sleep(for: .seconds(0.5))
 
         return bookedLessons.filter { $0.userId == userId }
+    }
+
+    func lesson(lessonId: String) async throws -> BookedLesson {
+        guard let lesson = bookedLessons.first(where: { $0.lessonId == lessonId }) else {
+            throw AppError(message: "Занятие не найдено")
+        }
+
+        return lesson
     }
 }

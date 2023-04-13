@@ -186,17 +186,22 @@ class ProfileViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
 
         viewModel.$profileInfo
             .sink { [weak self] info in
-                self?.headerView.configure(with: .init(
-                    avatarUrl: info.avatarUrl,
-                    name: info.name,
-                    email: info.email
-                )
+                self?.headerView.configure(
+                    with: .init(
+                        avatarUrl: info.avatarUrl,
+                        name: info.name,
+                        email: info.email
+                    )
                 )
             }
             .store(in: &subscriptions)

@@ -95,10 +95,15 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
         containerView.addSubview(avatarImageView)
         containerView.addSubview(subcategoriesCloudView)
 
-        containerView.applyConstraints(.fitWithInsets(in: contentView, insets: Constants.edgeInsets))
+        containerView
+            .applyConstraints(.fitWithInsets(in: contentView, insets: Constants.edgeInsets))
 
         avatarImageView.applyConstraints(
-            .leading(to: containerView, attribute: .leading, constant: Constants.contentInsets.left),
+            .leading(
+                to: containerView,
+                attribute: .leading,
+                constant: Constants.contentInsets.left
+            ),
             .top(to: containerView, attribute: .top, constant: Constants.contentInsets.top),
             .height(constant: 64),
             .width(constant: 64)
@@ -112,26 +117,54 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
 
         ratingView.applyConstraints(
             .centerY(to: nameLabel, attribute: .centerY),
-            .trailing(to: containerView, attribute: .trailing, constant: -Constants.contentInsets.right)
+            .trailing(
+                to: containerView,
+                attribute: .trailing,
+                constant: -Constants.contentInsets.right
+            )
         )
 
         majorLabel.applyConstraints(
             .top(to: nameLabel, attribute: .bottom, constant: 4),
             .leading(to: avatarImageView, attribute: .trailing, constant: 8),
-            .trailing(to: containerView, attribute: .trailing, constant: -Constants.contentInsets.right)
+            .trailing(
+                to: containerView,
+                attribute: .trailing,
+                constant: -Constants.contentInsets.right
+            )
         )
 
         descriptionLabel.applyConstraints(
             .top(to: avatarImageView, attribute: .bottom, constant: 8),
-            .leading(to: containerView, attribute: .leading, constant: Constants.contentInsets.left),
-            .trailing(to: containerView, attribute: .trailing, constant: -Constants.contentInsets.right)
+            .leading(
+                to: containerView,
+                attribute: .leading,
+                constant: Constants.contentInsets.left
+            ),
+            .trailing(
+                to: containerView,
+                attribute: .trailing,
+                constant: -Constants.contentInsets.right
+            )
         )
 
         subcategoriesCloudView.applyConstraints(
             .top(to: descriptionLabel, attribute: .bottom, constant: 8),
-            .leading(to: containerView, attribute: .leading, constant: Constants.contentInsets.left),
-            .trailing(to: containerView, attribute: .trailing, constant: -Constants.contentInsets.right),
-            .bottom(to: containerView, attribute: .bottom, constant: -Constants.contentInsets.bottom)
+            .leading(
+                to: containerView,
+                attribute: .leading,
+                constant: Constants.contentInsets.left
+            ),
+            .trailing(
+                to: containerView,
+                attribute: .trailing,
+                constant: -Constants.contentInsets.right
+            ),
+            .bottom(
+                to: containerView,
+                attribute: .bottom,
+                constant: -Constants.contentInsets.bottom
+            )
         )
     }
 
@@ -161,7 +194,8 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
 
         let edgeInsets = Constants.edgeInsets
         let contentInsets = Constants.contentInsets
-        let availableWidth = layoutWidth - edgeInsets.left - contentInsets.left - edgeInsets.right - contentInsets.right
+        let availableWidth = layoutWidth - edgeInsets.left - contentInsets.left - edgeInsets
+            .right - contentInsets.right
         let layout = CloudView.calculateLayout(
             for: items,
             attributes: Constants.cloudViewLayoutAttributes,
@@ -172,12 +206,18 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
 
     func performBlink() {
         containerView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseIn, .autoreverse]) { [weak self] in
-            self?.containerView.backgroundColor = R.color.brandPrimary()?.withAlphaComponent(0.3)
-        } completion: { [weak self] finished in
-            if finished {
-                self?.containerView.backgroundColor = R.color.themePrimary()
+        UIView
+            .animate(
+                withDuration: 0.15,
+                delay: 0,
+                options: [.curveEaseIn, .autoreverse]
+            ) { [weak self] in
+                self?.containerView.backgroundColor = R.color.brandPrimary()?
+                    .withAlphaComponent(0.3)
+            } completion: { [weak self] finished in
+                if finished {
+                    self?.containerView.backgroundColor = R.color.themePrimary()
+                }
             }
-        }
     }
 }

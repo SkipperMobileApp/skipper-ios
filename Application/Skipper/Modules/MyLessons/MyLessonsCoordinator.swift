@@ -14,12 +14,20 @@ class MyLessonsCoordinator: NavigationCoordinator {
         let viewModel = MyLessonsViewModel()
         let controller = MyLessonsViewController(viewModel: viewModel)
 
-        controller.didSelectLesson = { _ in
+        controller.didSelectLesson = { [weak self] lessonId in
+            self?.showLessonDetails(lessonId: lessonId)
         }
 
         router.navigationController.navigationItem.largeTitleDisplayMode = .always
         router.navigationController.navigationBar.prefersLargeTitles = true
 
         router.setRootModule(controller)
+    }
+
+    func showLessonDetails(lessonId: String) {
+        let viewModel = LessonDetailsViewModel(lessonId: lessonId)
+        let controller = LessonDetailsViewController(viewModel: viewModel)
+
+        router.push(controller)
     }
 }

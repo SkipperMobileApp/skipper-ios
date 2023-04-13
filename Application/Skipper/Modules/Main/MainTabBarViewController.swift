@@ -56,7 +56,11 @@ class MainTabBarViewController: UITabBarController {
         viewModel.didFail = { [weak self] error in
             guard let self = self else { return }
 
-            AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+            AlertPresenter.presentSimpleAlert(
+                "Ошибка",
+                message: error.localizedDescription,
+                controller: self
+            )
         }
     }
 }

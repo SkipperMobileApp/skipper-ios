@@ -25,15 +25,16 @@ class ImagePicker: NSObject {
         case .authorized, .limited: presentPhotoPicker(on: controller)
         case .denied: showPermissionDeniedAlert(on: controller)
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self, weak controller] status in
-                guard let self = self, let controller = controller else { return }
+            PHPhotoLibrary
+                .requestAuthorization(for: .readWrite) { [weak self, weak controller] status in
+                    guard let self = self, let controller = controller else { return }
 
-                if status == .authorized {
-                    DispatchQueue.main.async {
-                        self.presentPhotoPicker(on: controller)
+                    if status == .authorized {
+                        DispatchQueue.main.async {
+                            self.presentPhotoPicker(on: controller)
+                        }
                     }
                 }
-            }
         default: return
         }
     }
@@ -111,24 +112,25 @@ extension ImagePicker: PHPickerViewControllerDelegate, PHPhotoLibraryAvailabilit
             return
         }
 
-        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self, weak picker] image, error in
+        result.itemProvider
+            .loadObject(ofClass: UIImage.self) { [weak self, weak picker] image, error in
 
-            if error != nil {
-                DispatchQueue.main.async {
-                    picker?.dismiss(animated: true) {
-                        self?.provider?.didSelectImage(nil)
+                if error != nil {
+                    DispatchQueue.main.async {
+                        picker?.dismiss(animated: true) {
+                            self?.provider?.didSelectImage(nil)
+                        }
+                    }
+                    return
+                }
+
+                if let image = image as? UIImage {
+                    DispatchQueue.main.async {
+                        picker?.dismiss(animated: true) { [weak self] in
+                            self?.provider?.didSelectImage(image)
+                        }
                     }
                 }
-                return
             }
-
-            if let image = image as? UIImage {
-                DispatchQueue.main.async {
-                    picker?.dismiss(animated: true) { [weak self] in
-                        self?.provider?.didSelectImage(image)
-                    }
-                }
-            }
-        }
     }
 }

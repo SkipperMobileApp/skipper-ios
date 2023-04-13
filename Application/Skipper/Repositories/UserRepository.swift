@@ -159,12 +159,32 @@ class UserRepositoryImpl {
     private func generateCv() -> UserModel.UserResumeInfo {
         .init(
             educationUnits: [
-                .init(name: "Сибирский Федеральный Университет", startYear: 2016, endYear: 2020, degree: "Бакалавр"),
-                .init(name: "Сибирский Федеральный Университет", startYear: 2020, endYear: 2022, degree: "Магистр")
+                .init(
+                    name: "Сибирский Федеральный Университет",
+                    startYear: 2016,
+                    endYear: 2020,
+                    degree: "Бакалавр"
+                ),
+                .init(
+                    name: "Сибирский Федеральный Университет",
+                    startYear: 2020,
+                    endYear: 2022,
+                    degree: "Магистр"
+                )
             ],
             workUnits: [
-                .init(name: #"ООО "Очень Интересно""#, startYear: 2019, endYear: 2020, post: "Мобильный разработчик"),
-                .init(name: #"ООО "Тинькофф Центр Разработки""#, startYear: 2020, endYear: nil, post: "Android-разработчик")
+                .init(
+                    name: #"ООО "Очень Интересно""#,
+                    startYear: 2019,
+                    endYear: 2020,
+                    post: "Мобильный разработчик"
+                ),
+                .init(
+                    name: #"ООО "Тинькофф Центр Разработки""#,
+                    startYear: 2020,
+                    endYear: nil,
+                    post: "Android-разработчик"
+                )
             ],
             achievementUnits: [
                 .init(name: "ВКОШП ACM Team Tournament", year: 2015, info: "9 место"),
@@ -201,7 +221,7 @@ extension UserRepositoryImpl: UserRepository {
         try await Task.sleep(for: .seconds(0.5))
 
         guard let mentor = users.filter({ $0.isMentor }).first(where: { $0.id == mentorId }) else {
-            throw AppError(message: "Ментор не найден")
+            throw AppError(message: Strings.errorMentorNotFound())
         }
 
         let lessons = try await lessonRepository.lessonsForMentor(mentorId: mentorId)
@@ -213,7 +233,7 @@ extension UserRepositoryImpl: UserRepository {
 
     func user(userId: String) async throws -> UserModel {
         guard let user = try await database.user(userId: userId) else {
-            throw AppError(message: "Пользователь не найден")
+            throw AppError(message: Strings.errorUserNotFound())
         }
 
         return UserMapper.apiToDomain(user)

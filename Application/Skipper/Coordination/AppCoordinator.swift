@@ -52,7 +52,10 @@ class AppCoordinator: RootCoordinator {
 
         addChild(coordinator)
 
-        router.setRootModule(coordinator.toPresentable(), transitionOptions: defaultTransitionOptions)
+        router.setRootModule(
+            coordinator.toPresentable(),
+            transitionOptions: defaultTransitionOptions
+        )
         currentRootModule = .auth
     }
 

@@ -85,7 +85,10 @@ extension FirestoreDatabaseImpl {
         }
     }
 
-    private func write<T: FirebaseModel>(models: [T], to collectionReference: CollectionReference) async throws {
+    private func write<T: FirebaseModel>(
+        models: [T],
+        to collectionReference: CollectionReference
+    ) async throws {
         let batch = firestore.batch()
 
         models.forEach {
@@ -95,7 +98,10 @@ extension FirestoreDatabaseImpl {
         try await batch.commit()
     }
 
-    private func write<T: FirebaseModel>(model: T, to documentReference: DocumentReference) async throws {
+    private func write<T: FirebaseModel>(
+        model: T,
+        to documentReference: DocumentReference
+    ) async throws {
         try await documentReference.setData(model.toDictionary())
     }
 }

@@ -9,7 +9,8 @@ import Foundation
 
 extension String {
     /// Formats current string with `mask`.
-    /// Optionally you can specify the mask `maskedCharacter` that will be considered as replacing character. Default is "*".
+    /// Optionally you can specify the mask `maskedCharacter` that will be considered as replacing
+    /// character. Default is "*".
     ///
     /// Example: string is "123456", mask is `(***) *-*-*`, result will be "(123) 4-5-6"
     func formattedWith(mask: String, maskedCharacter: Character = "*") -> String {

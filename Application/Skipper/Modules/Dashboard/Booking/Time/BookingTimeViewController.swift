@@ -156,7 +156,12 @@ class BookingTimeViewController: UIViewController {
             .top(to: headerView, attribute: .bottom, constant: 0),
             .leading(to: headerContainerView, attribute: .leading, constant: 16),
             .trailing(to: headerContainerView, attribute: .trailing, constant: -16),
-            .bottom(to: headerContainerView, attribute: .bottom, constant: -16, equality: .lessThanOrEqual)
+            .bottom(
+                to: headerContainerView,
+                attribute: .bottom,
+                constant: -16,
+                equality: .lessThanOrEqual
+            )
         )
     }
 

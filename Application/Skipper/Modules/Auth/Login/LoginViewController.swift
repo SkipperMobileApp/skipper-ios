@@ -128,10 +128,10 @@ class LoginViewController: UIViewController {
 
         assembleForm()
 
-//        #if DEBUG
-//        fields[.email]?.text = "test@test.test"
-//        fields[.password]?.text = "testtest"
-//        #endif
+        #if DEBUG
+        fields[.email]?.text = "den.kovalev999@gmail.com"
+        fields[.password]?.text = "passworD123@"
+        #endif
     }
 
     private func assembleForm() {

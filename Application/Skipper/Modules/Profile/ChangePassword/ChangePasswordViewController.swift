@@ -149,7 +149,12 @@ class ChangePasswordViewController: UIViewController {
         )
 
         saveButton.applyConstraints(
-            .top(to: newPasswordTextField, attribute: .bottom, constant: 16, equality: .greaterThanOrEqual),
+            .top(
+                to: newPasswordTextField,
+                attribute: .bottom,
+                constant: 16,
+                equality: .greaterThanOrEqual
+            ),
             .trailing(to: containerView, attribute: .trailing, constant: -16),
             .leading(to: containerView, attribute: .leading, constant: 16),
             .bottom(to: containerView, attribute: .bottom, constant: -16),

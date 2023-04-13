@@ -11,7 +11,8 @@
 import UIKit
 
 public extension UIView {
-    /// Applies constraints to the current view. Returns array of Autolayout constraints in direct order.
+    /// Applies constraints to the current view. Returns array of Autolayout constraints in direct
+    /// order.
     @discardableResult
     func applyConstraints(_ constraints: Constraints...) -> [NSLayoutConstraint] {
         translatesAutoresizingMaskIntoConstraints = false
@@ -20,25 +21,95 @@ public extension UIView {
             var appliedConstraint: NSLayoutConstraint?
             switch constraint {
             case let .top(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.top, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .top,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .bottom(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.bottom, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .bottom,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .leading(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.leading, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .leading,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .trailing(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.trailing, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .trailing,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .left(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.left, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .left,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .right(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.right, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .right,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .width(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.width, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .width,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .height(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.height, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .height,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .centerX(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.centerX, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .centerX,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .centerY(view, attribute, constant, multiplier, equality):
-                appliedConstraint = setConstraint(.centerY, to: view, attribute: attribute, equality: equality, constant: constant, multiplier: multiplier)
+                appliedConstraint = setConstraint(
+                    .centerY,
+                    to: view,
+                    attribute: attribute,
+                    equality: equality,
+                    constant: constant,
+                    multiplier: multiplier
+                )
             case let .fit(element, constant):
                 let internalConstraints = applyConstraints(
                     .top(to: element, attribute: .top, constant: constant),
@@ -70,21 +141,27 @@ public extension UIView {
     }
 
     /// Fits current view in view's superview with constant `insets`.
-    /// `relativeToSafeArea` parameter determines whether insets will be extended with safe area layout guide values or not
+    /// `relativeToSafeArea` parameter determines whether insets will be extended with safe area
+    /// layout guide values or not
     func fitInSuperview(insets: CGFloat = 0, relativeToSafeArea: Bool = false) {
         guard let superview = superview else { return }
         fitInView(superview, insets: insets, relativeToSafeArea: relativeToSafeArea)
     }
 
     /// Fits current view in `view` with constant `insets`.
-    /// `relativeToSafeArea` parameter determines whether insets will be extended with safe area layout guide values or not
+    /// `relativeToSafeArea` parameter determines whether insets will be extended with safe area
+    /// layout guide values or not
     func fitInView(_ view: UIView, insets: CGFloat = 0, relativeToSafeArea: Bool = false) {
-        applyConstraints(.fit(in: relativeToSafeArea ? view.safeAreaLayoutGuide : view, inset: insets))
+        applyConstraints(.fit(
+            in: relativeToSafeArea ? view.safeAreaLayoutGuide : view,
+            inset: insets
+        ))
     }
 
     // MARK: - Private
 
-    /// Sets constraint from current view's `fromAttribute` to `element`'s `attribute` with `equality`, by `constant` and `multiplier`
+    /// Sets constraint from current view's `fromAttribute` to `element`'s `attribute` with
+    /// `equality`, by `constant` and `multiplier`
     /// Returns applied constraint object
     @discardableResult
     private func setConstraint(

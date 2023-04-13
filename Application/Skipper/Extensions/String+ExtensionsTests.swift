@@ -18,7 +18,11 @@ class String_ExtensionsTests: XCTestCase {
         XCTAssertEqual("123".formattedWith(mask: "(**)"), "(12)", "Mask less than string failed")
         XCTAssertEqual("12".formattedWith(mask: "(***)"), "(12", "String less than mask failed")
 
-        XCTAssertEqual("123".formattedWith(mask: "_(***)_", maskedCharacter: "_"), "1(***)2", "Custom replace character failed")
+        XCTAssertEqual(
+            "123".formattedWith(mask: "_(***)_", maskedCharacter: "_"),
+            "1(***)2",
+            "Custom replace character failed"
+        )
     }
 
     func testIsValidEmail() {

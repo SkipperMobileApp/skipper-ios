@@ -16,14 +16,17 @@ class ChangePasswordViewModel {
 
     func save(oldPassword: String, newPassword: String) {
         guard oldPassword != newPassword else {
-            errorEvent = AppError(message: "Пароли не должны совпадать!")
+            errorEvent = AppError(message: Strings.errorChangePasswordPasswordsAreEqual())
             return
         }
 
         isLoading = true
         Task {
             do {
-                try await authRepository.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                try await authRepository.changePassword(
+                    oldPassword: oldPassword,
+                    newPassword: newPassword
+                )
 
                 await MainActor.run {
                     isLoading = false

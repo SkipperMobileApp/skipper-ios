@@ -9,6 +9,7 @@
 --patternlet hoist
 --nospaceoperators
 --stripunusedargs closure-only
+--maxwidth 100
 --wraparguments before-first
 --wrapcollections before-first
 --exclude Pods

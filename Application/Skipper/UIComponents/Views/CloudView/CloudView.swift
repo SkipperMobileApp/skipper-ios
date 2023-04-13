@@ -77,13 +77,21 @@ class CloudView: SetupableView {
 
             switch layout.attributes.alignment {
             case .left: viewX = layout.attributes.insets.left
-            case .center: viewX = (layout.width - rowWidth(row, attributes: layout.attributes)) / 2.0
-            case .right: viewX = layout.width - rowWidth(row, attributes: layout.attributes) - layout.attributes.insets.right
+            case .center: viewX = (layout.width - rowWidth(row, attributes: layout.attributes)) /
+                2.0
+            case .right: viewX = layout
+                .width - rowWidth(row, attributes: layout.attributes) - layout.attributes.insets
+                .right
             }
 
             for width in row {
                 let view = items[viewIndex]
-                view.frame = CGRect(x: viewX, y: rowY, width: width, height: layout.attributes.itemHeight)
+                view.frame = CGRect(
+                    x: viewX,
+                    y: rowY,
+                    width: width,
+                    height: layout.attributes.itemHeight
+                )
                 viewIndex += 1
                 viewX += width + layout.attributes.itemSpace
             }
@@ -111,7 +119,10 @@ class CloudView: SetupableView {
 
         var selectedIndexes = selectedIndexes
         if let maxSelectedItems = maxSelectedItems, maxSelectedItems < selectedIndexes.count {
-            selectedIndexes = IndexSet(selectedIndexes.dropLast(selectedIndexes.count - maxSelectedItems))
+            selectedIndexes = IndexSet(
+                selectedIndexes
+                    .dropLast(selectedIndexes.count - maxSelectedItems)
+            )
         }
         self.selectedIndexes = selectedIndexes
 
@@ -135,14 +146,19 @@ class CloudView: SetupableView {
     ///   - width: view width
     ///
     /// - Returns: Layout instance
-    class func calculateLayout(for items: [CloudItem], attributes: Layout.Attributes, width: CGFloat) -> Layout {
+    class func calculateLayout(
+        for items: [CloudItem],
+        attributes: Layout.Attributes,
+        width: CGFloat
+    ) -> Layout {
         var rows: [[CGFloat]] = []
         var row: [CGFloat] = []
 
         let availableWidth = width - attributes.insets.left - attributes.insets.right
 
         for item in items {
-            let itemWidth = item.sizeThatFits(CGSize(width: availableWidth, height: attributes.itemHeight)).width
+            let itemWidth = item
+                .sizeThatFits(CGSize(width: availableWidth, height: attributes.itemHeight)).width
 
             var estimatedRow = row
             estimatedRow.append(itemWidth)
@@ -163,7 +179,9 @@ class CloudView: SetupableView {
     }
 
     private func updateDisabledState() {
-        if isSelectionEnabled, let maxSelectedItems = maxSelectedItems, selectedIndexes.count >= maxSelectedItems {
+        if isSelectionEnabled, let maxSelectedItems = maxSelectedItems,
+           selectedIndexes.count >= maxSelectedItems
+        {
             items.forEach { $0.isEnabled = $0.isSelected ? true : false }
             if isResetItemEnabled {
                 items.first?.isEnabled = true

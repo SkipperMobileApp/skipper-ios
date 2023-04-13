@@ -80,7 +80,8 @@ class MyLessonsViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = R.color.themeBackground()
-        title = "Мои занятия"
+
+        title = Strings.myLessonsNavTitle()
         navigationItem.backButtonTitle = ""
         navigationItem.largeTitleDisplayMode = .always
 
@@ -110,15 +111,13 @@ class MyLessonsViewController: UIViewController {
             .sink { [weak self] error in
                 guard let self = self else { return }
                 AlertPresenter.presentSimpleAlert(
-                    "Ошибка",
+                    Strings.errorTitle(),
                     message: error.localizedDescription,
                     controller: self
                 )
             }
             .store(in: &subscriptions)
     }
-
-    // MARK: - UI Callbacks
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource

@@ -86,8 +86,11 @@ class DropdownButton: SetupableControl {
         let innerInset = Constants.innerInset
 
         return .init(
-            width: contentInset.left + max(titleSize.width, placeholderSize.width) + innerInset + imageSize.width + contentInset.right,
-            height: contentInset.top + max(titleSize.height, placeholderSize.height) + contentInset.bottom
+            width: contentInset
+                .left + max(titleSize.width, placeholderSize.width) + innerInset + imageSize
+                .width + contentInset.right,
+            height: contentInset.top + max(titleSize.height, placeholderSize.height) + contentInset
+                .bottom
         )
     }
 
@@ -113,7 +116,8 @@ class DropdownButton: SetupableControl {
         let (width, height) = (bounds.width, bounds.height)
         let innerInset = Constants.innerInset
         let imageSize = Constants.imageSize
-        let textWidth = width - contentInset.left - contentInset.right - imageSize.width - innerInset
+        let textWidth = width - contentInset.left - contentInset.right - imageSize
+            .width - innerInset
 
         arrowImageView.frame = .init(
             x: width - contentInset.right - imageSize.width,

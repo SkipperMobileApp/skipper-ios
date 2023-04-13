@@ -48,10 +48,12 @@ class BookingTimeViewModel {
             return
         }
 
-        let allIntervals = lessonAvailableIntervals[weekDay - 1]?.map(BookingTimeInterval.init) ?? []
+        let allIntervals = lessonAvailableIntervals[weekDay - 1]?
+            .map(BookingTimeInterval.init) ?? []
 
         availableBookingIntervals = allIntervals.filter { interval in
-            !selectedTimeItems.filter { $0.date == date }.contains { $0.timeInterval == interval.time }
+            !selectedTimeItems.filter { $0.date == date }
+                .contains { $0.timeInterval == interval.time }
         }
     }
 

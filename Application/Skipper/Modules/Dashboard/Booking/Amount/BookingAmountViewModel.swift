@@ -29,7 +29,8 @@ class BookingAmountViewModel {
     // MARK: - Initializations
 
     func setData(durations: [LessonDuration], costs: [LessonDuration: Int]) {
-        durationItems = durations.map(BookingDuration.init).sorted(by: { $0.rawValue < $1.rawValue })
+        durationItems = durations.map(BookingDuration.init)
+            .sorted(by: { $0.rawValue < $1.rawValue })
 
         self.costs = durations.reduce([BookingDuration: Int]()) { acc, item in
             var acc = acc

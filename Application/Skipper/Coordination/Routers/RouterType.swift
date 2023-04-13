@@ -13,7 +13,11 @@ public extension RouterType {
 
 public protocol PresentationRouterType: RouterType {
     func present(_ module: Presentable)
-    func present(_ module: Presentable, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?)
+    func present(
+        _ module: Presentable,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle?
+    )
     func dismissModule()
     func dismissModule(animated: Bool)
     func dismissModule(animated: Bool, completion: (() -> Void)?)
@@ -24,12 +28,17 @@ public extension PresentationRouterType {
         present(module, animated: true)
     }
 
-    func present(_ module: Presentable, animated: Bool, modalPresentationStyle: UIModalPresentationStyle? = nil) {
+    func present(
+        _ module: Presentable,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle? = nil
+    ) {
         let controller = module.toPresentable()
         if let presentationStyle = modalPresentationStyle {
             controller.modalPresentationStyle = presentationStyle
         }
-        toPresentable().topModalViewController().present(controller, animated: animated, completion: nil)
+        toPresentable().topModalViewController()
+            .present(controller, animated: animated, completion: nil)
     }
 
     func dismissModule() {

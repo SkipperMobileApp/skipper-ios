@@ -168,7 +168,12 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         items.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        viewForRow row: Int,
+        forComponent component: Int,
+        reusing view: UIView?
+    ) -> UIView {
         let label = UILabel()
         label.font = R.typo.body1
         label.textColor = R.color.primary87()
@@ -194,7 +199,10 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 // MARK: - UIGestureRecognizerDelegate
 
 extension PickerViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldReceive touch: UITouch
+    ) -> Bool {
         return touch.view == gestureRecognizer.view
     }
 }

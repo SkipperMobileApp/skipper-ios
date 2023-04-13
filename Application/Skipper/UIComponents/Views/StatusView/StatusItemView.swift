@@ -49,8 +49,10 @@ class StatusItemView: SetupableView {
         ))
 
         return .init(
-            width: contentInset.left + max(titleSize.width, subtitleSize.width) + contentInset.right,
-            height: contentInset.top + titleSize.height + 4 + subtitleSize.height + contentInset.bottom
+            width: contentInset.left + max(titleSize.width, subtitleSize.width) + contentInset
+                .right,
+            height: contentInset.top + titleSize.height + 4 + subtitleSize.height + contentInset
+                .bottom
         )
     }
 

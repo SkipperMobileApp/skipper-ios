@@ -54,8 +54,12 @@ class DangerSecondaryButton: SetupableButton {
     // MARK: - UI Methods
 
     private func updateStyle() {
-        layer.borderColor = R.color.brandError()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0).cgColor
-        setTitleColor(R.color.brandError()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0), for: .normal)
+        layer.borderColor = R.color.brandError()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
+            .cgColor
+        setTitleColor(
+            R.color.brandError()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0),
+            for: .normal
+        )
     }
 
     private func updateLoadingState() {

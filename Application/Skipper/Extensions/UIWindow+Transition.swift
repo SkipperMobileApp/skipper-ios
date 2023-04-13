@@ -99,7 +99,10 @@ public extension UIWindow {
         /// - Parameters:
         ///   - direction: direction
         ///   - style: style
-        public init(direction: TransitionOptions.Direction = .toRight, style: TransitionOptions.Curve = .linear) {
+        public init(
+            direction: TransitionOptions.Direction = .toRight,
+            style: TransitionOptions.Curve = .linear
+        ) {
             self.direction = direction
             self.style = style
         }
@@ -120,13 +123,19 @@ public extension UIWindow {
     /// - Parameters:
     ///   - controller: controller to set
     ///   - options: options of the transition
-    func setRootViewController(_ controller: UIViewController, options: TransitionOptions = TransitionOptions()) {
+    func setRootViewController(
+        _ controller: UIViewController,
+        options: TransitionOptions = TransitionOptions()
+    ) {
         var transitionWnd: UIWindow?
         if let background = options.background {
             transitionWnd = UIWindow(frame: UIScreen.main.bounds)
             switch background {
             case let .customView(view):
-                transitionWnd?.rootViewController = UIViewController.newController(withView: view, frame: transitionWnd!.bounds)
+                transitionWnd?.rootViewController = UIViewController.newController(
+                    withView: view,
+                    frame: transitionWnd!.bounds
+                )
             case let .solidColor(color):
                 transitionWnd?.backgroundColor = color
             }

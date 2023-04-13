@@ -91,7 +91,11 @@ class DashboardViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
 
         view.addSubview(collectionView)
-        collectionView.applyConstraints(.fitWithInsets(in: view, insets: .init(top: 0, left: 8, bottom: 0, right: 8)))
+        collectionView
+            .applyConstraints(.fitWithInsets(
+                in: view,
+                insets: .init(top: 0, left: 8, bottom: 0, right: 8)
+            ))
         collectionView.clipsToBounds = false
     }
 
@@ -105,7 +109,11 @@ class DashboardViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
 
@@ -128,16 +136,19 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 25
 
-        let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
-            guard let self = self else { return nil }
+        let layout = UICollectionViewCompositionalLayout(
+            sectionProvider: { [weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
+                guard let self = self else { return nil }
 
-            let section = self.viewModel.sections[sectionIndex]
+                let section = self.viewModel.sections[sectionIndex]
 
-            switch section {
-            case .categories: return self.makeCategorySectionLayout()
-            case .popularMentors: return self.makeMentorsSectionLayout()
-            }
-        }, configuration: config)
+                switch section {
+                case .categories: return self.makeCategorySectionLayout()
+                case .popularMentors: return self.makeMentorsSectionLayout()
+                }
+            },
+            configuration: config
+        )
 
         return layout
     }
@@ -252,7 +263,10 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         viewModel.sections.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         switch viewModel.sections[section] {
         case let .categories(items): return items.count
         case let .popularMentors(items): return items.count
@@ -276,10 +290,11 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
         case UICollectionView.elementKindSectionFooter:
             if case let .categories(items) = section {
-                let view: DashboardCategoryFooterView = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    for: indexPath
-                )
+                let view: DashboardCategoryFooterView = collectionView
+                    .dequeueReusableSupplementaryView(
+                        ofKind: kind,
+                        for: indexPath
+                    )
 
                 view.configureWith(
                     numberOfPages: Int(ceil(Double(items.count) / 6.0)),
@@ -295,18 +310,23 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         return UICollectionReusableView()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let section = viewModel.sections[indexPath.section]
 
         switch section {
         case let .categories(items):
-            let cell: DashboardCategoryCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+            let cell: DashboardCategoryCollectionCell = collectionView
+                .dequeueReusableCell(for: indexPath)
             let item = items[indexPath.item]
             cell.configureWith(image: item.image, title: item.title)
             return cell
 
         case let .popularMentors(items):
-            let cell: DashboardMentorCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+            let cell: DashboardMentorCollectionCell = collectionView
+                .dequeueReusableCell(for: indexPath)
             let item = items[indexPath.item]
             cell.configureWith(
                 name: item.name,
