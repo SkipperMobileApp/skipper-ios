@@ -18,7 +18,7 @@ class EditPersonalInfoViewModel {
         Task {
             do {
                 guard let authUser = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Пользователь не вошел в аккаунт")
+                    throw AppError(message: Strings.errorUserNotAuthorized())
                 }
 
                 let user = try await userRepository.user(userId: authUser.id)
@@ -48,7 +48,7 @@ class EditPersonalInfoViewModel {
         Task {
             do {
                 guard let authUser = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Пользователь не вошел в аккаунт")
+                    throw AppError(message: Strings.errorUserNotAuthorized())
                 }
 
 //                if authUser.email != email {

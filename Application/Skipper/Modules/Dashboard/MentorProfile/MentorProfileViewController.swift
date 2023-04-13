@@ -156,7 +156,10 @@ class MentorProfileViewController: UIViewController {
         )
 
         stackView.applyConstraints(
-            .fitWithInsets(in: containerView, insets: .init(top: 24, left: 16, bottom: 24, right: 16))
+            .fitWithInsets(
+                in: containerView,
+                insets: .init(top: 24, left: 16, bottom: 24, right: 16)
+            )
         )
 
         setupStack()
@@ -229,8 +232,10 @@ class MentorProfileViewController: UIViewController {
         nameLabel.text = viewModel.profileInfo.name
         majorLabel.text = viewModel.profileInfo.major
         descriptionLabel.text = viewModel.profileInfo.description
-        avatarImageView.kf.setImage(with: URL(string: viewModel.profileInfo.imageUrl ?? ""),
-                                    placeholder: nil)
+        avatarImageView.kf.setImage(
+            with: URL(string: viewModel.profileInfo.imageUrl ?? ""),
+            placeholder: nil
+        )
 
         // Status info
 
@@ -255,14 +260,18 @@ class MentorProfileViewController: UIViewController {
             return label
         }
 
-        let attributes = CloudView.Layout.Attributes(insets: .zero,
-                                                     rowSpace: 8,
-                                                     itemSpace: 8,
-                                                     itemHeight: 30,
-                                                     alignment: .left)
-        let layout = CloudView.calculateLayout(for: skillItems,
-                                               attributes: attributes,
-                                               width: view.frame.width - 32)
+        let attributes = CloudView.Layout.Attributes(
+            insets: .zero,
+            rowSpace: 8,
+            itemSpace: 8,
+            itemHeight: 30,
+            alignment: .left
+        )
+        let layout = CloudView.calculateLayout(
+            for: skillItems,
+            attributes: attributes,
+            width: view.frame.width - 32
+        )
         skillsCloudView.updateWith(skillItems, layout: layout)
 
         // Resume
@@ -313,7 +322,11 @@ class MentorProfileViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
     }

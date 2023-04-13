@@ -16,8 +16,10 @@ class PaddingLabel: SetupableLabel {
 
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
-        return CGSize(width: contentInset.left + size.width + contentInset.right,
-                      height: contentInset.top + size.height + contentInset.bottom)
+        return CGSize(
+            width: contentInset.left + size.width + contentInset.right,
+            height: contentInset.top + size.height + contentInset.bottom
+        )
     }
 
     override var bounds: CGRect {

@@ -24,7 +24,7 @@ class AuthCoordinator: NavigationCoordinator {
             if isVerified {
                 self?.didFinish?()
             } else {
-                self?.showVerification()
+                self?.didFinish?()
             }
         }
 

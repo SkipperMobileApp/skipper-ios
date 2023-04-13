@@ -44,38 +44,12 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         return label
     }()
 
-    private lazy var avatarImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 8
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.tintColor = R.color.primary24()
-        return imageView
-    }()
-
-    private lazy var mentorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = R.color.primary54()
-        label.font = R.typo.caption
-        label.numberOfLines = 0
-        label.text = "Ментор"
-        return label
-    }()
-
-    private lazy var descriptionHeaderLabel: UILabel = {
+    private lazy var mentorHeaderLabel: UILabel = {
         let label = UILabel()
         label.textColor = R.color.primary87()
         label.font = R.typo.header
         label.numberOfLines = 1
-        label.text = "Описание"
-        return label
-    }()
-
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = R.color.primary54()
-        label.font = R.typo.body
-        label.numberOfLines = 0
+        label.text = Strings.myLessonsLessonInfoMentor()
         return label
     }()
 
@@ -84,7 +58,7 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         label.textColor = R.color.primary87()
         label.font = R.typo.header
         label.numberOfLines = 1
-        label.text = "Информация о занятии"
+        label.text = Strings.myLessonsLessonInfoLabel()
         return label
     }()
 
@@ -101,22 +75,6 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         label.textColor = R.color.primary87()
         label.font = R.typo.body
         label.numberOfLines = 0
-        return label
-    }()
-
-    private lazy var costImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.tintColor = R.color.brandPrimary()
-        imageView.contentMode = .scaleToFill
-        imageView.image = R.icon.dollarCircle
-        return imageView
-    }()
-
-    private lazy var costLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = R.color.primary87()
-        label.font = R.typo.body
-        label.numberOfLines = 1
         return label
     }()
 
@@ -149,15 +107,10 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         containerView.addSubview(titleLabel)
         containerView.addSubview(typeLabel)
         containerView.addSubview(mentorNameLabel)
-        containerView.addSubview(avatarImageView)
-        containerView.addSubview(mentorLabel)
-        containerView.addSubview(descriptionHeaderLabel)
-        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(mentorHeaderLabel)
         containerView.addSubview(lessonInfoHeaderLabel)
         containerView.addSubview(timeImageView)
         containerView.addSubview(timeLabel)
-        containerView.addSubview(costImageView)
-        containerView.addSubview(costLabel)
         containerView.addSubview(contactImageView)
         containerView.addSubview(contactLabel)
 
@@ -177,39 +130,20 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
             .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
 
-        avatarImageView.applyConstraints(
+        mentorHeaderLabel.applyConstraints(
             .top(to: typeLabel, attribute: .bottom, constant: 16),
             .leading(to: containerView, attribute: .leading, constant: 16),
-            .width(constant: 64),
-            .height(constant: 64)
+            .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
 
         mentorNameLabel.applyConstraints(
-            .bottom(to: avatarImageView, attribute: .centerY, constant: -2),
-            .leading(to: avatarImageView, attribute: .trailing, constant: 8),
-            .trailing(to: containerView, attribute: .trailing, constant: -16)
-        )
-
-        mentorLabel.applyConstraints(
-            .top(to: avatarImageView, attribute: .centerY, constant: 2),
-            .leading(to: avatarImageView, attribute: .trailing, constant: 8),
-            .trailing(to: containerView, attribute: .trailing, constant: -16)
-        )
-
-        descriptionHeaderLabel.applyConstraints(
-            .top(to: avatarImageView, attribute: .bottom, constant: 16),
-            .leading(to: containerView, attribute: .leading, constant: 16),
-            .trailing(to: containerView, attribute: .trailing, constant: -16)
-        )
-
-        descriptionLabel.applyConstraints(
-            .top(to: descriptionHeaderLabel, attribute: .bottom, constant: 16),
+            .top(to: mentorHeaderLabel, attribute: .bottom, constant: 4),
             .leading(to: containerView, attribute: .leading, constant: 16),
             .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
 
         lessonInfoHeaderLabel.applyConstraints(
-            .top(to: descriptionLabel, attribute: .bottom, constant: 16),
+            .top(to: mentorNameLabel, attribute: .bottom, constant: 16),
             .leading(to: containerView, attribute: .leading, constant: 16),
             .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
@@ -227,21 +161,8 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
             .trailing(to: containerView, attribute: .trailing, constant: -16)
         )
 
-        costImageView.applyConstraints(
-            .top(to: timeImageView, attribute: .bottom, constant: 16),
-            .leading(to: containerView, attribute: .leading, constant: 16),
-            .width(constant: 32),
-            .height(constant: 32)
-        )
-
-        costLabel.applyConstraints(
-            .centerY(to: costImageView, attribute: .centerY),
-            .leading(to: costImageView, attribute: .trailing, constant: 8),
-            .trailing(to: containerView, attribute: .trailing, constant: -16)
-        )
-
         contactImageView.applyConstraints(
-            .top(to: costImageView, attribute: .bottom, constant: 16),
+            .top(to: timeImageView, attribute: .bottom, constant: 16),
             .leading(to: containerView, attribute: .leading, constant: 16),
             .width(constant: 32),
             .height(constant: 32)
@@ -259,26 +180,25 @@ class MyLessonsCell: SetupableTableViewCell, Reusable {
         titleLabel.text = item.name
         typeLabel.text = item.type
         mentorNameLabel.text = item.mentorName
-        descriptionLabel.text = item.description
         timeLabel.text = item.time
-        costLabel.text = item.cost
         contactLabel.text = item.contact
-
-        avatarImageView.kf.setImage(
-            with: URL(string: item.mentorAvatarURL ?? ""),
-            placeholder: nil
-        )
     }
 
     func performBlink() {
         containerView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseIn, .autoreverse]) { [weak self] in
-            self?.containerView.backgroundColor = R.color.brandPrimary()?.withAlphaComponent(0.3)
-        } completion: { [weak self] finished in
-            if finished {
-                self?.containerView.backgroundColor = R.color.themePrimary()
+        UIView
+            .animate(
+                withDuration: 0.15,
+                delay: 0,
+                options: [.curveEaseIn, .autoreverse]
+            ) { [weak self] in
+                self?.containerView.backgroundColor = R.color.brandPrimary()?
+                    .withAlphaComponent(0.3)
+            } completion: { [weak self] finished in
+                if finished {
+                    self?.containerView.backgroundColor = R.color.themePrimary()
+                }
             }
-        }
     }
 }
 
@@ -291,10 +211,7 @@ extension MyLessonsCell {
         let name: String
         let type: String
         let mentorName: String
-        let mentorAvatarURL: String?
-        let description: String
         let time: String
-        let cost: String
         let contact: String
     }
 }

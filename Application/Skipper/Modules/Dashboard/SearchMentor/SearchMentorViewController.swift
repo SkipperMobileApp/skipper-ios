@@ -119,7 +119,11 @@ class SearchMentorViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка", message: error.localizedDescription, controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
     }
@@ -141,13 +145,15 @@ extension SearchMentorViewController: UITableViewDelegate, UITableViewDataSource
 
         let item = viewModel.items[indexPath.row]
 
-        cell.configureWith(name: item.name,
-                           major: item.major,
-                           rating: item.rating,
-                           imageUrl: item.imageUrl,
-                           description: item.description,
-                           subcategories: item.subcategories,
-                           layoutWidth: tableView.frame.width)
+        cell.configureWith(
+            name: item.name,
+            major: item.major,
+            rating: item.rating,
+            imageUrl: item.imageUrl,
+            description: item.description,
+            subcategories: item.subcategories,
+            layoutWidth: tableView.frame.width
+        )
 
         return cell
     }

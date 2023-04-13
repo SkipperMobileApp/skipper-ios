@@ -50,7 +50,9 @@ class TextCloudItem: SetupableControl, CloudItem {
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let size = label.sizeThatFits(size)
-        return .init(width: contentInset.left + size.width + contentInset.right,
-                     height: contentInset.top + size.height + contentInset.bottom)
+        return .init(
+            width: contentInset.left + size.width + contentInset.right,
+            height: contentInset.top + size.height + contentInset.bottom
+        )
     }
 }

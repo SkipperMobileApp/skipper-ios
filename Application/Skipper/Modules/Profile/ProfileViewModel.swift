@@ -31,15 +31,17 @@ class ProfileViewModel {
     func loadData() {
         Task {
             do {
-                guard let currentUser = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Ошибка авторизации")
+                guard let currentUser = try await authRepository.currentUser(forceUpdate: false)
+                else {
+                    throw AppError(message: Strings.errorUserNotAuthorized())
                 }
 
                 let user = try await userRepository.user(userId: currentUser.id)
 
                 await MainActor.run {
                     profileInfo = .init(
-                        name: [user.lastName, user.firstName].filter { !$0.isEmpty }.joined(separator: " "),
+                        name: [user.lastName, user.firstName].filter { !$0.isEmpty }
+                            .joined(separator: " "),
                         avatarUrl: user.imageUrl,
                         email: user.email
                     )
@@ -78,15 +80,16 @@ class ProfileViewModel {
         Task {
             do {
                 guard let image = image else {
-                    throw AppError(message: "Что-то пошло не так")
+                    throw AppError(message: Strings.errorUnknown())
                 }
 
                 guard let imageData = image.jpegData(compressionQuality: 0.6) else {
-                    throw AppError(message: "Что-то пошло не так")
+                    throw AppError(message: Strings.errorUnknown())
                 }
 
-                guard let currentUser = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Ошибка авторизации")
+                guard let currentUser = try await authRepository.currentUser(forceUpdate: false)
+                else {
+                    throw AppError(message: Strings.errorUserNotAuthorized())
                 }
 
                 var user = try await userRepository.user(userId: currentUser.id)

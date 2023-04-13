@@ -25,28 +25,33 @@ class ImagePicker: NSObject {
         case .authorized, .limited: presentPhotoPicker(on: controller)
         case .denied: showPermissionDeniedAlert(on: controller)
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self, weak controller] status in
-                guard let self = self, let controller = controller else { return }
+            PHPhotoLibrary
+                .requestAuthorization(for: .readWrite) { [weak self, weak controller] status in
+                    guard let self = self, let controller = controller else { return }
 
-                if status == .authorized {
-                    DispatchQueue.main.async {
-                        self.presentPhotoPicker(on: controller)
+                    if status == .authorized {
+                        DispatchQueue.main.async {
+                            self.presentPhotoPicker(on: controller)
+                        }
                     }
                 }
-            }
         default: return
         }
     }
 
     func showPermissionDeniedAlert(on controller: UIViewController) {
-        let alert = UIAlertController(title: "Photo library permission denied",
-                                      message: "Please, go to settings and enable it to choose photos from gallery",
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Photo library permission denied",
+            message: "Please, go to settings and enable it to choose photos from gallery",
+            preferredStyle: .alert
+        )
         alert.addAction(.init(title: "Cancel", style: .cancel))
         alert.addAction(.init(title: "Go to setting", style: .default) { _ in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                      options: [:],
-                                      completionHandler: nil)
+            UIApplication.shared.open(
+                URL(string: UIApplication.openSettingsURLString)!,
+                options: [:],
+                completionHandler: nil
+            )
         })
 
         controller.present(alert, animated: true)
@@ -66,9 +71,10 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
         controller.present(picker, animated: true)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any])
-    {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         guard let image = info[.originalImage] as? UIImage else { return }
 
         provider?.didSelectImage(image)
@@ -106,24 +112,25 @@ extension ImagePicker: PHPickerViewControllerDelegate, PHPhotoLibraryAvailabilit
             return
         }
 
-        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self, weak picker] image, error in
+        result.itemProvider
+            .loadObject(ofClass: UIImage.self) { [weak self, weak picker] image, error in
 
-            if error != nil {
-                DispatchQueue.main.async {
-                    picker?.dismiss(animated: true) {
-                        self?.provider?.didSelectImage(nil)
+                if error != nil {
+                    DispatchQueue.main.async {
+                        picker?.dismiss(animated: true) {
+                            self?.provider?.didSelectImage(nil)
+                        }
+                    }
+                    return
+                }
+
+                if let image = image as? UIImage {
+                    DispatchQueue.main.async {
+                        picker?.dismiss(animated: true) { [weak self] in
+                            self?.provider?.didSelectImage(image)
+                        }
                     }
                 }
-                return
             }
-
-            if let image = image as? UIImage {
-                DispatchQueue.main.async {
-                    picker?.dismiss(animated: true) { [weak self] in
-                        self?.provider?.didSelectImage(image)
-                    }
-                }
-            }
-        }
     }
 }

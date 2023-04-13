@@ -55,8 +55,12 @@ class SecondaryButton: SetupableButton {
     // MARK: - UI Methods
 
     private func updateStyle() {
-        layer.borderColor = R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0).cgColor
-        setTitleColor(R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0), for: .normal)
+        layer.borderColor = R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
+            .cgColor
+        setTitleColor(
+            R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0),
+            for: .normal
+        )
     }
 
     private func updateLoadingState() {

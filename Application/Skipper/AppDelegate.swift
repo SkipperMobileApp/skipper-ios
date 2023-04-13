@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var appCoordinator: AppCoordinator!
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         FirebaseApp.configure()
 
         initializeDependencyGraph(reAuthHandler: { [weak self] in
@@ -72,8 +75,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Services
 
-        let logoutHandler = makeLogoutHandler(logoutRepository: logoutRepository,
-                                              postLogoutNavigationHandler: reAuthHandler)
+        let logoutHandler = makeLogoutHandler(
+            logoutRepository: logoutRepository,
+            postLogoutNavigationHandler: reAuthHandler
+        )
 
         // Assembling
 
@@ -86,9 +91,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(bookedLessonRepository)
     }
 
-    private func makeLogoutHandler(logoutRepository: LogoutRepository,
-                                   postLogoutNavigationHandler: @escaping () -> Void) -> LogoutHandler
-    {
+    private func makeLogoutHandler(
+        logoutRepository: LogoutRepository,
+        postLogoutNavigationHandler: @escaping () -> Void
+    ) -> LogoutHandler {
         SyncCompositeLogoutHandler {
             APILogoutHandler(logoutRepository: logoutRepository)
             NavigationLogoutHandler(logoutNavigationHandler: postLogoutNavigationHandler)

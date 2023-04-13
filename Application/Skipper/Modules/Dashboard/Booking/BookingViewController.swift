@@ -82,9 +82,11 @@ class BookingViewController: UIViewController {
         viewModel.$errorEvent
             .sink { [weak self] error in
                 guard let self = self else { return }
-                AlertPresenter.presentSimpleAlert("Ошибка записи!",
-                                                  message: error.localizedDescription,
-                                                  controller: self)
+                AlertPresenter.presentSimpleAlert(
+                    "Ошибка записи!",
+                    message: error.localizedDescription,
+                    controller: self
+                )
             }
             .store(in: &subscriptions)
 
@@ -107,8 +109,10 @@ class BookingViewController: UIViewController {
         let validationResults = viewModel.validateValues()
 
         guard validationResults.isEmpty else {
-            AlertPresenter.presentSimpleAlert(validationResults.joined(separator: "\n"),
-                                              controller: self)
+            AlertPresenter.presentSimpleAlert(
+                validationResults.joined(separator: "\n"),
+                controller: self
+            )
             return
         }
 

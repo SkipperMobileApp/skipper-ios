@@ -66,13 +66,23 @@ class DashboardMentorCollectionCell: SetupableCollectionViewCell, Reusable {
 
         majorLabel.applyConstraints(
             .leading(to: contentView, attribute: .leading, constant: 16),
-            .trailing(to: likesView, attribute: .leading, constant: -16, equality: .lessThanOrEqual),
+            .trailing(
+                to: likesView,
+                attribute: .leading,
+                constant: -16,
+                equality: .lessThanOrEqual
+            ),
             .bottom(to: contentView, attribute: .bottom, constant: -16)
         )
 
         nameLabel.applyConstraints(
             .leading(to: contentView, attribute: .leading, constant: 16),
-            .trailing(to: likesView, attribute: .leading, constant: -16, equality: .lessThanOrEqual),
+            .trailing(
+                to: likesView,
+                attribute: .leading,
+                constant: -16,
+                equality: .lessThanOrEqual
+            ),
             .bottom(to: majorLabel, attribute: .top, constant: -4)
         )
     }

@@ -166,7 +166,7 @@ extension UtilRepositoryImpl {
         try await Task.sleep(for: .seconds(0.5))
 
         guard let category = categories.first(where: { $0.id == categoryId }) else {
-            throw AppError(message: "Категория не найдена")
+            throw AppError(message: Strings.errorCategoryNotFound())
         }
 
         return category

@@ -73,17 +73,24 @@ class DropdownButton: SetupableControl {
     }
 
     override var intrinsicContentSize: CGSize {
-        let titleSize = titleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                      height: .greatestFiniteMagnitude))
-        let placeholderSize = placeholderLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                                  height: .greatestFiniteMagnitude))
+        let titleSize = titleLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
+        let placeholderSize = placeholderLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
 
         let imageSize = Constants.imageSize
         let innerInset = Constants.innerInset
 
         return .init(
-            width: contentInset.left + max(titleSize.width, placeholderSize.width) + innerInset + imageSize.width + contentInset.right,
-            height: contentInset.top + max(titleSize.height, placeholderSize.height) + contentInset.bottom
+            width: contentInset
+                .left + max(titleSize.width, placeholderSize.width) + innerInset + imageSize
+                .width + contentInset.right,
+            height: contentInset.top + max(titleSize.height, placeholderSize.height) + contentInset
+                .bottom
         )
     }
 
@@ -109,22 +116,29 @@ class DropdownButton: SetupableControl {
         let (width, height) = (bounds.width, bounds.height)
         let innerInset = Constants.innerInset
         let imageSize = Constants.imageSize
-        let textWidth = width - contentInset.left - contentInset.right - imageSize.width - innerInset
+        let textWidth = width - contentInset.left - contentInset.right - imageSize
+            .width - innerInset
 
-        arrowImageView.frame = .init(x: width - contentInset.right - imageSize.width,
-                                     y: (height - imageSize.height) / 2,
-                                     width: imageSize.width,
-                                     height: imageSize.height)
+        arrowImageView.frame = .init(
+            x: width - contentInset.right - imageSize.width,
+            y: (height - imageSize.height) / 2,
+            width: imageSize.width,
+            height: imageSize.height
+        )
 
-        titleLabel.frame = .init(x: contentInset.left,
-                                 y: 0,
-                                 width: textWidth,
-                                 height: height)
+        titleLabel.frame = .init(
+            x: contentInset.left,
+            y: 0,
+            width: textWidth,
+            height: height
+        )
 
-        placeholderLabel.frame = .init(x: contentInset.left,
-                                       y: 0,
-                                       width: textWidth,
-                                       height: height)
+        placeholderLabel.frame = .init(
+            x: contentInset.left,
+            y: 0,
+            width: textWidth,
+            height: height
+        )
     }
 
     // MARK: - UI Methods

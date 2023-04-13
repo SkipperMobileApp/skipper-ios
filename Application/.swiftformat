@@ -9,7 +9,8 @@
 --patternlet hoist
 --nospaceoperators
 --stripunusedargs closure-only
---wraparguments preserve
+--maxwidth 100
+--wraparguments before-first
 --wrapcollections before-first
 --exclude Pods
 --swiftversion 5.0

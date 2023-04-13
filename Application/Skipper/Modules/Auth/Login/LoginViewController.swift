@@ -129,8 +129,8 @@ class LoginViewController: UIViewController {
         assembleForm()
 
         #if DEBUG
-        fields[.email]?.text = "test@test.test"
-        fields[.password]?.text = "testtest"
+        fields[.email]?.text = "den.kovalev999@gmail.com"
+        fields[.password]?.text = "passworD123@"
         #endif
     }
 
@@ -161,9 +161,11 @@ class LoginViewController: UIViewController {
             guard let self = self else { return }
 
             self.setLoginButtonLoading(false)
-            AlertPresenter.presentSimpleAlert(Strings.errorTitle(),
-                                              message: error.localizedDescription,
-                                              controller: self)
+            AlertPresenter.presentSimpleAlert(
+                Strings.errorTitle(),
+                message: error.localizedDescription,
+                controller: self
+            )
         }
     }
 

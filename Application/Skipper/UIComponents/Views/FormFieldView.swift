@@ -119,8 +119,10 @@ class FormFieldView: SetupableView {
 
     @objc private func togglePasswordAction() {
         textField.isSecureTextEntry.toggle()
-        togglePasswordButton.setImage(textField.isSecureTextEntry ? R.icon.eye : R.icon.eyeSlashed,
-                                      for: .normal)
+        togglePasswordButton.setImage(
+            textField.isSecureTextEntry ? R.icon.eye : R.icon.eyeSlashed,
+            for: .normal
+        )
     }
 }
 

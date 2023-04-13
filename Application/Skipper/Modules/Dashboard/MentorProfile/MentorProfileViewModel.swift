@@ -12,7 +12,12 @@ class MentorProfileViewModel {
     private(set) var title: String = ""
     private(set) var statusItems: [StatusItem] = []
     private(set) var classItems: [ClassItem] = []
-    private(set) var profileInfo: ProfileInfo = .init(name: "", major: "", description: "", imageUrl: nil)
+    private(set) var profileInfo: ProfileInfo = .init(
+        name: "",
+        major: "",
+        description: "",
+        imageUrl: nil
+    )
     private(set) var skills: [String] = []
     private(set) var resumeItems: [ResumeType] = []
 

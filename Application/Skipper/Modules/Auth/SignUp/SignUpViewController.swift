@@ -161,9 +161,11 @@ class SignUpViewController: UIViewController {
             guard let self = self else { return }
 
             self.setSignUpButtonLoading(false)
-            AlertPresenter.presentSimpleAlert(Strings.errorTitle(),
-                                              message: error.localizedDescription,
-                                              controller: self)
+            AlertPresenter.presentSimpleAlert(
+                Strings.errorTitle(),
+                message: error.localizedDescription,
+                controller: self
+            )
         }
     }
 

@@ -52,7 +52,10 @@ class AppCoordinator: RootCoordinator {
 
         addChild(coordinator)
 
-        router.setRootModule(coordinator.toPresentable(), transitionOptions: defaultTransitionOptions)
+        router.setRootModule(
+            coordinator.toPresentable(),
+            transitionOptions: defaultTransitionOptions
+        )
         currentRootModule = .auth
     }
 
@@ -69,11 +72,15 @@ class AppCoordinator: RootCoordinator {
 
         addChild(coordinator)
 
-        router.setRootModule(coordinator.toPresentable(),
-                             transitionOptions: defaultTransitionOptions)
+        router.setRootModule(
+            coordinator.toPresentable(),
+            transitionOptions: defaultTransitionOptions
+        )
         currentRootModule = .main
     }
 }
 
-private let defaultTransitionOptions = UIWindow.TransitionOptions(direction: .fade,
-                                                                  style: .easeIn)
+private let defaultTransitionOptions = UIWindow.TransitionOptions(
+    direction: .fade,
+    style: .easeIn
+)

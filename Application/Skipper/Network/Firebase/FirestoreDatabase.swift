@@ -44,9 +44,10 @@ extension FirestoreDatabaseImpl {
 // MARK: - Utils
 
 extension FirestoreDatabaseImpl {
-    private func get<T: FirebaseResponseModel>(_ documentReference: DocumentReference,
-                                               type: T.Type) async throws -> T?
-    {
+    private func get<T: FirebaseResponseModel>(
+        _ documentReference: DocumentReference,
+        type: T.Type
+    ) async throws -> T? {
         try await withCheckedThrowingContinuation { continuation in
             documentReference.getDocument { snapshot, error in
                 if let error = error {
@@ -84,7 +85,10 @@ extension FirestoreDatabaseImpl {
         }
     }
 
-    private func write<T: FirebaseModel>(models: [T], to collectionReference: CollectionReference) async throws {
+    private func write<T: FirebaseModel>(
+        models: [T],
+        to collectionReference: CollectionReference
+    ) async throws {
         let batch = firestore.batch()
 
         models.forEach {
@@ -94,7 +98,10 @@ extension FirestoreDatabaseImpl {
         try await batch.commit()
     }
 
-    private func write<T: FirebaseModel>(model: T, to documentReference: DocumentReference) async throws {
+    private func write<T: FirebaseModel>(
+        model: T,
+        to documentReference: DocumentReference
+    ) async throws {
         try await documentReference.setData(model.toDictionary())
     }
 }

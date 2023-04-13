@@ -72,7 +72,9 @@ extension Sequence {
     /// Runs asynchronous `transform` lambda for each element in the Sequence asynchronously.
     /// Performs transformations in parallel and returns mapped elements in the same order.
     /// Operations that returned `nil` won't be added to the result array
-    func asyncCompactMap<T>(_ transform: @escaping (Element) async throws -> T?) async rethrows -> [T] {
+    func asyncCompactMap<T>(_ transform: @escaping (Element) async throws -> T?) async rethrows
+        -> [T]
+    {
         let tasks = map { element in
             Task {
                 try await transform(element)

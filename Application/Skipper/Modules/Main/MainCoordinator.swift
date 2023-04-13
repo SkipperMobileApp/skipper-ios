@@ -58,7 +58,11 @@ class MainCoordinator: NavigationCoordinator {
         ]
     }
 
-    private func addTabs(_ tabs: [TabBox], to tabController: UITabBarController, selectedTab: Tab = .dashboard) {
+    private func addTabs(
+        _ tabs: [TabBox],
+        to tabController: UITabBarController,
+        selectedTab: Tab = .dashboard
+    ) {
         let sorted = tabs.sorted { box1, box2 -> Bool in
             box2.tab.rawValue > box1.tab.rawValue
         }
@@ -66,7 +70,11 @@ class MainCoordinator: NavigationCoordinator {
         let controllers = sorted.map { box -> UIViewController in
             self.tabs[box.tab] = box.coordinator
             let controller = box.coordinator.toPresentable()
-            controller.tabBarItem = UITabBarItem(title: box.tab.title, image: box.tab.icon, tag: box.tab.rawValue)
+            controller.tabBarItem = UITabBarItem(
+                title: box.tab.title,
+                image: box.tab.icon,
+                tag: box.tab.rawValue
+            )
             return controller
         }
 

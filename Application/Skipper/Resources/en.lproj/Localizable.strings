@@ -54,14 +54,37 @@
 "searchMentor.nav.title" = "Поиск ментора";
 "searchMentor.search.placeholder" = "Искать ментора по имени";
 
+// MARK: - My Lesson
+
+"myLessons.nav.title" = "Мои занятия";
+"myLessons.lessonInfo.label" = "Информация о занятии";
+"myLessons.lessonInfo.mentor" = "Ментор";
+
 // MARK: - Errors
 
 "error.title" = "Ошибка";
+
 "error.connectivity" = "Проверьте интернет-соединение";
+
 "error.auth.invalidEmail" = "Пользователь с таким адресом не найден";
 "error.auth.invalidPassword" = "Неверный пароль";
 "error.auth.accountDisabled" = "Ваш аккаунт был заблокирован. Пожалуйста, свяжитесь с поддержкой для дополнительной информации";
+
+"error.mentor.notFound" = "Ментор не найден";
+
+"error.user.notFound" = "Пользователь не найден";
+"error.user.notAuthorized" = "Пользователь не вошел в аккант";
+
+"error.lesson.notFound" = "Занятие не найдено :(";
+
+"error.category.notFound" = "Категория не найдена";
+
+"error.booking.invalidData" = "Ошибка бронирования :(\nПроверьте выбранные данные!";
+
+"error.changePassword.passwordsAreEqual" = "Пароли не должны совпадать!";
+
 "error.firebase.system" = "Что-то пошло не так. Пожалуйста, повторите позднее";
+
 "error.unknown" = "Ой! Что-то пошло не так :(";
 
 

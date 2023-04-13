@@ -38,14 +38,22 @@ class StatusItemView: SetupableView {
     }
 
     override var intrinsicContentSize: CGSize {
-        let titleSize = titleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                      height: .greatestFiniteMagnitude))
+        let titleSize = titleLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
 
-        let subtitleSize = subtitleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
-                                                            height: .greatestFiniteMagnitude))
+        let subtitleSize = subtitleLabel.sizeThatFits(.init(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        ))
 
-        return .init(width: contentInset.left + max(titleSize.width, subtitleSize.width) + contentInset.right,
-                     height: contentInset.top + titleSize.height + 4 + subtitleSize.height + contentInset.bottom)
+        return .init(
+            width: contentInset.left + max(titleSize.width, subtitleSize.width) + contentInset
+                .right,
+            height: contentInset.top + titleSize.height + 4 + subtitleSize.height + contentInset
+                .bottom
+        )
     }
 
     // MARK: - UI Lifecycle
@@ -62,20 +70,28 @@ class StatusItemView: SetupableView {
 
         let availableWidth = bounds.width - contentInset.left - contentInset.right
 
-        let titleHeight = titleLabel.sizeThatFits(.init(width: availableWidth,
-                                                        height: .greatestFiniteMagnitude)).height
-        let subtitleHeight = subtitleLabel.sizeThatFits(.init(width: availableWidth,
-                                                              height: .greatestFiniteMagnitude)).height
+        let titleHeight = titleLabel.sizeThatFits(.init(
+            width: availableWidth,
+            height: .greatestFiniteMagnitude
+        )).height
+        let subtitleHeight = subtitleLabel.sizeThatFits(.init(
+            width: availableWidth,
+            height: .greatestFiniteMagnitude
+        )).height
 
-        titleLabel.frame = .init(x: contentInset.left,
-                                 y: contentInset.top,
-                                 width: availableWidth,
-                                 height: titleHeight)
+        titleLabel.frame = .init(
+            x: contentInset.left,
+            y: contentInset.top,
+            width: availableWidth,
+            height: titleHeight
+        )
 
-        subtitleLabel.frame = .init(x: contentInset.left,
-                                    y: titleLabel.frame.maxY + 4,
-                                    width: availableWidth,
-                                    height: subtitleHeight)
+        subtitleLabel.frame = .init(
+            x: contentInset.left,
+            y: titleLabel.frame.maxY + 4,
+            width: availableWidth,
+            height: subtitleHeight
+        )
     }
 
     // MARK: - UI Methods

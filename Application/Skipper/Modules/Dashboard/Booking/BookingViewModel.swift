@@ -75,7 +75,9 @@ class BookingViewModel {
     private func validateTime() -> [String] {
         let amountIndex = amountViewModel.selectedAmountIndex ?? 0
 
-        if timeViewModel.selectedTimeItems.count < amountViewModel.amountItems[amountIndex].rawValue {
+        if timeViewModel.selectedTimeItems.count < amountViewModel.amountItems[amountIndex]
+            .rawValue
+        {
             return ["Выбрано недостаточное количество дат для занятий"]
         }
 
@@ -132,7 +134,7 @@ class BookingViewModel {
             let contactIndex = contactViewModel.selectedContactIndex,
             contactIndex >= 0, contactIndex < mentor.contacts.count
         else {
-            errorEvent = AppError(message: "Ошибка бронирования :(\nПроверьте выбранные данные!")
+            errorEvent = AppError(message: Strings.errorBookingInvalidData())
             return
         }
 
@@ -140,7 +142,7 @@ class BookingViewModel {
         Task {
             do {
                 guard let user = try await authRepository.currentUser(forceUpdate: false) else {
-                    throw AppError(message: "Пользователь не найден")
+                    throw AppError(message: Strings.errorUserNotFound())
                 }
 
                 let bookedLessons = timeViewModel.selectedTimeItems.map {

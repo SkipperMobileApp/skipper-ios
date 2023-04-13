@@ -16,7 +16,9 @@ public protocol CoordinatorType: AnyObject, Presentable {
     func start(with deeplink: DeepLinkType?)
 }
 
-public class Coordinator<DeepLinkType, Router: RouterType>: NSObject, CoordinatorType, InteractiveDismissable {
+public class Coordinator<DeepLinkType, Router: RouterType>: NSObject, CoordinatorType,
+    InteractiveDismissable
+{
     public let router: Router
     public var childCoordinators: [Coordinator<DeepLinkType, NavigationRouter>] = []
 
@@ -39,7 +41,9 @@ public class Coordinator<DeepLinkType, Router: RouterType>: NSObject, Coordinato
     }
 
     public func removeChild(_ coordinator: Coordinator<DeepLinkType, NavigationRouter>?) {
-        guard let coordinator = coordinator, let index = childCoordinators.firstIndex(where: { $0 === coordinator }) else {
+        guard let coordinator = coordinator,
+              let index = childCoordinators.firstIndex(where: { $0 === coordinator })
+        else {
             return
         }
 

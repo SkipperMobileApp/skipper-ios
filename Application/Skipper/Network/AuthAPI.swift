@@ -41,18 +41,22 @@ class FirebaseAuthAPI: AuthAPI {
 
     func signUp(user: UserRegisterAPIModel) async throws -> AuthUserFirebaseModel {
         do {
-            let result = try await auth.createUser(withEmail: user.email,
-                                                   password: user.password)
+            let result = try await auth.createUser(
+                withEmail: user.email,
+                password: user.password
+            )
 
             let authUser = AuthUserMapper.firebaseToAPI(result.user)
 
-            let user = UserFirebaseModel(id: authUser.id,
-                                         email: authUser.email,
-                                         firstName: user.firstName,
-                                         lastName: user.lastName,
-                                         bio: "",
-                                         post: "",
-                                         imageUrl: nil)
+            let user = UserFirebaseModel(
+                id: authUser.id,
+                email: authUser.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                bio: "",
+                post: "",
+                imageUrl: nil
+            )
 
             try await database.updateUsers(users: [user])
 
@@ -76,13 +80,14 @@ class FirebaseAuthAPI: AuthAPI {
 
     func changePassword(oldPassword: String, newPassword: String) async throws {
         guard let user = auth.currentUser, let email = user.email else {
-            throw AppError(message: "Пользователь не вошел в аккаунт")
+            throw AppError(message: Strings.errorUserNotAuthorized())
         }
 
-        try await user.reauthenticate(with: EmailAuthProvider.credential(
-            withEmail: email,
-            password: oldPassword
-        )
+        try await user.reauthenticate(
+            with: EmailAuthProvider.credential(
+                withEmail: email,
+                password: oldPassword
+            )
         )
 
         try await user.updatePassword(to: newPassword)

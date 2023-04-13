@@ -24,7 +24,7 @@ class UserRepositoryImpl {
             email: "van.darkholme@test.com",
             firstName: "Van",
             lastName: "Darkholme",
-            bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
+            bio: "Занимаюсь backend-разработкой уже более 5 лет. Работал в ведущих зарубежных компаниях уровня FAANG.",
             post: "Backend Developer",
             imageUrl: "https://clips-media-assets2.twitch.tv/AT-cm%7CDvVLC2hBoIkrmBh1VtqN6A-preview-480x272.jpg",
             isMentor: true,
@@ -47,7 +47,7 @@ class UserRepositoryImpl {
             email: "thomas.shelby@test.com",
             firstName: "Thomas",
             lastName: "Shelby",
-            bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
+            bio: "Отлично анализирую обстановку, читаю людей и проектную документацию. Победитель Birmingham Whiskey Cup 1921",
             post: "Аналитик со стажем",
             imageUrl: "https://i.tribune.com.pk/media/images/1947471-thomas-1554890232/1947471-thomas-1554890232.png",
             isMentor: true,
@@ -67,10 +67,10 @@ class UserRepositoryImpl {
         ),
         .init(
             id: "3",
-            email: "thomas.shelby@test.com",
+            email: "thomas.angelo@test.com",
             firstName: "Thomas",
             lastName: "Angelo",
-            bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
+            bio: "Опыт работы в сфере - 9 лет. Разрабатывал архитектуру приложений-гигантов в индустрии продакт-плейсмента.",
             post: "Мобильный архитектор-муравей",
             imageUrl: "https://www.casinos.at/fileadmin/_processed_/b/8/csm_poker-croupier-karten-fliegen-mischen_5dbbb47659.jpg",
             isMentor: true,
@@ -93,7 +93,7 @@ class UserRepositoryImpl {
             email: "homelander@test.com",
             firstName: "Homelander",
             lastName: "",
-            bio: "Я всё это хаваю, у меня нет выбора\nЕсли не хочу, чтоб мои будущие дети в школе увидали видео",
+            bio: "Обучаю необучаемое. Чем вы глупее бездушных машин?",
             post: "Data learning engineer",
             imageUrl: "https://www.tvinsider.com/wp-content/uploads/2019/08/the-boys-homelander-1014x570.jpg",
             isMentor: true,
@@ -159,12 +159,32 @@ class UserRepositoryImpl {
     private func generateCv() -> UserModel.UserResumeInfo {
         .init(
             educationUnits: [
-                .init(name: "Сибирский Федеральный Университет", startYear: 2016, endYear: 2020, degree: "Бакалавр"),
-                .init(name: "Сибирский Федеральный Университет", startYear: 2020, endYear: 2022, degree: "Магистр")
+                .init(
+                    name: "Сибирский Федеральный Университет",
+                    startYear: 2016,
+                    endYear: 2020,
+                    degree: "Бакалавр"
+                ),
+                .init(
+                    name: "Сибирский Федеральный Университет",
+                    startYear: 2020,
+                    endYear: 2022,
+                    degree: "Магистр"
+                )
             ],
             workUnits: [
-                .init(name: #"ООО "Очень Интересно""#, startYear: 2019, endYear: 2020, post: "Мобильный разработчик"),
-                .init(name: #"ООО "Тинькофф Центр Разработки""#, startYear: 2020, endYear: nil, post: "Android-разработчик")
+                .init(
+                    name: #"ООО "Очень Интересно""#,
+                    startYear: 2019,
+                    endYear: 2020,
+                    post: "Мобильный разработчик"
+                ),
+                .init(
+                    name: #"ООО "Тинькофф Центр Разработки""#,
+                    startYear: 2020,
+                    endYear: nil,
+                    post: "Android-разработчик"
+                )
             ],
             achievementUnits: [
                 .init(name: "ВКОШП ACM Team Tournament", year: 2015, info: "9 место"),
@@ -201,7 +221,7 @@ extension UserRepositoryImpl: UserRepository {
         try await Task.sleep(for: .seconds(0.5))
 
         guard let mentor = users.filter({ $0.isMentor }).first(where: { $0.id == mentorId }) else {
-            throw AppError(message: "Ментор не найден")
+            throw AppError(message: Strings.errorMentorNotFound())
         }
 
         let lessons = try await lessonRepository.lessonsForMentor(mentorId: mentorId)
@@ -213,7 +233,7 @@ extension UserRepositoryImpl: UserRepository {
 
     func user(userId: String) async throws -> UserModel {
         guard let user = try await database.user(userId: userId) else {
-            throw AppError(message: "Пользователь не найден")
+            throw AppError(message: Strings.errorUserNotFound())
         }
 
         return UserMapper.apiToDomain(user)

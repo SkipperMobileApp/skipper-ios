@@ -64,13 +64,13 @@ class BookingAmountViewController: UIViewController {
         return button
     }()
 
-    private lazy var totalLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = R.color.primary87()
-        label.font = R.typo.header
-        label.numberOfLines = 1
-        return label
-    }()
+//    private lazy var totalLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = R.color.primary87()
+//        label.font = R.typo.header
+//        label.numberOfLines = 1
+//        return label
+//    }()
 
     private lazy var pickerPresenter: PickerPresenter = {
         let presenter = PickerPresenter()
@@ -139,8 +139,10 @@ class BookingAmountViewController: UIViewController {
             .bottom(to: nextButton, attribute: .top, constant: -16)
         )
 
-        containerView.applyConstraints(.fit(in: scrollView.contentLayoutGuide),
-                                       .width(to: scrollView, attribute: .width))
+        containerView.applyConstraints(
+            .fit(in: scrollView.contentLayoutGuide),
+            .width(to: scrollView, attribute: .width)
+        )
 
         headerView.applyConstraints(
             .top(to: containerView, attribute: .top, constant: 16),
@@ -183,14 +185,16 @@ class BookingAmountViewController: UIViewController {
         stackView.addArrangedSubview(amountButton)
         stackView.setCustomSpacing(16, after: amountButton)
 
-        stackView.addArrangedSubview(totalLabel)
-        stackView.setCustomSpacing(16, after: totalLabel)
+//        stackView.addArrangedSubview(totalLabel)
+//        stackView.setCustomSpacing(16, after: totalLabel)
     }
 
     private func updateData() {
-        totalLabel.text = "Итоговая стоимость: \(viewModel.totalCost) рублей"
-        amountButton.text = viewModel.selectedAmountIndex.flatMap { viewModel.amountItems[$0].title }
-        durationButton.text = viewModel.selectedDurationIndex.flatMap { viewModel.durationItems[$0].title }
+        // totalLabel.text = "Итоговая стоимость: \(viewModel.totalCost) рублей"
+        amountButton.text = viewModel.selectedAmountIndex
+            .flatMap { viewModel.amountItems[$0].title }
+        durationButton.text = viewModel.selectedDurationIndex
+            .flatMap { viewModel.durationItems[$0].title }
     }
 
     private func bindViewModelActions() {}
