@@ -25,6 +25,12 @@ class SecondaryButton: SetupableButton {
         }
     }
 
+    override var tintColor: UIColor! {
+        didSet {
+            updateStyle()
+        }
+    }
+
     var isLoading: Bool = false {
         didSet {
             updateLoadingState()
@@ -38,6 +44,8 @@ class SecondaryButton: SetupableButton {
 
         updateStyle()
         updateLoadingState()
+
+        tintColor = R.color.brandPrimary()
 
         titleLabel?.font = R.typo.header
         layer.cornerRadius = 12
@@ -55,10 +63,10 @@ class SecondaryButton: SetupableButton {
     // MARK: - UI Methods
 
     private func updateStyle() {
-        layer.borderColor = R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
+        layer.borderColor = tintColor.withAlphaComponent(isHighlighted ? 0.7 : 1.0)
             .cgColor
         setTitleColor(
-            R.color.brandPrimary()?.withAlphaComponent(isHighlighted ? 0.7 : 1.0),
+            tintColor.withAlphaComponent(isHighlighted ? 0.7 : 1.0),
             for: .normal
         )
     }

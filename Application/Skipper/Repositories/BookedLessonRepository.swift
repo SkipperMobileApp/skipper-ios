@@ -11,6 +11,7 @@ protocol BookedLessonRepository {
     func bookLessons(lessons: [BookedLesson]) async throws
     func lessonsForUser(userId: String) async throws -> [BookedLesson]
     func lesson(lessonId: String) async throws -> BookedLesson
+    func cancelLesson(lessonId: String) async throws
 }
 
 class BookedLessonRepositoryImpl: BookedLessonRepository {
@@ -29,10 +30,18 @@ class BookedLessonRepositoryImpl: BookedLessonRepository {
     }
 
     func lesson(lessonId: String) async throws -> BookedLesson {
+        try await Task.sleep(for: .seconds(0.5))
+
         guard let lesson = bookedLessons.first(where: { $0.lessonId == lessonId }) else {
             throw AppError(message: "Занятие не найдено")
         }
 
         return lesson
+    }
+
+    func cancelLesson(lessonId: String) async throws {
+        try await Task.sleep(for: .seconds(0.5))
+
+        bookedLessons.removeAll { $0.lessonId == lessonId }
     }
 }

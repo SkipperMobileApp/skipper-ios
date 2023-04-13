@@ -28,6 +28,10 @@ class MyLessonsCoordinator: NavigationCoordinator {
         let viewModel = LessonDetailsViewModel(lessonId: lessonId)
         let controller = LessonDetailsViewController(viewModel: viewModel)
 
+        controller.didCancelLesson = { [weak self] in
+            self?.router.popModule()
+        }
+
         router.push(controller)
     }
 }
