@@ -19,6 +19,10 @@
 		8415A8C8297C7EFF00D16CD0 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8C7297C7EFF00D16CD0 /* ProfileHeaderView.swift */; };
 		8415A8CA297C877500D16CD0 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8C9297C877500D16CD0 /* SecondaryButton.swift */; };
 		8415A8CC297C8A8500D16CD0 /* DangerSecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415A8CB297C8A8500D16CD0 /* DangerSecondaryButton.swift */; };
+		841B413D29E9975D0022681F /* LessonManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B413C29E9975D0022681F /* LessonManagementViewController.swift */; };
+		841B413F29E997640022681F /* LessonManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B413E29E997640022681F /* LessonManagementViewModel.swift */; };
+		841B414129E99B5B0022681F /* LessonManagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B414029E99B5B0022681F /* LessonManagementCell.swift */; };
+		841B414329E9A7780022681F /* LessonManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B414229E9A7780022681F /* LessonManagementCoordinator.swift */; };
 		8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC8E296973A000FB00F8 /* BookingViewController.swift */; };
 		8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC90296973A600FB00F8 /* BookingViewModel.swift */; };
 		8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CC962969785300FB00F8 /* BookingTypeViewController.swift */; };
@@ -255,6 +259,10 @@
 		8415A8C7297C7EFF00D16CD0 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8415A8C9297C877500D16CD0 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		8415A8CB297C8A8500D16CD0 /* DangerSecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerSecondaryButton.swift; sourceTree = "<group>"; };
+		841B413C29E9975D0022681F /* LessonManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManagementViewController.swift; sourceTree = "<group>"; };
+		841B413E29E997640022681F /* LessonManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManagementViewModel.swift; sourceTree = "<group>"; };
+		841B414029E99B5B0022681F /* LessonManagementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManagementCell.swift; sourceTree = "<group>"; };
+		841B414229E9A7780022681F /* LessonManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManagementCoordinator.swift; sourceTree = "<group>"; };
 		8431CC8E296973A000FB00F8 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8431CC90296973A600FB00F8 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		8431CC962969785300FB00F8 /* BookingTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTypeViewController.swift; sourceTree = "<group>"; };
@@ -555,6 +563,17 @@
 			path = SkipperUITests;
 			sourceTree = "<group>";
 		};
+		841B413B29E98F130022681F /* LessonManagement */ = {
+			isa = PBXGroup;
+			children = (
+				841B414229E9A7780022681F /* LessonManagementCoordinator.swift */,
+				841B413C29E9975D0022681F /* LessonManagementViewController.swift */,
+				841B413E29E997640022681F /* LessonManagementViewModel.swift */,
+				841B414029E99B5B0022681F /* LessonManagementCell.swift */,
+			);
+			path = LessonManagement;
+			sourceTree = "<group>";
+		};
 		8431CC8D2969739300FB00F8 /* Booking */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +765,7 @@
 		8485C4CC295E2B3C007A7811 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				841B413B29E98F130022681F /* LessonManagement */,
 				84F1B4F7297D9277008AC86B /* ProfileNotifications */,
 				84F1B4EF297D841A008AC86B /* EditPersonalInfo */,
 				84F1B4F8297D928E008AC86B /* ChangePassword */,
@@ -1564,12 +1584,14 @@
 				848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */,
 				84A27BE52968B29D002465DD /* ClassesListViewModel.swift in Sources */,
 				84AC022C292E882A00DE7AF2 /* UserFirebaseModel.swift in Sources */,
+				841B413F29E997640022681F /* LessonManagementViewModel.swift in Sources */,
 				84B1118E295CCA930040AEA1 /* AuthVerificationViewController.swift in Sources */,
 				8455B98D296C903A005DE8DD /* UtilRepository.swift in Sources */,
 				8485C4CE295E2B49007A7811 /* ProfileViewController.swift in Sources */,
 				8455B985296C7452005DE8DD /* UserRepository.swift in Sources */,
 				84BC43CF296AF427000B2C67 /* BookingTimeSectionHeader.swift in Sources */,
 				849A925F293E80A00056711F /* SyncCompositeLogoutHandler.swift in Sources */,
+				841B413D29E9975D0022681F /* LessonManagementViewController.swift in Sources */,
 				84A27BE72968B407002465DD /* ClassesListCell.swift in Sources */,
 				84AC0233292E889100DE7AF2 /* PaginatedModel.swift in Sources */,
 				844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */,
@@ -1614,6 +1636,7 @@
 				84429C49297DD7D300645C6A /* GradientView.swift in Sources */,
 				84CC1F4A2969EEF200300F32 /* PickerViewController.swift in Sources */,
 				846B83542966E4A5008F9BB5 /* CloudView.swift in Sources */,
+				841B414129E99B5B0022681F /* LessonManagementCell.swift in Sources */,
 				84C29AAB29086E030073E7A4 /* SplashViewController.swift in Sources */,
 				848AB2CD29410D5C007DB9F4 /* AuthUserCacheModel.swift in Sources */,
 				84F6A2FA2974518700B7E188 /* LessonAmount.swift in Sources */,
@@ -1679,6 +1702,7 @@
 				84EE755428F70E8900B55839 /* Log.swift in Sources */,
 				84573DE62906F42200F03827 /* ExampleMapper.swift in Sources */,
 				84E51DDE292BFB8F008D2308 /* InsetTextField.swift in Sources */,
+				841B414329E9A7780022681F /* LessonManagementCoordinator.swift in Sources */,
 				84573E0529071D8D00F03827 /* R.generated.swift in Sources */,
 				84E6C2E2293CB13F003ACCF7 /* Injected.swift in Sources */,
 				84EE758428F72A9200B55839 /* Presentable.swift in Sources */,

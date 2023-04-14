@@ -55,6 +55,7 @@ class FirebaseAuthAPI: AuthAPI {
                 lastName: user.lastName,
                 bio: "",
                 post: "",
+                isMentor: false,
                 imageUrl: nil
             )
 

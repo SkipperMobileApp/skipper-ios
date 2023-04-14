@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController {
     var didTapEditProfileInfo: (() -> Void)?
     var didTapEditPassword: (() -> Void)?
     var didTapEditNotifications: (() -> Void)?
+    var didTapLessonsManagement: (() -> Void)?
     var didTapImageAction: ((ImagePickerProvider) -> Void)?
 
     // MARK: - Properties
@@ -158,13 +159,13 @@ class ProfileViewController: UIViewController {
             .height(constant: 45)
         )
 
-        setupStackView()
+        setupStackView(with: viewModel.options)
     }
 
-    private func setupStackView() {
+    private func setupStackView(with options: [Option]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        Option.allCases
+        options
             .map(makeOptionView)
             .forEach {
                 stackView.addArrangedSubview($0)
@@ -174,6 +175,7 @@ class ProfileViewController: UIViewController {
 
     private func bindViewModelActions() {
         viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
             .sink { isLoading in
                 if isLoading {
                     HUD.show(.progress)
@@ -184,6 +186,7 @@ class ProfileViewController: UIViewController {
             .store(in: &subscriptions)
 
         viewModel.$errorEvent
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 guard let self = self else { return }
                 AlertPresenter.presentSimpleAlert(
@@ -195,6 +198,7 @@ class ProfileViewController: UIViewController {
             .store(in: &subscriptions)
 
         viewModel.$profileInfo
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
                 self?.headerView.configure(
                     with: .init(
@@ -203,6 +207,13 @@ class ProfileViewController: UIViewController {
                         email: info.email
                     )
                 )
+            }
+            .store(in: &subscriptions)
+
+        viewModel.$options
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] options in
+                self?.setupStackView(with: options)
             }
             .store(in: &subscriptions)
     }
@@ -246,6 +257,7 @@ class ProfileViewController: UIViewController {
                 case .info: self?.didTapEditProfileInfo?()
                 case .password: self?.didTapEditPassword?()
                 case .notifications: self?.didTapEditNotifications?()
+                case .lessons: self?.didTapLessonsManagement?()
                 }
             },
             for: .touchUpInside

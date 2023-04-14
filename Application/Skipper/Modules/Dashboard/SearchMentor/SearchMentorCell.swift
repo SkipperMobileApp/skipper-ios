@@ -21,7 +21,7 @@ class SearchMentorCell: SetupableTableViewCell, Reusable {
             alignment: .left
         )
         static let contentInsets: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
-        static let edgeInsets: UIEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        static let edgeInsets: UIEdgeInsets = .init(top: 8, left: 16, bottom: 8, right: 16)
     }
 
     // MARK: - UI Controls

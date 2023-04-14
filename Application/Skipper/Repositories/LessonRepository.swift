@@ -157,6 +157,42 @@ class LessonRepositoryImpl: LessonRepository {
             costTable: mockCostTable(),
             slots: mockFreeSlots(),
             types: [.theoretical]
+        ),
+        LessonModel(
+            id: "13",
+            mentorId: "TE6C0gmMbMYtKzGN2XFGC8qHmfx2",
+            title: "Консультация iOS SDK",
+            brief: "Получение навыков работы с iOS SDK",
+            description: "",
+            appointmentDate: Date.now,
+            durations: [.trial],
+            costTable: mockCostTable(),
+            slots: mockFreeSlots(),
+            types: [.theoretical]
+        ),
+        LessonModel(
+            id: "14",
+            mentorId: "TE6C0gmMbMYtKzGN2XFGC8qHmfx2",
+            title: "Расширенный курс iOS SDK (Middle)",
+            brief: "Расширенный курс по iOS SDK, который позволит получить знания уровня Middle",
+            description: "",
+            appointmentDate: Date.now,
+            durations: [.trial],
+            costTable: mockCostTable(),
+            slots: mockFreeSlots(),
+            types: [.theoretical]
+        ),
+        LessonModel(
+            id: "15",
+            mentorId: "TE6C0gmMbMYtKzGN2XFGC8qHmfx2",
+            title: "Консультация SwiftUI",
+            brief: "Получение базовых навыков по работе с фреймворком SwiftUI",
+            description: "",
+            appointmentDate: Date.now,
+            durations: [.trial],
+            costTable: mockCostTable(),
+            slots: mockFreeSlots(),
+            types: [.theoretical]
         )
     ]
 

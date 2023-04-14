@@ -65,5 +65,8 @@ extension R {
 
         static let bellCircle = UIImage(systemName: "bell.circle.fill")!
             .withRenderingMode(.alwaysTemplate)
+
+        static let plus = UIImage(systemName: "plus")!
+            .withRenderingMode(.alwaysTemplate)
     }
 }
