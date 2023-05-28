@@ -102,8 +102,8 @@ class BookingViewModel {
                 let mentor = try await userRepository.mentor(mentorId: lesson.mentorId)
 
                 await MainActor.run {
-                    typeViewModel.setTypes(types: lesson.types)
-                    amountViewModel.setData(durations: lesson.durations, costs: lesson.costTable)
+                    typeViewModel.setTypes(types: makeTypesArray(from: lesson.types))
+                    amountViewModel.setData(durations: makeDurationsArray(from: lesson.durations))
                     timeViewModel.setLessonAvailableIntervals(lesson.slots)
                     contactViewModel.setContacts(types: mentor.contacts)
 
@@ -127,7 +127,6 @@ class BookingViewModel {
             let mentor = mentor,
             let durationIndex = amountViewModel.selectedDurationIndex,
             durationIndex >= 0, durationIndex < lesson.durations.count,
-            let cost = lesson.costTable[lesson.durations[durationIndex]],
             let typeIndex = typeViewModel.selectedItemIndex,
             typeIndex >= 0, typeIndex < lesson.types.count,
             timeViewModel.selectedTimeItems.count > 0,
@@ -153,11 +152,10 @@ class BookingViewModel {
                         lessonId: lesson.id,
                         name: lesson.title,
                         description: lesson.brief,
-                        type: lesson.types[typeIndex],
-                        cost: cost,
+                        type: makeTypesArray(from: lesson.types)[typeIndex],
                         date: $0.date,
                         time: $0.timeInterval,
-                        duration: lesson.durations[durationIndex],
+                        duration: makeDurationsArray(from: lesson.durations)[durationIndex],
                         contact: mentor.contacts[contactIndex].type
                     )
                 }
@@ -176,6 +174,14 @@ class BookingViewModel {
                 }
             }
         }
+    }
+
+    private func makeTypesArray(from typeSet: Set<LessonType>) -> [LessonType] {
+        LessonType.allCases.filter { typeSet.contains($0) }
+    }
+
+    private func makeDurationsArray(from durationSet: Set<LessonDuration>) -> [LessonDuration] {
+        LessonDuration.allCases.filter { durationSet.contains($0) }
     }
 }
 

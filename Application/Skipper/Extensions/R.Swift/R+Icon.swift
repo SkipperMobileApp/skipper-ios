@@ -68,5 +68,14 @@ extension R {
 
         static let plus = UIImage(systemName: "plus")!
             .withRenderingMode(.alwaysTemplate)
+
+        static let checkmark = UIImage(systemName: "checkmark")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let checkboxOn = UIImage(systemName: "checkmark.square.fill")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let checkboxOff = UIImage(systemName: "square")!
+            .withRenderingMode(.alwaysTemplate)
     }
 }

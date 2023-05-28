@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum LessonType {
+enum LessonType: CaseIterable {
     case theoretical, practical, solution
 }

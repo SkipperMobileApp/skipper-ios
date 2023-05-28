@@ -44,7 +44,27 @@ class LessonManagementCoordinator: NavigationCoordinator {
 
     // MARK: - Routing
 
-    func showLessonDetails(lessonId: String, lessonRefreshable: LessonRefreshable) {}
+    func showLessonDetails(lessonId: String, lessonRefreshable: LessonRefreshable) {
+        let viewModel = LessonInfoViewModel(lessonId: lessonId)
+        let controller = LessonInfoViewController(viewModel: viewModel)
 
-    func showAddLesson(lessonRefreshable: LessonRefreshable) {}
+        controller.didSaveLesson = { [weak self, weak lessonRefreshable] in
+            lessonRefreshable?.refreshLessons()
+            self?.router.popModule()
+        }
+
+        router.push(controller)
+    }
+
+    func showAddLesson(lessonRefreshable: LessonRefreshable) {
+        let viewModel = LessonInfoViewModel(lessonId: nil)
+        let controller = LessonInfoViewController(viewModel: viewModel)
+
+        controller.didSaveLesson = { [weak self, weak lessonRefreshable] in
+            lessonRefreshable?.refreshLessons()
+            self?.router.popModule()
+        }
+
+        router.push(controller)
+    }
 }

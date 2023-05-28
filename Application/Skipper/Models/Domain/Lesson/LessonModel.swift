@@ -8,14 +8,12 @@
 import Foundation
 
 struct LessonModel {
-    let id: String
+    var id: String
     let mentorId: String
     let title: String
     let brief: String
     let description: String
-    let appointmentDate: Date
-    let durations: [LessonDuration]
-    let costTable: [LessonDuration: Int]
+    let durations: Set<LessonDuration>
     let slots: [Int: [String]]
-    let types: [LessonType]
+    let types: Set<LessonType>
 }

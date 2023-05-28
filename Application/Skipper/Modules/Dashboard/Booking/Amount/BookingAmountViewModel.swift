@@ -8,13 +8,6 @@
 import Foundation
 
 class BookingAmountViewModel {
-    var totalCost: Int {
-        guard let amountIndex = selectedAmountIndex,
-              let durationIndex = selectedDurationIndex else { return 0 }
-
-        return (costs[durationItems[durationIndex]] ?? 0) * amountItems[amountIndex].rawValue
-    }
-
     private let trialAmountItems: [BookingAmount] = [.one]
     private let defaultAmountItems: [BookingAmount] = [.one, .three, .five]
 
@@ -24,19 +17,11 @@ class BookingAmountViewModel {
     @Published private(set) var selectedAmountIndex: Int?
     private(set) var selectedDurationIndex: Int?
 
-    private var costs: [BookingDuration: Int] = [:]
-
     // MARK: - Initializations
 
-    func setData(durations: [LessonDuration], costs: [LessonDuration: Int]) {
+    func setData(durations: [LessonDuration]) {
         durationItems = durations.map(BookingDuration.init)
             .sorted(by: { $0.rawValue < $1.rawValue })
-
-        self.costs = durations.reduce([BookingDuration: Int]()) { acc, item in
-            var acc = acc
-            acc[BookingDuration(from: item)] = costs[item]
-            return acc
-        }
     }
 
     // MARK: - Data items
