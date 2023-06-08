@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum LessonDuration: Int {
+enum LessonDuration: Int, CaseIterable {
     case trial = 15, short = 30, mid = 60, long = 90
 }

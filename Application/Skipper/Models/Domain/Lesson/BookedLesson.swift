@@ -17,7 +17,6 @@ struct BookedLesson {
     let description: String
 
     let type: LessonType
-    let cost: Int
 
     let date: Date
     let time: String

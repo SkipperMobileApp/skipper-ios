@@ -70,7 +70,7 @@ class BookingTimeViewController: UIViewController {
 
     private lazy var pickerPresenter: PickerPresenter = {
         let presenter = PickerPresenter()
-        presenter.delegate = self
+        presenter.itemDelegate = self
         return presenter
     }()
 
@@ -239,7 +239,7 @@ extension BookingTimeViewController: UICalendarSelectionSingleDateDelegate {
 
         selectedDateComponents = dateComponents
 
-        pickerPresenter.presentPicker(pickerData: .init(
+        pickerPresenter.presentItemPicker(pickerData: .init(
             title: "Выберите время",
             items: viewModel.availableBookingIntervals.map { $0.time },
             selectedIndex: nil
@@ -279,8 +279,6 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
             guard let self = self,
                   let actualIndexPath = tableView.indexPath(for: cell) else { return }
 
-            let date = self.viewModel.selectedTimeItems[actualIndexPath.row].date
-
             self.viewModel.deleteSelectedItem(at: actualIndexPath.row)
             self.tableView.deleteRows(at: [actualIndexPath], with: .fade)
 
@@ -294,8 +292,8 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
 
 // MARK: - PickerPresenterDelegate
 
-extension BookingTimeViewController: PickerPresenterDelegate {
-    func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
+extension BookingTimeViewController: ItemPickerDelegate {
+    func itemPicker(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
         guard let selectedDateComponents = selectedDateComponents,
               let selectedDate = selectedDateComponents.date else { return }
 

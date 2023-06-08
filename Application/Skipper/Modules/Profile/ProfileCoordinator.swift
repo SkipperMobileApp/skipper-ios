@@ -27,6 +27,10 @@ class ProfileCoordinator: NavigationCoordinator {
         controller.didTapEditNotifications = { [weak self] in
         }
 
+        controller.didTapLessonsManagement = { [weak self] in
+            self?.showLessonManagement()
+        }
+
         controller.didTapImageAction = { [weak self, weak controller] provider in
             guard let self = self, let controller = controller else { return }
             self.imagePicker.presentPicker(provider: provider, on: controller)
@@ -53,4 +57,14 @@ class ProfileCoordinator: NavigationCoordinator {
     }
 
     private func showEditNotifications() {}
+
+    private func showLessonManagement() {
+        let coordinator = LessonManagementCoordinator(with: router)
+
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
+
+        addChild(coordinator)
+    }
 }

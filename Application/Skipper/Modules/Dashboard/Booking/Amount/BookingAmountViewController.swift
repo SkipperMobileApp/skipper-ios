@@ -74,7 +74,7 @@ class BookingAmountViewController: UIViewController {
 
     private lazy var pickerPresenter: PickerPresenter = {
         let presenter = PickerPresenter()
-        presenter.delegate = self
+        presenter.itemDelegate = self
         return presenter
     }()
 
@@ -229,7 +229,7 @@ class BookingAmountViewController: UIViewController {
     }
 
     @objc private func durationAction() {
-        pickerPresenter.presentPicker(
+        pickerPresenter.presentItemPicker(
             pickerData: .init(
                 title: "Длительность занятия",
                 items: viewModel.durationItems.map { $0.title },
@@ -240,7 +240,7 @@ class BookingAmountViewController: UIViewController {
     }
 
     @objc private func amountAction() {
-        pickerPresenter.presentPicker(
+        pickerPresenter.presentItemPicker(
             pickerData: .init(
                 title: "Количество занятий",
                 items: viewModel.amountItems.map { $0.title },
@@ -253,8 +253,8 @@ class BookingAmountViewController: UIViewController {
 
 // MARK: - PickerPresenterDelegate
 
-extension BookingAmountViewController: PickerPresenterDelegate {
-    func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
+extension BookingAmountViewController: ItemPickerDelegate {
+    func itemPicker(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
         if pickerMode == .duration {
             viewModel.setSelectedDuration(at: index)
         } else {

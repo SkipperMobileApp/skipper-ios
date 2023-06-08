@@ -61,6 +61,12 @@
 "myLessons.lessonInfo.mentor" = "Ментор";
 "myLessons.details.cancelButton.title" = "Отменить занятие";
 
+// MARK: - Lesson Management
+
+"lessonManagement.nav.title" = "Список занятий";
+"lessonManagement.searchBar.placeholder" = "Искать занятие по названию";
+
+
 // MARK: - Errors
 
 "error.title" = "Ошибка";

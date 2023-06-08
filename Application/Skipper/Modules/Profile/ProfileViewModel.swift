@@ -26,6 +26,8 @@ class ProfileViewModel {
         email: "--"
     )
 
+    @Published private(set) var options: [Option] = Option.menteeOptions
+
     // MARK: - API Calls
 
     func loadData() {
@@ -38,18 +40,17 @@ class ProfileViewModel {
 
                 let user = try await userRepository.user(userId: currentUser.id)
 
-                await MainActor.run {
-                    profileInfo = .init(
-                        name: [user.lastName, user.firstName].filter { !$0.isEmpty }
-                            .joined(separator: " "),
-                        avatarUrl: user.imageUrl,
-                        email: user.email
-                    )
-                }
+                profileInfo = .init(
+                    name: [user.lastName, user.firstName].filter { !$0.isEmpty }
+                        .joined(separator: " "),
+                    avatarUrl: user.imageUrl,
+                    email: user.email
+                )
+
+                options = user.isMentor ? Option.mentorOptions : Option.menteeOptions
+
             } catch {
-                await MainActor.run {
-                    errorEvent = error
-                }
+                errorEvent = error
             }
         }
     }
@@ -61,16 +62,11 @@ class ProfileViewModel {
         Task {
             do {
                 try await logoutHandler.logout()
-
-                await MainActor.run {
-                    isLoading = false
-                }
             } catch {
-                await MainActor.run {
-                    errorEvent = error
-                    isLoading = false
-                }
+                errorEvent = error
             }
+
+            isLoading = false
         }
     }
 
@@ -105,16 +101,12 @@ class ProfileViewModel {
 
                 try await userRepository.updateUser(user: user)
 
-                await MainActor.run {
-                    profileInfo.avatarUrl = url.absoluteString
-                    isLoading = false
-                }
+                profileInfo.avatarUrl = url.absoluteString
             } catch {
-                await MainActor.run {
-                    errorEvent = error
-                    isLoading = false
-                }
+                errorEvent = error
             }
+
+            isLoading = false
         }
     }
 
@@ -136,14 +128,15 @@ extension ProfileViewModel {
         let email: String
     }
 
-    enum Option: CaseIterable {
-        case info, password, notifications
+    enum Option {
+        case info, password, notifications, lessons
 
         var title: String {
             switch self {
             case .info: return "Личная информация"
             case .password: return "Управление паролем"
             case .notifications: return "Параметры уведомлений"
+            case .lessons: return "Управление занятиями"
             }
         }
 
@@ -152,7 +145,11 @@ extension ProfileViewModel {
             case .info: return R.icon.profileCircle
             case .password: return R.icon.lockCircle
             case .notifications: return R.icon.bellCircle
+            case .lessons: return R.icon.briefCaseCircle
             }
         }
+
+        static let menteeOptions: [Self] = [.info, .password, .notifications]
+        static let mentorOptions: [Self] = [.info, .password, .notifications, .lessons]
     }
 }

@@ -8,18 +8,28 @@
 import Foundation
 import UIKit
 
-protocol PickerPresenterDelegate: AnyObject {
-    func pickerPresenter(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int)
+protocol ItemPickerDelegate: AnyObject {
+    func itemPicker(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int)
+}
+
+protocol TimeSlotsPickerDelegate: AnyObject {
+    func timeSlotsPicker(
+        _ presenter: PickerPresenter,
+        didSelectDateIndex dateIndex: Int,
+        withTimeIndex timeIndex: Int
+    )
 }
 
 class PickerPresenter {
-    typealias PickerData = PickerViewController.PickerData
+    typealias ItemPickerData = ItemPickerViewController.PickerData
+    typealias TimeSlotsPickerData = TimeSlotsPickerViewController.PickerData
 
-    weak var delegate: PickerPresenterDelegate?
+    weak var itemDelegate: ItemPickerDelegate?
+    weak var timeSlotsDelegate: TimeSlotsPickerDelegate?
 
-    private var currentPicker: PickerViewController?
+    private var currentPicker: UIViewController?
 
-    func presentPicker(pickerData: PickerData) {
+    func presentItemPicker(pickerData: ItemPickerData) {
         dismiss(animated: false)
 
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
@@ -28,7 +38,7 @@ class PickerPresenter {
             return
         }
 
-        let picker = PickerViewController(pickerData: pickerData)
+        let picker = ItemPickerViewController(pickerData: pickerData)
 
         picker.didTapCancel = { [weak self] in
             self?.dismiss()
@@ -36,7 +46,39 @@ class PickerPresenter {
 
         picker.didSelectItem = { [weak self] index in
             guard let self = self else { return }
-            self.delegate?.pickerPresenter(self, didSelectItemAtIndex: index)
+            self.itemDelegate?.itemPicker(self, didSelectItemAtIndex: index)
+        }
+
+        picker.modalTransitionStyle = .crossDissolve
+        picker.modalPresentationStyle = .overCurrentContext
+
+        controller.present(picker, animated: true)
+
+        currentPicker = picker
+    }
+
+    func presentTimeSlotsPicker(pickerData: TimeSlotsPickerData) {
+        dismiss(animated: false)
+
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+              let controller = window.rootViewController
+        else {
+            return
+        }
+
+        let picker = TimeSlotsPickerViewController(pickerData: pickerData)
+
+        picker.didTapCancel = { [weak self] in
+            self?.dismiss()
+        }
+
+        picker.didSelectTimeSlot = { [weak self] dateIndex, timeIndex in
+            guard let self = self else { return }
+            self.timeSlotsDelegate?.timeSlotsPicker(
+                self,
+                didSelectDateIndex: dateIndex,
+                withTimeIndex: timeIndex
+            )
         }
 
         picker.modalTransitionStyle = .crossDissolve

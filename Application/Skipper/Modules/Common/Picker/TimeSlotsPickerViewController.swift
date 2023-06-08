@@ -1,18 +1,25 @@
 //
-//  PickerViewController.swift
+//  TimeSlotsPickerViewController.swift
 //  Skipper
 //
-//  Created by Denis Kovalev on 08.01.2023.
+//  Created by Denis Kovalev on 21.05.2023.
 //
 
 import Foundation
 import UIKit
 
-class PickerViewController: UIViewController {
+class TimeSlotsPickerViewController: UIViewController {
     struct PickerData {
         let title: String
-        let items: [String]
-        let selectedIndex: Int?
+        let selectedDateIndex: Int?
+        let selectedTimeIndex: Int?
+
+        let items: [Item]
+
+        struct Item {
+            let date: String
+            let slots: [String]
+        }
     }
 
     // MARK: - UI Controls
@@ -68,19 +75,22 @@ class PickerViewController: UIViewController {
     // MARK: - Output
 
     var didTapCancel: (() -> Void)?
-    var didSelectItem: ((_ index: Int) -> Void)?
+    var didSelectTimeSlot: ((_ dateIndex: Int, _ timeIndex: Int) -> Void)?
 
     // MARK: - Properties
 
-    private let items: [String]
+    private let items: [PickerData.Item]
 
     // MARK: - Initialization
 
     init(pickerData: PickerData) {
         items = pickerData.items
+
         super.init(nibName: nil, bundle: nil)
 
-        pickerView.selectRow(pickerData.selectedIndex ?? 0, inComponent: 0, animated: false)
+        pickerView.selectRow(pickerData.selectedDateIndex ?? 0, inComponent: 0, animated: false)
+        pickerView.selectRow(pickerData.selectedTimeIndex ?? 0, inComponent: 1, animated: false)
+
         titleLabel.text = pickerData.title
     }
 
@@ -149,7 +159,10 @@ class PickerViewController: UIViewController {
     }
 
     @objc private func selectAction() {
-        didSelectItem?(pickerView.selectedRow(inComponent: 0))
+        didSelectTimeSlot?(
+            pickerView.selectedRow(inComponent: 0),
+            pickerView.selectedRow(inComponent: 1)
+        )
     }
 
     @objc private func tapAction() {
@@ -159,13 +172,18 @@ class PickerViewController: UIViewController {
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 
-extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TimeSlotsPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
+        2
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        items.count
+        if component == 0 {
+            return items.count
+        }
+
+        let selectedDateIndex = pickerView.selectedRow(inComponent: 0)
+        return items[selectedDateIndex == -1 ? 0 : selectedDateIndex].slots.count
     }
 
     func pickerView(
@@ -177,11 +195,17 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         let label = UILabel()
         label.font = R.typo.body1
         label.textColor = R.color.primary87()
-        label.text = items[row]
         label.backgroundColor = .clear
         label.layer.cornerRadius = 0
         label.textAlignment = .center
         label.clipsToBounds = true
+
+        if component == 0 {
+            label.text = items[row].date
+        } else {
+            let selectedDateIndex = pickerView.selectedRow(inComponent: 0)
+            label.text = items[selectedDateIndex == -1 ? 0 : selectedDateIndex].slots[row]
+        }
 
         DispatchQueue.main.async { // chance color of the middle row
             if let label = pickerView.view(forRow: row, forComponent: component) as? UILabel {
@@ -194,11 +218,17 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
         return label
     }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            pickerView.reloadComponent(1)
+        }
+    }
 }
 
 // MARK: - UIGestureRecognizerDelegate
 
-extension PickerViewController: UIGestureRecognizerDelegate {
+extension TimeSlotsPickerViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(
         _ gestureRecognizer: UIGestureRecognizer,
         shouldReceive touch: UITouch

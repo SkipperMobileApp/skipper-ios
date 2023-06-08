@@ -119,7 +119,7 @@ class UserRepositoryImpl {
             bio: "Просто здравствуй, просто как дела",
             post: "iOS разработчик",
             imageUrl: "",
-            isMentor: false,
+            isMentor: true,
             contacts: [],
             stats: .init(
                 lessonsCount: 0,

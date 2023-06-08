@@ -17,7 +17,7 @@ enum UserMapper {
             bio: model.bio,
             post: model.post,
             imageUrl: model.imageUrl,
-            isMentor: false,
+            isMentor: model.isMentor,
             contacts: [],
             stats: .init(lessonsCount: 0, rating: 0, registrationDate: "", reviewsCount: 0),
             tags: [],
@@ -34,6 +34,7 @@ enum UserMapper {
             lastName: model.lastName,
             bio: model.bio,
             post: model.post,
+            isMentor: model.isMentor,
             imageUrl: model.imageUrl
         )
     }
