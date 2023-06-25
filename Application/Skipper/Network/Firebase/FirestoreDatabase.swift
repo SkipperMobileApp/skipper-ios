@@ -12,6 +12,8 @@ protocol FirestoreDatabase {
     func users() async throws -> [UserFirebaseModel]
     func user(userId: String) async throws -> UserFirebaseModel?
     func updateUsers(users: [UserFirebaseModel]) async throws
+
+    func sendReport(report: ReportMentorFirebaseModel) async throws
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -38,6 +40,15 @@ extension FirestoreDatabaseImpl {
     func updateUsers(users: [UserFirebaseModel]) async throws {
         let collection = firestore.collection("users")
         try await write(models: users, to: collection)
+    }
+}
+
+// MARK: - Reports
+
+extension FirestoreDatabaseImpl {
+    func sendReport(report: ReportMentorFirebaseModel) async throws {
+        let collection = firestore.collection("reports")
+        try await write(models: [report], to: collection)
     }
 }
 

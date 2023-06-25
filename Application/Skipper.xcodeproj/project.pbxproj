@@ -47,6 +47,14 @@
 		844B9D302A48518700A9724A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 844B9D2F2A48518700A9724A /* FirebaseFirestore */; };
 		844B9D322A48518700A9724A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 844B9D312A48518700A9724A /* FirebaseFirestoreSwift */; };
 		844B9D342A48518700A9724A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 844B9D332A48518700A9724A /* FirebaseStorage */; };
+		844B9D372A4859BE00A9724A /* ReportMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D362A4859BE00A9724A /* ReportMentorViewController.swift */; };
+		844B9D392A4859C500A9724A /* ReportMentorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D382A4859C500A9724A /* ReportMentorViewModel.swift */; };
+		844B9D3B2A4859E500A9724A /* MentorProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D3A2A4859E500A9724A /* MentorProfileCoordinator.swift */; };
+		844B9D3D2A48683700A9724A /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D3C2A48683700A9724A /* ReportRepository.swift */; };
+		844B9D3F2A48693700A9724A /* ReportMentorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D3E2A48693700A9724A /* ReportMentorModel.swift */; };
+		844B9D422A48696500A9724A /* ReportReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D412A48696500A9724A /* ReportReason.swift */; };
+		844B9D442A48848100A9724A /* ReportMentorFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */; };
+		844B9D462A48864B00A9724A /* ReportMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D452A48864B00A9724A /* ReportMapper.swift */; };
 		844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844E345D2942648E003AC372 /* MainTabBarViewController.swift */; };
 		8455B985296C7452005DE8DD /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B984296C7452005DE8DD /* UserRepository.swift */; };
 		8455B987296C7819005DE8DD /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B986296C7819005DE8DD /* LessonModel.swift */; };
@@ -288,6 +296,14 @@
 		8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Skipper/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserFirebaseModel.swift; sourceTree = "<group>"; };
 		8447C3CD2932958F0092B10D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		844B9D362A4859BE00A9724A /* ReportMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMentorViewController.swift; sourceTree = "<group>"; };
+		844B9D382A4859C500A9724A /* ReportMentorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMentorViewModel.swift; sourceTree = "<group>"; };
+		844B9D3A2A4859E500A9724A /* MentorProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorProfileCoordinator.swift; sourceTree = "<group>"; };
+		844B9D3C2A48683700A9724A /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
+		844B9D3E2A48693700A9724A /* ReportMentorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMentorModel.swift; sourceTree = "<group>"; };
+		844B9D412A48696500A9724A /* ReportReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReason.swift; sourceTree = "<group>"; };
+		844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMentorFirebaseModel.swift; sourceTree = "<group>"; };
+		844B9D452A48864B00A9724A /* ReportMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMapper.swift; sourceTree = "<group>"; };
 		844E345D2942648E003AC372 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		8455B984296C7452005DE8DD /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		8455B986296C7819005DE8DD /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
@@ -667,6 +683,24 @@
 			path = DI;
 			sourceTree = "<group>";
 		};
+		844B9D352A4859A300A9724A /* ReportMentor */ = {
+			isa = PBXGroup;
+			children = (
+				844B9D362A4859BE00A9724A /* ReportMentorViewController.swift */,
+				844B9D382A4859C500A9724A /* ReportMentorViewModel.swift */,
+			);
+			path = ReportMentor;
+			sourceTree = "<group>";
+		};
+		844B9D402A48695D00A9724A /* ReportMentor */ = {
+			isa = PBXGroup;
+			children = (
+				844B9D3E2A48693700A9724A /* ReportMentorModel.swift */,
+				844B9D412A48696500A9724A /* ReportReason.swift */,
+			);
+			path = ReportMentor;
+			sourceTree = "<group>";
+		};
 		84573E0C2907258200F03827 /* Construct */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,11 +771,13 @@
 		846B835929674775008F9BB5 /* MentorProfile */ = {
 			isa = PBXGroup;
 			children = (
+				844B9D3A2A4859E500A9724A /* MentorProfileCoordinator.swift */,
 				846B835A2967478D008F9BB5 /* MentorProfileViewController.swift */,
 				846B835C296747A2008F9BB5 /* MentorProfileViewModel.swift */,
 				84A27BDF2968ADBA002465DD /* MentorProfileHeaderView.swift */,
 				84A27BDB29685D90002465DD /* ClassesView */,
 				84A27BDC29685DA2002465DD /* ResumeView */,
+				844B9D352A4859A300A9724A /* ReportMentor */,
 			);
 			path = MentorProfile;
 			sourceTree = "<group>";
@@ -920,6 +956,7 @@
 				84AC022A292E882A00DE7AF2 /* UserFirebaseModel.swift */,
 				8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */,
 				84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */,
+				844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -1123,6 +1160,7 @@
 				8455B98A296C79D8005DE8DD /* LessonRepository.swift */,
 				8455B98C296C903A005DE8DD /* UtilRepository.swift */,
 				84DC34032971EAF90023A3A0 /* BookedLessonRepository.swift */,
+				844B9D3C2A48683700A9724A /* ReportRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1163,6 +1201,7 @@
 				84573DE52906F42200F03827 /* ExampleMapper.swift */,
 				84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */,
 				84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */,
+				844B9D452A48864B00A9724A /* ReportMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1180,6 +1219,7 @@
 		84EE754928F70DC400B55839 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				844B9D402A48695D00A9724A /* ReportMentor */,
 				84EE92252970A43200893B09 /* User */,
 				84EE922229707AE600893B09 /* Lesson */,
 				84AC022E292E886D00DE7AF2 /* AuthUserModel.swift */,
@@ -1631,6 +1671,7 @@
 				84F1B506297DBB5B008AC86B /* StorageDatabase.swift in Sources */,
 				84EE758528F72A9200B55839 /* Coordinator.swift in Sources */,
 				84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */,
+				844B9D3D2A48683700A9724A /* ReportRepository.swift in Sources */,
 				84AC0241292E909900DE7AF2 /* AuthRepositoryImpl.swift in Sources */,
 				84A27BD829685ACC002465DD /* MentorProfileResumeView.swift in Sources */,
 				848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */,
@@ -1645,6 +1686,8 @@
 				8431CC972969785300FB00F8 /* BookingTypeViewController.swift in Sources */,
 				846B835D296747A2008F9BB5 /* MentorProfileViewModel.swift in Sources */,
 				84EE757828F72A9200B55839 /* AppCoordinator.swift in Sources */,
+				844B9D3F2A48693700A9724A /* ReportMentorModel.swift in Sources */,
+				844B9D3B2A4859E500A9724A /* MentorProfileCoordinator.swift in Sources */,
 				84F6A2FD2974800D00B7E188 /* MyLessonsCoordinator.swift in Sources */,
 				84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */,
 				849A925D293E80910056711F /* CompositeLogoutHandler.swift in Sources */,
@@ -1692,6 +1735,7 @@
 				84EE757A28F72A9200B55839 /* AppRouter.swift in Sources */,
 				84C39370291D825D0042C231 /* TextButton.swift in Sources */,
 				84573E132907258300F03827 /* UIView+Constraints.swift in Sources */,
+				844B9D462A48864B00A9724A /* ReportMapper.swift in Sources */,
 				84A27BD629682797002465DD /* MentorProfileClassItem.swift in Sources */,
 				849A9257293E7E2A0056711F /* LogoutHandler.swift in Sources */,
 				84BC43D3296B3C86000B2C67 /* BookingContactViewController.swift in Sources */,
@@ -1712,6 +1756,8 @@
 				84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */,
 				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
 				8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */,
+				844B9D422A48696500A9724A /* ReportReason.swift in Sources */,
+				844B9D372A4859BE00A9724A /* ReportMentorViewController.swift in Sources */,
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
 				84F6A3012974801C00B7E188 /* MyLessonsViewModel.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
@@ -1719,6 +1765,7 @@
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
+				844B9D442A48848100A9724A /* ReportMentorFirebaseModel.swift in Sources */,
 				84F6A303297480C300B7E188 /* MyLessonsCell.swift in Sources */,
 				84BC43D1296AF8C0000B2C67 /* DateHelper.swift in Sources */,
 				84A27BE02968ADBA002465DD /* MentorProfileHeaderView.swift in Sources */,
@@ -1791,6 +1838,7 @@
 				84573E122907258300F03827 /* Attributes.swift in Sources */,
 				84EE758A28F72E1E00B55839 /* MainTabBarViewModel.swift in Sources */,
 				8485C4E0295E30C1007A7811 /* Event.swift in Sources */,
+				844B9D392A4859C500A9724A /* ReportMentorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

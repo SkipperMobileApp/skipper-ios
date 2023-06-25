@@ -28,7 +28,7 @@ class DashboardCoordinator: NavigationCoordinator {
         router.setRootModule(controller)
     }
 
-    func showSearchMentor(categoryId: String?) {
+    private func showSearchMentor(categoryId: String?) {
         let viewModel = SearchMentorViewModel(categoryId: categoryId)
         let controller = SearchMentorViewController(viewModel: viewModel)
 
@@ -39,40 +39,13 @@ class DashboardCoordinator: NavigationCoordinator {
         router.push(controller)
     }
 
-    func showMentorProfile(mentorId: String) {
-        let viewModel = MentorProfileViewModel(mentorId: mentorId)
-        let controller = MentorProfileViewController(viewModel: viewModel)
+    private func showMentorProfile(mentorId: String) {
+        let coordinator = MentorProfileCoordinator(with: router, mentorId: mentorId)
 
-        controller.didSelectLesson = { [weak self] lessonId in
-            self?.showBookingForLesson(lessonId: lessonId)
+        addChild(coordinator)
+
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
         }
-
-        controller.didTapClassesList = { [weak self] in
-            self?.showClassesList(mentorId: mentorId)
-        }
-
-        router.push(controller)
-    }
-
-    func showClassesList(mentorId: String) {
-        let viewModel = ClassesListViewModel(mentorId: mentorId)
-        let controller = ClassesListViewController(viewModel: viewModel)
-
-        controller.didSelectLesson = { [weak self] lessonId in
-            self?.showBookingForLesson(lessonId: lessonId)
-        }
-
-        router.push(controller)
-    }
-
-    func showBookingForLesson(lessonId: String) {
-        let viewModel = BookingViewModel(lessonId: lessonId)
-        let controller = BookingViewController(viewModel: viewModel)
-
-        controller.didFinishBooking = { [weak self] in
-            self?.router.popModule()
-        }
-
-        router.push(controller)
     }
 }
