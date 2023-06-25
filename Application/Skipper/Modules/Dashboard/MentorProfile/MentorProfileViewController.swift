@@ -101,6 +101,7 @@ class MentorProfileViewController: UIViewController {
     var didFinish: (() -> Void)?
     var didSelectLesson: ((_ id: String) -> Void)?
     var didTapClassesList: (() -> Void)?
+    var didTapReportMentor: (() -> Void)?
 
     // MARK: - Properties
 
@@ -143,6 +144,15 @@ class MentorProfileViewController: UIViewController {
         view.backgroundColor = R.color.themeBackground()
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.backButtonTitle = ""
+
+        let reportButton = UIBarButtonItem(
+            image: R.icon.report,
+            style: .plain,
+            target: self,
+            action: #selector(reportMentorAction)
+        )
+        reportButton.tintColor = R.color.brandError()
+        navigationItem.rightBarButtonItem = reportButton
 
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -337,5 +347,11 @@ class MentorProfileViewController: UIViewController {
         let view = MentorProfileHeaderView()
         view.title = text
         return view
+    }
+
+    // MARK: - UI Callbacks
+
+    @objc private func reportMentorAction() {
+        didTapReportMentor?()
     }
 }

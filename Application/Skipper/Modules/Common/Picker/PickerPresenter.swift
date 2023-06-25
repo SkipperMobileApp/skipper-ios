@@ -29,13 +29,18 @@ class PickerPresenter {
 
     private var currentPicker: UIViewController?
 
-    func presentItemPicker(pickerData: ItemPickerData) {
+    func presentItemPicker(pickerData: ItemPickerData, on viewController: UIViewController? = nil) {
         dismiss(animated: false)
 
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
-              let controller = window.rootViewController
-        else {
-            return
+        var controller: UIViewController! = viewController
+        if controller == nil {
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+                  let rootController = window.rootViewController
+            else {
+                return
+            }
+
+            controller = rootController
         }
 
         let picker = ItemPickerViewController(pickerData: pickerData)

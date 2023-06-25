@@ -77,5 +77,11 @@ extension R {
 
         static let checkboxOff = UIImage(systemName: "square")!
             .withRenderingMode(.alwaysTemplate)
+
+        static let cross = UIImage(systemName: "xmark")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let report = UIImage(systemName: "exclamationmark.octagon.fill")!
+            .withRenderingMode(.alwaysTemplate)
     }
 }
