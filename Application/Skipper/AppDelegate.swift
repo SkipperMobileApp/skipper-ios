@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import FirebaseAnalytics
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore

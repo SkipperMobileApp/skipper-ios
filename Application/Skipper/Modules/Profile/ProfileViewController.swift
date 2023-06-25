@@ -59,7 +59,7 @@ class ProfileViewController: UIViewController {
         button.setTitle("Удалить аккаунт", for: .normal)
         button.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         button.isEnabled = false
-        button.alpha = 0.5
+        button.alpha = 0
         return button
     }()
 

@@ -6,6 +6,7 @@
 //
 
 import Combine
+import FirebaseAnalytics
 import Foundation
 import PKHUD
 import UIKit
@@ -84,6 +85,8 @@ class SearchMentorViewController: UIViewController {
         bindViewModelActions()
 
         viewModel.loadData()
+
+        Analytics.logEvent("mentors_Screen_List_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -164,6 +167,8 @@ extension SearchMentorViewController: UITableViewDelegate, UITableViewDataSource
         cell?.performBlink()
 
         didSelectMentor?(viewModel.items[indexPath.row].id)
+
+        Analytics.logEvent("mentors_Screen_Mentor_Clicked", parameters: nil)
     }
 }
 

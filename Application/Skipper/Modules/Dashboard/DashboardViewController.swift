@@ -6,6 +6,7 @@
 //
 
 import Combine
+import FirebaseAnalytics
 import Foundation
 import PKHUD
 import UIKit
@@ -80,6 +81,8 @@ class DashboardViewController: UIViewController {
         bindViewModelActions()
 
         viewModel.loadData()
+
+        Analytics.logEvent("main_Screen_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -344,8 +347,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         switch section {
         case let .categories(items):
             didTapCategory?(items[indexPath.item].id)
+            Analytics.logEvent(
+                "main_Screen_Categories_Tap",
+                parameters: ["categoryName": items[indexPath.item].title]
+            )
         case let .popularMentors(items):
             didTapMentor?(items[indexPath.row].id)
+            Analytics.logEvent(
+                "main_Screen_Mentors_Tap",
+                parameters: ["mentorId": items[indexPath.item].id]
+            )
         }
     }
 }

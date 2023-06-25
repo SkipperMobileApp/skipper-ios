@@ -74,6 +74,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "840DB1E427A552AA00F40C89"
+               BuildableName = "SkipperTests.xctest"
+               BlueprintName = "SkipperTests"
+               ReferencedContainer = "container:Skipper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -96,6 +106,12 @@
             ReferencedContainer = "container:Skipper.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsVerboseLoggingEnabled"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Development_Release"

@@ -6,6 +6,7 @@
 //
 
 import Combine
+import FirebaseAnalytics
 import Foundation
 import UIKit
 
@@ -78,6 +79,8 @@ class BookingTypeViewController: UIViewController {
         setupUI()
 
         bindViewModelActions()
+
+        Analytics.logEvent("classBook_Type_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -118,6 +121,8 @@ class BookingTypeViewController: UIViewController {
 
     @objc private func nextAction() {
         didTapNext?()
+
+        Analytics.logEvent("classBook_Type_Clicked", parameters: nil)
     }
 }
 

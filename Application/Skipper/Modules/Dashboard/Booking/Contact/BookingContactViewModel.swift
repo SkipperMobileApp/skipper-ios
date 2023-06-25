@@ -55,5 +55,14 @@ extension BookingContactViewModel {
             case .vk: return R.image.logoContactVk()
             }
         }
+
+        var analyticsLabel: String {
+            switch self {
+            case .discord: return "dis"
+            case .skype: return "skype"
+            case .telegram: return "telegram"
+            case .vk: return "vk"
+            }
+        }
     }
 }

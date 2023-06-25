@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 08.01.2023.
 //
 
+import FirebaseAnalytics
 import Foundation
 import UIKit
 
@@ -110,6 +111,8 @@ class BookingTimeViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+
+        Analytics.logEvent("classBook_ClassDate_Shown", parameters: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -186,6 +189,8 @@ class BookingTimeViewController: UIViewController {
 
     @objc private func nextAction() {
         didTapNext?()
+
+        Analytics.logEvent("classBook_ClassDate_Clicked", parameters: nil)
     }
 }
 
