@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 09.11.2022.
 //
 
+import FirebaseAnalytics
 import Foundation
 import TPKeyboardAvoiding
 import UIKit
@@ -83,6 +84,8 @@ class LoginViewController: UIViewController {
 
         setupUI()
         bindViewModelActions()
+
+        Analytics.logEvent("login_Screen_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -218,10 +221,14 @@ class LoginViewController: UIViewController {
 
     @objc private func loginAction() {
         login()
+
+        Analytics.logEvent("login_Screen_Login_Button_Clicked", parameters: nil)
     }
 
     @objc private func signUpAction() {
         didTapSignUp?()
+
+        Analytics.logEvent("login_Screen_Signup_Button_Clicked", parameters: nil)
     }
 }
 

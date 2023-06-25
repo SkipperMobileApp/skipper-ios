@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 09.12.2022.
 //
 
+import FirebaseAnalytics
 import Foundation
 import UIKit
 
@@ -70,6 +71,14 @@ class MainTabBarViewController: UITabBarController {
 extension MainTabBarViewController {
     enum Tab: Int, CaseIterable {
         case dashboard, myLessons, profile
+
+        var analyticsLabel: String {
+            switch self {
+            case .dashboard: return "main"
+            case .myLessons: return "myLessons"
+            case .profile: return "settings"
+            }
+        }
     }
 
     private func setupTabBarAppearance() {
@@ -117,5 +126,9 @@ extension MainTabBarViewController {
 extension MainTabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_: UITabBarController, didSelect _: UIViewController) {
         didSelectTab?(Tab.allCases[selectedIndex])
+        Analytics.logEvent(
+            "navigation_Tabbar_Clicked",
+            parameters: ["item": Tab.allCases[selectedIndex].analyticsLabel]
+        )
     }
 }

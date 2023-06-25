@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 07.01.2023.
 //
 
+import FirebaseAnalytics
 import Foundation
 import UIKit
 
@@ -117,6 +118,8 @@ class BookingAmountViewController: UIViewController {
 
         updateUI()
         updateData()
+
+        Analytics.logEvent("classBook_OptionsDuratuion_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -226,6 +229,8 @@ class BookingAmountViewController: UIViewController {
 
     @objc private func nextAction() {
         didTapNext?()
+
+        Analytics.logEvent("classBook_OptionsDuratuion_Clicked", parameters: nil)
     }
 
     @objc private func durationAction() {

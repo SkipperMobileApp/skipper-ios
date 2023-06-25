@@ -50,6 +50,11 @@ platform :ios do
     )
   end
 
+  desc "Run tests"
+  lane :tests do
+    run_tests(scheme: "MyAppTests")
+  end
+
   desc "Release binary"
   lane :release do
 

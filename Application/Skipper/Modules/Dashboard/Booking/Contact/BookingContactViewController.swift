@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 09.01.2023.
 //
 
+import FirebaseAnalytics
 import Foundation
 import UIKit
 
@@ -78,6 +79,8 @@ class BookingContactViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+
+        Analytics.logEvent("classBook_Communication_Shown", parameters: nil)
     }
 
     // MARK: - UI Methods
@@ -113,6 +116,16 @@ class BookingContactViewController: UIViewController {
 
     @objc private func bookAction() {
         save()
+
+        guard let index = viewModel.selectedContactIndex else {
+            return
+        }
+
+        let type = viewModel.contactTypes[index]
+        Analytics.logEvent(
+            "classBook_Communication_Clicked",
+            parameters: ["type": type.analyticsLabel]
+        )
     }
 }
 

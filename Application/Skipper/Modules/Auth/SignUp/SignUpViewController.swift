@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 28.11.2022.
 //
 
+import FirebaseAnalytics
 import Foundation
 import PKHUD
 import TPKeyboardAvoiding
@@ -217,6 +218,8 @@ class SignUpViewController: UIViewController {
 
     @objc private func signUpAction() {
         signUp()
+
+        Analytics.logEvent("login_Screen_Signup_Button_Done_Clicked", parameters: nil)
     }
 
     @objc private func loginAction() {
