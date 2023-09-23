@@ -215,7 +215,7 @@ class LessonInfoViewModel {
         }
 
         return .init(
-            id: lessonId ?? "",
+            id: lessonId ?? UUID().uuidString,
             mentorId: mentorId,
             title: lessonInfo.name,
             brief: lessonInfo.description,

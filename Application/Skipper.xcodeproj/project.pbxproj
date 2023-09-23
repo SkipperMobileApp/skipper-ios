@@ -56,6 +56,8 @@
 		844B9D442A48848100A9724A /* ReportMentorFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */; };
 		844B9D462A48864B00A9724A /* ReportMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B9D452A48864B00A9724A /* ReportMapper.swift */; };
 		844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844E345D2942648E003AC372 /* MainTabBarViewController.swift */; };
+		844EC6C12ABF384400B575C2 /* LessonFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */; };
+		844EC6C32ABF3FCD00B575C2 /* LessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */; };
 		8455B985296C7452005DE8DD /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B984296C7452005DE8DD /* UserRepository.swift */; };
 		8455B987296C7819005DE8DD /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B986296C7819005DE8DD /* LessonModel.swift */; };
 		8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B988296C799B005DE8DD /* LessonDuration.swift */; };
@@ -305,6 +307,8 @@
 		844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMentorFirebaseModel.swift; sourceTree = "<group>"; };
 		844B9D452A48864B00A9724A /* ReportMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMapper.swift; sourceTree = "<group>"; };
 		844E345D2942648E003AC372 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFirebaseModel.swift; sourceTree = "<group>"; };
+		844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMapper.swift; sourceTree = "<group>"; };
 		8455B984296C7452005DE8DD /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		8455B986296C7819005DE8DD /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		8455B988296C799B005DE8DD /* LessonDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDuration.swift; sourceTree = "<group>"; };
@@ -957,6 +961,7 @@
 				8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */,
 				84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */,
 				844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */,
+				844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -1202,6 +1207,7 @@
 				84E6C2EF293D0D33003ACCF7 /* UserRegisterMapper.swift */,
 				84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */,
 				844B9D452A48864B00A9724A /* ReportMapper.swift */,
+				844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1692,6 +1698,7 @@
 				84FD389E2933E412004023E4 /* SignUpViewModel.swift in Sources */,
 				849A925D293E80910056711F /* CompositeLogoutHandler.swift in Sources */,
 				84EE756228F72A1500B55839 /* String+Extensions.swift in Sources */,
+				844EC6C32ABF3FCD00B575C2 /* LessonMapper.swift in Sources */,
 				84AC0248292E94D300DE7AF2 /* FormFieldView.swift in Sources */,
 				84573DEA2906F4A800F03827 /* ExampleAPIModel.swift in Sources */,
 				848AB2CA2941099F007DB9F4 /* AuthCache.swift in Sources */,
@@ -1804,6 +1811,7 @@
 				846B835B2967478D008F9BB5 /* MentorProfileViewController.swift in Sources */,
 				84EE759028F72EE700B55839 /* SetupableView.swift in Sources */,
 				848AB2C729410940007DB9F4 /* LogoutRepository.swift in Sources */,
+				844EC6C12ABF384400B575C2 /* LessonFirebaseModel.swift in Sources */,
 				84E51DDA292BFB33008D2308 /* UnderlinedButton.swift in Sources */,
 				84CC1F482969EEDB00300F32 /* PickerPresenter.swift in Sources */,
 				8485C4D2295E2B56007A7811 /* ProfileViewModel.swift in Sources */,

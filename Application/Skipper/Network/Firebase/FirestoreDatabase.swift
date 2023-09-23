@@ -14,6 +14,10 @@ protocol FirestoreDatabase {
     func updateUsers(users: [UserFirebaseModel]) async throws
 
     func sendReport(report: ReportMentorFirebaseModel) async throws
+
+    func lessonsForMentor(mentorId: String) async throws -> [LessonFirebaseModel]
+    func lesson(lessonId: String) async throws -> LessonFirebaseModel?
+    func updateLesson(lesson: LessonFirebaseModel) async throws
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -49,6 +53,29 @@ extension FirestoreDatabaseImpl {
     func sendReport(report: ReportMentorFirebaseModel) async throws {
         let collection = firestore.collection("reports")
         try await write(models: [report], to: collection)
+    }
+}
+
+// MARK: - Lessons
+
+extension FirestoreDatabaseImpl {
+    func lessonsForMentor(mentorId: String) async throws -> [LessonFirebaseModel] {
+        let collection = firestore.collection("lessons")
+        let query = collection.whereField(
+            LessonFirebaseModel.CodingKeys.mentorId.rawValue,
+            isEqualTo: mentorId
+        )
+        return try await get(query, type: LessonFirebaseModel.self)
+    }
+
+    func lesson(lessonId: String) async throws -> LessonFirebaseModel? {
+        let document = firestore.collection("lessons").document(lessonId)
+        return try await get(document, type: LessonFirebaseModel.self)
+    }
+
+    func updateLesson(lesson: LessonFirebaseModel) async throws {
+        let collection = firestore.collection("lessons")
+        try await write(models: [lesson], to: collection)
     }
 }
 

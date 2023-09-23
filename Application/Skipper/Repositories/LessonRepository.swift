@@ -167,6 +167,14 @@ class LessonRepositoryImpl {
         )
     ]
 
+    // MARK: - Private properties
+
+    private let database: FirestoreDatabase
+
+    init(database: FirestoreDatabase) {
+        self.database = database
+    }
+
     // MARK: - Lessons
 
     // Int - day of week from sunday [0-6]
@@ -178,47 +186,30 @@ class LessonRepositoryImpl {
             0: ["12:00 - 15:00", "15:00 - 18:00", "18:00 - 21:00"] // Sunday
         ]
     }
-
-    private func mockCostTable() -> [LessonDuration: Int] {
-        return [
-            .trial: 100,
-            .short: 500,
-            .mid: 1000,
-            .long: 1500
-        ]
-    }
 }
 
 extension LessonRepositoryImpl: LessonRepository {
     func lessonsForMentor(mentorId: String) async throws -> [LessonModel] {
         try await Task.sleep(for: .seconds(0.5))
 
-        return lessons.filter { $0.mentorId == mentorId }
+        return try await database
+            .lessonsForMentor(mentorId: mentorId)
+            .map(LessonMapper.lessonAPIToDomain)
     }
 
     func lesson(lessonId: String) async throws -> LessonModel {
         try await Task.sleep(for: .seconds(0.5))
 
-        guard let lesson = lessons.first(where: { $0.id == lessonId }) else {
+        guard let lesson = try await database.lesson(lessonId: lessonId) else {
             throw AppError(message: Strings.errorLessonNotFound())
         }
 
-        return lesson
+        return LessonMapper.lessonAPIToDomain(lesson)
     }
 
     func saveLesson(lesson: LessonModel) async throws {
         try await Task.sleep(for: .seconds(0.5))
 
-        if let index = lessons.firstIndex(where: { $0.id == lesson.id }) {
-            lessons[index] = lesson
-            return
-        }
-
-        var lesson = lesson
-
-        if lesson.id.isEmpty {
-            lesson.id = UUID().uuidString
-        }
-        lessons.append(lesson)
+        try await database.updateLesson(lesson: LessonMapper.lessonDomainToAPI(lesson))
     }
 }
