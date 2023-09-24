@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let authRepository: AuthRepository = authRepositoryImpl
         let logoutRepository: LogoutRepository = authRepositoryImpl
         let lessonRepository: LessonRepository = LessonRepositoryImpl(database: firestoreDatabase)
-        let utilRepository: UtilRepository = UtilRepositoryImpl()
+        let utilRepository: UtilRepository = UtilRepositoryImpl(database: firestoreDatabase)
         let userRepository: UserRepository = UserRepositoryImpl(
             lessonRepository: lessonRepository,
             utilRepository: utilRepository,

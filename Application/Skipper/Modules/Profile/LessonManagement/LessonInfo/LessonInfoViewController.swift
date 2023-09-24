@@ -404,5 +404,6 @@ extension LessonInfoViewController: TimeSlotsPickerDelegate {
         )
 
         pickerPresenter.dismiss()
+        view.endEditing(true)
     }
 }

@@ -30,9 +30,17 @@ class DashboardViewModel {
 
                 await MainActor.run {
                     sections = [
-                        .categories(categories.map {
-                            .init(id: $0.id, title: $0.name, image: $0.image)
-                        }),
+                        .categories(
+                            categories
+                                .sorted { $0.key.rawValue < $1.key.rawValue }
+                                .map {
+                                    .init(
+                                        id: $0.id,
+                                        title: $0.name,
+                                        image: imageForCategoryKey($0.key)
+                                    )
+                                }
+                        ),
                         .popularMentors(mentors.map {
                             .init(
                                 id: $0.id,
@@ -57,6 +65,28 @@ class DashboardViewModel {
 
     func setCategoriesCurrentPage(_ page: Int) {
         categoriesPage = page
+    }
+
+    // MARK: - Mappers
+
+    private func imageForCategoryKey(_ key: CategoryKey) -> UIImage {
+        switch key {
+        case .development: return R.image.icCategoryDevelopment()!
+        case .analytics: return R.image.icCategoryAnalytics()!
+        case .infrastructure: return R.image.icCategoryInfrastructure()!
+        case .qa: return R.image.icCategoryQa()!
+        case .uiDesign: return R.image.icCategoryDesign()!
+        case .design: return R.image.icCategoryProjectDesign()!
+        case .architecture: return R.image.icCategoryArchitecture()!
+        case .management: return R.image.icCategoryManagement()!
+        case .systemProgramming: return R.image.icCategorySystemProgramming()!
+        case .sre: return R.image.icCategoryMonitoring()!
+        case .security: return R.image.icCategorySecurity()!
+        case .database: return R.image.icCategoryDatabase()!
+        case .dataAnalysis: return R.image.icCategoryDataAnalysis()!
+        case .machineLearning: return R.image.icCategoryMachineLearning()!
+        case .unknown: return UIImage()
+        }
     }
 }
 

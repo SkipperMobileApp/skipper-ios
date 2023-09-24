@@ -58,6 +58,9 @@
 		844E345E2942648E003AC372 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844E345D2942648E003AC372 /* MainTabBarViewController.swift */; };
 		844EC6C12ABF384400B575C2 /* LessonFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */; };
 		844EC6C32ABF3FCD00B575C2 /* LessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */; };
+		844EC6C52AC04CA600B575C2 /* CateroryFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */; };
+		844EC6C72AC08FCC00B575C2 /* CategoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */; };
+		844EC6CA2AC0916E00B575C2 /* CategoryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C92AC0916E00B575C2 /* CategoryKey.swift */; };
 		8455B985296C7452005DE8DD /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B984296C7452005DE8DD /* UserRepository.swift */; };
 		8455B987296C7819005DE8DD /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B986296C7819005DE8DD /* LessonModel.swift */; };
 		8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B988296C799B005DE8DD /* LessonDuration.swift */; };
@@ -309,6 +312,9 @@
 		844E345D2942648E003AC372 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFirebaseModel.swift; sourceTree = "<group>"; };
 		844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMapper.swift; sourceTree = "<group>"; };
+		844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CateroryFirebaseModel.swift; sourceTree = "<group>"; };
+		844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMapper.swift; sourceTree = "<group>"; };
+		844EC6C92AC0916E00B575C2 /* CategoryKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryKey.swift; sourceTree = "<group>"; };
 		8455B984296C7452005DE8DD /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		8455B986296C7819005DE8DD /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		8455B988296C799B005DE8DD /* LessonDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDuration.swift; sourceTree = "<group>"; };
@@ -705,6 +711,15 @@
 			path = ReportMentor;
 			sourceTree = "<group>";
 		};
+		844EC6C82AC0916000B575C2 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				8455B98E296C912C005DE8DD /* CategoryModel.swift */,
+				844EC6C92AC0916E00B575C2 /* CategoryKey.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		84573E0C2907258200F03827 /* Construct */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +977,7 @@
 				84F1B510297DBC24008AC86B /* UserImageStorageModel.swift */,
 				844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */,
 				844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */,
+				844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -1208,6 +1224,7 @@
 				84F1B50E297DBC0C008AC86B /* UserImageMapper.swift */,
 				844B9D452A48864B00A9724A /* ReportMapper.swift */,
 				844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */,
+				844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1225,6 +1242,7 @@
 		84EE754928F70DC400B55839 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				844EC6C82AC0916000B575C2 /* Category */,
 				844B9D402A48695D00A9724A /* ReportMentor */,
 				84EE92252970A43200893B09 /* User */,
 				84EE922229707AE600893B09 /* Lesson */,
@@ -1232,7 +1250,6 @@
 				84573DE72906F45900F03827 /* ExampleModel.swift */,
 				84573E0A2907218100F03827 /* TokensModel.swift */,
 				84E6C2E9293D015F003ACCF7 /* UserRegisterModel.swift */,
-				8455B98E296C912C005DE8DD /* CategoryModel.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1725,6 +1742,7 @@
 				84EE753C28F706F600B55839 /* GlobalConstants.swift in Sources */,
 				8455B987296C7819005DE8DD /* LessonModel.swift in Sources */,
 				8431CC9B29697B3800FB00F8 /* BookingTypeCell.swift in Sources */,
+				844EC6C72AC08FCC00B575C2 /* CategoryMapper.swift in Sources */,
 				848AB2B52940F65F007DB9F4 /* AsyncCompositeLogoutHandler.swift in Sources */,
 				84C763652A1A9245000347EB /* TimeSlotsPickerViewController.swift in Sources */,
 				8431CC9D29698C2F00FB00F8 /* BookingHeaderView.swift in Sources */,
@@ -1764,11 +1782,13 @@
 				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
 				8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */,
 				844B9D422A48696500A9724A /* ReportReason.swift in Sources */,
+				844EC6CA2AC0916E00B575C2 /* CategoryKey.swift in Sources */,
 				844B9D372A4859BE00A9724A /* ReportMentorViewController.swift in Sources */,
 				8462CB422965B9C300347EA1 /* LabeledImageView.swift in Sources */,
 				84F6A3012974801C00B7E188 /* MyLessonsViewModel.swift in Sources */,
 				848AB2BE29410097007DB9F4 /* NavigationLogoutHandler.swift in Sources */,
 				84F1B4F6297D86E8008AC86B /* SecondaryTextView.swift in Sources */,
+				844EC6C52AC04CA600B575C2 /* CateroryFirebaseModel.swift in Sources */,
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,

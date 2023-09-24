@@ -39,18 +39,6 @@ class DashboardCategoryCollectionCell: SetupableCollectionViewCell, Reusable {
         return label
     }()
 
-//    private lazy var gradientLayer: CALayer = {
-//        let layer = CAGradientLayer()
-//        layer.colors = [
-//            R.color.gradientCategoryFirst(),
-//            R.color.gradientCategorySecond()
-//        ].compactMap { $0?.cgColor }
-//        layer.startPoint = .init(x: 0, y: 1)
-//        layer.endPoint = .init(x: 1, y: 0)
-//        layer.cornerRadius = 8
-//        return layer
-//    }()
-
     // MARK: - UI Lifecycle
 
     override func setup() {
@@ -77,10 +65,6 @@ class DashboardCategoryCollectionCell: SetupableCollectionViewCell, Reusable {
             .trailing(to: contentView, attribute: .trailing),
             .bottom(to: contentView, attribute: .bottom, equality: .lessThanOrEqual)
         )
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
 
     // MARK: - UI Methods

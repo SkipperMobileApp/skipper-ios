@@ -18,6 +18,9 @@ protocol FirestoreDatabase {
     func lessonsForMentor(mentorId: String) async throws -> [LessonFirebaseModel]
     func lesson(lessonId: String) async throws -> LessonFirebaseModel?
     func updateLesson(lesson: LessonFirebaseModel) async throws
+
+    func categories() async throws -> [CategoryFirebaseModel]
+    func category(categoryId: String) async throws -> CategoryFirebaseModel?
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -76,6 +79,20 @@ extension FirestoreDatabaseImpl {
     func updateLesson(lesson: LessonFirebaseModel) async throws {
         let collection = firestore.collection("lessons")
         try await write(models: [lesson], to: collection)
+    }
+}
+
+// MARK: - Categories
+
+extension FirestoreDatabaseImpl {
+    func categories() async throws -> [CategoryFirebaseModel] {
+        let collection = firestore.collection("categories")
+        return try await get(collection, type: CategoryFirebaseModel.self)
+    }
+
+    func category(categoryId: String) async throws -> CategoryFirebaseModel? {
+        let document = firestore.collection("categories").document(categoryId)
+        return try await get(document, type: CategoryFirebaseModel.self)
     }
 }
 
