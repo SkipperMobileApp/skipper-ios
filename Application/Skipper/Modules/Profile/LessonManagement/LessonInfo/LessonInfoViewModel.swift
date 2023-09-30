@@ -64,7 +64,8 @@ class LessonInfoViewModel {
 
                                 return TimePeriod(weekday: weekday, slot: slot)
                             }
-                        }.flatMap { $0 }
+                        }.flatMap { $0 },
+                    creationDate: lesson.creationDate
                 )
 
                 loadLessonEvent = lessonInfo
@@ -222,7 +223,9 @@ class LessonInfoViewModel {
             description: "",
             durations: durations,
             slots: slots,
-            types: types
+            types: types,
+            creationDate: lessonInfo.creationDate ?? Date.now,
+            updationDate: Date.now
         )
     }
 }
@@ -236,9 +239,17 @@ extension LessonInfoViewModel {
         var types: Set<LessonType>
         var durations: Set<LessonDuration>
         var timePeriods: [TimePeriod]
+        let creationDate: Date?
 
         static var empty: LessonInfo {
-            .init(name: "", description: "", types: [], durations: [], timePeriods: [])
+            .init(
+                name: "",
+                description: "",
+                types: [],
+                durations: [],
+                timePeriods: [],
+                creationDate: nil
+            )
         }
     }
 
@@ -268,13 +279,13 @@ extension LessonInfoViewModel {
     }
 
     enum LessonDuration: CaseIterable {
-        case trial, short, mid, long
+        case trial, short, medium, long
 
         init(_ duration: Skipper.LessonDuration) {
             switch duration {
             case .trial: self = .trial
             case .short: self = .short
-            case .mid: self = .mid
+            case .medium: self = .medium
             case .long: self = .long
             }
         }
@@ -283,7 +294,7 @@ extension LessonInfoViewModel {
             switch self {
             case .trial: return "15 минут (пробное занятие)"
             case .short: return "30 минут"
-            case .mid: return "60 минут"
+            case .medium: return "60 минут"
             case .long: return "90 минут"
             }
         }

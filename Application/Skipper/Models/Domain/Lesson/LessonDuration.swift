@@ -8,5 +8,5 @@
 import Foundation
 
 enum LessonDuration: Int, CaseIterable {
-    case trial = 15, short = 30, mid = 60, long = 90
+    case trial = 15, short = 30, medium = 60, long = 90
 }

@@ -61,6 +61,8 @@
 		844EC6C52AC04CA600B575C2 /* CateroryFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */; };
 		844EC6C72AC08FCC00B575C2 /* CategoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */; };
 		844EC6CA2AC0916E00B575C2 /* CategoryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6C92AC0916E00B575C2 /* CategoryKey.swift */; };
+		844EC6CC2AC0A87400B575C2 /* BookedLessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6CB2AC0A87400B575C2 /* BookedLessonMapper.swift */; };
+		844EC6CE2AC0A90800B575C2 /* BookedLessonFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EC6CD2AC0A90800B575C2 /* BookedLessonFirebaseModel.swift */; };
 		8455B985296C7452005DE8DD /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B984296C7452005DE8DD /* UserRepository.swift */; };
 		8455B987296C7819005DE8DD /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B986296C7819005DE8DD /* LessonModel.swift */; };
 		8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455B988296C799B005DE8DD /* LessonDuration.swift */; };
@@ -188,7 +190,7 @@
 		84CC1F482969EEDB00300F32 /* PickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC1F472969EEDB00300F32 /* PickerPresenter.swift */; };
 		84CC1F4A2969EEF200300F32 /* ItemPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC1F492969EEF200300F32 /* ItemPickerViewController.swift */; };
 		84DC34042971EAF90023A3A0 /* BookedLessonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC34032971EAF90023A3A0 /* BookedLessonRepository.swift */; };
-		84DC34062971EB580023A3A0 /* BookedLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC34052971EB580023A3A0 /* BookedLesson.swift */; };
+		84DC34062971EB580023A3A0 /* BookedLessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC34052971EB580023A3A0 /* BookedLessonModel.swift */; };
 		84E51DD8292BEEBA008D2308 /* R+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DD7292BEEBA008D2308 /* R+Icon.swift */; };
 		84E51DDA292BFB33008D2308 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DD9292BFB33008D2308 /* UnderlinedButton.swift */; };
 		84E51DDC292BFB84008D2308 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E51DDB292BFB84008D2308 /* PrimaryTextField.swift */; };
@@ -315,6 +317,8 @@
 		844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CateroryFirebaseModel.swift; sourceTree = "<group>"; };
 		844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMapper.swift; sourceTree = "<group>"; };
 		844EC6C92AC0916E00B575C2 /* CategoryKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryKey.swift; sourceTree = "<group>"; };
+		844EC6CB2AC0A87400B575C2 /* BookedLessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedLessonMapper.swift; sourceTree = "<group>"; };
+		844EC6CD2AC0A90800B575C2 /* BookedLessonFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedLessonFirebaseModel.swift; sourceTree = "<group>"; };
 		8455B984296C7452005DE8DD /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		8455B986296C7819005DE8DD /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		8455B988296C799B005DE8DD /* LessonDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDuration.swift; sourceTree = "<group>"; };
@@ -438,7 +442,7 @@
 		84CC1F472969EEDB00300F32 /* PickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPresenter.swift; sourceTree = "<group>"; };
 		84CC1F492969EEF200300F32 /* ItemPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerViewController.swift; sourceTree = "<group>"; };
 		84DC34032971EAF90023A3A0 /* BookedLessonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedLessonRepository.swift; sourceTree = "<group>"; };
-		84DC34052971EB580023A3A0 /* BookedLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedLesson.swift; sourceTree = "<group>"; };
+		84DC34052971EB580023A3A0 /* BookedLessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedLessonModel.swift; sourceTree = "<group>"; };
 		84E51DD7292BEEBA008D2308 /* R+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Icon.swift"; sourceTree = "<group>"; };
 		84E51DD9292BFB33008D2308 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
 		84E51DDB292BFB84008D2308 /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
@@ -978,6 +982,7 @@
 				844B9D432A48848100A9724A /* ReportMentorFirebaseModel.swift */,
 				844EC6C02ABF384400B575C2 /* LessonFirebaseModel.swift */,
 				844EC6C42AC04CA600B575C2 /* CateroryFirebaseModel.swift */,
+				844EC6CD2AC0A90800B575C2 /* BookedLessonFirebaseModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -1225,6 +1230,7 @@
 				844B9D452A48864B00A9724A /* ReportMapper.swift */,
 				844EC6C22ABF3FCD00B575C2 /* LessonMapper.swift */,
 				844EC6C62AC08FCC00B575C2 /* CategoryMapper.swift */,
+				844EC6CB2AC0A87400B575C2 /* BookedLessonMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1335,7 +1341,7 @@
 				8455B988296C799B005DE8DD /* LessonDuration.swift */,
 				84EE922329707AF300893B09 /* LessonType.swift */,
 				84F6A2F92974518700B7E188 /* LessonAmount.swift */,
-				84DC34052971EB580023A3A0 /* BookedLesson.swift */,
+				84DC34052971EB580023A3A0 /* BookedLessonModel.swift */,
 			);
 			path = Lesson;
 			sourceTree = "<group>";
@@ -1729,6 +1735,7 @@
 				84EE922429707AF300893B09 /* LessonType.swift in Sources */,
 				8415A8C8297C7EFF00D16CD0 /* ProfileHeaderView.swift in Sources */,
 				84F1B503297DB8D2008AC86B /* ImagePickerProvider.swift in Sources */,
+				844EC6CE2AC0A90800B575C2 /* BookedLessonFirebaseModel.swift in Sources */,
 				8447C3CE2932958F0092B10D /* Container.swift in Sources */,
 				84429C49297DD7D300645C6A /* GradientView.swift in Sources */,
 				84CC1F4A2969EEF200300F32 /* ItemPickerViewController.swift in Sources */,
@@ -1769,7 +1776,7 @@
 				84AC0230292E886D00DE7AF2 /* AuthUserModel.swift in Sources */,
 				84C763592A1A51F7000347EB /* CheckboxButton.swift in Sources */,
 				8431CCA52969B5FC00FB00F8 /* BookingAmountViewController.swift in Sources */,
-				84DC34062971EB580023A3A0 /* BookedLesson.swift in Sources */,
+				84DC34062971EB580023A3A0 /* BookedLessonModel.swift in Sources */,
 				84573DDF2906F21900F03827 /* Database.xcdatamodeld in Sources */,
 				8485C4D0295E2B50007A7811 /* ProfileCoordinator.swift in Sources */,
 				846B83512966DADE008F9BB5 /* SearchMentorCell.swift in Sources */,
@@ -1842,6 +1849,7 @@
 				84EE757B28F72A9200B55839 /* RouterType.swift in Sources */,
 				84573E142907258300F03827 /* Constrainable.swift in Sources */,
 				84F1B4FF297D97B0008AC86B /* PasswordSecondaryTextField.swift in Sources */,
+				844EC6CC2AC0A87400B575C2 /* BookedLessonMapper.swift in Sources */,
 				846B83562966E4B1008F9BB5 /* TextCloudItem.swift in Sources */,
 				849A925B293E80420056711F /* APILogoutHandler.swift in Sources */,
 				84AC0239292E8F0100DE7AF2 /* EmailValidator.swift in Sources */,

@@ -20,7 +20,7 @@ struct UserFirebaseModel: FirebaseModel {
 
     let imageUrl: String?
 
-    enum CodingKeys: String {
+    private enum CodingKeys: String {
         case id
         case email
         case firstName = "first_name"

@@ -145,7 +145,7 @@ class BookingViewModel {
                 }
 
                 let bookedLessons = timeViewModel.selectedTimeItems.map {
-                    BookedLesson(
+                    BookedLessonModel(
                         id: "",
                         userId: user.id,
                         mentorId: mentor.id,

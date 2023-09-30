@@ -16,6 +16,8 @@ struct LessonFirebaseModel {
     let durations: [String]
     let slots: [Int: [String]]
     let types: [String]
+    let createdAt: Int
+    let updatedAt: Int
 
     init(
         id: String,
@@ -24,7 +26,9 @@ struct LessonFirebaseModel {
         brief: String,
         durations: [String],
         slots: [Int: [String]],
-        types: [String]
+        types: [String],
+        createdAt: Int,
+        updatedAt: Int
     ) {
         self.id = id
         self.mentorId = mentorId
@@ -33,6 +37,8 @@ struct LessonFirebaseModel {
         self.durations = durations
         self.slots = slots
         self.types = types
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 }
 
@@ -45,6 +51,8 @@ extension LessonFirebaseModel: FirebaseModel {
         case durations
         case slots
         case types
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 
     init?(_ dict: [String: Any], id: String) {
@@ -53,7 +61,9 @@ extension LessonFirebaseModel: FirebaseModel {
               let brief = dict[CodingKeys.brief.rawValue] as? String,
               let durations = dict[CodingKeys.durations.rawValue] as? [String],
               let slots = dict[CodingKeys.slots.rawValue] as? [String: [String]],
-              let types = dict[CodingKeys.types.rawValue] as? [String]
+              let types = dict[CodingKeys.types.rawValue] as? [String],
+              let createdAt = dict[CodingKeys.createdAt.rawValue] as? Int,
+              let updatedAt = dict[CodingKeys.updatedAt.rawValue] as? Int
         else { return nil }
 
         self.id = id
@@ -69,6 +79,8 @@ extension LessonFirebaseModel: FirebaseModel {
             return acc
         }
         self.types = types
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     func toDictionary() -> [String: Any] {
@@ -82,7 +94,9 @@ extension LessonFirebaseModel: FirebaseModel {
                 acc[String(element.key)] = element.value
                 return acc
             },
-            CodingKeys.types.rawValue: types
+            CodingKeys.types.rawValue: types,
+            CodingKeys.createdAt.rawValue: createdAt,
+            CodingKeys.updatedAt.rawValue: updatedAt
         ]
     }
 }

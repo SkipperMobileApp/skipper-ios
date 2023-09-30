@@ -21,5 +21,12 @@ enum DateHelper {
             formatter.dateFormat = "d MMMM"
             return formatter
         }()
+
+        static let isoDateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            return formatter
+        }()
     }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 protocol BookedLessonRepository {
-    func bookLessons(lessons: [BookedLesson]) async throws
-    func lessonsForUser(userId: String) async throws -> [BookedLesson]
-    func lesson(lessonId: String) async throws -> BookedLesson
+    func bookLessons(lessons: [BookedLessonModel]) async throws
+    func lessonsForUser(userId: String) async throws -> [BookedLessonModel]
+    func lesson(lessonId: String) async throws -> BookedLessonModel
     func cancelLesson(lessonId: String) async throws
 }
 
 class BookedLessonRepositoryImpl: BookedLessonRepository {
-    private var bookedLessons: [BookedLesson] = [
+    private var bookedLessons: [BookedLessonModel] = [
         .init(
             id: "1",
             userId: "TE6C0gmMbMYtKzGN2XFGC8qHmfx2",
@@ -31,19 +31,19 @@ class BookedLessonRepositoryImpl: BookedLessonRepository {
         )
     ]
 
-    func bookLessons(lessons: [BookedLesson]) async throws {
+    func bookLessons(lessons: [BookedLessonModel]) async throws {
         try await Task.sleep(for: .seconds(0.5))
 
         bookedLessons.append(contentsOf: lessons)
     }
 
-    func lessonsForUser(userId: String) async throws -> [BookedLesson] {
+    func lessonsForUser(userId: String) async throws -> [BookedLessonModel] {
         try await Task.sleep(for: .seconds(0.5))
 
         return bookedLessons.filter { $0.userId == userId }
     }
 
-    func lesson(lessonId: String) async throws -> BookedLesson {
+    func lesson(lessonId: String) async throws -> BookedLessonModel {
         try await Task.sleep(for: .seconds(0.5))
 
         guard let lesson = bookedLessons.first(where: { $0.lessonId == lessonId }) else {

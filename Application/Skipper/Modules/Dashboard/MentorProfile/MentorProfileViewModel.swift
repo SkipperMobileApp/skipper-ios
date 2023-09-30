@@ -57,9 +57,11 @@ class MentorProfileViewModel {
                         )
                     ]
 
-                    classItems = mentor.lessons.map {
-                        .init(id: $0.id, title: $0.title, description: $0.brief)
-                    }
+                    classItems = mentor.lessons
+                        .sorted { $0.updationDate > $1.updationDate }
+                        .map {
+                            .init(id: $0.id, title: $0.title, description: $0.brief)
+                        }
 
                     profileInfo = .init(
                         name: [mentor.firstName, mentor.lastName].joined(separator: " "),

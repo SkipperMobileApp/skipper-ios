@@ -1,39 +1,26 @@
 //
-//  LessonMapper.swift
+//  BookedLessonMapper.swift
 //  Skipper
 //
-//  Created by Denis Kovalev on 23.09.2023.
+//  Created by Denis Kovalev on 24.09.2023.
 //
 
 import Foundation
 
-enum LessonMapper {
-    static func lessonDomainToAPI(_ model: LessonModel) -> LessonFirebaseModel {
+enum BookedLessonMapper {
+    static func bookedLessonDomainToAPI(_ model: BookedLessonModel) -> BookedLessonFirebaseModel {
         .init(
             id: model.id,
+            userId: model.userId,
             mentorId: model.mentorId,
-            title: model.title,
-            brief: model.brief,
-            durations: model.durations.map(lessonDurationToAPIStringKey),
-            slots: model.slots,
-            types: model.types.map(lessonTypeToAPIStringKey),
-            createdAt: Int(model.creationDate.timeIntervalSince1970),
-            updatedAt: Int(model.updationDate.timeIntervalSince1970)
-        )
-    }
-
-    static func lessonAPIToDomain(_ model: LessonFirebaseModel) -> LessonModel {
-        .init(
-            id: model.id,
-            mentorId: model.mentorId,
-            title: model.title,
-            brief: model.brief,
-            description: "",
-            durations: Set(model.durations.compactMap(lessonDurationAPIStringKeyToDomain)),
-            slots: model.slots,
-            types: Set(model.types.compactMap(lessonTypeAPIStringKeyToDomain)),
-            creationDate: Date(timeIntervalSince1970: Double(model.createdAt)),
-            updationDate: Date(timeIntervalSince1970: Double(model.updatedAt))
+            lessonId: model.lessonId,
+            name: model.name,
+            description: model.description,
+            type: lessonTypeToAPIStringKey(model.type),
+            date: DateHelper.Formatters.isoDateFormatter.string(from: model.date),
+            time: model.time,
+            duration: lessonDurationToAPIStringKey(model.duration),
+            contact: userContactTypeToAPIStringKey(model.contact)
         )
     }
 
@@ -69,6 +56,25 @@ enum LessonMapper {
         case "theoretical": return .theoretical
         case "practical": return .practical
         case "solution": return .solution
+        default: return nil
+        }
+    }
+
+    private static func userContactTypeToAPIStringKey(_ type: UserContactType) -> String {
+        switch type {
+        case .discord: return "discord"
+        case .skype: return "skype"
+        case .telegram: return "telegram"
+        case .vk: return "vk"
+        }
+    }
+
+    private static func userContactTypeAPIStringKeyToDomain(_ key: String) -> UserContactType? {
+        switch key {
+        case "discord": return .discord
+        case "skype": return .skype
+        case "telegram": return .telegram
+        case "vk": return .vk
         default: return nil
         }
     }

@@ -22,7 +22,7 @@ struct CategoryFirebaseModel {
 }
 
 extension CategoryFirebaseModel: FirebaseResponseModel {
-    enum CodingKeys: String {
+    private enum CodingKeys: String {
         case id
         case name
         case key

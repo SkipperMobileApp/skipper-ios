@@ -21,6 +21,11 @@ protocol FirestoreDatabase {
 
     func categories() async throws -> [CategoryFirebaseModel]
     func category(categoryId: String) async throws -> CategoryFirebaseModel?
+
+    func bookLessons(lessons: [BookedLessonFirebaseModel]) async throws
+    func bookedLessonsForUser(userId: String) async throws -> [BookedLessonFirebaseModel]
+    func bookedLesson(bookedLessonId: String) async throws -> BookedLessonFirebaseModel?
+    func cancelBookedLesson(bookedLessonId: String) async throws
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -63,8 +68,7 @@ extension FirestoreDatabaseImpl {
 
 extension FirestoreDatabaseImpl {
     func lessonsForMentor(mentorId: String) async throws -> [LessonFirebaseModel] {
-        let collection = firestore.collection("lessons")
-        let query = collection.whereField(
+        let query = firestore.collection("lessons").whereField(
             LessonFirebaseModel.CodingKeys.mentorId.rawValue,
             isEqualTo: mentorId
         )
@@ -93,6 +97,34 @@ extension FirestoreDatabaseImpl {
     func category(categoryId: String) async throws -> CategoryFirebaseModel? {
         let document = firestore.collection("categories").document(categoryId)
         return try await get(document, type: CategoryFirebaseModel.self)
+    }
+}
+
+// MARK: - BookedLessons
+
+extension FirestoreDatabaseImpl {
+    func bookLessons(lessons: [BookedLessonFirebaseModel]) async throws {
+        let collection = firestore.collection("booked_lessons")
+        try await write(models: lessons, to: collection)
+    }
+
+    func bookedLesson(bookedLessonId: String) async throws -> BookedLessonFirebaseModel? {
+        let document = firestore.collection("booked_lessons").document(bookedLessonId)
+        return try await get(document, type: BookedLessonFirebaseModel.self)
+    }
+
+    func bookedLessonsForUser(userId: String) async throws -> [BookedLessonFirebaseModel] {
+        let query = firestore.collection("booked_lessons").whereField(
+            BookedLessonFirebaseModel.CodingKeys.userId.rawValue,
+            isEqualTo: userId
+        )
+
+        return try await get(query, type: BookedLessonFirebaseModel.self)
+    }
+
+    func cancelBookedLesson(bookedLessonId: String) async throws {
+        let document = firestore.collection("booked_lessons").document(bookedLessonId)
+        try await document.delete()
     }
 }
 
