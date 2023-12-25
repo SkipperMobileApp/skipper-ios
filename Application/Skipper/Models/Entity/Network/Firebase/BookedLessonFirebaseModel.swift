@@ -18,8 +18,7 @@ struct BookedLessonFirebaseModel {
 
     let type: String
 
-    let date: String
-    let time: String
+    let dateTime: String
     let duration: String
 
     let contact: String
@@ -32,8 +31,7 @@ struct BookedLessonFirebaseModel {
         name: String,
         description: String,
         type: String,
-        date: String,
-        time: String,
+        dateTime: String,
         duration: String,
         contact: String
     ) {
@@ -44,8 +42,7 @@ struct BookedLessonFirebaseModel {
         self.name = name
         self.description = description
         self.type = type
-        self.date = date
-        self.time = time
+        self.dateTime = dateTime
         self.duration = duration
         self.contact = contact
     }
@@ -59,8 +56,7 @@ extension BookedLessonFirebaseModel: FirebaseModel {
         case name
         case description
         case type
-        case date
-        case time
+        case dateTime = "date_time"
         case duration
         case contact
     }
@@ -72,8 +68,7 @@ extension BookedLessonFirebaseModel: FirebaseModel {
               let name = dict[CodingKeys.name.rawValue] as? String,
               let description = dict[CodingKeys.description.rawValue] as? String,
               let type = dict[CodingKeys.type.rawValue] as? String,
-              let date = dict[CodingKeys.date.rawValue] as? String,
-              let time = dict[CodingKeys.time.rawValue] as? String,
+              let dateTime = dict[CodingKeys.dateTime.rawValue] as? String,
               let duration = dict[CodingKeys.duration.rawValue] as? String,
               let contact = dict[CodingKeys.contact.rawValue] as? String
         else {
@@ -87,8 +82,7 @@ extension BookedLessonFirebaseModel: FirebaseModel {
         self.name = name
         self.description = description
         self.type = type
-        self.date = date
-        self.time = time
+        self.dateTime = dateTime
         self.duration = duration
         self.contact = contact
     }
@@ -101,8 +95,7 @@ extension BookedLessonFirebaseModel: FirebaseModel {
             CodingKeys.name.rawValue: name,
             CodingKeys.description.rawValue: description,
             CodingKeys.type.rawValue: type,
-            CodingKeys.date.rawValue: date,
-            CodingKeys.time.rawValue: time,
+            CodingKeys.dateTime.rawValue: dateTime,
             CodingKeys.duration.rawValue: duration,
             CodingKeys.contact.rawValue: contact
         ]

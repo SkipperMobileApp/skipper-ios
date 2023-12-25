@@ -15,8 +15,8 @@ protocol ItemPickerDelegate: AnyObject {
 protocol TimeSlotsPickerDelegate: AnyObject {
     func timeSlotsPicker(
         _ presenter: PickerPresenter,
-        didSelectDateIndex dateIndex: Int,
-        withTimeIndex timeIndex: Int
+        didSelectStartTime startTime: Date,
+        withEndTime endTime: Date
     )
 }
 
@@ -77,12 +77,12 @@ class PickerPresenter {
             self?.dismiss()
         }
 
-        picker.didSelectTimeSlot = { [weak self] dateIndex, timeIndex in
+        picker.didSelectTimeSlot = { [weak self] startTime, endTime in
             guard let self = self else { return }
             self.timeSlotsDelegate?.timeSlotsPicker(
                 self,
-                didSelectDateIndex: dateIndex,
-                withTimeIndex: timeIndex
+                didSelectStartTime: startTime,
+                withEndTime: endTime
             )
         }
 

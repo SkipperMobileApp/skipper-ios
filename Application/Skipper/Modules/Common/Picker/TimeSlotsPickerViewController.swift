@@ -11,15 +11,13 @@ import UIKit
 class TimeSlotsPickerViewController: UIViewController {
     struct PickerData {
         let title: String
-        let selectedDateIndex: Int?
-        let selectedTimeIndex: Int?
+        let selectedStartTime: Date?
+        let selectedEndTime: Date?
+    }
 
-        let items: [Item]
-
-        struct Item {
-            let date: String
-            let slots: [String]
-        }
+    private enum PickerComponent: Int, CaseIterable {
+        case startTime = 0
+        case endTime = 1
     }
 
     // MARK: - UI Controls
@@ -47,7 +45,7 @@ class TimeSlotsPickerViewController: UIViewController {
         let label = UILabel()
         label.textColor = R.color.primary87()
         label.font = R.typo.header
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         return label
     }()
 
@@ -75,21 +73,30 @@ class TimeSlotsPickerViewController: UIViewController {
     // MARK: - Output
 
     var didTapCancel: (() -> Void)?
-    var didSelectTimeSlot: ((_ dateIndex: Int, _ timeIndex: Int) -> Void)?
+    var didSelectTimeSlot: ((_ startDate: Date, _ endDate: Date) -> Void)?
 
     // MARK: - Properties
 
-    private let items: [PickerData.Item]
+    private lazy var allSlots: [Date] = stride(from: 0, to: 86400, by: 900).map {
+        Date(timeIntervalSince1970: $0)
+    }
 
     // MARK: - Initialization
 
     init(pickerData: PickerData) {
-        items = pickerData.items
-
         super.init(nibName: nil, bundle: nil)
 
-        pickerView.selectRow(pickerData.selectedDateIndex ?? 0, inComponent: 0, animated: false)
-        pickerView.selectRow(pickerData.selectedTimeIndex ?? 0, inComponent: 1, animated: false)
+        pickerView.selectRow(
+            pickerData.selectedStartTime.flatMap(allSlots.firstIndex) ?? 0,
+            inComponent: PickerComponent.startTime.rawValue,
+            animated: false
+        )
+
+        pickerView.selectRow(
+            pickerData.selectedEndTime.flatMap(allSlots.firstIndex) ?? 0,
+            inComponent: PickerComponent.endTime.rawValue,
+            animated: false
+        )
 
         titleLabel.text = pickerData.title
     }
@@ -152,6 +159,10 @@ class TimeSlotsPickerViewController: UIViewController {
         )
     }
 
+    // MARK: - Data Source
+
+    private func updateTimeSlots() {}
+
     // MARK: - UI Callbacks
 
     @objc private func cancelAction() {
@@ -160,8 +171,8 @@ class TimeSlotsPickerViewController: UIViewController {
 
     @objc private func selectAction() {
         didSelectTimeSlot?(
-            pickerView.selectedRow(inComponent: 0),
-            pickerView.selectedRow(inComponent: 1)
+            allSlots[pickerView.selectedRow(inComponent: PickerComponent.startTime.rawValue)],
+            allSlots[pickerView.selectedRow(inComponent: PickerComponent.endTime.rawValue)]
         )
     }
 
@@ -174,16 +185,11 @@ class TimeSlotsPickerViewController: UIViewController {
 
 extension TimeSlotsPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        2
+        PickerComponent.allCases.count
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return items.count
-        }
-
-        let selectedDateIndex = pickerView.selectedRow(inComponent: 0)
-        return items[selectedDateIndex == -1 ? 0 : selectedDateIndex].slots.count
+        allSlots.count
     }
 
     func pickerView(
@@ -199,30 +205,19 @@ extension TimeSlotsPickerViewController: UIPickerViewDelegate, UIPickerViewDataS
         label.layer.cornerRadius = 0
         label.textAlignment = .center
         label.clipsToBounds = true
-
-        if component == 0 {
-            label.text = items[row].date
-        } else {
-            let selectedDateIndex = pickerView.selectedRow(inComponent: 0)
-            label.text = items[selectedDateIndex == -1 ? 0 : selectedDateIndex].slots[row]
-        }
+        label.text = DateHelper.Formatters.timeSlotFormatter.string(from: allSlots[row])
 
         DispatchQueue.main.async { // chance color of the middle row
             if let label = pickerView.view(forRow: row, forComponent: component) as? UILabel {
                 label.textColor = R.color.secondary100()
-                label.font = R.typo.header
+                label.font = R.typo.body1
                 label.backgroundColor = R.color.brandPrimary()
                 label.layer.cornerRadius = 8
+                label.textAlignment = .center
             }
         }
 
         return label
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-            pickerView.reloadComponent(1)
-        }
     }
 }
 

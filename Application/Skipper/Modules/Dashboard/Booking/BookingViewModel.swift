@@ -140,7 +140,8 @@ class BookingViewModel {
         isLoading = true
         Task {
             do {
-                guard let user = try await authRepository.currentUser(forceUpdate: false) else {
+                guard let user = try await self.authRepository.currentUser(forceUpdate: false)
+                else {
                     throw AppError(message: Strings.errorUserNotFound())
                 }
 
@@ -153,8 +154,7 @@ class BookingViewModel {
                         name: lesson.title,
                         description: lesson.brief,
                         type: makeTypesArray(from: lesson.types)[typeIndex],
-                        date: $0.date,
-                        time: $0.timeInterval,
+                        dateTime: parseDateTime(date: $0.date, timeInterval: $0.timeInterval),
                         duration: makeDurationsArray(from: lesson.durations)[durationIndex],
                         contact: mentor.contacts[contactIndex].type
                     )
@@ -182,6 +182,12 @@ class BookingViewModel {
 
     private func makeDurationsArray(from durationSet: Set<LessonDuration>) -> [LessonDuration] {
         LessonDuration.allCases.filter { durationSet.contains($0) }
+    }
+
+    private func parseDateTime(date: Date, timeInterval: String) -> Date {
+        let first = timeInterval.split(separator: " - ").first!
+        let interval = DateHelper.Formatters.timeSlotFormatter.date(from: String(first)) ?? Date()
+        return date.addingTimeInterval(interval.timeIntervalSince1970)
     }
 }
 

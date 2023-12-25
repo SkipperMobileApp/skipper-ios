@@ -18,8 +18,7 @@ struct BookedLessonModel {
 
     let type: LessonType
 
-    let date: Date
-    let time: String
+    let dateTime: Date
     let duration: LessonDuration
 
     let contact: UserContactType

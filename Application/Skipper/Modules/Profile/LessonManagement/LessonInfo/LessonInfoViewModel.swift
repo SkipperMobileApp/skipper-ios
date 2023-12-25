@@ -50,21 +50,19 @@ class LessonInfoViewModel {
                     types: Set(lesson.types.map(LessonType.init)),
                     durations: Set(lesson.durations.map(LessonDuration.init)),
                     timePeriods: lesson.slots
-                        .compactMap { (slot: (key: Int, value: [String])) -> [TimePeriod]? in
+                        .compactMap { (slot: (key: Int, value: [LessonModel.LessonTimeSlot])) -> [TimePeriod]? in
+
                             guard let weekday = Weekday(rawValue: slot.key) else { return nil }
 
-                            return slot.value.compactMap { (period: String) -> TimePeriod? in
-                                let range = period.split(separator: " - ")
-
-                                guard range.count == 2,
-                                      let slot = TimeSlot(from: String(range[0]))
-                                else {
-                                    return nil
-                                }
-
-                                return TimePeriod(weekday: weekday, slot: slot)
+                            return slot.value.map {
+                                return TimePeriod(
+                                    weekday: weekday,
+                                    startTime: $0.startTime,
+                                    endTime: $0.endTime
+                                )
                             }
-                        }.flatMap { $0 },
+                        }
+                        .flatMap { $0 },
                     creationDate: lesson.creationDate
                 )
 
@@ -160,22 +158,10 @@ class LessonInfoViewModel {
         wasDataChanged = true
     }
 
-    func retrieveFreeTimePeriods() -> [(day: Weekday, slots: [TimeSlot])] {
-        var result: [(day: Weekday, slots: [TimeSlot])] = []
+    func getTimePeriod(at index: Int) -> TimePeriod? {
+        guard index >= 0, index < lessonInfo.timePeriods.count else { return nil }
 
-        Weekday.allCases
-            .forEach { weekday in
-                let slots = TimeSlot.allCases.filter {
-                    let period = TimePeriod(weekday: weekday, slot: $0)
-                    return !lessonInfo.timePeriods.contains(period)
-                }
-
-                if !slots.isEmpty {
-                    result.append((day: weekday, slots: slots))
-                }
-            }
-
-        return result
+        return lessonInfo.timePeriods[index]
     }
 
     func bookTimePeriod(_ period: TimePeriod, replacingIndex: Int? = nil) {
@@ -209,11 +195,13 @@ class LessonInfoViewModel {
             }
         )
 
-        let slots = lessonInfo.timePeriods.reduce([Int: [String]]()) { acc, item in
-            var acc = acc
-            acc[item.weekday.rawValue, default: []].append(item.slot.fullTime)
-            return acc
-        }
+        let slots = lessonInfo.timePeriods
+            .reduce([Int: [LessonModel.LessonTimeSlot]]()) { acc, item in
+                var acc = acc
+                acc[item.weekday.rawValue, default: []]
+                    .append(.init(startTime: item.startTime, endTime: item.endTime))
+                return acc
+            }
 
         return .init(
             id: lessonId ?? UUID().uuidString,
@@ -255,7 +243,15 @@ extension LessonInfoViewModel {
 
     struct TimePeriod: Hashable {
         let weekday: Weekday
-        let slot: TimeSlot
+        let startTime: Date
+        let endTime: Date
+
+        var fullTime: String {
+            [
+                DateHelper.Formatters.timeSlotFormatter.string(from: startTime),
+                DateHelper.Formatters.timeSlotFormatter.string(from: endTime)
+            ].joined(separator: " - ")
+        }
     }
 
     enum LessonType: CaseIterable {
@@ -297,42 +293,6 @@ extension LessonInfoViewModel {
             case .medium: return "60 минут"
             case .long: return "90 минут"
             }
-        }
-    }
-
-    enum TimeSlot: CaseIterable {
-        case morning, afternoon, day, evening
-
-        init?(from startTime: String) {
-            switch startTime {
-            case "09:00": self = .morning
-            case "12:00": self = .afternoon
-            case "15:00": self = .day
-            case "18:00": self = .evening
-            default: return nil
-            }
-        }
-
-        var startTime: String {
-            switch self {
-            case .morning: return "09:00"
-            case .afternoon: return "12:00"
-            case .day: return "15:00"
-            case .evening: return "18:00"
-            }
-        }
-
-        var endTime: String {
-            switch self {
-            case .morning: return "12:00"
-            case .afternoon: return "15:00"
-            case .day: return "18:00"
-            case .evening: return "21:00"
-            }
-        }
-
-        var fullTime: String {
-            [startTime, endTime].joined(separator: " - ")
         }
     }
 

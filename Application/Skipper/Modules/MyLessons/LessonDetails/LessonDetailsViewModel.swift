@@ -47,14 +47,13 @@ class LessonDetailsViewModel {
                         mentorAvatarUrl: mentor.imageUrl,
                         description: bookedLesson.description,
                         time: LessonInfo.timeStringFor(
-                            date: bookedLesson.date,
-                            time: bookedLesson.time,
+                            dateTime: bookedLesson.dateTime,
                             duration: bookedLesson.duration
                         ),
                         contact: LessonInfo.contactStringFor(
                             lessonContactType: bookedLesson.contact,
                             mentor: mentor,
-                            date: bookedLesson.date
+                            date: bookedLesson.dateTime
                         )
                     )
                     isLoading = false
@@ -132,12 +131,12 @@ extension LessonDetailsViewModel {
             return "\(duration.rawValue) мин."
         }
 
-        static func timeStringFor(date: Date, time: String, duration: LessonDuration) -> String {
-            let dateString = DateHelper.Formatters.dayAndMonthFormatter.string(from: date)
-            let timeString = String(time.split(separator: " - ").first ?? "") // Temporary
+        static func timeStringFor(dateTime: Date, duration: LessonDuration) -> String {
+            let dateTimeString = DateHelper.Formatters.dayAndMonthTimeFormatter
+                .string(from: dateTime)
             let durationString = durationFromLessonDuration(duration)
 
-            return [dateString, timeString, durationString].filter { !$0.isEmpty }
+            return [dateTimeString, durationString].filter { !$0.isEmpty }
                 .joined(separator: ", ")
         }
 

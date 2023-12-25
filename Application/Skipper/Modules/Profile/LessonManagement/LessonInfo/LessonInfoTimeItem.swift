@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol LessonInfoTimeItemDelegate: AnyObject {
-    func itemDidTapDayTime(_ item: LessonInfoTimeItem)
+    func itemDidTapTime(_ item: LessonInfoTimeItem)
+    func itemDidTapDay(_ item: LessonInfoTimeItem)
     func itemDidTapDelete(_ item: LessonInfoTimeItem)
 }
 
@@ -87,11 +88,11 @@ class LessonInfoTimeItem: SetupableView {
     // MARK: - UI Callbacks
 
     @objc private func dayButtonAction() {
-        delegate?.itemDidTapDayTime(self)
+        delegate?.itemDidTapDay(self)
     }
 
     @objc private func timeButtonAction() {
-        delegate?.itemDidTapDayTime(self)
+        delegate?.itemDidTapTime(self)
     }
 
     @objc private func deleteAction() {

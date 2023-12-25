@@ -15,6 +15,7 @@ class LessonInfoViewController: UIViewController {
     // MARK: - Definitions
 
     typealias Field = LessonInfoViewModel.Field
+    typealias TimePeriod = LessonInfoViewModel.TimePeriod
 
     // MARK: - UI Controls
 
@@ -44,6 +45,7 @@ class LessonInfoViewController: UIViewController {
     private lazy var pickerPresenter: PickerPresenter = {
         let presenter = PickerPresenter()
         presenter.timeSlotsDelegate = self
+        presenter.itemDelegate = self
         return presenter
     }()
 
@@ -54,7 +56,7 @@ class LessonInfoViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var selectedTimeIndex: Int?
+    private var selectedSlotIndex: Int?
 
     private let viewModel: LessonInfoViewModel
 
@@ -203,7 +205,7 @@ class LessonInfoViewController: UIViewController {
                 $0.weekday.rawValue < $1.weekday.rawValue
             }
             .map {
-                .init(day: $0.weekday.title, time: $0.slot.fullTime)
+                .init(day: $0.weekday.title, time: $0.fullTime)
             } ?? []
 
         let nameField = makeTextField(for: .name, with: name)
@@ -235,14 +237,21 @@ class LessonInfoViewController: UIViewController {
     }
 
     private func presentTimeSlotsPicker() {
-        let periods = viewModel.retrieveFreeTimePeriods()
         pickerPresenter.presentTimeSlotsPicker(
             pickerData: .init(
-                title: "Выберите дату и время",
-                selectedDateIndex: nil,
-                selectedTimeIndex: nil,
-                items: periods
-                    .map { .init(date: $0.day.title, slots: $0.slots.map { $0.fullTime }) }
+                title: "Выберите время начала и конца занятия",
+                selectedStartTime: nil,
+                selectedEndTime: nil
+            )
+        )
+    }
+
+    private func presentDaySlotsPicker() {
+        pickerPresenter.presentItemPicker(
+            pickerData: .init(
+                title: "Выберите день занятия",
+                items: LessonInfoViewModel.Weekday.allCases.map { $0.title },
+                selectedIndex: nil
             )
         )
     }
@@ -337,12 +346,23 @@ class LessonInfoViewController: UIViewController {
         }
 
         view.didSelectTime = { [weak self] index in
-            self?.selectedTimeIndex = index
+            self?.selectedSlotIndex = index
             self?.presentTimeSlotsPicker()
         }
 
-        view.didAddTime = { [weak view] in
+        view.didSelectDay = { [weak self] index in
+            self?.selectedSlotIndex = index
+            self?.presentDaySlotsPicker()
+        }
+
+        view.didAddTime = { [weak view, weak self] in
             view?.addItem()
+            let newPeriod = TimePeriod(
+                weekday: .monday,
+                startTime: Date(timeIntervalSince1970: 0),
+                endTime: Date(timeIntervalSince1970: 900)
+            )
+            self?.viewModel.bookTimePeriod(newPeriod)
         }
 
         return view
@@ -385,25 +405,45 @@ extension LessonInfoViewController: UITextViewDelegate {
 extension LessonInfoViewController: TimeSlotsPickerDelegate {
     func timeSlotsPicker(
         _ presenter: PickerPresenter,
-        didSelectDateIndex dateIndex: Int,
-        withTimeIndex timeIndex: Int
+        didSelectStartTime startTime: Date,
+        withEndTime endTime: Date
     ) {
-        guard let selectedTimeIndex else { return }
+        guard let selectedSlotIndex else { return }
 
-        let freeSlots = viewModel.retrieveFreeTimePeriods()
+        guard let weekday = viewModel.getTimePeriod(at: selectedSlotIndex)?.weekday else { return }
 
-        let weekday = freeSlots[dateIndex].day
-        let slot = freeSlots[dateIndex].slots[timeIndex]
-        let period = LessonInfoViewModel.TimePeriod(weekday: weekday, slot: slot)
-
-        viewModel.bookTimePeriod(period, replacingIndex: selectedTimeIndex)
+        let newPeriod = TimePeriod(weekday: weekday, startTime: startTime, endTime: endTime)
+        viewModel.bookTimePeriod(newPeriod, replacingIndex: selectedSlotIndex)
 
         timeView?.updateItem(
-            at: selectedTimeIndex,
-            with: .init(day: weekday.title, time: slot.fullTime)
+            at: selectedSlotIndex,
+            with: .init(day: weekday.title, time: newPeriod.fullTime)
         )
 
-        pickerPresenter.dismiss()
+        presenter.dismiss()
+        view.endEditing(true)
+    }
+}
+
+extension LessonInfoViewController: ItemPickerDelegate {
+    func itemPicker(_ presenter: PickerPresenter, didSelectItemAtIndex index: Int) {
+        guard let selectedSlotIndex else { return }
+
+        guard let oldPeriod = viewModel.getTimePeriod(at: selectedSlotIndex) else { return }
+
+        let newPeriod = TimePeriod(
+            weekday: LessonInfoViewModel.Weekday.allCases[index],
+            startTime: oldPeriod.startTime,
+            endTime: oldPeriod.endTime
+        )
+        viewModel.bookTimePeriod(newPeriod, replacingIndex: selectedSlotIndex)
+
+        timeView?.updateItem(
+            at: selectedSlotIndex,
+            with: .init(day: newPeriod.weekday.title, time: newPeriod.fullTime)
+        )
+
+        presenter.dismiss()
         view.endEditing(true)
     }
 }

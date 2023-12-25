@@ -17,8 +17,7 @@ enum BookedLessonMapper {
             name: model.name,
             description: model.description,
             type: lessonTypeToAPIStringKey(model.type),
-            date: DateHelper.Formatters.isoDateFormatter.string(from: model.date),
-            time: model.time,
+            dateTime: DateHelper.Formatters.isoDateFormatter.string(from: model.dateTime),
             duration: lessonDurationToAPIStringKey(model.duration),
             contact: userContactTypeToAPIStringKey(model.contact)
         )

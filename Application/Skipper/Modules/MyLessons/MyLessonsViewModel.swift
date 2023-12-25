@@ -48,14 +48,13 @@ class MyLessonsViewModel {
                                 mentor.lastName
                             ].filter { !$0.isEmpty }.joined(separator: " "),
                             time: timeStringFor(
-                                date: lesson.date,
-                                time: lesson.time,
+                                dateTime: lesson.dateTime,
                                 duration: lesson.duration
                             ),
                             contact: contactStringFor(
                                 lessonContactType: lesson.contact,
                                 mentor: mentor,
-                                date: lesson.date
+                                date: lesson.dateTime
                             )
                         )
                     }
@@ -98,12 +97,11 @@ class MyLessonsViewModel {
         return "\(duration.rawValue) мин."
     }
 
-    private func timeStringFor(date: Date, time: String, duration: LessonDuration) -> String {
-        let dateString = DateHelper.Formatters.dayAndMonthFormatter.string(from: date)
-        let timeString = String(time.split(separator: " - ").first ?? "") // Temporary
+    private func timeStringFor(dateTime: Date, duration: LessonDuration) -> String {
+        let dateTimeString = DateHelper.Formatters.dayAndMonthTimeFormatter.string(from: dateTime)
         let durationString = durationFromLessonDuration(duration)
 
-        return [dateString, timeString, durationString].filter { !$0.isEmpty }
+        return [dateTimeString, durationString].filter { !$0.isEmpty }
             .joined(separator: ", ")
     }
 
