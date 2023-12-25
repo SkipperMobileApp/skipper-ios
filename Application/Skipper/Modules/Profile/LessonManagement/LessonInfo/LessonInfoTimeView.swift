@@ -25,6 +25,7 @@ class LessonInfoTimeView: SetupableView {
 
     var didDeleteTime: ((_ index: Int) -> Void)?
     var didSelectTime: ((_ index: Int) -> Void)?
+    var didSelectDay: ((_ index: Int) -> Void)?
     var didAddTime: (() -> Void)?
 
     // MARK: - UI Lifecycle
@@ -110,7 +111,13 @@ extension LessonInfoTimeView: LessonInfoTimeItemDelegate {
         didDeleteTime?(index)
     }
 
-    func itemDidTapDayTime(_ item: LessonInfoTimeItem) {
+    func itemDidTapDay(_ item: LessonInfoTimeItem) {
+        guard let index = items.firstIndex(of: item) else { return }
+
+        didSelectDay?(index)
+    }
+
+    func itemDidTapTime(_ item: LessonInfoTimeItem) {
         guard let index = items.firstIndex(of: item) else { return }
 
         didSelectTime?(index)

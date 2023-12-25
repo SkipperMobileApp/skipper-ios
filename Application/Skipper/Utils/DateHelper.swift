@@ -16,9 +16,23 @@ enum DateHelper {
             return formatter
         }()
 
-        static let dayAndMonthFormatter: DateFormatter = {
+        static let dayAndMonthTimeFormatter: DateFormatter = {
             let formatter = DateFormatter()
-            formatter.dateFormat = "d MMMM"
+            formatter.dateFormat = "d MMMM, HH:mm"
+            return formatter
+        }()
+
+        static let isoDateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            return formatter
+        }()
+
+        static let timeSlotFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
             return formatter
         }()
     }

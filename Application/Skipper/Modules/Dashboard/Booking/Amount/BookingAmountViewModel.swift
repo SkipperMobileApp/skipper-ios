@@ -58,13 +58,13 @@ extension BookingAmountViewModel {
     }
 
     enum BookingDuration: Int {
-        case trial, short, mid, long
+        case trial, short, medium, long
 
         var title: String {
             switch self {
             case .trial: return "15 минут (пробное)"
             case .short: return "30 минут"
-            case .mid: return "60 минут"
+            case .medium: return "60 минут"
             case .long: return "90 минут"
             }
         }
@@ -73,7 +73,7 @@ extension BookingAmountViewModel {
             switch duration {
             case .trial: self = .trial
             case .short: self = .short
-            case .mid: self = .mid
+            case .medium: self = .medium
             case .long: self = .long
             }
         }

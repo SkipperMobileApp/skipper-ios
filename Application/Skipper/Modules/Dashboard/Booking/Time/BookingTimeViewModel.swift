@@ -21,7 +21,7 @@ class BookingTimeViewModel {
     private(set) var selectedTimeItems: [BookingTimeItem] = []
     private(set) var availableBookingIntervals: [BookingTimeInterval] = []
 
-    private var lessonAvailableIntervals: [Int: [String]] = [:]
+    private var lessonAvailableIntervals: [Int: [LessonModel.LessonTimeSlot]] = [:]
     private var maxSelectionAmount: Int = 0
 
     var isMaximumItemsSelected: Bool {
@@ -49,7 +49,14 @@ class BookingTimeViewModel {
         }
 
         let allIntervals = lessonAvailableIntervals[weekDay - 1]?
-            .map(BookingTimeInterval.init) ?? []
+            .map {
+                BookingTimeInterval(
+                    time: [
+                        DateHelper.Formatters.timeSlotFormatter.string(from: $0.startTime),
+                        DateHelper.Formatters.timeSlotFormatter.string(from: $0.endTime)
+                    ].joined(separator: " - ")
+                )
+            } ?? []
 
         availableBookingIntervals = allIntervals.filter { interval in
             !selectedTimeItems.filter { $0.date == date }
@@ -101,7 +108,7 @@ class BookingTimeViewModel {
 
     // MARK: - Global data
 
-    func setLessonAvailableIntervals(_ intervals: [Int: [String]]) {
+    func setLessonAvailableIntervals(_ intervals: [Int: [LessonModel.LessonTimeSlot]]) {
         lessonAvailableIntervals = intervals
     }
 

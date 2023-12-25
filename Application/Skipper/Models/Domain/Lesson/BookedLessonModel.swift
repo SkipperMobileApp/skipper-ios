@@ -1,5 +1,5 @@
 //
-//  BookedLesson.swift
+//  BookedLessonModel.swift
 //  Skipper
 //
 //  Created by Denis Kovalev on 14.01.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookedLesson {
+struct BookedLessonModel {
     let id: String
     let userId: String
     let mentorId: String
@@ -18,8 +18,7 @@ struct BookedLesson {
 
     let type: LessonType
 
-    let date: Date
-    let time: String
+    let dateTime: Date
     let duration: LessonDuration
 
     let contact: UserContactType

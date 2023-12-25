@@ -33,7 +33,7 @@ struct ReportMentorFirebaseModel {
 }
 
 extension ReportMentorFirebaseModel: FirebaseModel {
-    enum CodingKeys: String {
+    private enum CodingKeys: String {
         case id
         case userId = "user_id"
         case mentorId = "mentor_id"

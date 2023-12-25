@@ -10,7 +10,7 @@ import UIKit
 struct CategoryModel {
     let id: String
     let name: String
-    let image: UIImage
+    let key: CategoryKey
     let subcategories: [Subcategory]
 }
 

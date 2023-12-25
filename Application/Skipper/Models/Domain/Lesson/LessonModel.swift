@@ -14,6 +14,13 @@ struct LessonModel {
     let brief: String
     let description: String
     let durations: Set<LessonDuration>
-    let slots: [Int: [String]]
+    let slots: [Int: [LessonTimeSlot]]
     let types: Set<LessonType>
+    let creationDate: Date
+    let updationDate: Date
+
+    struct LessonTimeSlot {
+        let startTime: Date
+        let endTime: Date
+    }
 }

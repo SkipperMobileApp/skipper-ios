@@ -43,13 +43,15 @@ class LessonManagementViewModel {
 
                 let lessons = try await lessonRepostory.lessonsForMentor(mentorId: user.id)
 
-                self.lessons = lessons.map {
-                    .init(
-                        lessonId: $0.id,
-                        title: $0.title,
-                        description: $0.brief
-                    )
-                }
+                self.lessons = lessons
+                    .sorted { $0.creationDate > $1.creationDate }
+                    .map {
+                        .init(
+                            lessonId: $0.id,
+                            title: $0.title,
+                            description: $0.brief
+                        )
+                    }
             } catch {
                 errorEvent = error
             }

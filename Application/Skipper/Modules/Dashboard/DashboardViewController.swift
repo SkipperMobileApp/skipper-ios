@@ -184,7 +184,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
         let outerGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(280)
+            heightDimension: .absolute(290)
         )
         let outerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: outerGroupSize,

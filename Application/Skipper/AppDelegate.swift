@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Database
 
-        let firestoreDatabase = FirestoreDatabaseImpl(firestore: firestore)
+        let firestoreDatabase: FirestoreDatabase = FirestoreDatabaseImpl(firestore: firestore)
         let storageDatabase = StorageDatabaseImpl(storage: storage)
 
         // API
@@ -64,8 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let authRepositoryImpl = AuthRepositoryImpl(api: authAPI, cache: authCache)
         let authRepository: AuthRepository = authRepositoryImpl
         let logoutRepository: LogoutRepository = authRepositoryImpl
-        let lessonRepository: LessonRepository = LessonRepositoryImpl()
-        let utilRepository: UtilRepository = UtilRepositoryImpl()
+        let lessonRepository: LessonRepository = LessonRepositoryImpl(database: firestoreDatabase)
+        let utilRepository: UtilRepository = UtilRepositoryImpl(database: firestoreDatabase)
         let userRepository: UserRepository = UserRepositoryImpl(
             lessonRepository: lessonRepository,
             utilRepository: utilRepository,
