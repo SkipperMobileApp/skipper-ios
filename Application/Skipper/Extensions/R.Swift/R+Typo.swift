@@ -37,7 +37,10 @@ extension R {
         /// SF Pro Regular (400) 17 pt
         static let body1 = UIFont.systemFont(ofSize: 17, weight: .regular)
 
-        /// Montserrat Regular (400), 11 pt
-        static let caption = R.font.montserratRegular(size: 11)
+        /// SF Pro Regular (400), 11 pt
+        static let caption = UIFont.systemFont(ofSize: 11, weight: .regular)
+
+        /// SF Pro Medium (500), 11 pt
+        static let caption2 = UIFont.systemFont(ofSize: 11, weight: .medium)
     }
 }

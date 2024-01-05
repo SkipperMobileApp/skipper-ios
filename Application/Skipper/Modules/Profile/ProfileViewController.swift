@@ -221,23 +221,33 @@ class ProfileViewController: UIViewController {
     private func showAvatarOptionsSheet() {
         let sheet = UIAlertController(
             title: "Update Avatar",
-            message: "Image size limit - 20MB",
+            message: Strings.photoPickerLimitDisclaimer(),
             preferredStyle: .actionSheet
         )
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            sheet.addAction(.init(title: "Take a photo", style: .default) { [weak self] _ in
-                guard let self = self else { return }
-                self.didTapImageAction?(self.viewModel.imageActionProvider(for: .camera))
-            })
+            sheet.addAction(
+                .init(
+                    title: Strings.photoPickerPhotoText(),
+                    style: .default
+                ) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.didTapImageAction?(self.viewModel.imageActionProvider(for: .camera))
+                }
+            )
         }
 
-        sheet.addAction(.init(title: "Choose from Photos", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.didTapImageAction?(self.viewModel.imageActionProvider(for: .photos))
-        })
+        sheet.addAction(
+            .init(
+                title: Strings.photoPickerGalleryText(),
+                style: .default
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.didTapImageAction?(self.viewModel.imageActionProvider(for: .photos))
+            }
+        )
 
-        sheet.addAction(.init(title: "Cancel", style: .cancel))
+        sheet.addAction(.init(title: Strings.photoPickerCancel(), style: .cancel))
 
         present(sheet, animated: true)
     }

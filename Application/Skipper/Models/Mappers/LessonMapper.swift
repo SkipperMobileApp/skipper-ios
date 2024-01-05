@@ -77,8 +77,8 @@ enum LessonMapper {
         _ model: LessonModel.LessonTimeSlot
     ) -> LessonFirebaseModel.LessonTimeSlot {
         .init(
-            startTime: DateHelper.Formatters.timeSlotFormatter.string(from: model.startTime),
-            endTime: DateHelper.Formatters.timeSlotFormatter.string(from: model.endTime)
+            startTime: DateHelper.Formatters.time24GMT0Formatter.string(from: model.startTime),
+            endTime: DateHelper.Formatters.time24GMT0Formatter.string(from: model.endTime)
         )
     }
 
@@ -86,10 +86,10 @@ enum LessonMapper {
         _ model: LessonFirebaseModel.LessonTimeSlot
     ) -> LessonModel.LessonTimeSlot {
         .init(
-            startTime: DateHelper.Formatters.timeSlotFormatter.date(
+            startTime: DateHelper.Formatters.time24GMT0Formatter.date(
                 from: model.startTime
             ) ?? Date(timeIntervalSince1970: 0),
-            endTime: DateHelper.Formatters.timeSlotFormatter.date(
+            endTime: DateHelper.Formatters.time24GMT0Formatter.date(
                 from: model.endTime
             ) ?? Date(timeIntervalSince1970: 0)
         )

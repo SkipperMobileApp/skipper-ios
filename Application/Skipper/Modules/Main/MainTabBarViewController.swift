@@ -47,6 +47,13 @@ class MainTabBarViewController: UITabBarController {
         bindViewModelActions()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationItem.backButtonTitle = ""
+    }
+
     // MARK: - UI Methods
 
     private func setupUI() {
@@ -70,12 +77,13 @@ class MainTabBarViewController: UITabBarController {
 
 extension MainTabBarViewController {
     enum Tab: Int, CaseIterable {
-        case dashboard, myLessons, profile
+        case dashboard, myLessons, chats, profile
 
         var analyticsLabel: String {
             switch self {
             case .dashboard: return "main"
             case .myLessons: return "myLessons"
+            case .chats: return "chats"
             case .profile: return "settings"
             }
         }
@@ -88,12 +96,12 @@ extension MainTabBarViewController {
 
         let itemTextNormalAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: itemNormalColor,
-            .font: R.typo.caption!
+            .font: R.typo.caption
         ]
 
         let itemTextSelectedAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: itemSelectedColor,
-            .font: R.typo.caption!
+            .font: R.typo.caption
         ]
 
         // Tab Bar appearance

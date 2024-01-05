@@ -52,8 +52,8 @@ class BookingTimeViewModel {
             .map {
                 BookingTimeInterval(
                     time: [
-                        DateHelper.Formatters.timeSlotFormatter.string(from: $0.startTime),
-                        DateHelper.Formatters.timeSlotFormatter.string(from: $0.endTime)
+                        DateHelper.Formatters.time24GMT0Formatter.string(from: $0.startTime),
+                        DateHelper.Formatters.time24GMT0Formatter.string(from: $0.endTime)
                     ].joined(separator: " - ")
                 )
             } ?? []

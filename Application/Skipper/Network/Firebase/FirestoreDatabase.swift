@@ -5,11 +5,13 @@
 //  Created by Denis Kovalev on 04.12.2022.
 //
 
+import Combine
 import FirebaseFirestore
 import Foundation
 
 protocol FirestoreDatabase {
     func users() async throws -> [UserFirebaseModel]
+    func users(userIds: [String]) async throws -> [UserFirebaseModel]
     func user(userId: String) async throws -> UserFirebaseModel?
     func updateUsers(users: [UserFirebaseModel]) async throws
 
@@ -26,6 +28,15 @@ protocol FirestoreDatabase {
     func bookedLessonsForUser(userId: String) async throws -> [BookedLessonFirebaseModel]
     func bookedLesson(bookedLessonId: String) async throws -> BookedLessonFirebaseModel?
     func cancelBookedLesson(bookedLessonId: String) async throws
+
+    func chats(userId: String) async throws -> [ChatFirebaseModel]
+    func chat(chatId: String) async throws -> ChatFirebaseModel?
+    func setChat(chat: ChatFirebaseModel) async throws
+    func subscribeOnChats(userId: String) -> AnyPublisher<[ChatFirebaseModel], Error>
+
+    func messages(for chatId: String) async throws -> [ChatMessageFirebaseModel]
+    func setMessage(message: ChatMessageFirebaseModel) async throws
+    func subscribeOnMessages(chatId: String) -> AnyPublisher<[ChatMessageFirebaseModel], Error>
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -41,6 +52,14 @@ class FirestoreDatabaseImpl: FirestoreDatabase {
 extension FirestoreDatabaseImpl {
     func users() async throws -> [UserFirebaseModel] {
         let query = firestore.collection("users")
+        return try await get(query, type: UserFirebaseModel.self)
+    }
+
+    func users(userIds: [String]) async throws -> [UserFirebaseModel] {
+        let query = firestore
+            .collection("users")
+            .whereField(FieldPath.documentID(), in: userIds)
+
         return try await get(query, type: UserFirebaseModel.self)
     }
 
@@ -128,6 +147,66 @@ extension FirestoreDatabaseImpl {
     }
 }
 
+// MARK: - Chat
+
+extension FirestoreDatabaseImpl {
+    func chats(userId: String) async throws -> [ChatFirebaseModel] {
+        let query = firestore
+            .collection("dialogs")
+            .whereField(ChatFirebaseModel.CodingKeys.participants.rawValue, arrayContains: userId)
+
+        return try await get(query, type: ChatFirebaseModel.self)
+    }
+
+    func chat(chatId: String) async throws -> ChatFirebaseModel? {
+        let document = firestore.collection("dialogs").document(chatId)
+
+        return try await get(document, type: ChatFirebaseModel.self)
+    }
+
+    func setChat(chat: ChatFirebaseModel) async throws {
+        let document = firestore.collection("dialogs").document(chat.id)
+
+        try await write(model: chat, to: document)
+    }
+
+    func subscribeOnChats(userId: String) -> AnyPublisher<[ChatFirebaseModel], Error> {
+        let query = firestore
+            .collection("dialogs")
+            .whereField(ChatFirebaseModel.CodingKeys.participants.rawValue, arrayContains: userId)
+
+        return subscribe(query, type: ChatFirebaseModel.self)
+    }
+
+    func messages(for chatId: String) async throws -> [ChatMessageFirebaseModel] {
+        let collection = firestore
+            .collection("dialogs")
+            .document(chatId)
+            .collection("messages")
+
+        return try await get(collection, type: ChatMessageFirebaseModel.self)
+    }
+
+    func setMessage(message: ChatMessageFirebaseModel) async throws {
+        let document = firestore
+            .collection("dialogs")
+            .document(message.chatId)
+            .collection("messages")
+            .document(message.id)
+
+        try await write(model: message, to: document)
+    }
+
+    func subscribeOnMessages(chatId: String) -> AnyPublisher<[ChatMessageFirebaseModel], Error> {
+        let collection = firestore
+            .collection("dialogs")
+            .document(chatId)
+            .collection("messages")
+
+        return subscribe(collection, type: ChatMessageFirebaseModel.self)
+    }
+}
+
 // MARK: - Utils
 
 extension FirestoreDatabaseImpl {
@@ -135,41 +214,81 @@ extension FirestoreDatabaseImpl {
         _ documentReference: DocumentReference,
         type: T.Type
     ) async throws -> T? {
-        try await withCheckedThrowingContinuation { continuation in
-            documentReference.getDocument { snapshot, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-
-                if let snapshot = snapshot {
-                    let result = snapshot.data().flatMap { T($0, id: snapshot.documentID) }
-                    continuation.resume(returning: result)
-                    return
-                }
-
-                continuation.resume(throwing: AppError(message: Strings.errorUnknown()))
-            }
-        }
+        let snapshot = try await documentReference.getDocument()
+        return snapshot.data().flatMap { T($0, id: snapshot.documentID) }
     }
 
     private func get<T: FirebaseResponseModel>(_ query: Query, type: T.Type) async throws -> [T] {
-        try await withCheckedThrowingContinuation { continuation in
-            query.getDocuments { snapshot, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
+        let snapshots = try await query.getDocuments()
+        return snapshots.documents.compactMap { T($0.data(), id: $0.documentID) }
+    }
 
-                if let snapshot = snapshot {
-                    let result = snapshot.documents.compactMap { T($0.data(), id: $0.documentID) }
-                    continuation.resume(returning: result)
-                    return
-                }
+    private func get<T: FirebaseResponseModel>(
+        _ collection: CollectionReference,
+        type: T.Type
+    ) async throws -> [T] {
+        let snapshots = try await collection.getDocuments()
+        return snapshots.documents.compactMap { T($0.data(), id: $0.documentID) }
+    }
 
-                continuation.resume(throwing: AppError(message: Strings.errorUnknown()))
+    private func subscribe<T: FirebaseResponseModel>(
+        _ query: Query,
+        type: T.Type
+    ) -> AnyPublisher<[T], Error> {
+        let subject = PassthroughSubject<[T], Error>()
+        let listener = query.addSnapshotListener { documentSnapshot, error in
+            if let error {
+                subject.send(completion: .failure(error))
+                return
             }
+
+            guard let documentSnapshot else {
+                subject.send(completion: .failure(FirebaseError.documentNotFound(error)))
+                return
+            }
+
+            let models = documentSnapshot
+                .documents
+                .compactMap { T($0.data(), id: $0.documentID) }
+
+            subject.send(models)
         }
+
+        return subject
+            .handleEvents(receiveCancel: {
+                listener.remove()
+            })
+            .eraseToAnyPublisher()
+    }
+
+    private func subscribe<T: FirebaseResponseModel>(
+        _ collection: CollectionReference,
+        type: T.Type
+    ) -> AnyPublisher<[T], Error> {
+        let subject = PassthroughSubject<[T], Error>()
+        let listener = collection.addSnapshotListener { documentSnapshot, error in
+            if let error {
+                subject.send(completion: .failure(error))
+                return
+            }
+
+            guard let documentSnapshot else {
+                subject.send(completion: .failure(FirebaseError.documentNotFound(error)))
+                return
+            }
+
+            let models = documentSnapshot
+                .documents
+                .compactMap { T($0.data(), id: $0.documentID) }
+
+            subject.send(models)
+        }
+
+        return subject
+            .handleEvents(receiveCancel: {
+                listener.remove()
+            })
+            .eraseToAnyPublisher()
     }
 
     private func write<T: FirebaseModel>(

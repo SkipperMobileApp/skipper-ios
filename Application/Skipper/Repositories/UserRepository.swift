@@ -13,6 +13,7 @@ protocol UserRepository {
     func mentor(mentorId: String) async throws -> UserModel
 
     func user(userId: String) async throws -> UserModel
+    func users(userIds: [String]) async throws -> [UserModel]
     func updateUser(user: UserModel) async throws
     func uploadUserImage(userImage: UserImageUploadModel) async throws -> URL
 }
@@ -239,11 +240,15 @@ extension UserRepositoryImpl: UserRepository {
         return UserMapper.apiToDomain(user)
     }
 
+    func users(userIds: [String]) async throws -> [UserModel] {
+        return try await database.users(userIds: userIds).map(UserMapper.apiToDomain)
+    }
+
     func updateUser(user: UserModel) async throws {
         try await database.updateUsers(users: [UserMapper.domainToAPI(user)])
     }
 
     func uploadUserImage(userImage: UserImageUploadModel) async throws -> URL {
-        try await storage.uploadImage(model: UserImageMapper.uploadDomainToAPI(userImage))
+        try await storage.uploadUserImage(model: UserImageMapper.uploadDomainToAPI(userImage))
     }
 }

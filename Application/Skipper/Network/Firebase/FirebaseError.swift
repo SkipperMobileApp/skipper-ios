@@ -12,6 +12,7 @@ enum FirebaseError: LocalizedError {
     case authInvalidPassword
     case authAccountDisabled
     case firebaseSystemError
+    case documentNotFound(Error?)
 
     var errorDescription: String? {
         switch self {
@@ -23,6 +24,8 @@ enum FirebaseError: LocalizedError {
             return Strings.errorAuthAccountDisabled()
         case .firebaseSystemError:
             return Strings.errorFirebaseSystem()
+        case let .documentNotFound(error):
+            return error?.localizedDescription ?? ""
         }
     }
 }

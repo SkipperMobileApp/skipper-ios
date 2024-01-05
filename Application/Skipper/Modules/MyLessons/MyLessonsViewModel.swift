@@ -98,7 +98,8 @@ class MyLessonsViewModel {
     }
 
     private func timeStringFor(dateTime: Date, duration: LessonDuration) -> String {
-        let dateTimeString = DateHelper.Formatters.dayAndMonthTimeFormatter.string(from: dateTime)
+        let dateTimeString = DateHelper.Formatters.dayAndMonthTimeLocalFormatter
+            .string(from: dateTime)
         let durationString = durationFromLessonDuration(duration)
 
         return [dateTimeString, durationString].filter { !$0.isEmpty }

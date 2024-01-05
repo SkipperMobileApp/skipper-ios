@@ -74,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         let bookedLessonRepository: BookedLessonRepository = BookedLessonRepositoryImpl()
         let reportRepository: ReportRepository = ReportRepositoryImpl(database: firestoreDatabase)
+        let chatRepository: ChatRepository = ChatRepositoryImpl(
+            database: firestoreDatabase,
+            storage: storageDatabase
+        )
 
         // Services
 
@@ -92,6 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(userRepository)
         SharedDependencyContainer.register(bookedLessonRepository)
         SharedDependencyContainer.register(reportRepository)
+        SharedDependencyContainer.register(chatRepository)
     }
 
     private func makeLogoutHandler(

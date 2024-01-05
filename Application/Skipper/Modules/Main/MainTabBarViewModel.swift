@@ -17,7 +17,6 @@ class MainTabBarViewModel {
         Task {
             do {
                 try await logoutHandler.logout()
-
             } catch {
                 await MainActor.run {
                     didFail?(error)

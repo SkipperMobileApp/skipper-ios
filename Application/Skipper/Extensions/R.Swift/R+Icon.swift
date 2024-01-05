@@ -83,5 +83,20 @@ extension R {
 
         static let report = UIImage(systemName: "exclamationmark.octagon.fill")!
             .withRenderingMode(.alwaysTemplate)
+
+        static let chat = UIImage(systemName: "message")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let chatFill = UIImage(systemName: "message.fill")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let attachment = UIImage(systemName: "paperclip")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let sendMessage = UIImage(systemName: "paperplane")!
+            .withRenderingMode(.alwaysTemplate)
+
+        static let share = UIImage(systemName: "square.and.arrow.up")!
+            .withRenderingMode(.alwaysTemplate)
     }
 }

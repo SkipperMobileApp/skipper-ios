@@ -132,7 +132,7 @@ extension LessonDetailsViewModel {
         }
 
         static func timeStringFor(dateTime: Date, duration: LessonDuration) -> String {
-            let dateTimeString = DateHelper.Formatters.dayAndMonthTimeFormatter
+            let dateTimeString = DateHelper.Formatters.dayAndMonthTimeLocalFormatter
                 .string(from: dateTime)
             let durationString = durationFromLessonDuration(duration)
 
