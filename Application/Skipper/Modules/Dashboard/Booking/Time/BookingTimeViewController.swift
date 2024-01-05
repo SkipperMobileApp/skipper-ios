@@ -276,7 +276,7 @@ extension BookingTimeViewController: UITableViewDataSource, UITableViewDelegate 
         let item = viewModel.selectedTimeItems[indexPath.row]
 
         cell.configureWith(
-            date: DateHelper.Formatters.fullDateFormatter.string(from: item.date),
+            date: DateHelper.Formatters.fullDateLocalFormatter.string(from: item.date),
             time: item.timeInterval
         )
 

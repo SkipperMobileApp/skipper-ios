@@ -73,6 +73,15 @@
       }
     },
     {
+      "identity" : "keyboardnotificationsobserver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zummenix/KeyboardNotificationsObserver",
+      "state" : {
+        "revision" : "d825a8394bfdd31d337da4c4b328e96a01603b2c",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "keychainaccess",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kishikawakatsumi/KeychainAccess",

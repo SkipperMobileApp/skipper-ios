@@ -98,3 +98,23 @@
 // MARK: - Alert
 
 "alert.ok" = "OK";
+
+// MARK: - Chat
+
+"chat.chatsList.imageMessage.placeholderText" = "Изображение";
+"chat.chatMessages.date.today" = "Сегодня";
+"chat.chatMessages.date.yesterday" = "Вчера";
+"chat.chatMessages.defaultOpponentName" = "Обновление...";
+"chat.chatMessages.inputFieldPlaceholder" = "Введите сообщение";
+"chat.chatMessages.photoPicker.title" = "Прикрепить изображение";
+
+// MARK: - Photo Picker
+
+"photoPicker.photo.text" = "Снимок с камеры";
+"photoPicker.gallery.text" = "Выбрать из галереи";
+"photoPicker.cancel" = "Отменить";
+"photoPicker.limit.disclaimer" = "Объем не более 20 МБ";
+
+// MARK: - Share Sheet
+
+"shareSheet.image.subjectText" = "Изображение";

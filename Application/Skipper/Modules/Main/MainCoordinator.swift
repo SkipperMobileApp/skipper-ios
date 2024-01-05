@@ -44,16 +44,34 @@ class MainCoordinator: NavigationCoordinator {
         router.setRootModule(controller)
     }
 
+    // MARK: - Routing
+
+    private func showChat(chatId: String, opponentId: String) {
+        let coordinator = ChatCoordinator(with: router, chatId: chatId, opponentId: opponentId)
+
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
+
+        addChild(coordinator)
+    }
+
     // MARK: - Tabs
 
     private func initTabs() -> [TabBox] {
         let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
         let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
         let myLessonsCoordinator = MyLessonsCoordinator(with: NavigationRouter())
+        let chatCoordinator = ChatListCoordinator(with: NavigationRouter())
+
+        chatCoordinator.didSelectChat = { [weak self] chatId, opponentId in
+            self?.showChat(chatId: chatId, opponentId: opponentId)
+        }
 
         return [
             (.dashboard, dashboardCoordinator),
             (.myLessons, myLessonsCoordinator),
+            (.chats, chatCoordinator),
             (.profile, profileCoordinator)
         ]
     }
@@ -70,11 +88,15 @@ class MainCoordinator: NavigationCoordinator {
         let controllers = sorted.map { box -> UIViewController in
             self.tabs[box.tab] = box.coordinator
             let controller = box.coordinator.toPresentable()
-            controller.tabBarItem = UITabBarItem(
+            let item = UITabBarItem(
                 title: box.tab.title,
                 image: box.tab.icon,
                 tag: box.tab.rawValue
             )
+
+            item.selectedImage = box.tab.selectedIcon
+
+            controller.tabBarItem = item
             return controller
         }
 
@@ -90,6 +112,7 @@ private extension MainCoordinator.Tab {
         switch self {
         case .dashboard: return "Главная"
         case .myLessons: return "Мои занятия"
+        case .chats: return "Чаты"
         case .profile: return "Профиль"
         }
     }
@@ -98,7 +121,15 @@ private extension MainCoordinator.Tab {
         switch self {
         case .dashboard: return R.icon.home
         case .myLessons: return R.icon.checklist
+        case .chats: return R.icon.chat
         case .profile: return R.icon.profile
+        }
+    }
+
+    var selectedIcon: UIImage? {
+        switch self {
+        case .chats: return R.icon.chatFill
+        default: return nil
         }
     }
 }

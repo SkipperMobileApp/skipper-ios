@@ -205,7 +205,7 @@ extension TimeSlotsPickerViewController: UIPickerViewDelegate, UIPickerViewDataS
         label.layer.cornerRadius = 0
         label.textAlignment = .center
         label.clipsToBounds = true
-        label.text = DateHelper.Formatters.timeSlotFormatter.string(from: allSlots[row])
+        label.text = DateHelper.Formatters.time24GMT0Formatter.string(from: allSlots[row])
 
         DispatchQueue.main.async { // chance color of the middle row
             if let label = pickerView.view(forRow: row, forComponent: component) as? UILabel {

@@ -248,8 +248,8 @@ extension LessonInfoViewModel {
 
         var fullTime: String {
             [
-                DateHelper.Formatters.timeSlotFormatter.string(from: startTime),
-                DateHelper.Formatters.timeSlotFormatter.string(from: endTime)
+                DateHelper.Formatters.time24GMT0Formatter.string(from: startTime),
+                DateHelper.Formatters.time24GMT0Formatter.string(from: endTime)
             ].joined(separator: " - ")
         }
     }
