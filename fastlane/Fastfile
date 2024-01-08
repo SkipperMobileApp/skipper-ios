@@ -25,6 +25,7 @@ platform :ios do
   lane :bump_build_number do
     latest_release = firebase_app_distribution_get_latest_release(
       app: ENV['FIREBASEAPPDISTRO_APP'],
+      service_credentials_file: ENV['GOOGLE_APPLICATION_CREDENTIALS'],
       debug: true
     )
     if latest_release == nil
