@@ -17,11 +17,13 @@ jobs:
       
       - name: Set up ruby
         run: |
-          brew install ruby
+          brew install rbenv ruby-build
+          rbenv install 3.2.2
+          rbenv local 3.2.2
       
       - name: Setup fastlane
         run: |
-          gem install bundler:2.4.2
+          gem install bundler
           bundle install --jobs 4 --retry 3 
         
       - name: Update Keychain
