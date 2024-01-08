@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "skipper-bdc2b",
+  "private_key_id": "044d966c0ab9790f39d54726f7b95e33af255124",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC/efssFdyfok5K\nOE/rwaRde4CjGY1WevgILD0GsARDUCDNvqsfdI+vJ3unObU67vGrANt66dhbV5V+\nvycXQLDEvpKdRRodB8kiEH3ouzEd1iXwaUSW/KBmzNNiY0xynrGtoSJtYu8gFqQj\n8KBweRelVEYHR+B0sXRwdLYffGPT10o1KDOQb1rdXyWyu2DW+YrV85keEgYRNR7t\n0NJ3JqrD4wRk1FbQCqhWYRHPEp/BBKKXG7t2hm/xpIJKMqNRQxc1Xpid++KUd80a\n7rA61I/2k7AHrn9bazUcwkpd/J1mGmHdHqUr9YoH7tTBRQY7ahjQqbXjoa2tSqwS\nRxtfcdtvAgMBAAECggEAIDYUFAGFgPFb/E5m24FS9kr9g/KbfU3ohe9zQLnBrdU/\n/3yw6vS/6zZYLfSeUVC7JQpa4d2PASbFxnG/0MCYPDDXF0/1qaaSpoFhvRIonB1X\neo8q87+B+GlCsk2EIdAikdQGp6I6GgrVCBrF0sX8PVrlAPqNfvQPY4+ux7M0VAGc\nAnkwnSrss7mTrnpA7HvI8p3OMSx8LAw8PKKwWadWb2z/xFTN+zf+kFKfHYOtFsQQ\nDpobsPWPTKUM/FlbMPjq5qvWG6SAYJnKMdlSBHyNnMN/1wuIQdVviwQa9pvtSivr\nfGY6fdjuohdgH8tJVxP5+lMAoQcB4lrc0+iaDOz6cQKBgQDwceZTUKopJ6R8FC35\nGBb1g7hsC/0h9aoGXDim/Kiwn+ZB8K9UNANpvZ54HCNKu36R8rgfHlZc8D3yavHb\nX4o0m5rIgpIvTSJoPJM0arHs2fpYsjGVEkakl+bXCxJF1bVarpqllJNGArhvENcz\nrDOiFIh137Ts3Jr5K8Z6/ftrKQKBgQDL3Ri0eJ+apiRfo6mJ3KL5TAmDVU+VQ3Lw\ny8MalvGcRI4K2IjNY4ji9qJWc2jxuQicmLqV+wv2EZOp6mQEMT/dni7K2Sb3N8W2\ntD9j/mwyF8RCxYnvPwydson+0BLRGFHDcRIVdnipa94iF4oOCl0xglvtj4InBWDW\n8W3Xrat81wKBgAZgXuVSvFB/FqObvWRfuSwlpBxpbPsbkri8dVwoUyjr9KVHBr9K\n6dRCDRPOWzk+I6snLq7UlSG91Ua6g1N4AyhGACLVI59RgloVUSoQsks/tJ3pi9sS\nMwFmbd7CEmf7tOWEv+EoQYeXxuBbJ/nc1Tm1JbFKj3fAmfOFr6vPVH2RAoGATQuC\nCrKLnyarGHoB2NhJv229KqVTLlYPWnGniqUBKs294Nt02CqF0UDkmUeEodYMKyKN\nYaE/JAAAjnbG1c7HFDpz9LWcxFGPpzz3uBKvUT8qLRH6zzBE1FRlUqfQdLV8MSDK\ndNIRR/Y8PSYoRqYkElHx7BYQWi7uKk2T9a7s4IECgYAaSA7dS8kylVESwLuL5pQW\n82ep2u85vOivaIiUZfjK3nD4HBO9/G35dTALOyKrH6tXIgrLiPrDMth/AqVafF9X\nO010CnOL7+8pdMXrfsMPCAxjbWaaXCsZWxJ17GT9xWctlPE2c4M9GWTDZcYV+TmL\nFX6ttPY1GeCGCTLmzyWjaQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebasedistribution@skipper-bdc2b.iam.gserviceaccount.com",
+  "client_id": "109577060574980426008",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebasedistribution%40skipper-bdc2b.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
