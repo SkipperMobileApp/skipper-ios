@@ -31,10 +31,9 @@ jobs:
           KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           FL_IMPORT_CERT_KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-          CERTIFICATE_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-          CERT_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
         run: |
-          echo "Certificate password: $CERT_PASSWORD"
+          echo "$KEYCHAIN_NAME, $KEYCHAIN_PASSWORD, $CERTIFICATE_PASSWORD" > key.txt
           bundle exec fastlane ios update_keychain
 
       - name: Fastlane ios release
