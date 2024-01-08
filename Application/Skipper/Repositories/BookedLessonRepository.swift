@@ -24,7 +24,7 @@ class BookedLessonRepositoryImpl: BookedLessonRepository {
             name: "Консультация React",
             description: "Консультация для овладения базовыми знаниями по React",
             type: .solution,
-            dateTime: .now.addingTimeInterval(3600 * 24 * 2 + 3600 * 18),
+            dateTime: .now.addingTimeInterval(3600 * 24 - 10),
             duration: .trial,
             contact: .discord
         )

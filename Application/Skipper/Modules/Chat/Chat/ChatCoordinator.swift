@@ -41,6 +41,10 @@ class ChatCoordinator: NavigationCoordinator {
             self?.showImagePreview(url: url)
         }
 
+        controller.didTapMentor = { [weak self] mentorId in
+            self?.showMentorProfile(mentorId: mentorId)
+        }
+
         controller.didFinish = { [weak self] in
             self?.didFinish?()
         }
@@ -71,5 +75,15 @@ class ChatCoordinator: NavigationCoordinator {
         activityViewController.popoverPresentationController?.sourceView = view
 
         router.present(activityViewController)
+    }
+
+    private func showMentorProfile(mentorId: String) {
+        let coordinator = MentorProfileCoordinator(with: router, mentorId: mentorId)
+
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
+
+        addChild(coordinator)
     }
 }

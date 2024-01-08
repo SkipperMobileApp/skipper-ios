@@ -31,6 +31,7 @@ protocol FirestoreDatabase {
 
     func chats(userId: String) async throws -> [ChatFirebaseModel]
     func chat(chatId: String) async throws -> ChatFirebaseModel?
+    func chat(userId: String, opponentId: String) async throws -> ChatFirebaseModel?
     func setChat(chat: ChatFirebaseModel) async throws
     func subscribeOnChats(userId: String) -> AnyPublisher<[ChatFirebaseModel], Error>
 
@@ -162,6 +163,15 @@ extension FirestoreDatabaseImpl {
         let document = firestore.collection("dialogs").document(chatId)
 
         return try await get(document, type: ChatFirebaseModel.self)
+    }
+
+    func chat(userId: String, opponentId: String) async throws -> ChatFirebaseModel? {
+        let array = [userId, opponentId].sorted()
+        let query = firestore
+            .collection("dialogs")
+            .whereField(ChatFirebaseModel.CodingKeys.participants.rawValue, isEqualTo: array)
+
+        return try await get(query, type: ChatFirebaseModel.self).first
     }
 
     func setChat(chat: ChatFirebaseModel) async throws {

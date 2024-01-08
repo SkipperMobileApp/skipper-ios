@@ -12,14 +12,19 @@ class LessonDetailsViewModel {
 
     @Event private(set) var isLoading: Bool?
     @Event private(set) var errorEvent: Error?
+    @Event private(set) var loadChatEvent: ChatModel?
     @Event private(set) var cancelLessonEvent: Void?
 
     @Injected() private var bookedLessonRepository: BookedLessonRepository
     @Injected() private var userRepository: UserRepository
+    @Injected() private var chatRepository: ChatRepository
+    @Injected() private var authRepository: AuthRepository
 
     @Published private(set) var lessonInfo: LessonInfo = .placeholder
 
     private let lessonId: String
+    private(set) var mentor: UserModel?
+    private(set) var hasSendMessageOption: Bool = false
 
     // MARK: - Initialization
 
@@ -36,14 +41,19 @@ class LessonDetailsViewModel {
                 let bookedLesson = try await bookedLessonRepository.lesson(lessonId: lessonId)
                 let mentor = try await userRepository.mentor(mentorId: bookedLesson.mentorId)
 
+                self.mentor = mentor
+
                 await MainActor.run {
+                    hasSendMessageOption =
+                        bookedLesson.dateTime.timeIntervalSinceNow < 60 * 60 * 24
+
                     lessonInfo = .init(
                         title: bookedLesson.name,
                         type: LessonInfo.titleFromLessonType(bookedLesson.type),
                         mentorName: [
                             mentor.lastName,
                             mentor.firstName
-                        ].filter { !$0.isEmpty }.joined(separator: ""),
+                        ].filter { !$0.isEmpty }.joined(separator: " "),
                         mentorAvatarUrl: mentor.imageUrl,
                         description: bookedLesson.description,
                         time: LessonInfo.timeStringFor(
@@ -63,6 +73,44 @@ class LessonDetailsViewModel {
                     errorEvent = error
                     isLoading = false
                 }
+            }
+        }
+    }
+
+    func loadChat() {
+        isLoading = true
+        Task {
+            defer {
+                isLoading = false
+            }
+
+            do {
+                guard let user = try await authRepository.currentUser(forceUpdate: false),
+                      let mentor = self.mentor
+                else {
+                    throw AppError(message: Strings.errorUnknown())
+                }
+
+                if let chat = try await chatRepository.getChatWithOpponent(
+                    userId: user.id,
+                    opponentId: mentor.id
+                ) {
+                    loadChatEvent = chat
+                    return
+                }
+
+                let chatModel = ChatModel(
+                    id: UUID().uuidString,
+                    lastMessage: Strings.chatChatListFirstMessageText(),
+                    lastUpdateDate: .now,
+                    opponent: mentor
+                )
+
+                try await chatRepository.saveChat(chat: chatModel, userId: user.id)
+
+                loadChatEvent = chatModel
+            } catch {
+                errorEvent = error
             }
         }
     }
@@ -145,7 +193,7 @@ extension LessonDetailsViewModel {
             mentor: UserModel,
             date: Date
         ) -> String {
-            if abs(date.timeIntervalSince(.now)) > 60 * 60 * 24 {
+            if date.timeIntervalSinceNow > 60 * 60 * 24 {
                 return "\(contactTypeNameFrom(type: lessonContactType)): Станет видимым за сутки до занятия"
             }
 

@@ -42,6 +42,9 @@ extension R {
         static let arrowRight = UIImage(systemName: "arrowtriangle.forward.fill")!
             .withRenderingMode(.alwaysTemplate)
 
+        static let arrowDown = UIImage(systemName: "chevron.down")!
+            .withRenderingMode(.alwaysTemplate)
+
         static let trash = UIImage(systemName: "trash.fill")!.withRenderingMode(.alwaysTemplate)
 
         static let chatCircle = R.image.icChatCircle()!

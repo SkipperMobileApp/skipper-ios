@@ -39,8 +39,14 @@ class ChatViewController: UIViewController {
         return tableView
     }()
 
-    private let userView: UserView = {
+    private lazy var userView: UserView = {
         let view = UserView()
+        view.isUserInteractionEnabled = true
+
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(userTapAction))
+        view.addGestureRecognizer(gesture)
+
         return view
     }()
 
@@ -58,6 +64,22 @@ class ChatViewController: UIViewController {
         return view
     }()
 
+    private lazy var scrollDownButton: UIButton = {
+        let button = UIButton()
+        button.setImage(R.icon.arrowDown, for: .normal)
+        button.tintColor = R.color.brandPrimary()
+        button.backgroundColor = R.color.themeBackground()
+
+        button.layer.cornerRadius = 22
+        button.layer.borderWidth = 1
+        button.layer.borderColor = R.color.brandPrimary()?.cgColor
+
+        button.isHidden = true
+
+        button.addTarget(self, action: #selector(scrollDownAction), for: .touchUpInside)
+        return button
+    }()
+
     private var chatInputViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Output
@@ -65,6 +87,7 @@ class ChatViewController: UIViewController {
     var didFinish: (() -> Void)?
     var didSelectImageAttachmentType: ((_ provider: ImagePickerProvider) -> Void)?
     var didTapMessageImage: ((_ url: URL) -> Void)?
+    var didTapMentor: ((_ mentorId: String) -> Void)?
 
     // MARK: - Properties
 
@@ -111,13 +134,14 @@ class ChatViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = userView
 
-        navigationController?.navigationBar.standardAppearance.backgroundColor = R.color
-            .themePrimary()
+        navigationController?.navigationBar.standardAppearance.backgroundColor =
+            R.color.themePrimary()
 
         view.backgroundColor = R.color.themeBackground()
 
         view.addSubview(tableView)
         view.addSubview(chatInputView)
+        view.addSubview(scrollDownButton)
 
         tableView.applyConstraints(
             .top(to: view.safeAreaLayoutGuide, attribute: .top),
@@ -131,6 +155,13 @@ class ChatViewController: UIViewController {
             .trailing(to: view, attribute: .trailing),
             .bottom(to: view.safeAreaLayoutGuide, attribute: .bottom)
         ).last!
+
+        scrollDownButton.applyConstraints(
+            .trailing(to: view, attribute: .trailing, constant: -16),
+            .bottom(to: chatInputView, attribute: .top, constant: -16),
+            .width(constant: 44),
+            .height(constant: 44)
+        )
 
         keyboardObserver.onWillShow = { [weak self] userInfo in
             guard let self else { return }
@@ -298,6 +329,16 @@ class ChatViewController: UIViewController {
 
         present(sheet, animated: true)
     }
+
+    // MARK: - UI Callbacks
+
+    @objc private func userTapAction() {
+        didTapMentor?(viewModel.opponentId)
+    }
+
+    @objc private func scrollDownAction() {
+        tableView.scrollRectToVisible(.zero, animated: true)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -317,5 +358,17 @@ extension ChatViewController: UITableViewDelegate {
         view.configure(with: model)
 
         return view
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollDownButton.isHidden, scrollView.contentOffset.y > UIScreen.main.bounds.height {
+            scrollDownButton.isHidden = false
+            return
+        }
+
+        if !scrollDownButton.isHidden, scrollView.contentOffset.y < UIScreen.main.bounds.height {
+            scrollDownButton.isHidden = true
+            return
+        }
     }
 }

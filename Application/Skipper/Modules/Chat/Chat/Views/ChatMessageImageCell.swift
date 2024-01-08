@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 03.01.2024.
 //
 
+import Kingfisher
 import Reusable
 import UIKit
 
@@ -95,7 +96,15 @@ class ChatMessageImageCell: SetupableTableViewCell, Reusable {
     }
 
     func configure(with model: ViewModel) {
-        contentImageView.kf.setImage(with: URL(string: model.url))
+        let resizingProcessor = ResizingImageProcessor(
+            referenceSize: CGSize(width: 200, height: 200),
+            mode: .aspectFill
+        )
+
+        contentImageView.kf.setImage(
+            with: URL(string: model.url),
+            options: [.processor(resizingProcessor)]
+        )
 
         timeLabel.text = model.time
         timeLabel.textColor =

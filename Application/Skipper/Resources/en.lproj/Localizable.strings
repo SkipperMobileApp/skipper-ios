@@ -102,6 +102,7 @@
 // MARK: - Chat
 
 "chat.chatsList.imageMessage.placeholderText" = "Изображение";
+"chat.chatList.firstMessage.text" = "Чат создан";
 "chat.chatMessages.date.today" = "Сегодня";
 "chat.chatMessages.date.yesterday" = "Вчера";
 "chat.chatMessages.defaultOpponentName" = "Обновление...";
