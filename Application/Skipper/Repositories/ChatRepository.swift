@@ -12,6 +12,7 @@ protocol ChatRepository {
     func getChats(userId: String) async throws -> [ChatModel]
     func getChat(chatId: String, userId: String) async throws -> ChatModel?
     func saveChat(chat: ChatModel, userId: String) async throws
+    func getChatWithOpponent(userId: String, opponentId: String) async throws -> ChatModel?
     func subscribeOnChats(userId: String) -> AnyPublisher<[ChatModel], Error>
 
     func getMessages(for chatId: String) async throws -> [ChatMessageModel]
@@ -56,10 +57,17 @@ class ChatRepositoryImpl: ChatRepository {
             return nil
         }
 
-        return ChatMapper.chatFirebaseToDomain(
-            chat,
-            userModel: UserMapper.apiToDomain(user)
-        )
+        return ChatMapper.chatFirebaseToDomain(chat, userModel: UserMapper.apiToDomain(user))
+    }
+
+    func getChatWithOpponent(userId: String, opponentId: String) async throws -> ChatModel? {
+        guard let user = try await database.user(userId: opponentId),
+              let chat = try await database.chat(userId: userId, opponentId: opponentId)
+        else {
+            return nil
+        }
+
+        return ChatMapper.chatFirebaseToDomain(chat, userModel: UserMapper.apiToDomain(user))
     }
 
     func saveChat(chat: ChatModel, userId: String) async throws {

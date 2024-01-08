@@ -59,14 +59,18 @@ class MainCoordinator: NavigationCoordinator {
     // MARK: - Tabs
 
     private func initTabs() -> [TabBox] {
-        let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
-        let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
-        let myLessonsCoordinator = MyLessonsCoordinator(with: NavigationRouter())
-        let chatCoordinator = ChatListCoordinator(with: NavigationRouter())
-
-        chatCoordinator.didSelectChat = { [weak self] chatId, opponentId in
+        let showChatCallback: ((String, String) -> Void)? = { [weak self] chatId, opponentId in
             self?.showChat(chatId: chatId, opponentId: opponentId)
         }
+
+        let dashboardCoordinator = DashboardCoordinator(with: NavigationRouter())
+        let profileCoordinator = ProfileCoordinator(with: NavigationRouter())
+
+        let myLessonsCoordinator = MyLessonsCoordinator(with: NavigationRouter())
+        myLessonsCoordinator.didTapOpenChat = showChatCallback
+
+        let chatCoordinator = ChatListCoordinator(with: NavigationRouter())
+        chatCoordinator.didSelectChat = showChatCallback
 
         return [
             (.dashboard, dashboardCoordinator),

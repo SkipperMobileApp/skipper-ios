@@ -30,8 +30,8 @@ class ChatViewModel {
 
     private var messagesSubscription: AnyCancellable?
 
+    let opponentId: String
     private let chatId: String
-    private let opponentId: String
     private var currentUserId: String?
     private var chat: ChatModel?
 

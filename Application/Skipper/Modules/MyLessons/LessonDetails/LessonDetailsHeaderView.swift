@@ -54,8 +54,20 @@ class LessonDetailsHeaderView: SetupableView {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.backgroundColor = R.color.gray30()
+        imageView.isUserInteractionEnabled = true
+
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(mentorImageTapAction))
+        imageView.addGestureRecognizer(gesture)
+
         return imageView
     }()
+
+    // MARK: - Output
+
+    var didTapMentorProfile: (() -> Void)?
+
+    // MARK: - Lifecycle
 
     override func setup() {
         super.setup()
@@ -107,6 +119,12 @@ class LessonDetailsHeaderView: SetupableView {
         mentorNameLabel.text = model.mentorName
 
         mentorImageView.kf.setImage(with: URL(string: model.mentorAvatarUrl ?? ""))
+    }
+
+    // MARK: - UI Callbacks
+
+    @objc private func mentorImageTapAction() {
+        didTapMentorProfile?()
     }
 }
 

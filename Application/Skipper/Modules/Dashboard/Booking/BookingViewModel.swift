@@ -187,7 +187,7 @@ class BookingViewModel {
     private func parseDateTime(date: Date, timeInterval: String) -> Date {
         let first = timeInterval.split(separator: " - ").first!
         let interval = DateHelper.Formatters.time24GMT0Formatter.date(from: String(first)) ?? Date()
-        return date.addingTimeInterval(interval.timeIntervalSince1970)
+        return date.addingTimeInterval(interval.timeIntervalSinceReferenceDate)
     }
 }
 

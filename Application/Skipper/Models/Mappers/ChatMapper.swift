@@ -30,7 +30,7 @@ enum ChatMapper {
             id: model.id,
             lastMessage: model.lastMessage,
             lastUpdateDate: Int(model.lastUpdateDate.timeIntervalSince1970 * 1000),
-            participants: [currentUserId, model.opponent.id]
+            participants: [currentUserId, model.opponent.id].sorted()
         )
     }
 

@@ -113,28 +113,48 @@ class UserRepositoryImpl {
             resumeInfo: generateCv()
         ),
         .init(
-            id: "1bbR71nRN2dEFSHeIOUZZrxUlLl2",
+            id: "TE6C0gmMbMYtKzGN2XFGC8qHmfx2",
             email: "den.kovalev999@gmail.com",
             firstName: "Денис",
             lastName: "Ковалёв",
             bio: "Просто здравствуй, просто как дела",
             post: "iOS разработчик",
-            imageUrl: "",
+            imageUrl: "https://firebasestorage.googleapis.com:443/v0/b/skipper-bdc2b.appspot.com/o/avatars%2FTE6C0gmMbMYtKzGN2XFGC8qHmfx2.jpg?alt=media&token=ee2b9d0b-5860-4d39-9ac7-87d32e6a1223",
             isMentor: true,
-            contacts: [],
+            contacts: [.init(type: .vk, accountName: "@bard_10x")],
             stats: .init(
                 lessonsCount: 0,
                 rating: 0,
-                registrationDate: "",
+                registrationDate: "150 дней",
                 reviewsCount: 0
             ),
-            tags: [],
+            tags: ["Мобильная разработка", "iOS-разработка"],
             lessons: [],
             resumeInfo: .init(
                 educationUnits: [],
                 workUnits: [],
                 achievementUnits: []
             )
+        ),
+        .init(
+            id: "CGnN0oa2vDfB3Y1zX2rUYFbOcuq1",
+            email: "max.kovalev15@gmail.com",
+            firstName: "Maxim",
+            lastName: "Kovalev",
+            bio: "Привет! Я Android-разработчик с многолетним опытом! Даю советы и не только.",
+            post: "Android-разработчик",
+            imageUrl: "https://firebasestorage.googleapis.com/v0/b/skipper-bdc2b.appspot.com/o/avatars%2F8mjGFeBDMcRWjRX4ySG684jTZoG3.jpg?alt=media&token=af1bf714-385b-4c48-9652-9a53fcd02a65",
+            isMentor: true,
+            contacts: [.init(type: .vk, accountName: "@cakewalker")],
+            stats: .init(
+                lessonsCount: 0,
+                rating: 0,
+                registrationDate: "2 дня",
+                reviewsCount: 0
+            ),
+            tags: ["Мобильная разработка", "Android-разработка"],
+            lessons: [],
+            resumeInfo: generateCv()
         )
     ]
 

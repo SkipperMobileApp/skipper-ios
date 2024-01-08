@@ -27,12 +27,33 @@ class LessonDetailsViewController: UIViewController {
 
     private lazy var headerView: LessonDetailsHeaderView = {
         let view = LessonDetailsHeaderView()
+
+        view.didTapMentorProfile = { [weak self] in
+            guard let self, let mentor = viewModel.mentor else { return }
+            self.didTapMentorProfile?(mentor.id)
+        }
+
         return view
     }()
 
     private lazy var infoView: LessonDetailsInfoView = {
         let view = LessonDetailsInfoView()
         return view
+    }()
+
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 8
+        return stackView
+    }()
+
+    private lazy var sendMessageButton: UIButton = {
+        let button = PrimaryButton()
+        button.addTarget(self, action: #selector(sendMessageAction), for: .touchUpInside)
+        button.setTitle("Написать ментору", for: .normal)
+        return button
     }()
 
     private lazy var cancelButton: UIButton = {
@@ -47,6 +68,8 @@ class LessonDetailsViewController: UIViewController {
 
     var didFinish: (() -> Void)?
     var didCancelLesson: (() -> Void)?
+    var didTapMentorProfile: ((_ mentorId: String) -> Void)?
+    var didTapSendMessage: ((_ chat: ChatModel) -> Void)?
 
     // MARK: - Properties
 
@@ -100,6 +123,7 @@ class LessonDetailsViewController: UIViewController {
         contentView.addSubview(headerView)
         contentView.addSubview(infoView)
         contentView.addSubview(cancelButton)
+        contentView.addSubview(buttonStackView)
 
         scrollView.applyConstraints(.fit(in: view.safeAreaLayoutGuide))
 
@@ -125,13 +149,19 @@ class LessonDetailsViewController: UIViewController {
             .top(to: headerView, attribute: .bottom)
         )
 
-        cancelButton.applyConstraints(
+        buttonStackView.applyConstraints(
             .leading(to: contentView, attribute: .leading, constant: 16),
             .trailing(to: contentView, attribute: .trailing, constant: -16),
             .top(to: infoView, attribute: .bottom, constant: 16, equality: .greaterThanOrEqual),
-            .bottom(to: contentView, attribute: .bottom, constant: -16),
-            .height(constant: 45)
+            .bottom(to: contentView, attribute: .bottom, constant: -16)
         )
+
+        sendMessageButton.applyConstraints(.height(constant: 45))
+        buttonStackView.addArrangedSubview(sendMessageButton)
+        sendMessageButton.isHidden = true
+
+        buttonStackView.addArrangedSubview(cancelButton)
+        cancelButton.applyConstraints(.height(constant: 45))
     }
 
     private func bindViewModelActions() {
@@ -171,6 +201,13 @@ class LessonDetailsViewController: UIViewController {
                 self?.didCancelLesson?()
             }
             .store(in: &subscriptions)
+
+        viewModel.$loadChatEvent
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] chat in
+                self?.didTapSendMessage?(chat)
+            }
+            .store(in: &subscriptions)
     }
 
     func configureViews(with info: LessonDetailsViewModel.LessonInfo) {
@@ -190,11 +227,17 @@ class LessonDetailsViewController: UIViewController {
                 time: info.time
             )
         )
+
+        sendMessageButton.isHidden = !viewModel.hasSendMessageOption
     }
 
     // MARK: - UI Callbacks
 
     @objc private func cancelLessonAction() {
         viewModel.cancelLesson()
+    }
+
+    @objc private func sendMessageAction() {
+        viewModel.loadChat()
     }
 }

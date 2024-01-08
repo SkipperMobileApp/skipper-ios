@@ -8,6 +8,8 @@
 import Foundation
 
 class MyLessonsCoordinator: NavigationCoordinator {
+    var didTapOpenChat: ((_ chatId: String, _ opponentId: String) -> Void)?
+
     override init(with router: NavigationRouter) {
         super.init(with: router)
 
@@ -24,7 +26,7 @@ class MyLessonsCoordinator: NavigationCoordinator {
         router.setRootModule(controller)
     }
 
-    func showLessonDetails(lessonId: String) {
+    private func showLessonDetails(lessonId: String) {
         let viewModel = LessonDetailsViewModel(lessonId: lessonId)
         let controller = LessonDetailsViewController(viewModel: viewModel)
 
@@ -32,6 +34,27 @@ class MyLessonsCoordinator: NavigationCoordinator {
             self?.router.popModule()
         }
 
+        controller.didTapMentorProfile = { [weak self] mentorId in
+            self?.showMentorProfile(mentorId: mentorId)
+        }
+
+        controller.didTapSendMessage = { [weak self] chat in
+            self?.didTapOpenChat?(chat.id, chat.opponent.id)
+        }
+
         router.push(controller)
+    }
+
+    private func showMentorProfile(mentorId: String) {
+        let coordinator = MentorProfileCoordinator(
+            with: router,
+            mentorId: mentorId
+        )
+
+        coordinator.didFinish = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
+
+        addChild(coordinator)
     }
 }

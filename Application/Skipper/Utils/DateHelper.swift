@@ -38,6 +38,7 @@ enum DateHelper {
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.calendar = .current
             return formatter
         }()
 

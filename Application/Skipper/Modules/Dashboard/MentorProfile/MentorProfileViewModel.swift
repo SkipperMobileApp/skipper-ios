@@ -25,7 +25,7 @@ class MentorProfileViewModel {
     @Event private(set) var errorEvent: Error?
     @Published private(set) var isLoading: Bool = false
 
-    @Injected() private(set) var userRepository: UserRepository
+    @Injected() private var userRepository: UserRepository
 
     private let mentorId: String
 
@@ -52,7 +52,8 @@ class MentorProfileViewModel {
                             subtitle: "ОЦЕНКА"
                         ),
                         .init(
-                            title: mentor.stats.registrationDate,
+                            title: mentor.stats.registrationDate.isEmpty ? "0 дней" : mentor.stats
+                                .registrationDate,
                             subtitle: "НА SKIPPER"
                         )
                     ]
