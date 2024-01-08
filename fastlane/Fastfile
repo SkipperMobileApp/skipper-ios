@@ -24,9 +24,14 @@ platform :ios do
   desc "Bump build number from Firebase"
   lane :bump_build_number do
     latest_release = firebase_app_distribution_get_latest_release(
-      app: ENV['FIREBASEAPPDISTRO_APP']
+      app: ENV['FIREBASEAPPDISTRO_APP'],
+      debug: true
     )
-    increment_build_number(build_number: latest_release[:buildVersion].to_i + 1)
+    if latest_release == nil
+      increment_build_number(build_number: 1)
+    else 
+      increment_build_number(build_number: latest_release[:buildVersion].to_i + 1)
+    end
   end
 
   desc "Sync signing"
@@ -60,7 +65,9 @@ platform :ios do
 
     bump_build_number
     build
-    firebase_app_distribution
+    firebase_app_distribution(
+      debug: true
+    )
 
   end
 
