@@ -47,6 +47,14 @@ Sync signing
 
 Build binary
 
+### ios tests
+
+```sh
+[bundle exec] fastlane ios tests
+```
+
+Run tests
+
 ### ios release
 
 ```sh
