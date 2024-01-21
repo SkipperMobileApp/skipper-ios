@@ -5,6 +5,7 @@
 //  Created by Denis Kovalev on 06.01.2023.
 //
 
+import Combine
 import Foundation
 import UIKit
 
@@ -20,12 +21,15 @@ class MentorProfileViewModel {
     )
     private(set) var skills: [String] = []
     private(set) var resumeItems: [ResumeType] = []
+    private(set) var reviewItems: [ReviewItem] = []
 
     @Event private(set) var loadDataEvent: Void?
     @Event private(set) var errorEvent: Error?
     @Published private(set) var isLoading: Bool = false
+    private var addReviewEventSubscription: AnyCancellable?
 
     @Injected() private var userRepository: UserRepository
+    @Injected() private var reviewRepository: ReviewRepository
 
     private let mentorId: String
 
@@ -39,82 +43,109 @@ class MentorProfileViewModel {
             do {
                 let mentor = try await userRepository.mentor(mentorId: mentorId)
 
-                await MainActor.run {
-                    title = [mentor.firstName, mentor.lastName].joined(separator: " ")
+                reviewItems = try await reviewRepository.getReviews(targetUserId: mentorId)
+                    .sorted { $0.date > $1.date }
+                    .map(mapReviewToItem)
 
-                    statusItems = [
-                        .init(
-                            title: String(mentor.stats.lessonsCount),
-                            subtitle: "ЗАНЯТИЙ"
-                        ),
-                        .init(
-                            title: String(format: "%.1lf", mentor.stats.rating),
-                            subtitle: "ОЦЕНКА"
-                        ),
-                        .init(
-                            title: mentor.stats.registrationDate.isEmpty ? "0 дней" : mentor.stats
-                                .registrationDate,
-                            subtitle: "НА SKIPPER"
-                        )
-                    ]
+                title = [mentor.firstName, mentor.lastName].joined(separator: " ")
 
-                    classItems = mentor.lessons
-                        .sorted { $0.updationDate > $1.updationDate }
-                        .map {
-                            .init(id: $0.id, title: $0.title, description: $0.brief)
-                        }
+                var rating: Double = 0
+                if reviewItems.count > 0 {
+                    rating = reviewItems.map(\.rating).reduce(0.0, +) / Double(reviewItems.count)
+                }
 
-                    profileInfo = .init(
-                        name: [mentor.firstName, mentor.lastName].joined(separator: " "),
-                        major: mentor.post,
-                        description: mentor.bio,
-                        imageUrl: mentor.imageUrl
+                statusItems = [
+                    .init(
+                        title: String(mentor.stats.lessonsCount),
+                        subtitle: "ЗАНЯТИЙ"
+                    ),
+                    .init(
+                        title: String(format: "%.1lf", rating),
+                        subtitle: "ОЦЕНКА"
+                    ),
+                    .init(
+                        title: mentor.stats.registrationDate.isEmpty ? "0 дней" : mentor.stats
+                            .registrationDate,
+                        subtitle: "НА SKIPPER"
                     )
+                ]
 
-                    skills = mentor.tags
+                classItems = mentor.lessons
+                    .sorted { $0.updationDate > $1.updationDate }
+                    .map {
+                        .init(id: $0.id, title: $0.title, description: $0.brief)
+                    }
 
-                    resumeItems = [
-                        .education(
-                            items: mentor.resumeInfo.educationUnits.map {
-                                .init(
-                                    name: $0.name,
-                                    startYear: $0.startYear,
-                                    endYear: $0.endYear,
-                                    degree: $0.degree
-                                )
-                            }
-                        ),
-                        .work(
-                            items: mentor.resumeInfo.workUnits.map {
-                                .init(
-                                    name: $0.name,
-                                    startYear: $0.startYear,
-                                    endYear: $0.endYear,
-                                    post: $0.post
-                                )
-                            }
-                        ),
-                        .achievements(
-                            items: mentor.resumeInfo.achievementUnits.map {
-                                .init(
-                                    name: $0.name,
-                                    year: $0.year,
-                                    info: $0.info
-                                )
-                            }
-                        )
-                    ]
+                profileInfo = .init(
+                    name: [mentor.firstName, mentor.lastName].joined(separator: " "),
+                    major: mentor.post,
+                    description: mentor.bio,
+                    imageUrl: mentor.imageUrl
+                )
 
-                    isLoading = false
-                    loadDataEvent = ()
-                }
+                skills = mentor.tags
+
+                resumeItems = [
+                    .education(
+                        items: mentor.resumeInfo.educationUnits.map {
+                            .init(
+                                name: $0.name,
+                                startYear: $0.startYear,
+                                endYear: $0.endYear,
+                                degree: $0.degree
+                            )
+                        }
+                    ),
+                    .work(
+                        items: mentor.resumeInfo.workUnits.map {
+                            .init(
+                                name: $0.name,
+                                startYear: $0.startYear,
+                                endYear: $0.endYear,
+                                post: $0.post
+                            )
+                        }
+                    ),
+                    .achievements(
+                        items: mentor.resumeInfo.achievementUnits.map {
+                            .init(
+                                name: $0.name,
+                                year: $0.year,
+                                info: $0.info
+                            )
+                        }
+                    )
+                ]
+
+                loadDataEvent = ()
             } catch {
-                await MainActor.run {
-                    errorEvent = error
-                    isLoading = false
-                }
+                errorEvent = error
             }
+            isLoading = false
         }
+    }
+
+    func getAddReviewEvent() -> PassthroughSubject<Void, Never> {
+        let subject = PassthroughSubject<Void, Never>()
+
+        addReviewEventSubscription = subject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.loadData()
+            }
+
+        return subject
+    }
+
+    private func mapReviewToItem(_ model: ReviewModel) -> ReviewItem {
+        .init(
+            avatarUrl: model.author?.imageUrl,
+            name: model.author
+                .flatMap { [$0.firstName, $0.lastName].joined(separator: " ") } ?? "Аноним",
+            date: DateHelper.chatMessagesDateString(from: model.date),
+            text: model.text ?? "",
+            rating: model.rating
+        )
     }
 }
 
@@ -178,4 +209,6 @@ extension MentorProfileViewModel {
         let year: Int
         let info: String
     }
+
+    typealias ReviewItem = MentorProfileReviewsView.DisplayData
 }

@@ -79,6 +79,8 @@ class MentorProfileViewController: UIViewController {
         return view
     }()
 
+    private var classesHeaderView: MentorProfileHeaderView!
+
     private lazy var classesView: MentorProfileClassesView = {
         let view = MentorProfileClassesView()
 
@@ -89,6 +91,20 @@ class MentorProfileViewController: UIViewController {
         }
 
         return view
+    }()
+
+    private var reviewsHeaderView: MentorProfileHeaderView!
+
+    private lazy var reviewsView: MentorProfileReviewsView = {
+        let view = MentorProfileReviewsView()
+        return view
+    }()
+
+    private lazy var addReviewButton: PrimaryButton = {
+        let button = PrimaryButton()
+        button.setTitle("Оставить отзыв", for: .normal)
+        button.addTarget(self, action: #selector(addReviewAction), for: .touchUpInside)
+        return button
     }()
 
     private lazy var resumeView: MentorProfileResumeView = {
@@ -102,6 +118,8 @@ class MentorProfileViewController: UIViewController {
     var didSelectLesson: ((_ id: String) -> Void)?
     var didTapClassesList: (() -> Void)?
     var didTapReportMentor: (() -> Void)?
+    var didTapReviewsList: (() -> Void)?
+    var didTapAddReview: ((_ addReviewSubject: PassthroughSubject<Void, Never>) -> Void)?
 
     // MARK: - Properties
 
@@ -219,16 +237,35 @@ class MentorProfileViewController: UIViewController {
         classesHeader.didTapButton = { [weak self] in
             self?.didTapClassesList?()
         }
+        classesHeaderView = classesHeader
 
         stackView.addArrangedSubview(classesView)
         stackView.setCustomSpacing(24, after: classesView)
+
+        let reviewsHeader = makeHeader(with: "Отзывы")
+        stackView.addArrangedSubview(reviewsHeader)
+        stackView.setCustomSpacing(16, after: reviewsHeader)
+
+        reviewsHeader.buttonTitle = ""
+        reviewsHeader.isButtonHidden = false
+        reviewsHeader.didTapButton = { [weak self] in
+            self?.didTapReviewsList?()
+        }
+        reviewsHeaderView = reviewsHeader
+
+        stackView.addArrangedSubview(reviewsView)
+        stackView.setCustomSpacing(16, after: reviewsView)
+
+        addReviewButton.applyConstraints(.height(constant: 45))
+        stackView.addArrangedSubview(addReviewButton)
+        stackView.setCustomSpacing(24, after: addReviewButton)
 
         let resumeHeader = makeHeader(with: "Резюме")
         stackView.addArrangedSubview(resumeHeader)
         stackView.setCustomSpacing(8, after: resumeHeader)
 
         stackView.addArrangedSubview(resumeView)
-        stackView.setCustomSpacing(24, after: resumeHeader)
+        stackView.setCustomSpacing(24, after: resumeView)
 
         stackView.layoutIfNeeded()
         classesView.reloadData()
@@ -314,22 +351,35 @@ class MentorProfileViewController: UIViewController {
 
             return .init(title: $0.title, image: $0.icon, items: items)
         })
+
+        // Reviews
+
+        reviewsView.isHidden = viewModel.reviewItems.count < 1
+        reviewsHeaderView.isButtonHidden = viewModel.reviewItems.count < 1
+        reviewsHeaderView.buttonTitle = "Все отзывы (\(viewModel.reviewItems.count))"
+
+        if let review = viewModel.reviewItems.first {
+            reviewsView.configure(with: review)
+        }
     }
 
     private func bindViewModelActions() {
         viewModel.$loadDataEvent
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.updateData()
             }
             .store(in: &subscriptions)
 
         viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
             .sink { isLoading in
                 isLoading ? HUD.show(.progress) : HUD.hide()
             }
             .store(in: &subscriptions)
 
         viewModel.$errorEvent
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 guard let self = self else { return }
                 AlertPresenter.presentSimpleAlert(
@@ -353,5 +403,9 @@ class MentorProfileViewController: UIViewController {
 
     @objc private func reportMentorAction() {
         didTapReportMentor?()
+    }
+
+    @objc private func addReviewAction() {
+        didTapAddReview?(viewModel.getAddReviewEvent())
     }
 }

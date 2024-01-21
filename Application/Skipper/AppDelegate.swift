@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             database: firestoreDatabase,
             storage: storageDatabase
         )
+        let reviewRepository: ReviewRepository = ReviewRepositoryImpl(database: firestoreDatabase)
 
         // Services
 
@@ -97,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SharedDependencyContainer.register(bookedLessonRepository)
         SharedDependencyContainer.register(reportRepository)
         SharedDependencyContainer.register(chatRepository)
+        SharedDependencyContainer.register(reviewRepository)
     }
 
     private func makeLogoutHandler(

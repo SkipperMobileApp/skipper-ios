@@ -38,6 +38,9 @@ protocol FirestoreDatabase {
     func messages(for chatId: String) async throws -> [ChatMessageFirebaseModel]
     func setMessage(message: ChatMessageFirebaseModel) async throws
     func subscribeOnMessages(chatId: String) -> AnyPublisher<[ChatMessageFirebaseModel], Error>
+
+    func reviews(for userId: String) async throws -> [ReviewFirebaseModel]
+    func setReview(review: ReviewFirebaseModel) async throws
 }
 
 class FirestoreDatabaseImpl: FirestoreDatabase {
@@ -217,6 +220,24 @@ extension FirestoreDatabaseImpl {
     }
 }
 
+// MARK: - Reviews
+
+extension FirestoreDatabaseImpl {
+    func reviews(for userId: String) async throws -> [ReviewFirebaseModel] {
+        let query = firestore
+            .collection("reviews")
+            .whereField(ReviewFirebaseModel.CodingKeys.userId.rawValue, isEqualTo: userId)
+
+        let reviews = try await get(query, type: ReviewFirebaseModel.self)
+        return reviews
+    }
+
+    func setReview(review: ReviewFirebaseModel) async throws {
+        let document = firestore.collection("reviews").document(review.id)
+        try await write(model: review, to: document)
+    }
+}
+
 // MARK: - Utils
 
 extension FirestoreDatabaseImpl {
@@ -301,7 +322,7 @@ extension FirestoreDatabaseImpl {
             .eraseToAnyPublisher()
     }
 
-    private func write<T: FirebaseModel>(
+    private func write<T: FirebaseRequestModel>(
         models: [T],
         to collectionReference: CollectionReference
     ) async throws {
@@ -314,7 +335,7 @@ extension FirestoreDatabaseImpl {
         try await batch.commit()
     }
 
-    private func write<T: FirebaseModel>(
+    private func write<T: FirebaseRequestModel>(
         model: T,
         to documentReference: DocumentReference
     ) async throws {

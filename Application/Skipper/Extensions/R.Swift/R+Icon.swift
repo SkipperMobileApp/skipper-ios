@@ -84,6 +84,11 @@ extension R {
         static let cross = UIImage(systemName: "xmark")!
             .withRenderingMode(.alwaysTemplate)
 
+        static let crossBold = UIImage(
+            systemName: "xmark",
+            withConfiguration: UIImage.SymbolConfiguration(weight: .bold)
+        )!.withRenderingMode(.alwaysTemplate)
+
         static let report = UIImage(systemName: "exclamationmark.octagon.fill")!
             .withRenderingMode(.alwaysTemplate)
 
