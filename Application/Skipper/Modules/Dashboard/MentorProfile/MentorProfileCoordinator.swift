@@ -5,7 +5,9 @@
 //  Created by Denis Kovalev on 25.06.2023.
 //
 
+import Combine
 import Foundation
+import UIKit
 
 class MentorProfileCoordinator: NavigationCoordinator {
     var didFinish: (() -> Void)?
@@ -26,6 +28,14 @@ class MentorProfileCoordinator: NavigationCoordinator {
 
         controller.didTapReportMentor = { [weak self] in
             self?.showReportMentor(for: mentorId)
+        }
+
+        controller.didTapReviewsList = { [weak self] in
+            self?.showReviewsList(mentorId: mentorId)
+        }
+
+        controller.didTapAddReview = { [weak self] addReviewSubject in
+            self?.showAddReview(mentorId: mentorId, addReviewSubject: addReviewSubject)
         }
 
         controller.didFinish = { [weak self] in
@@ -70,5 +80,35 @@ class MentorProfileCoordinator: NavigationCoordinator {
         }
 
         router.present(controller)
+    }
+
+    private func showReviewsList(mentorId: String) {
+        let viewModel = ReviewsListViewModel(userId: mentorId)
+        let controller = ReviewsListViewController(viewModel: viewModel)
+
+        router.push(controller)
+    }
+
+    private func showAddReview(
+        mentorId: String,
+        addReviewSubject: PassthroughSubject<Void, Never>
+    ) {
+        let viewModel = AddReviewViewModel(
+            targetUserId: mentorId,
+            addReviewSubject: addReviewSubject
+        )
+        let controller = AddReviewViewController(viewModel: viewModel)
+
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+
+        controller.didFinish = { [weak controller] in
+            controller?.dismiss(animated: true)
+        }
+
+        UIApplication.shared.windows
+            .first { $0.isKeyWindow }?
+            .rootViewController?
+            .present(controller, animated: true)
     }
 }

@@ -40,10 +40,23 @@
 		8431CCA52969B5FC00FB00F8 /* BookingAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */; };
 		8431CCA72969B60500FB00F8 /* BookingAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */; };
 		8431CCA92969CF3D00FB00F8 /* DropdownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431CCA82969CF3D00FB00F8 /* DropdownButton.swift */; };
+		8431F1432B52DEE200DEDD4E /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1422B52DEE200DEDD4E /* ReviewModel.swift */; };
+		8431F1452B52DF6000DEDD4E /* ReviewMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1442B52DF6000DEDD4E /* ReviewMapper.swift */; };
+		8431F1482B52EE3300DEDD4E /* MentorProfileReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1472B52EE3300DEDD4E /* MentorProfileReviewsView.swift */; };
+		8431F14A2B53E44800DEDD4E /* RatingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1492B53E44800DEDD4E /* RatingBar.swift */; };
+		8431F14C2B53E45200DEDD4E /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F14B2B53E45200DEDD4E /* RatingView.swift */; };
+		8431F14F2B53FF9400DEDD4E /* ReviewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F14E2B53FF9400DEDD4E /* ReviewsListViewController.swift */; };
+		8431F1512B53FFAC00DEDD4E /* ReviewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1502B53FFAC00DEDD4E /* ReviewsListViewModel.swift */; };
+		8431F1532B53FFF600DEDD4E /* ReviewsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1522B53FFF600DEDD4E /* ReviewsListCell.swift */; };
+		8431F1562B558BEE00DEDD4E /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1552B558BEE00DEDD4E /* AddReviewViewController.swift */; };
+		8431F1582B558BF500DEDD4E /* AddReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1572B558BF500DEDD4E /* AddReviewViewModel.swift */; };
+		8431F15A2B55C57200DEDD4E /* ReviewRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431F1592B55C57200DEDD4E /* ReviewRequestModel.swift */; };
 		843F034D29E3D5B600AD17B7 /* LessonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F034C29E3D5B600AD17B7 /* LessonDetailsViewController.swift */; };
 		843F034F29E3D5BE00AD17B7 /* LessonDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F034E29E3D5BE00AD17B7 /* LessonDetailsViewModel.swift */; };
 		843F035129E3D75100AD17B7 /* LessonDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F035029E3D75100AD17B7 /* LessonDetailsHeaderView.swift */; };
 		84429C49297DD7D300645C6A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84429C48297DD7D300645C6A /* GradientView.swift */; };
+		8445FC572B529AA500E6EF87 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445FC562B529AA500E6EF87 /* ReviewRepository.swift */; };
+		8445FC592B529CA600E6EF87 /* ReviewFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445FC582B529CA600E6EF87 /* ReviewFirebaseModel.swift */; };
 		8446E43E292FE0AD00750B5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */; };
 		8447C3CB29328F8F0092B10D /* AuthUserFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */; };
 		8447C3CE2932958F0092B10D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447C3CD2932958F0092B10D /* Container.swift */; };
@@ -332,10 +345,23 @@
 		8431CCA42969B5FC00FB00F8 /* BookingAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewController.swift; sourceTree = "<group>"; };
 		8431CCA62969B60500FB00F8 /* BookingAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingAmountViewModel.swift; sourceTree = "<group>"; };
 		8431CCA82969CF3D00FB00F8 /* DropdownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownButton.swift; sourceTree = "<group>"; };
+		8431F1422B52DEE200DEDD4E /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
+		8431F1442B52DF6000DEDD4E /* ReviewMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMapper.swift; sourceTree = "<group>"; };
+		8431F1472B52EE3300DEDD4E /* MentorProfileReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorProfileReviewsView.swift; sourceTree = "<group>"; };
+		8431F1492B53E44800DEDD4E /* RatingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingBar.swift; sourceTree = "<group>"; };
+		8431F14B2B53E45200DEDD4E /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		8431F14E2B53FF9400DEDD4E /* ReviewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListViewController.swift; sourceTree = "<group>"; };
+		8431F1502B53FFAC00DEDD4E /* ReviewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListViewModel.swift; sourceTree = "<group>"; };
+		8431F1522B53FFF600DEDD4E /* ReviewsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListCell.swift; sourceTree = "<group>"; };
+		8431F1552B558BEE00DEDD4E /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
+		8431F1572B558BF500DEDD4E /* AddReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewModel.swift; sourceTree = "<group>"; };
+		8431F1592B55C57200DEDD4E /* ReviewRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestModel.swift; sourceTree = "<group>"; };
 		843F034C29E3D5B600AD17B7 /* LessonDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailsViewController.swift; sourceTree = "<group>"; };
 		843F034E29E3D5BE00AD17B7 /* LessonDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailsViewModel.swift; sourceTree = "<group>"; };
 		843F035029E3D75100AD17B7 /* LessonDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailsHeaderView.swift; sourceTree = "<group>"; };
 		84429C48297DD7D300645C6A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		8445FC562B529AA500E6EF87 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		8445FC582B529CA600E6EF87 /* ReviewFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFirebaseModel.swift; sourceTree = "<group>"; };
 		8446E43D292FE0AD00750B5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Skipper/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8447C3CA29328F8F0092B10D /* AuthUserFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserFirebaseModel.swift; sourceTree = "<group>"; };
 		8447C3CD2932958F0092B10D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -746,6 +772,42 @@
 			path = Contact;
 			sourceTree = "<group>";
 		};
+		8431F1412B52DED900DEDD4E /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				8431F1422B52DEE200DEDD4E /* ReviewModel.swift */,
+				8431F1592B55C57200DEDD4E /* ReviewRequestModel.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		8431F1462B52EE1100DEDD4E /* ReviewsView */ = {
+			isa = PBXGroup;
+			children = (
+				8431F1472B52EE3300DEDD4E /* MentorProfileReviewsView.swift */,
+			);
+			path = ReviewsView;
+			sourceTree = "<group>";
+		};
+		8431F14D2B53FF8500DEDD4E /* ReviewsList */ = {
+			isa = PBXGroup;
+			children = (
+				8431F14E2B53FF9400DEDD4E /* ReviewsListViewController.swift */,
+				8431F1502B53FFAC00DEDD4E /* ReviewsListViewModel.swift */,
+				8431F1522B53FFF600DEDD4E /* ReviewsListCell.swift */,
+			);
+			path = ReviewsList;
+			sourceTree = "<group>";
+		};
+		8431F1542B558BDA00DEDD4E /* AddReview */ = {
+			isa = PBXGroup;
+			children = (
+				8431F1552B558BEE00DEDD4E /* AddReviewViewController.swift */,
+				8431F1572B558BF500DEDD4E /* AddReviewViewModel.swift */,
+			);
+			path = AddReview;
+			sourceTree = "<group>";
+		};
 		843F034B29E3D5A300AD17B7 /* LessonDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +932,7 @@
 				84A27BDB29685D90002465DD /* ClassesView */,
 				84A27BDC29685DA2002465DD /* ResumeView */,
 				844B9D352A4859A300A9724A /* ReportMentor */,
+				8431F1462B52EE1100DEDD4E /* ReviewsView */,
 			);
 			path = MentorProfile;
 			sourceTree = "<group>";
@@ -904,6 +967,8 @@
 				846B835929674775008F9BB5 /* MentorProfile */,
 				84A27BE12968B283002465DD /* ClassesList */,
 				8431CC8D2969739300FB00F8 /* Booking */,
+				8431F14D2B53FF8500DEDD4E /* ReviewsList */,
+				8431F1542B558BDA00DEDD4E /* AddReview */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1055,6 +1120,7 @@
 				842910642B3B40D200A8F513 /* ChatFirebaseModel.swift */,
 				842910662B3B416000A8F513 /* ChatMessageFirebaseModel.swift */,
 				84E91A6D2B474EE300D27874 /* ChatMessageImageStorageModel.swift */,
+				8445FC582B529CA600E6EF87 /* ReviewFirebaseModel.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -1290,6 +1356,7 @@
 				84DC34032971EAF90023A3A0 /* BookedLessonRepository.swift */,
 				844B9D3C2A48683700A9724A /* ReportRepository.swift */,
 				842910622B3B406E00A8F513 /* ChatRepository.swift */,
+				8445FC562B529AA500E6EF87 /* ReviewRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1337,6 +1404,7 @@
 				844EC6CB2AC0A87400B575C2 /* BookedLessonMapper.swift */,
 				8429106F2B3B45C600A8F513 /* ChatMapper.swift */,
 				84E91A6F2B474FA800D27874 /* ChatMessageImageMapper.swift */,
+				8431F1442B52DF6000DEDD4E /* ReviewMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1354,6 +1422,7 @@
 		84EE754928F70DC400B55839 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				8431F1412B52DED900DEDD4E /* Review */,
 				842910682B3B450B00A8F513 /* Chat */,
 				844EC6C82AC0916000B575C2 /* Category */,
 				844B9D402A48695D00A9724A /* ReportMentor */,
@@ -1396,6 +1465,8 @@
 				84429C48297DD7D300645C6A /* GradientView.swift */,
 				84E91A642B45E40000D27874 /* UserView.swift */,
 				84E91A7B2B48069800D27874 /* LoadingView.swift */,
+				8431F1492B53E44800DEDD4E /* RatingBar.swift */,
+				8431F14B2B53E45200DEDD4E /* RatingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1816,6 +1887,7 @@
 				84BC43C9296AB8E3000B2C67 /* BookingTimeViewController.swift in Sources */,
 				847DD3AC2906E71500C9CC5D /* ExampleDao.swift in Sources */,
 				84E6C2F4293D16EE003ACCF7 /* CharacterSet+Extensions.swift in Sources */,
+				8445FC572B529AA500E6EF87 /* ReviewRepository.swift in Sources */,
 				84C7635B2A1A5453000347EB /* LessonInfoOptionView.swift in Sources */,
 				843F034D29E3D5B600AD17B7 /* LessonDetailsViewController.swift in Sources */,
 				84573DE82906F45900F03827 /* ExampleModel.swift in Sources */,
@@ -1825,8 +1897,10 @@
 				84BC43D9296B568C000B2C67 /* SecondaryTextField.swift in Sources */,
 				848AB2CF29410F54007DB9F4 /* AuthCacheImpl.swift in Sources */,
 				84A27BE52968B29D002465DD /* ClassesListViewModel.swift in Sources */,
+				8431F1482B52EE3300DEDD4E /* MentorProfileReviewsView.swift in Sources */,
 				84AC022C292E882A00DE7AF2 /* UserFirebaseModel.swift in Sources */,
 				841B413F29E997640022681F /* LessonManagementViewModel.swift in Sources */,
+				8431F1582B558BF500DEDD4E /* AddReviewViewModel.swift in Sources */,
 				84B1118E295CCA930040AEA1 /* AuthVerificationViewController.swift in Sources */,
 				8455B98D296C903A005DE8DD /* UtilRepository.swift in Sources */,
 				8485C4CE295E2B49007A7811 /* ProfileViewController.swift in Sources */,
@@ -1844,12 +1918,15 @@
 				843F035129E3D75100AD17B7 /* LessonDetailsHeaderView.swift in Sources */,
 				84573E112907258200F03827 /* Constraints.swift in Sources */,
 				84F1B506297DBB5B008AC86B /* StorageDatabase.swift in Sources */,
+				8431F15A2B55C57200DEDD4E /* ReviewRequestModel.swift in Sources */,
 				8429106A2B3B451100A8F513 /* ChatModel.swift in Sources */,
 				84EE758528F72A9200B55839 /* Coordinator.swift in Sources */,
 				842910632B3B406E00A8F513 /* ChatRepository.swift in Sources */,
+				8431F14A2B53E44800DEDD4E /* RatingBar.swift in Sources */,
 				84FD38982933E1B7004023E4 /* AuthCoordinator.swift in Sources */,
 				844B9D3D2A48683700A9724A /* ReportRepository.swift in Sources */,
 				84AC0241292E909900DE7AF2 /* AuthRepositoryImpl.swift in Sources */,
+				8431F1432B52DEE200DEDD4E /* ReviewModel.swift in Sources */,
 				84A27BD829685ACC002465DD /* MentorProfileResumeView.swift in Sources */,
 				848AB2C329410362007DB9F4 /* LogoutHandlerComposed.swift in Sources */,
 				84AC022B292E882A00DE7AF2 /* FIrebaseModel.swift in Sources */,
@@ -1952,6 +2029,8 @@
 				8431CC91296973A600FB00F8 /* BookingViewModel.swift in Sources */,
 				8455B989296C799B005DE8DD /* LessonDuration.swift in Sources */,
 				844B9D422A48696500A9724A /* ReportReason.swift in Sources */,
+				8445FC592B529CA600E6EF87 /* ReviewFirebaseModel.swift in Sources */,
+				8431F14C2B53E45200DEDD4E /* RatingView.swift in Sources */,
 				84F88CCE2B39D24E0039A8E7 /* ChatListCell.swift in Sources */,
 				844EC6CA2AC0916E00B575C2 /* CategoryKey.swift in Sources */,
 				844B9D372A4859BE00A9724A /* ReportMentorViewController.swift in Sources */,
@@ -1963,6 +2042,7 @@
 				84A27BD229680B12002465DD /* StatusItemView.swift in Sources */,
 				84E6C2E8293CDAA6003ACCF7 /* FirestoreDatabase.swift in Sources */,
 				8491023D291995D500979112 /* UIApplication+Extensions.swift in Sources */,
+				8431F14F2B53FF9400DEDD4E /* ReviewsListViewController.swift in Sources */,
 				844B9D442A48848100A9724A /* ReportMentorFirebaseModel.swift in Sources */,
 				84F6A303297480C300B7E188 /* MyLessonsCell.swift in Sources */,
 				84BC43D1296AF8C0000B2C67 /* DateHelper.swift in Sources */,
@@ -1989,12 +2069,14 @@
 				84E91A692B46C04100D27874 /* PlaceholderTextView.swift in Sources */,
 				84E91A6E2B474EE300D27874 /* ChatMessageImageStorageModel.swift in Sources */,
 				8455B98F296C912C005DE8DD /* CategoryModel.swift in Sources */,
+				8431F1562B558BEE00DEDD4E /* AddReviewViewController.swift in Sources */,
 				84EE92272970A68400893B09 /* UserContactType.swift in Sources */,
 				84EE755628F70F1F00B55839 /* AppErrors.swift in Sources */,
 				846B83582966FABE008F9BB5 /* UIView+Extensions.swift in Sources */,
 				84E6C2F0293D0D33003ACCF7 /* UserRegisterMapper.swift in Sources */,
 				843F034F29E3D5BE00AD17B7 /* LessonDetailsViewModel.swift in Sources */,
 				8429106E2B3B459900A8F513 /* ChatMessageType.swift in Sources */,
+				8431F1532B53FFF600DEDD4E /* ReviewsListCell.swift in Sources */,
 				8431CC8F296973A000FB00F8 /* BookingViewController.swift in Sources */,
 				847DD3AE2906E71500C9CC5D /* DBError.swift in Sources */,
 				84EE757F28F72A9200B55839 /* DeepLink.swift in Sources */,
@@ -2006,6 +2088,7 @@
 				846B835B2967478D008F9BB5 /* MentorProfileViewController.swift in Sources */,
 				84EE759028F72EE700B55839 /* SetupableView.swift in Sources */,
 				848AB2C729410940007DB9F4 /* LogoutRepository.swift in Sources */,
+				8431F1512B53FFAC00DEDD4E /* ReviewsListViewModel.swift in Sources */,
 				844EC6C12ABF384400B575C2 /* LessonFirebaseModel.swift in Sources */,
 				84E51DDA292BFB33008D2308 /* UnderlinedButton.swift in Sources */,
 				84CC1F482969EEDB00300F32 /* PickerPresenter.swift in Sources */,
@@ -2036,6 +2119,7 @@
 				84573E09290720D600F03827 /* TokensContainer.swift in Sources */,
 				84E91A7F2B48A18B00D27874 /* ImageActivityItemSource.swift in Sources */,
 				84E91A7A2B47FED100D27874 /* ImagePreviewViewModel.swift in Sources */,
+				8431F1452B52DF6000DEDD4E /* ReviewMapper.swift in Sources */,
 				84C29AAD29086E090073E7A4 /* SplashViewModel.swift in Sources */,
 				845E19C429E4FFC600F59B3C /* LessonDetailsInfoView.swift in Sources */,
 				8431CCA92969CF3D00FB00F8 /* DropdownButton.swift in Sources */,
